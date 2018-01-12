@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         mc:Ignorable="d"
-        Title="Projecte" Height="300" Width="300">
+        Title="Projecte" Height="408" Width="534">
     <Grid>
-        
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="47,63,0,0" VerticalAlignment="Top" Height="259" Width="300"/>
+
     </Grid>
 </Window>
