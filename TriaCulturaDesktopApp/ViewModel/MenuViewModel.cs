@@ -10,6 +10,6 @@ namespace TriaCulturaDesktopApp.ViewModel
     class MenuViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+    
     }
 }
