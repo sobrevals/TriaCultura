@@ -11,5 +11,6 @@ namespace TriaCulturaDesktopApp.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
     
+
     }
 }
