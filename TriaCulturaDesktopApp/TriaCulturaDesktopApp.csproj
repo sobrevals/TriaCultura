@@ -54,6 +54,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\Autor.xaml.cs">
+      <DependentUpon>Autor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Disciplines.xaml.cs">
+      <DependentUpon>Disciplines.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Espais.xaml.cs">
+      <DependentUpon>Espais.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Projecte.xaml.cs">
+      <DependentUpon>Projecte.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Projectes.xaml.cs">
+      <DependentUpon>Projectes.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\Autor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Autors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Disciplines.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Espais.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,10 +94,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="View\Autors.xaml.cs">
+      <DependentUpon>Autors.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Projecte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Projectes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
