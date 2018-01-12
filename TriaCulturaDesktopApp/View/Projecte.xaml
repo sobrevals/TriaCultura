@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         mc:Ignorable="d"
-        Title="Projecte" Height="408" Width="534">
+        Title="Projecte" Height="373.5" Width="534">
     <Grid>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="47,63,0,0" VerticalAlignment="Top" Height="259" Width="300"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="33,40,0,0" VerticalAlignment="Top" Height="260" Width="300"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="400,80,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="400,127,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="400,182,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
