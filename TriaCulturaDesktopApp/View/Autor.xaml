@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         mc:Ignorable="d"
-        Title="Autor" Height="300" Width="300">
+        Title="Autor" Height="396.203" Width="776.266">
     <Grid>
-        
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="77,101,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="214,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_Copy" Content="Label" HorizontalAlignment="Left" Margin="214,4,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_Copy" Content="Button" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy1" Content="Button" HorizontalAlignment="Left" Margin="480,335,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy2" Content="Button" HorizontalAlignment="Left" Margin="177,169,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy3" Content="Button" HorizontalAlignment="Left" Margin="633,169,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy4" Content="Button" HorizontalAlignment="Left" Margin="633,106,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy5" Content="Button" HorizontalAlignment="Left" Margin="177,106,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0,1.572"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="100" Margin="30,189,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="listBox_Copy" HorizontalAlignment="Left" Height="166" Margin="430,96,0,0" VerticalAlignment="Top" Width="192"/>
+        <ListBox x:Name="listBox_Copy1" HorizontalAlignment="Left" Height="166" Margin="261,96,0,0" VerticalAlignment="Top" Width="152"/>
+        <Label x:Name="label_Copy1" Content="Label" HorizontalAlignment="Left" Margin="30,163,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy2" Content="Label" HorizontalAlignment="Left" Margin="259,65,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy3" Content="Label" HorizontalAlignment="Left" Margin="584,65,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
