@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="Disciplines" Height="300" Width="300">
     <Grid>
-        
+        <Label x:Name="lbDisciplina" Content="Disciplina" HorizontalAlignment="Left" Margin="24,25,0,0" VerticalAlignment="Top" Width="70" FontFamily="Verdana" FontSize="11"/>
+        <ListBox x:Name="lbDisciplines" HorizontalAlignment="Left" Height="177" Margin="24,64,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
+        <Button x:Name="btAfegir" Content="Afegir" HorizontalAlignment="Left" Margin="159,81,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btTreure" Content="Treure" HorizontalAlignment="Left" Margin="159,118,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btFinalitzar" Content="Finalitzar" HorizontalAlignment="Left" Margin="207,239,0,0" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </Window>
