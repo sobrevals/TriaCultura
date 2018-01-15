@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using TriaCulturaDesktopApp.Model;
 using MvvmDialogs.ViewModels;
 using GalaSoft.MvvmLight.Command;
- 
+using System.Collections.ObjectModel;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
