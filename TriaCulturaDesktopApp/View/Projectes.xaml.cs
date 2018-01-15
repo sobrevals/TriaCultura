@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace TriaCulturaDesktopApp.View
 {
     /// <summary>
-    /// Interaction logic for Projectes.xaml
+    /// Interaction logic for Projecte.xaml
     /// </summary>
-    public partial class Projectes : Window
+    public partial class Projecte : Window
     {
-        public Projectes()
+        public Projecte()
         {
             InitializeComponent();
         }
