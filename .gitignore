@@ -241,4 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
+# ignore a single file
 App.config
