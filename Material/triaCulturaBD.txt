@@ -1,0 +1,265 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema triaCultura
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema triaCultura
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `triaCultura` DEFAULT CHARACTER SET utf8 ;
+USE `triaCultura` ;
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`author`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`author` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`author` (
+  `dni` VARCHAR(12) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `surname` VARCHAR(45) NOT NULL,
+  `address` VARCHAR(45) NULL,
+  PRIMARY KEY (`dni`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`email`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`email` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`email` (
+  `id_email` INT NOT NULL AUTO_INCREMENT,
+  `address` VARCHAR(45) NOT NULL,
+  `author_dni` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`id_email`),
+  INDEX `fk_email_author_idx` (`author_dni` ASC),
+  CONSTRAINT `fk_email_author`
+    FOREIGN KEY (`author_dni`)
+    REFERENCES `triaCultura`.`author` (`dni`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`discipline`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`discipline` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`discipline` (
+  `id_discipline` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  `author_dni` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`id_discipline`),
+  INDEX `fk_discipline_author1_idx` (`author_dni` ASC),
+  CONSTRAINT `fk_discipline_author1`
+    FOREIGN KEY (`author_dni`)
+    REFERENCES `triaCultura`.`author` (`dni`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`phone`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`phone` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`phone` (
+  `id_phone` INT NOT NULL AUTO_INCREMENT,
+  `num` VARCHAR(20) NOT NULL,
+  `type` VARCHAR(45) NOT NULL,
+  `author_dni` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`id_phone`),
+  INDEX `fk_phone_author1_idx` (`author_dni` ASC),
+  CONSTRAINT `fk_phone_author1`
+    FOREIGN KEY (`author_dni`)
+    REFERENCES `triaCultura`.`author` (`dni`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`project`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`project` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`project` (
+  `id_project` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(45) NOT NULL,
+  `description` TEXT NOT NULL,
+  `topic` VARCHAR(45) NOT NULL,
+  `author_dni` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`id_project`),
+  INDEX `fk_project_author1_idx` (`author_dni` ASC),
+  CONSTRAINT `fk_project_author1`
+    FOREIGN KEY (`author_dni`)
+    REFERENCES `triaCultura`.`author` (`dni`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`place`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`place` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`place` (
+  `id_place` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `capacity` INT NOT NULL,
+  `address` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_place`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`request`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`request` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`request` (
+  `id_request` INT NOT NULL AUTO_INCREMENT,
+  `project_id_project` INT NOT NULL,
+  `place_id_place` INT NOT NULL,
+  PRIMARY KEY (`id_request`),
+  INDEX `fk_request_project1_idx` (`project_id_project` ASC),
+  INDEX `fk_request_place1_idx` (`place_id_place` ASC),
+  CONSTRAINT `fk_request_project1`
+    FOREIGN KEY (`project_id_project`)
+    REFERENCES `triaCultura`.`project` (`id_project`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_request_place1`
+    FOREIGN KEY (`place_id_place`)
+    REFERENCES `triaCultura`.`place` (`id_place`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`type` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`type` (
+  `id_type` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_type`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`file`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`file` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`file` (
+  `id_file` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `extension` VARCHAR(45) NOT NULL,
+  `path` VARCHAR(255) NOT NULL,
+  `project_id_project` INT NOT NULL,
+  PRIMARY KEY (`id_file`),
+  INDEX `fk_file_project1_idx` (`project_id_project` ASC),
+  CONSTRAINT `fk_file_project1`
+    FOREIGN KEY (`project_id_project`)
+    REFERENCES `triaCultura`.`project` (`id_project`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`capacity`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`capacity` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`capacity` (
+  `id_capacity` INT NOT NULL AUTO_INCREMENT,
+  `type_spectacle` VARCHAR(45) NOT NULL,
+  `vol_expo` INT NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id_capacity`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`event`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`event` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`event` (
+  `id_event` INT NOT NULL AUTO_INCREMENT,
+  `date_in` DATE NOT NULL,
+  `date_out` DATE NOT NULL,
+  `place_id_place` INT NOT NULL,
+  PRIMARY KEY (`id_event`),
+  INDEX `fk_event_place1_idx` (`place_id_place` ASC),
+  CONSTRAINT `fk_event_place1`
+    FOREIGN KEY (`place_id_place`)
+    REFERENCES `triaCultura`.`place` (`id_place`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`project_has_type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`project_has_type` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`project_has_type` (
+  `project_id_project` INT NOT NULL,
+  `type_id_type` INT NOT NULL,
+  PRIMARY KEY (`project_id_project`, `type_id_type`),
+  INDEX `fk_project_has_type_type1_idx` (`type_id_type` ASC),
+  INDEX `fk_project_has_type_project1_idx` (`project_id_project` ASC),
+  CONSTRAINT `fk_project_has_type_project1`
+    FOREIGN KEY (`project_id_project`)
+    REFERENCES `triaCultura`.`project` (`id_project`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_project_has_type_type1`
+    FOREIGN KEY (`type_id_type`)
+    REFERENCES `triaCultura`.`type` (`id_type`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `triaCultura`.`place_has_capacity`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `triaCultura`.`place_has_capacity` ;
+
+CREATE TABLE IF NOT EXISTS `triaCultura`.`place_has_capacity` (
+  `place_id_place` INT NOT NULL,
+  `capacity_id_capacity` INT NOT NULL,
+  PRIMARY KEY (`place_id_place`, `capacity_id_capacity`),
+  INDEX `fk_place_has_capacity_capacity1_idx` (`capacity_id_capacity` ASC),
+  INDEX `fk_place_has_capacity_place1_idx` (`place_id_place` ASC),
+  CONSTRAINT `fk_place_has_capacity_place1`
+    FOREIGN KEY (`place_id_place`)
+    REFERENCES `triaCultura`.`place` (`id_place`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_place_has_capacity_capacity1`
+    FOREIGN KEY (`capacity_id_capacity`)
+    REFERENCES `triaCultura`.`capacity` (`id_capacity`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

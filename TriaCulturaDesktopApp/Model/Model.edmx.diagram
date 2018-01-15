@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ef221eaa5d674d91978bb78241bdd19c" Name="Diagram1">
+        <EntityTypeShape EntityType="triaculturaModel.author" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.capacity" Width="1.5" PointX="3.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.discipline" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.email" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.event" Width="1.5" PointX="8.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.file" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.phone" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.place" Width="1.5" PointX="6" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.project" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.request" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaModel.type" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <AssociationConnector Association="triaculturaModel.fk_discipline_author1" ManuallyRouted="false" />
+        <AssociationConnector Association="triaculturaModel.fk_email_author" ManuallyRouted="false" />
+        <AssociationConnector Association="triaculturaModel.fk_phone_author1" ManuallyRouted="false" />
+        <AssociationConnector Association="triaculturaModel.fk_project_author1" ManuallyRouted="false" />
+        <AssociationConnector Association="triaculturaModel.fk_event_place1" ManuallyRouted="false" />
+        <AssociationConnector Association="triaculturaModel.fk_file_project1" ManuallyRouted="false" />
+        <AssociationConnector Association="triaculturaModel.fk_request_place1" ManuallyRouted="false" />
+        <AssociationConnector Association="triaculturaModel.fk_request_project1" ManuallyRouted="false" />
+        <AssociationConnector Association="triaculturaModel.place_has_capacity" ManuallyRouted="false" />
+        <AssociationConnector Association="triaculturaModel.project_has_type" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

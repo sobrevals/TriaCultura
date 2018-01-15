@@ -1,0 +1,754 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="triaculturaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="author">
+          <Key>
+            <PropertyRef Name="dni" />
+          </Key>
+          <Property Name="dni" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="capacity">
+          <Key>
+            <PropertyRef Name="id_capacity" />
+          </Key>
+          <Property Name="id_capacity" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_spectacle" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="vol_expo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="discipline">
+          <Key>
+            <PropertyRef Name="id_discipline" />
+          </Key>
+          <Property Name="id_discipline" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="author_dni" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="email">
+          <Key>
+            <PropertyRef Name="id_email" />
+          </Key>
+          <Property Name="id_email" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="author_dni" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="event">
+          <Key>
+            <PropertyRef Name="id_event" />
+          </Key>
+          <Property Name="id_event" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_in" Type="date" Nullable="false" />
+          <Property Name="date_out" Type="date" Nullable="false" />
+          <Property Name="place_id_place" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="file">
+          <Key>
+            <PropertyRef Name="id_file" />
+          </Key>
+          <Property Name="id_file" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="extension" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="path" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="project_id_project" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="phone">
+          <Key>
+            <PropertyRef Name="id_phone" />
+          </Key>
+          <Property Name="id_phone" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="num" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="author_dni" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="place">
+          <Key>
+            <PropertyRef Name="id_place" />
+          </Key>
+          <Property Name="id_place" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="capacity" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="place_has_capacity">
+          <Key>
+            <PropertyRef Name="place_id_place" />
+            <PropertyRef Name="capacity_id_capacity" />
+          </Key>
+          <Property Name="place_id_place" Type="int" Nullable="false" />
+          <Property Name="capacity_id_capacity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="project">
+          <Key>
+            <PropertyRef Name="id_project" />
+          </Key>
+          <Property Name="id_project" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="description" Type="text" Nullable="false" />
+          <Property Name="topic" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="author_dni" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="project_has_type">
+          <Key>
+            <PropertyRef Name="project_id_project" />
+            <PropertyRef Name="type_id_type" />
+          </Key>
+          <Property Name="project_id_project" Type="int" Nullable="false" />
+          <Property Name="type_id_type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="request">
+          <Key>
+            <PropertyRef Name="id_request" />
+          </Key>
+          <Property Name="id_request" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id_project" Type="int" Nullable="false" />
+          <Property Name="place_id_place" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="type">
+          <Key>
+            <PropertyRef Name="id_type" />
+          </Key>
+          <Property Name="id_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_discipline_author1">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="discipline" Type="Self.discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="discipline">
+              <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_email_author">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="email" Type="Self.email" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="email">
+              <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_event_place1">
+          <End Role="place" Type="Self.place" Multiplicity="1" />
+          <End Role="event" Type="Self.event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="place">
+              <PropertyRef Name="id_place" />
+            </Principal>
+            <Dependent Role="event">
+              <PropertyRef Name="place_id_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_file_project1">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="file" Type="Self.file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="file">
+              <PropertyRef Name="project_id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_phone_author1">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="phone" Type="Self.phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="phone">
+              <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_place_has_capacity_capacity1">
+          <End Role="capacity" Type="Self.capacity" Multiplicity="1" />
+          <End Role="place_has_capacity" Type="Self.place_has_capacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="capacity">
+              <PropertyRef Name="id_capacity" />
+            </Principal>
+            <Dependent Role="place_has_capacity">
+              <PropertyRef Name="capacity_id_capacity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_place_has_capacity_place1">
+          <End Role="place" Type="Self.place" Multiplicity="1" />
+          <End Role="place_has_capacity" Type="Self.place_has_capacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="place">
+              <PropertyRef Name="id_place" />
+            </Principal>
+            <Dependent Role="place_has_capacity">
+              <PropertyRef Name="place_id_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_project_author1">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="project" Type="Self.project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="project">
+              <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_project_has_type_project1">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="project_has_type" Type="Self.project_has_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="project_has_type">
+              <PropertyRef Name="project_id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_project_has_type_type1">
+          <End Role="type" Type="Self.type" Multiplicity="1" />
+          <End Role="project_has_type" Type="Self.project_has_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="project_has_type">
+              <PropertyRef Name="type_id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_request_place1">
+          <End Role="place" Type="Self.place" Multiplicity="1" />
+          <End Role="request" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="place">
+              <PropertyRef Name="id_place" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="place_id_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_request_project1">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="request" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="project_id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="triaculturaModelStoreContainer">
+          <EntitySet Name="author" EntityType="Self.author" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="capacity" EntityType="Self.capacity" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="discipline" EntityType="Self.discipline" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="email" EntityType="Self.email" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="event" EntityType="Self.event" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="file" EntityType="Self.file" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="phone" EntityType="Self.phone" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="place" EntityType="Self.place" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="place_has_capacity" EntityType="Self.place_has_capacity" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="project" EntityType="Self.project" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="project_has_type" EntityType="Self.project_has_type" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="request" EntityType="Self.request" Schema="triacultura" store:Type="Tables" />
+          <EntitySet Name="type" EntityType="Self.type" Schema="triacultura" store:Type="Tables" />
+          <AssociationSet Name="fk_discipline_author1" Association="Self.fk_discipline_author1">
+            <End Role="author" EntitySet="author" />
+            <End Role="discipline" EntitySet="discipline" />
+          </AssociationSet>
+          <AssociationSet Name="fk_email_author" Association="Self.fk_email_author">
+            <End Role="author" EntitySet="author" />
+            <End Role="email" EntitySet="email" />
+          </AssociationSet>
+          <AssociationSet Name="fk_event_place1" Association="Self.fk_event_place1">
+            <End Role="place" EntitySet="place" />
+            <End Role="event" EntitySet="event" />
+          </AssociationSet>
+          <AssociationSet Name="fk_file_project1" Association="Self.fk_file_project1">
+            <End Role="project" EntitySet="project" />
+            <End Role="file" EntitySet="file" />
+          </AssociationSet>
+          <AssociationSet Name="fk_phone_author1" Association="Self.fk_phone_author1">
+            <End Role="author" EntitySet="author" />
+            <End Role="phone" EntitySet="phone" />
+          </AssociationSet>
+          <AssociationSet Name="fk_place_has_capacity_capacity1" Association="Self.fk_place_has_capacity_capacity1">
+            <End Role="capacity" EntitySet="capacity" />
+            <End Role="place_has_capacity" EntitySet="place_has_capacity" />
+          </AssociationSet>
+          <AssociationSet Name="fk_place_has_capacity_place1" Association="Self.fk_place_has_capacity_place1">
+            <End Role="place" EntitySet="place" />
+            <End Role="place_has_capacity" EntitySet="place_has_capacity" />
+          </AssociationSet>
+          <AssociationSet Name="fk_project_author1" Association="Self.fk_project_author1">
+            <End Role="author" EntitySet="author" />
+            <End Role="project" EntitySet="project" />
+          </AssociationSet>
+          <AssociationSet Name="fk_project_has_type_project1" Association="Self.fk_project_has_type_project1">
+            <End Role="project" EntitySet="project" />
+            <End Role="project_has_type" EntitySet="project_has_type" />
+          </AssociationSet>
+          <AssociationSet Name="fk_project_has_type_type1" Association="Self.fk_project_has_type_type1">
+            <End Role="type" EntitySet="type" />
+            <End Role="project_has_type" EntitySet="project_has_type" />
+          </AssociationSet>
+          <AssociationSet Name="fk_request_place1" Association="Self.fk_request_place1">
+            <End Role="place" EntitySet="place" />
+            <End Role="request" EntitySet="request" />
+          </AssociationSet>
+          <AssociationSet Name="fk_request_project1" Association="Self.fk_request_project1">
+            <End Role="project" EntitySet="project" />
+            <End Role="request" EntitySet="request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="triaculturaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="author">
+          <Key>
+            <PropertyRef Name="dni" />
+          </Key>
+          <Property Name="dni" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="disciplines" Relationship="Self.fk_discipline_author1" FromRole="author" ToRole="discipline" />
+          <NavigationProperty Name="emails" Relationship="Self.fk_email_author" FromRole="author" ToRole="email" />
+          <NavigationProperty Name="phones" Relationship="Self.fk_phone_author1" FromRole="author" ToRole="phone" />
+          <NavigationProperty Name="projects" Relationship="Self.fk_project_author1" FromRole="author" ToRole="project" />
+        </EntityType>
+        <EntityType Name="capacity">
+          <Key>
+            <PropertyRef Name="id_capacity" />
+          </Key>
+          <Property Name="id_capacity" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_spectacle" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vol_expo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="places" Relationship="Self.place_has_capacity" FromRole="capacity" ToRole="place" />
+        </EntityType>
+        <EntityType Name="discipline">
+          <Key>
+            <PropertyRef Name="id_discipline" />
+          </Key>
+          <Property Name="id_discipline" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="author_dni" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="author" Relationship="Self.fk_discipline_author1" FromRole="discipline" ToRole="author" />
+        </EntityType>
+        <EntityType Name="email">
+          <Key>
+            <PropertyRef Name="id_email" />
+          </Key>
+          <Property Name="id_email" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="author_dni" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="author" Relationship="Self.fk_email_author" FromRole="email" ToRole="author" />
+        </EntityType>
+        <EntityType Name="event">
+          <Key>
+            <PropertyRef Name="id_event" />
+          </Key>
+          <Property Name="id_event" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_in" Type="DateTime" Nullable="false" />
+          <Property Name="date_out" Type="DateTime" Nullable="false" />
+          <Property Name="place_id_place" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="place" Relationship="Self.fk_event_place1" FromRole="event" ToRole="place" />
+        </EntityType>
+        <EntityType Name="file">
+          <Key>
+            <PropertyRef Name="id_file" />
+          </Key>
+          <Property Name="id_file" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="extension" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="project_id_project" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="project" Relationship="Self.fk_file_project1" FromRole="file" ToRole="project" />
+        </EntityType>
+        <EntityType Name="phone">
+          <Key>
+            <PropertyRef Name="id_phone" />
+          </Key>
+          <Property Name="id_phone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="author_dni" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="author" Relationship="Self.fk_phone_author1" FromRole="phone" ToRole="author" />
+        </EntityType>
+        <EntityType Name="place">
+          <Key>
+            <PropertyRef Name="id_place" />
+          </Key>
+          <Property Name="id_place" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="capacity" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="events" Relationship="Self.fk_event_place1" FromRole="place" ToRole="event" />
+          <NavigationProperty Name="requests" Relationship="Self.fk_request_place1" FromRole="place" ToRole="request" />
+          <NavigationProperty Name="capacities" Relationship="Self.place_has_capacity" FromRole="place" ToRole="capacity" />
+        </EntityType>
+        <EntityType Name="project">
+          <Key>
+            <PropertyRef Name="id_project" />
+          </Key>
+          <Property Name="id_project" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="topic" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="author_dni" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="author" Relationship="Self.fk_project_author1" FromRole="project" ToRole="author" />
+          <NavigationProperty Name="files" Relationship="Self.fk_file_project1" FromRole="project" ToRole="file" />
+          <NavigationProperty Name="requests" Relationship="Self.fk_request_project1" FromRole="project" ToRole="request" />
+          <NavigationProperty Name="types" Relationship="Self.project_has_type" FromRole="project" ToRole="type" />
+        </EntityType>
+        <EntityType Name="request">
+          <Key>
+            <PropertyRef Name="id_request" />
+          </Key>
+          <Property Name="id_request" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id_project" Type="Int32" Nullable="false" />
+          <Property Name="place_id_place" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="place" Relationship="Self.fk_request_place1" FromRole="request" ToRole="place" />
+          <NavigationProperty Name="project" Relationship="Self.fk_request_project1" FromRole="request" ToRole="project" />
+        </EntityType>
+        <EntityType Name="type">
+          <Key>
+            <PropertyRef Name="id_type" />
+          </Key>
+          <Property Name="id_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="projects" Relationship="Self.project_has_type" FromRole="type" ToRole="project" />
+        </EntityType>
+        <Association Name="fk_discipline_author1">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="discipline" Type="Self.discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="discipline">
+              <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_email_author">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="email" Type="Self.email" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="email">
+              <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_phone_author1">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="phone" Type="Self.phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="phone">
+              <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_project_author1">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="project" Type="Self.project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="project">
+              <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_event_place1">
+          <End Role="place" Type="Self.place" Multiplicity="1" />
+          <End Role="event" Type="Self.event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="place">
+              <PropertyRef Name="id_place" />
+            </Principal>
+            <Dependent Role="event">
+              <PropertyRef Name="place_id_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_file_project1">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="file" Type="Self.file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="file">
+              <PropertyRef Name="project_id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_request_place1">
+          <End Role="place" Type="Self.place" Multiplicity="1" />
+          <End Role="request" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="place">
+              <PropertyRef Name="id_place" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="place_id_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_request_project1">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="request" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="project_id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="place_has_capacity">
+          <End Role="capacity" Type="Self.capacity" Multiplicity="*" />
+          <End Role="place" Type="Self.place" Multiplicity="*" />
+        </Association>
+        <Association Name="project_has_type">
+          <End Role="project" Type="Self.project" Multiplicity="*" />
+          <End Role="type" Type="Self.type" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="triaculturaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="authors" EntityType="Self.author" />
+          <EntitySet Name="capacities" EntityType="Self.capacity" />
+          <EntitySet Name="disciplines" EntityType="Self.discipline" />
+          <EntitySet Name="emails" EntityType="Self.email" />
+          <EntitySet Name="events" EntityType="Self.event" />
+          <EntitySet Name="files" EntityType="Self.file" />
+          <EntitySet Name="phones" EntityType="Self.phone" />
+          <EntitySet Name="places" EntityType="Self.place" />
+          <EntitySet Name="projects" EntityType="Self.project" />
+          <EntitySet Name="requests" EntityType="Self.request" />
+          <EntitySet Name="types" EntityType="Self.type" />
+          <AssociationSet Name="fk_discipline_author1" Association="Self.fk_discipline_author1">
+            <End Role="author" EntitySet="authors" />
+            <End Role="discipline" EntitySet="disciplines" />
+          </AssociationSet>
+          <AssociationSet Name="fk_email_author" Association="Self.fk_email_author">
+            <End Role="author" EntitySet="authors" />
+            <End Role="email" EntitySet="emails" />
+          </AssociationSet>
+          <AssociationSet Name="fk_phone_author1" Association="Self.fk_phone_author1">
+            <End Role="author" EntitySet="authors" />
+            <End Role="phone" EntitySet="phones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_project_author1" Association="Self.fk_project_author1">
+            <End Role="author" EntitySet="authors" />
+            <End Role="project" EntitySet="projects" />
+          </AssociationSet>
+          <AssociationSet Name="fk_event_place1" Association="Self.fk_event_place1">
+            <End Role="place" EntitySet="places" />
+            <End Role="event" EntitySet="events" />
+          </AssociationSet>
+          <AssociationSet Name="fk_file_project1" Association="Self.fk_file_project1">
+            <End Role="project" EntitySet="projects" />
+            <End Role="file" EntitySet="files" />
+          </AssociationSet>
+          <AssociationSet Name="fk_request_place1" Association="Self.fk_request_place1">
+            <End Role="place" EntitySet="places" />
+            <End Role="request" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_request_project1" Association="Self.fk_request_project1">
+            <End Role="project" EntitySet="projects" />
+            <End Role="request" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="place_has_capacity" Association="Self.place_has_capacity">
+            <End Role="capacity" EntitySet="capacities" />
+            <End Role="place" EntitySet="places" />
+          </AssociationSet>
+          <AssociationSet Name="project_has_type" Association="Self.project_has_type">
+            <End Role="project" EntitySet="projects" />
+            <End Role="type" EntitySet="types" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="triaculturaModelStoreContainer" CdmEntityContainer="triaculturaEntities">
+          <EntitySetMapping Name="authors">
+            <EntityTypeMapping TypeName="triaculturaModel.author">
+              <MappingFragment StoreEntitySet="author">
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="capacities">
+            <EntityTypeMapping TypeName="triaculturaModel.capacity">
+              <MappingFragment StoreEntitySet="capacity">
+                <ScalarProperty Name="id_capacity" ColumnName="id_capacity" />
+                <ScalarProperty Name="type_spectacle" ColumnName="type_spectacle" />
+                <ScalarProperty Name="vol_expo" ColumnName="vol_expo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="disciplines">
+            <EntityTypeMapping TypeName="triaculturaModel.discipline">
+              <MappingFragment StoreEntitySet="discipline">
+                <ScalarProperty Name="id_discipline" ColumnName="id_discipline" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="author_dni" ColumnName="author_dni" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="emails">
+            <EntityTypeMapping TypeName="triaculturaModel.email">
+              <MappingFragment StoreEntitySet="email">
+                <ScalarProperty Name="id_email" ColumnName="id_email" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="author_dni" ColumnName="author_dni" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="events">
+            <EntityTypeMapping TypeName="triaculturaModel.event">
+              <MappingFragment StoreEntitySet="event">
+                <ScalarProperty Name="id_event" ColumnName="id_event" />
+                <ScalarProperty Name="date_in" ColumnName="date_in" />
+                <ScalarProperty Name="date_out" ColumnName="date_out" />
+                <ScalarProperty Name="place_id_place" ColumnName="place_id_place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="files">
+            <EntityTypeMapping TypeName="triaculturaModel.file">
+              <MappingFragment StoreEntitySet="file">
+                <ScalarProperty Name="id_file" ColumnName="id_file" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="project_id_project" ColumnName="project_id_project" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="phones">
+            <EntityTypeMapping TypeName="triaculturaModel.phone">
+              <MappingFragment StoreEntitySet="phone">
+                <ScalarProperty Name="id_phone" ColumnName="id_phone" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="author_dni" ColumnName="author_dni" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="places">
+            <EntityTypeMapping TypeName="triaculturaModel.place">
+              <MappingFragment StoreEntitySet="place">
+                <ScalarProperty Name="id_place" ColumnName="id_place" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projects">
+            <EntityTypeMapping TypeName="triaculturaModel.project">
+              <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="id_project" ColumnName="id_project" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="topic" ColumnName="topic" />
+                <ScalarProperty Name="author_dni" ColumnName="author_dni" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="requests">
+            <EntityTypeMapping TypeName="triaculturaModel.request">
+              <MappingFragment StoreEntitySet="request">
+                <ScalarProperty Name="id_request" ColumnName="id_request" />
+                <ScalarProperty Name="project_id_project" ColumnName="project_id_project" />
+                <ScalarProperty Name="place_id_place" ColumnName="place_id_place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="types">
+            <EntityTypeMapping TypeName="triaculturaModel.type">
+              <MappingFragment StoreEntitySet="type">
+                <ScalarProperty Name="id_type" ColumnName="id_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="place_has_capacity" TypeName="triaculturaModel.place_has_capacity" StoreEntitySet="place_has_capacity">
+            <EndProperty Name="capacity">
+              <ScalarProperty Name="id_capacity" ColumnName="capacity_id_capacity" />
+            </EndProperty>
+            <EndProperty Name="place">
+              <ScalarProperty Name="id_place" ColumnName="place_id_place" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="project_has_type" TypeName="triaculturaModel.project_has_type" StoreEntitySet="project_has_type">
+            <EndProperty Name="project">
+              <ScalarProperty Name="id_project" ColumnName="project_id_project" />
+            </EndProperty>
+            <EndProperty Name="type">
+              <ScalarProperty Name="id_type" ColumnName="type_id_type" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
