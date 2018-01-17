@@ -1,7 +1,7 @@
 using GalaSoft.MvvmLight;
 using MvvmDialogs.ViewModel;
 
-namespace Mvvv
+namespace MvvmDialogs.MainViewModel
 
 {
     /// <summary>
