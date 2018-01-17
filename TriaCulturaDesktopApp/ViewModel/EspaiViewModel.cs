@@ -14,5 +14,6 @@ namespace TriaCulturaDesktopApp.ViewModel
     {
         triaculturaCTX context = new triaculturaCTX();
 
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
