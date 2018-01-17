@@ -12,7 +12,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     class EspaiViewModel: INotifyPropertyChanged
     {
-        triaculturaEntities context = new Model.triaculturaEntities();
+        triaculturaCTX context = new triaculturaCTX();
 
     }
 }
