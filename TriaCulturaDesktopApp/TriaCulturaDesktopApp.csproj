@@ -133,6 +133,7 @@
     <Compile Include="Model\type.cs">
       <DependentUpon>triaculturaCTX.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Autors.cs" />
     <Compile Include="ViewModel\DisciplinaViewModel.cs" />
     <Compile Include="ViewModel\EspaiViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
