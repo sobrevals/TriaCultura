@@ -17,7 +17,7 @@ namespace TriaCulturaDesktopApp.Model
         public int id_event { get; set; }
         public System.DateTime date_in { get; set; }
         public System.DateTime date_out { get; set; }
-        public int place_id_place { get; set; }
+        public int place_id { get; set; }
     
         public virtual place place { get; set; }
     }
