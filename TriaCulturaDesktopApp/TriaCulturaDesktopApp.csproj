@@ -82,7 +82,57 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Program.cs" />
+    <Compile Include="Model\author.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\capacity.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\discipline.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\email.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\event.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\file.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\phone.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\place.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\project.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\request.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagram.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\triaculturaCTX.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>triaculturaCTX.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\triaculturaCTX.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\triaculturaCTX.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>triaculturaCTX.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\type.cs">
+      <DependentUpon>triaculturaCTX.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\DisciplinaViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -160,6 +210,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model\triaculturaCTX.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>triaculturaCTX.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\triaculturaCTX.edmx.diagram">
+      <DependentUpon>triaculturaCTX.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -172,9 +229,26 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MvvmDialogs\MvvmDialogs.csproj">
+      <Project>{7be06c50-5544-455f-886d-95322b468e25}</Project>
+      <Name>MvvmDialogs</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\triaculturaCTX.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>triaculturaCTX.edmx</DependentUpon>
+      <LastGenOutput>triaculturaCTX.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\triaculturaCTX.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>triaculturaCTX.edmx</DependentUpon>
+      <LastGenOutput>triaculturaCTX.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
