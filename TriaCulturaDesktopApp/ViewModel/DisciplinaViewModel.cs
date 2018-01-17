@@ -12,9 +12,9 @@ using System.Collections.ObjectModel;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class DisciplinaViewModel : INotifyPropertyChanged
+    class triaculturaCTX : INotifyPropertyChanged
     {
-        triaculturaEntities context = new Model.triaculturaEntities();
+        triaculturaCTX context = new triaculturaCTX();
         #region BasicProperties
 
         private List<discipline> _disciplines;
@@ -41,7 +41,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
         #endregion
-        public DisciplinaViewModel ()
+        public triaculturaCTX()
         {
             FillDisciplines(0);
         }
