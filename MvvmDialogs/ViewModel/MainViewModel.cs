@@ -1,6 +1,8 @@
 using GalaSoft.MvvmLight;
+using MvvmDialogs.ViewModel;
 
-namespace MvvmDialogs.ViewModel
+namespace Mvvv
+
 {
     /// <summary>
     /// This class contains properties that the main View can data bind to.
