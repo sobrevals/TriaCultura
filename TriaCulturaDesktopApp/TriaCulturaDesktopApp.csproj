@@ -134,6 +134,7 @@
       <DependentUpon>triaculturaCTX.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\DisciplinaViewModel.cs" />
+    <Compile Include="ViewModel\EspaiViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Autor.xaml.cs">

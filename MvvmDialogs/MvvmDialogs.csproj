@@ -80,8 +80,6 @@
     </Compile>
     <Compile Include="ViewModels\IDialogViewModel.cs" />
     <AppDesigner Include="Properties\" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
