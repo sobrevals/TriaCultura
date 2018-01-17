@@ -43,7 +43,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public DisciplinaViewModel ()
         {
-            FillDisciplines(0);
+            FillDisciplines(0); // crear model 
         }
     }
 }

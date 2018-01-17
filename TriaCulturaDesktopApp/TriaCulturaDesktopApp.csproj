@@ -226,7 +226,12 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MvvmDialogs\MvvmDialogs.csproj">
+      <Project>{7be06c50-5544-455f-886d-95322b468e25}</Project>
+      <Name>MvvmDialogs</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
