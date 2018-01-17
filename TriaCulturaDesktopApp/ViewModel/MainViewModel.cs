@@ -1,4 +1,12 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using TriaCulturaDesktopApp.ViewModel;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows;
+
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
