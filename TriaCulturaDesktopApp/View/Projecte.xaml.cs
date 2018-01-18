@@ -24,8 +24,9 @@ namespace TriaCulturaDesktopApp.View
         public Projectes()
         {
             InitializeComponent();
-            DataContext = new ProjecteViewModel();
+            this.DataContext = new ProjecteViewModel();
         }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
