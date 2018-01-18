@@ -15,16 +15,21 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     class DisciplinaViewModel : INotifyPropertyChanged, IUserDialogViewModel
     {
-        triaculturaDBEntities context = new triaculturaDBEntities();
+        triaculturaCTXEntities context = new triaculturaCTXEntities();
         #region BasicProperties
 
         private List<discipline> _disciplines;
-        private discipline _selectedDiscipline;
+        private discipline _selectedDiscipline_fromDisciplines;
+        private discipline _selectedDiscipline_fromAuthor;
+        private author _selectedauthor;
 
         public List<discipline> Disciplines
         { get { return _disciplines; } set { _disciplines = value; } }
 
-        public discipline SelectedDiscipline { get { return _selectedDiscipline; } set { _selectedDiscipline = value; } }
+        public discipline SelectedDiscipline_fromDisciplines { get { return _selectedDiscipline_fromDisciplines; } set { _selectedDiscipline_fromDisciplines = value; } }
+        public discipline SelectedDiscipline_fromAuthor { get { return _selectedDiscipline_fromAuthor; } set { _selectedDiscipline_fromAuthor = value; } }
+
+        public author SelectedAuthor { get { return _selectedauthor; } set { _selectedauthor = value; }  }
 
         public bool IsModal
         {
@@ -56,15 +61,23 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public DisciplinaViewModel ()
         {
-            FillDisciplines(0); // crear model 
+            FillDisciplines_all(0); // crear model 
         }
         #region fill
-        private void FillDisciplines (int index)
+        private void FillDisciplines_all (int index)
         {
             Disciplines = context.disciplines.OrderBy(x => x.type).ToList();
             if (Disciplines != null && index >= 0 && index < Disciplines.Count)
             {
-                SelectedDiscipline = Disciplines[index];
+                SelectedDiscipline_fromDisciplines = Disciplines[index];
+            }
+        }
+
+        private void FillDisciplines_author (int index)
+        {
+            if (index>=0 && index < SelectedAuthor.disciplines.Count)
+            {
+                SelectedDiscipline_fromAuthor = SelectedAuthor.disciplines.ToList()[index];
             }
         }
         #endregion
