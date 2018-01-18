@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,11 @@ namespace TriaCulturaDesktopApp.ViewModel
         private bool _canExecute;
         public void MyAction()
         {
-
+            /*base.OnStartup(e);
+            WpfMvvmTest.MainWindow window = new MainWindow();
+            ProductViewModel VM = new ProductViewModel();
+            window.DataContext = VM;
+            window.Show();*/
         }
     }
     public class CommandHandler : ICommand
