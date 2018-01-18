@@ -4,11 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" x:Name="disciplines" 
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"
         mc:Ignorable="d"
         Title="Disciplines" Height="300" Width="300">
+    <Window.DataContext>
+        <ViewModel:DisciplinaViewModel/>
+    </Window.DataContext>
     <Grid>
         <Label x:Name="lbDisciplina" Content="Disciplina" HorizontalAlignment="Left" Margin="24,25,0,0" VerticalAlignment="Top" Width="70" FontFamily="Verdana" FontSize="11"/>
-        <ListBox x:Name="lbDisciplines" HorizontalAlignment="Left" Height="177" Margin="24,64,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
+        <ListBox x:Name="lbDisciplines" ItemsSource="{Binding Disciplines}" SelectionMode="Single" SelectedItem="{Binding SelectedDiscipline}" DisplayMemberPath="type" HorizontalAlignment="Left" Height="177" Margin="24,64,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
         <Button x:Name="btAfegir" Content="Afegir" HorizontalAlignment="Left" Margin="159,81,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btTreure" Content="Treure" HorizontalAlignment="Left" Margin="159,118,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btFinalitzar" Content="Finalitzar" HorizontalAlignment="Left" Margin="207,239,0,0" VerticalAlignment="Top" Width="75"/>

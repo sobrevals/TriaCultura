@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp"
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="530">
     <Grid>
-        <Button x:Name="btAutors" Content="Autors" Command="{Binding NewModalDialogCommand}" HorizontalAlignment="Left" Margin="185,115,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
+        <Button x:Name="btAutors" Content="Autors" Command="{Binding NewModalDialogCommand}" dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}" HorizontalAlignment="Left" Margin="185,115,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
         <Button x:Name="btProjectes" Content="Projectes" HorizontalAlignment="Left" Margin="185,185,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="24" Margin="100,255,0,0" TextWrapping="Wrap" Text="Cerca..." VerticalAlignment="Top" Width="330"/>
         <Button x:Name="btSortir" Content="Salir" HorizontalAlignment="Left" Margin="185,325,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
