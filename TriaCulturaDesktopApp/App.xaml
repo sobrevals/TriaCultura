@@ -11,6 +11,7 @@
     <!--StartupUri="View/Disciplines.xaml" -->
     <Application.Resources>
         <View:Disciplines x:Key="{x:Type ViewModel:DisciplinaViewModel}" x:Shared="False" />
+        <View:Espais x:Key="{x:Type ViewModel:EspaiViewModel}" x:Shared="False" />
         <View:Autors x:Key="{x:Type ViewModel:AutorsViewModel}" x:Shared="False" />
     </Application.Resources>
 </Application>

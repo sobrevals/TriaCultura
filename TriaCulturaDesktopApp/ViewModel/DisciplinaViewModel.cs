@@ -93,6 +93,25 @@ namespace TriaCulturaDesktopApp.ViewModel
                
             }
         }
+        public ICommand AfegirDisciplina_autor { get { return new RelayCommand(AddDisciplina_autor); } }
+
+        protected virtual void AddDisciplina_autor()
+        {
+            discipline d = SelectedDiscipline_fromDisciplines;
+            SelectedAuthor.disciplines.Add(d);
+            context.SaveChanges();
+            FillDisciplines_author(0);
+        }
+
+        public ICommand TreureDisciplina_autor { get { return new RelayCommand(RemDisciplina_autor); } }
+
+        protected virtual void RemDisciplina_autor()
+        {
+            discipline d = SelectedDiscipline_fromAuthor;
+            SelectedAuthor.disciplines.Remove(d);
+            context.SaveChanges();
+            FillDisciplines_author(0);
+        }
 
         public Action<DisciplinaViewModel> OnOk { get; set; }
         public Action<DisciplinaViewModel> OnCancel { get; set; }
