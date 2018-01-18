@@ -24,5 +24,10 @@ namespace TriaCulturaDesktopApp
         {
             InitializeComponent();
         }
+
+        private void btAutors_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
