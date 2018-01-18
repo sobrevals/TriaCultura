@@ -42,30 +42,13 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Clear();
         }
 
+        public ICommand NewModalDialogCommand { get { return new RelayCommand(OnNewModalDialog); } }
+
         public void OnNewModalDialog()
         {
-            this.Dialogs.Add(new Autors
+            this.Dialogs.Add(new 
             {
-                //Message = "Hello World!",
-                //Caption = "Modal Dialog Box",
-
-                //OnOk = (sender) =>
-                //{
-                //    sender.Close();
-                //    //new MessageBoxViewModel("You pressed ok!", "Bye bye!").Show(this.Dialogs);
-                //},
-
-                //OnCancel = (sender) =>
-                //{
-                //    sender.Close();
-                //    //new MessageBoxViewModel("You pressed cancel!", "Bye bye!").Show(this.Dialogs);
-                //},
-
-                //OnCloseRequest = (sender) =>
-                //{
-                //    sender.Close();
-                //    //new MessageBoxViewModel("You clicked the caption bar close button!", "Bye bye!").Show(this.Dialogs);
-                //}
+                
             });
         }
     }
