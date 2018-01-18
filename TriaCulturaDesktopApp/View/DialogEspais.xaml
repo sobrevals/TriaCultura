@@ -7,9 +7,14 @@
         mc:Ignorable="d"
         Title="DialogEspais" Height="221.116" Width="201.992">
     <Grid>
-        <Label x:Name="lbDisciplina" Content="Afegir espai" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="78" FontFamily="Verdana" FontSize="11"/>
-        <Button x:Name="btAfegir" Content="Afegir" HorizontalAlignment="Left" Margin="103,70,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="lbDisciplina" Content="Nom espai" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="78" FontFamily="Verdana" FontSize="11"/>
+        <Button x:Name="btAfegir" Content="Afegir" HorizontalAlignment="Left" Margin="103,94,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btTreure" Content="Treure" HorizontalAlignment="Left" Margin="103,119,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,33,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78"/>
+        <Label x:Name="lbDisciplina_Copy" Content="Adreça" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="78" FontFamily="Verdana" FontSize="11"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="10,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78"/>
+        <Label x:Name="lbDisciplina_Copy1" Content="Aforament" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="78" FontFamily="Verdana" FontSize="11"/>
+        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="10,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78"/>
 
     </Grid>
 </Window>

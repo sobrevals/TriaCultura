@@ -23,11 +23,6 @@ namespace TriaCulturaDesktopApp
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void btAutors_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        }       
     }
 }

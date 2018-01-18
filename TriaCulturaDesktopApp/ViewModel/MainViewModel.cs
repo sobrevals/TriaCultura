@@ -6,7 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-
+using System.ComponentModel;
+using MvvmDialogs.ViewModels;
+using System.Windows.Input;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -24,19 +26,47 @@ namespace TriaCulturaDesktopApp.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
+
+        public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
+        {          
+        }
+        public ICommand CloseAllCommand { get { return new RelayCommand(OnCloseAll); } }
+        public void OnCloseAll()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            this.Dialogs.Clear();
+        }
+
+        public void OnNewModalDialog()
+        {
+            this.Dialogs.Add(new Autors
+            {
+                //Message = "Hello World!",
+                //Caption = "Modal Dialog Box",
+
+                //OnOk = (sender) =>
+                //{
+                //    sender.Close();
+                //    //new MessageBoxViewModel("You pressed ok!", "Bye bye!").Show(this.Dialogs);
+                //},
+
+                //OnCancel = (sender) =>
+                //{
+                //    sender.Close();
+                //    //new MessageBoxViewModel("You pressed cancel!", "Bye bye!").Show(this.Dialogs);
+                //},
+
+                //OnCloseRequest = (sender) =>
+                //{
+                //    sender.Close();
+                //    //new MessageBoxViewModel("You clicked the caption bar close button!", "Bye bye!").Show(this.Dialogs);
+                //}
+            });
         }
     }
 }
