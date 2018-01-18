@@ -23,6 +23,6 @@ namespace TriaCulturaDesktopApp
         public MainWindow()
         {
             InitializeComponent();
-        }       
+        }      
     }
 }

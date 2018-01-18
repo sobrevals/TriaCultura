@@ -46,7 +46,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void OnNewModalDialog()
         {
-            this.Dialogs.Add(new 
+            this.Dialogs.Add(new AutorsViewModel
             {
                 
             });
