@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TriaCulturaDesktopApp.ViewModel;
 
 namespace TriaCulturaDesktopApp.View
 {
@@ -22,6 +24,13 @@ namespace TriaCulturaDesktopApp.View
         public Projectes()
         {
             InitializeComponent();
+            DataContext = new ProjecteViewModel();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            btn_tornar_enrere.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
     }
 }
