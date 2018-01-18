@@ -48,7 +48,13 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             this.Dialogs.Add(new AutorsViewModel
             {
-                
+                Title = "Afegir Contacte",
+                Contacte = con_aux,
+                OkText = "Ok",
+                TextEnabled = true,
+                OnOk = (sender) =>
+
+
             });
         }
     }
