@@ -7,23 +7,25 @@
         mc:Ignorable="d"
         Title="Projectes" Height="432.353" Width="530.514">
     <Grid>
-        <Label x:Name="lb_title" Content="Label" HorizontalAlignment="Left" Margin="22,22,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_title" HorizontalAlignment="Left" Height="23" Margin="22,53,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="80"/>
-        <Label x:Name="lb_theme" Content="Label" HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_theme" HorizontalAlignment="Left" Height="23" Margin="22,112,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="80"/>
-        <Label x:Name="lb_addFile" Content="Label" HorizontalAlignment="Left" Margin="22,154,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lb_title" Content="Titol" HorizontalAlignment="Left" Margin="22,22,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_title" HorizontalAlignment="Left" Height="23" Margin="22,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="lb_theme" Content="Tema" HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_theme" HorizontalAlignment="Left" Height="23" Margin="22,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="lb_addFile" Content="Adjuntar Fitxers" HorizontalAlignment="Left" Margin="22,154,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbx_file" HorizontalAlignment="Left" Height="93" Margin="22,185,0,0" VerticalAlignment="Top" Width="104"/>
-        <Label x:Name="lb_type" Content="Label" HorizontalAlignment="Left" Margin="187,22,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_typeExpo" HorizontalAlignment="Left" Height="23" Margin="187,53,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="80"/>
-        <Label x:Name="lb_descrip" Content="Label" HorizontalAlignment="Left" Margin="187,81,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="187,22,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_typeExpo" HorizontalAlignment="Left" Height="23" Margin="187,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="187,81,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbx_desc" HorizontalAlignment="Left" Height="108" Margin="187,112,0,0" VerticalAlignment="Top" Width="301"/>
-        <ListBox x:Name="lbx_place" HorizontalAlignment="Left" Height="109" Margin="282,240,0,0" VerticalAlignment="Top" Width="122"/>
-        <Label x:Name="lb_place" Content="Label" HorizontalAlignment="Left" Margin="229,240,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="bt_save" Content="Button" HorizontalAlignment="Left" Margin="422,362,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="bt_add" Content="Button" HorizontalAlignment="Left" Margin="192,271,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="bt_del" Content="Button" HorizontalAlignment="Left" Margin="192,309,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label x:Name="lb_author" Content="Label" HorizontalAlignment="Left" Margin="22,323,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_author" HorizontalAlignment="Left" Height="23" Margin="22,354,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="93"/>
+        <ListBox x:Name="lbx_place" HorizontalAlignment="Left" Height="109" Margin="284,258,0,0" VerticalAlignment="Top" Width="122"/>
+        <Label x:Name="lb_place" Content="Espais Solicitats" HorizontalAlignment="Left" Margin="301,227,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="bt_save" Content="Finalitzar" HorizontalAlignment="Left" Margin="422,362,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="bt_add" Content="+" HorizontalAlignment="Left" Margin="222,271,0,0" VerticalAlignment="Top" Width="45"/>
+        <Button x:Name="bt_del" Content="-" HorizontalAlignment="Left" Margin="222,309,0,0" VerticalAlignment="Top" Width="45"/>
+        <Label x:Name="lb_author" Content="Autor: " HorizontalAlignment="Left" Margin="22,304,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_author" HorizontalAlignment="Left" Height="23" Margin="22,335,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93"/>
+        <Button x:Name="bt_add_Copy" Content="ADD" HorizontalAlignment="Left" Margin="131,225,0,0" VerticalAlignment="Top" Width="45"/>
+        <Button x:Name="btn_tornar_enrere" Content="Tornar enrere" HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
