@@ -84,36 +84,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 SelectedRequest_fromPlace = _selectedproject.requests.ToList()[index];
             }
         }
-
-
-
-
-
-        protected virtual void AddPlace_request()
-        {
-            request r = _selectedRequest_place;
-            SelectedProject.requests.Add(r);
-            context.SaveChanges();
-            FillRequests_all(0);
-        }
-
-
-        protected virtual void RemRequest_request()
-        {
-            request p = SelectedRequest_fromPlace;
-            SelectedProject.requests.Remove(p);
-            context.SaveChanges();
-            FillRequest_place(0);
-        }
-
-
-
-
-
-
-
-
-
+        #endregion
 
 
 
@@ -132,7 +103,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public void RequestClose()
         {
             this.DialogClosing(this, null);
@@ -142,9 +113,24 @@ namespace TriaCulturaDesktopApp.ViewModel
 
 
 
-
-
         #region Commands
+        public ICommand AfegirRequest_place { get { return new RelayCommand(AddPlace_request); } }
+        protected virtual void AddPlace_request()
+        {
+            request r = _selectedRequest_place;
+            SelectedProject.requests.Add(r);
+            context.SaveChanges();
+            FillRequests_all(0);
+        }
+        public ICommand TreureRequest_place { get { return new RelayCommand(RemRequest_request); } }
+        protected virtual void RemRequest_request()
+        {
+            request p = SelectedRequest_fromPlace;
+            SelectedProject.requests.Remove(p);
+            context.SaveChanges();
+            FillRequest_place(0);
+        }
+
         public ICommand OkCommand { get { return new RelayCommand(Ok); } }
         protected virtual void Ok()
         {
@@ -152,18 +138,18 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 this.OnOk(this);
             }
-            else if(this.OnReturn != null)
+            else if (this.OnReturn != null)
             {
                 this.OnReturn(this);
-            }else
+            } else
             {
-
+                this.OnCloseRequest(this);
             }
         }
 
         public Action<ProjecteViewModel> OnOk { get; set; }
         public Action<ProjecteViewModel> OnReturn { get; set; }
         public Action<ProjecteViewModel> OnCloseRequest { get; set; }
-
+        #endregion
     }
 }
