@@ -56,14 +56,10 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-
         ProjecteViewModel()
         {
             FillRequests_all(0);
         }
-
-
-
 
         #region fill
         private void FillRequests_all(int index)
@@ -75,8 +71,6 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-
-
         private void FillRequest_place(int index)
         {
             if (index >= 0 && index < SelectedProject.requests.Count)
@@ -84,10 +78,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                 SelectedRequest_fromPlace = _selectedproject.requests.ToList()[index];
             }
         }
-
-
-
-
 
         protected virtual void AddPlace_request()
         {
@@ -106,20 +96,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             FillRequest_place(0);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #endregion
 
         #region PropertyChanged
 
@@ -164,6 +141,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         public Action<ProjecteViewModel> OnOk { get; set; }
         public Action<ProjecteViewModel> OnReturn { get; set; }
         public Action<ProjecteViewModel> OnCloseRequest { get; set; }
-
+        #endregion
     }
 }

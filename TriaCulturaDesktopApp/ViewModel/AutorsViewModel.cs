@@ -50,16 +50,16 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public event EventHandler DialogClosing;
 
-        public bool IsModal
+        public virtual bool IsModal
         {
             get
             {
                 return true;
             }
         }
-        public virtual void RequestClose() { this.DialogClosing(this, null); }
-        public ICommand OpenAuthor { get { return new RelayCommand(OpAuthor); } }
-        protected virtual void OpAuthor()
+      
+        public ICommand OkCommand { get { return new RelayCommand(Ok); } }
+        protected virtual void Ok()
         {
             if (this.OnOk != null)
                 this.OnOk(this);
@@ -81,6 +81,11 @@ namespace TriaCulturaDesktopApp.ViewModel
         protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void RequestClose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

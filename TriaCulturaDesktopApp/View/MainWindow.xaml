@@ -6,6 +6,8 @@
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         xmlns:local="clr-namespace:TriaCulturaDesktopApp"
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="530">
     <Grid>
