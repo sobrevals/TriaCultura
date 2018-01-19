@@ -13,9 +13,10 @@ using System.Windows.Input;
 using TriaCulturaDesktopApp.Model;
 using System.Runtime.CompilerServices;
 
+
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class ProjecteViewModel : INotifyPropertyChanged, IUserDialogViewModel
+    class ProjecteViewModel : ViewModelBase,  INotifyPropertyChanged, IUserDialogViewModel
     {
 
         private List<place> _place;
@@ -94,7 +95,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         #region PropertyChanged
 
-        public event EventHandler DialogClosing;
+        public virtual event EventHandler DialogClosing;
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -109,8 +110,11 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.DialogClosing(this, null);
         }
         #endregion
-
-
+        public ICommand NewModalDialogCommand { get { return new RelayCommand(NewModalDialogEspai); } }
+        public void NewModalDialogEspai()
+        {
+            this.Dialogs.Add(new EspaiViewModel());
+        }
 
 
         #region Commands
@@ -122,14 +126,21 @@ namespace TriaCulturaDesktopApp.ViewModel
             context.SaveChanges();
             FillRequests_all(0);
         }
-        public ICommand TreureRequest_place { get { return new RelayCommand(RemRequest_request); } }
-        protected virtual void RemRequest_request()
+        public ICommand TreureRequest_place { get { return new RelayCommand(RemRequest_place); } }
+        protected virtual void RemRequest_place()
         {
             request p = SelectedRequest_fromPlace;
             SelectedProject.requests.Remove(p);
             context.SaveChanges();
             FillRequest_place(0);
         }
+
+        public ICommand Afegir_fitxer { get { return new RelayCommand(AddFitxer); } }
+        protected virtual void AddFitxer()
+        {
+
+        }
+
 
         public ICommand OkCommand { get { return new RelayCommand(Ok); } }
         protected virtual void Ok()
