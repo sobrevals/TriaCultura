@@ -9,7 +9,6 @@ using System.Windows;
 using System.ComponentModel;
 using MvvmDialogs.ViewModels;
 using System.Windows.Input;
-using TriaCulturaDesktopApp.Model;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -27,8 +26,6 @@ namespace TriaCulturaDesktopApp.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
-        
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
 
@@ -39,17 +36,26 @@ namespace TriaCulturaDesktopApp.ViewModel
         public MainViewModel()
         {          
         }
-              
         public ICommand CloseAllCommand { get { return new RelayCommand(OnCloseAll); } }
         public void OnCloseAll()
         {
             this.Dialogs.Clear();
         }
+
         public ICommand NewModalDialogCommand { get { return new RelayCommand(OnNewModalDialog); } }
 
         public void OnNewModalDialog()
         {
-            this.Dialogs.Add(new AutorsViewModel());
+            this.Dialogs.Add(new AutorsViewModel
+            {
+                //Title = "Afegir Contacte",
+                //Contacte = con_aux,
+                //OkText = "Ok",
+                //TextEnabled = true,
+                //OnOk = (sender) =>
+
+
+            });
         }
     }
 }

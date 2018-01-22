@@ -8,12 +8,28 @@ using System.Threading.Tasks;
 using TriaCulturaDesktopApp.Model;
 using MvvmDialogs.ViewModels;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight;
+
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class EspaiViewModel: INotifyPropertyChanged
+    class EspaiViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
         triaculturaCTXEntities context = new triaculturaCTXEntities();
 
+        public bool IsModal
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public event EventHandler DialogClosing;
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RequestClose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

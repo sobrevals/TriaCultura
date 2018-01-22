@@ -13,9 +13,10 @@ using System.Windows.Input;
 using TriaCulturaDesktopApp.Model;
 using System.Runtime.CompilerServices;
 
+
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class ProjecteViewModel : INotifyPropertyChanged, IUserDialogViewModel
+    class ProjecteViewModel : ViewModelBase,  INotifyPropertyChanged, IUserDialogViewModel
     {
 
         private List<place> _place;
@@ -56,10 +57,14 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
+
         ProjecteViewModel()
         {
             FillRequests_all(0);
         }
+
+
+
 
         #region fill
         private void FillRequests_all(int index)
@@ -71,6 +76,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
+
+
         private void FillRequest_place(int index)
         {
             if (index >= 0 && index < SelectedProject.requests.Count)
@@ -78,29 +85,17 @@ namespace TriaCulturaDesktopApp.ViewModel
                 SelectedRequest_fromPlace = _selectedproject.requests.ToList()[index];
             }
         }
-
-        protected virtual void AddPlace_request()
-        {
-            request r = _selectedRequest_place;
-            SelectedProject.requests.Add(r);
-            context.SaveChanges();
-            FillRequests_all(0);
-        }
-
-
-        protected virtual void RemRequest_request()
-        {
-            request p = SelectedRequest_fromPlace;
-            SelectedProject.requests.Remove(p);
-            context.SaveChanges();
-            FillRequest_place(0);
-        }
-
         #endregion
+
+
+
+
+
+
 
         #region PropertyChanged
 
-        public event EventHandler DialogClosing;
+        public virtual event EventHandler DialogClosing;
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -109,19 +104,44 @@ namespace TriaCulturaDesktopApp.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public void RequestClose()
         {
             this.DialogClosing(this, null);
         }
         #endregion
-
-
-
-
+        public ICommand NewModalDialogCommand { get { return new RelayCommand(NewModalDialogEspai); } }
+        public void NewModalDialogEspai()
+        {
+            this.Dialogs.Add(new EspaiViewModel());
+        }
 
 
         #region Commands
+        public ICommand AfegirRequest_place { get { return new RelayCommand(AddPlace_request); } }
+        protected virtual void AddPlace_request()
+        {
+            request r = _selectedRequest_place;
+            SelectedProject.requests.Add(r);
+            context.SaveChanges();
+            FillRequests_all(0);
+        }
+        public ICommand TreureRequest_place { get { return new RelayCommand(RemRequest_place); } }
+        protected virtual void RemRequest_place()
+        {
+            request p = SelectedRequest_fromPlace;
+            SelectedProject.requests.Remove(p);
+            context.SaveChanges();
+            FillRequest_place(0);
+        }
+
+        public ICommand Afegir_fitxer { get { return new RelayCommand(AddFitxer); } }
+        protected virtual void AddFitxer()
+        {
+
+        }
+
+
         public ICommand OkCommand { get { return new RelayCommand(Ok); } }
         protected virtual void Ok()
         {
@@ -129,12 +149,12 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 this.OnOk(this);
             }
-            else if(this.OnReturn != null)
+            else if (this.OnReturn != null)
             {
                 this.OnReturn(this);
-            }else
+            } else
             {
-
+                this.OnCloseRequest(this);
             }
         }
 
