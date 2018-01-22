@@ -134,6 +134,7 @@
       <DependentUpon>TriaCulturaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AutorsViewModel.cs" />
+    <Compile Include="ViewModel\AutorViewModel.cs" />
     <Compile Include="ViewModel\DisciplinaDialogViewModel.cs" />
     <Compile Include="ViewModel\DisciplinaViewModel.cs" />
     <Compile Include="ViewModel\EspaiViewModel.cs" />
