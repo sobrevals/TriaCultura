@@ -25,10 +25,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         private author _selectedAuthor;
 
         public AutorsViewModel()
-        {
-            AuthorsL = context.authors.ToList();
-            SelectedIndexAuthor = 0;
-            SelectedAuthor = AuthorsL[0];
+        {                  
+            FillAuthors(0);
         }
         public List<author> AuthorsL
         {
@@ -53,8 +51,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         #endregion
 
-        public event EventHandler DialogClosing;
-
+        #region IsModal
         public virtual bool IsModal
         {
             get
@@ -63,6 +60,9 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
+        #endregion IsModal
+
+        #region ICommand
         public ICommand OkCommand { get { return new RelayCommand(Ok); } }
         protected virtual void Ok()
         {
@@ -72,25 +72,46 @@ namespace TriaCulturaDesktopApp.ViewModel
                 Close();
         }
 
+        public Action<AutorsViewModel> OnOk { get; set; }
+        #endregion ICommand
+
+        #region DialogClosing
+
+        public event EventHandler DialogClosing;
+
         public void Close()
         {
             if (this.DialogClosing != null)
                 this.DialogClosing(this, new EventArgs());
         }
 
-        public Action<AutorsViewModel> OnOk { get; set; }
+        #endregion
 
-
-
+        #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
 
+        #region RequestClose
         public void RequestClose()
         {
-            throw new NotImplementedException();
+            this.DialogClosing(this, null);
         }
+        #endregion
+
+        #region FillAutors
+        private void FillAuthors(int n)
+        {
+            AuthorsL = context.authors.OrderBy(x => x.name).ToList();
+            
+            if (AuthorsL != null)
+            {
+                SelectedAuthor = AuthorsL[n];
+            }
+        }
+        #endregion
     }
 }
