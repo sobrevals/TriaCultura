@@ -42,20 +42,11 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Clear();
         }
 
-        public ICommand NewModalDialogCommand { get { return new RelayCommand(OnNewModalDialog); } }
+        public ICommand OpenAuthors { get { return new RelayCommand(OpAuthor); } }
 
-        public void OnNewModalDialog()
+        public void OpAuthor()
         {
-            this.Dialogs.Add(new AutorsViewModel
-            {
-                //Title = "Afegir Contacte",
-                //Contacte = con_aux,
-                //OkText = "Ok",
-                //TextEnabled = true,
-                //OnOk = (sender) =>
-
-
-            });
+            this.Dialogs.Add(new AutorsViewModel() );
         }
     }
 }
