@@ -15,6 +15,6 @@
         <View:Projectes x:Key="{x:Type ViewModel:ProjecteViewModel}" x:Shared="False" />
         <View:Autors x:Key="{x:Type ViewModel:AutorsViewModel}" x:Shared="False" />
         <View:DisciplinaDialog x:Key="{x:Type ViewModel:DisciplinaDialogViewModel}" x:Shared="False"/>
-        <View:MainWindow x:Key="{x:Type ViewModel:MainWindowViewModel}" x:Shared="False"/>
+        <!--<View:MainWindow x:Key="{x:Type ViewModel:MainWindowViewModel}" x:Shared="False"/>-->
     </Application.Resources>
 </Application>

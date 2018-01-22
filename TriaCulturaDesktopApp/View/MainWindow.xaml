@@ -2,18 +2,22 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
-        xmlns:local="clr-namespace:TriaCulturaDesktopApp"
-        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"      
+        xmlns:local="clr-namespace:TriaCulturaDesktopApp"       
         xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
         xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"
+        xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="530">
+    <Window.DataContext>
+        <ViewModel:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Button x:Name="btAutors" Content="Autors" Command="{Binding OpenAuthors}" HorizontalAlignment="Left" Margin="185,115,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
         <Button x:Name="btProjectes" Content="Projectes" HorizontalAlignment="Left" Margin="185,185,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="24" Margin="100,255,0,0" TextWrapping="Wrap" Text="Cerca..." VerticalAlignment="Top" Width="330"/>
-        <Button x:Name="btSortir" Content="Salir" HorizontalAlignment="Left" Margin="185,325,0,0" VerticalAlignment="Top" Width="160" Height="24"/>        
+        <Button x:Name="btSortir" Content="Salir" HorizontalAlignment="Left" Margin="185,325,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
     </Grid>
 </Window>
