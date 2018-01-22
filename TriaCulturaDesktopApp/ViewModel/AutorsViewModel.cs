@@ -8,16 +8,30 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using TriaCulturaDesktopApp.Model;
 
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
     public class AutorsViewModel : ViewModelBase, IUserDialogViewModel
     {
-        
-        #region Properties
-        private List<Autor>
-            private _autorSelected;
+        triaculturaCTXEntities context = new triaculturaCTXEntities();       
+        public bool IsModal
+        {
+            get
+            {
+                return true;            }
+        }
 
+        #region Properties
+        private List<author> _authors;
+            private author _autorSelected;
+public event EventHandler DialogClosing;
+
+        public void RequestClose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+#endregion
