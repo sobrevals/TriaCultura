@@ -8,6 +8,9 @@
         xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"
         mc:Ignorable="d"
         Title="{Binding Title}"  Height="240" Width="297">
+    <Window.DataContext>
+        <ViewModel:DisciplinaDialogViewModel/>
+    </Window.DataContext>
 
     <Grid>
         <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="21" Margin="75,41,0,0" TextWrapping="Wrap" Text="{Binding Discipline.id_discipline}" VerticalAlignment="Top" Width="47" IsEnabled="False"/>

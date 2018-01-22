@@ -5,29 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         mc:Ignorable="d"
-        Title="Autor" Height="396.203" Width="776.266">
+        xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" 
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
+        dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"
+        Title="{Binding Titol}" Height="396.203" Width="776.266">
+    <Window.DataContext>
+        <ViewModel:AutorViewModel/>
+    </Window.DataContext>
     <Grid>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="124,170,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="textbox_dni" HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textbox_dni" HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="lbl_dni" Content="DNI" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textbox_nom" HorizontalAlignment="Left" Height="23" Margin="259,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
-        <Label x:Name="nomArtistic" Content="Nom complert / Nom Artistic
-               " HorizontalAlignment="Left" Margin="259,4,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_nom" HorizontalAlignment="Left" Height="23" Margin="259,30,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="170"/>
+        <Label x:Name="lbl_nomAutor" Content="Nom" HorizontalAlignment="Left" Margin="259,4,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="btn_return" Content="Tornar enrere" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_finish" Content="Projectes" HorizontalAlignment="Left" Margin="683,340,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_esborrar_telefon" Content="Esborrar" HorizontalAlignment="Left" Margin="177,141,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_esborrar_mail" Content="Esborrar" HorizontalAlignment="Left" Margin="663,141,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_afegir_mail" Content="Afegir" HorizontalAlignment="Left" Margin="663,106,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_afegir_telefon" Content="Afegir" HorizontalAlignment="Left" Margin="177,106,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0,1.572"/>
-        <ListBox x:Name="listbox_disciplines" HorizontalAlignment="Left" Height="100" Margin="19,156,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox x:Name="listbox_mails" HorizontalAlignment="Left" Height="127" Margin="430,96,0,0" VerticalAlignment="Top" Width="218"/>
-        <ListBox x:Name="listbox_telefons" HorizontalAlignment="Left" Height="127" Margin="261,96,0,0" VerticalAlignment="Top" Width="152"/>
+        <ListBox x:Name="listbox_disciplines" HorizontalAlignment="Left" Height="100" Margin="19,156,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding DisciplinesL}"/>
+        <ListBox x:Name="listbox_mails" HorizontalAlignment="Left" Height="127" Margin="430,96,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding EmailsL}"/>
+        <ListBox x:Name="listbox_telefons" HorizontalAlignment="Left" Height="127" Margin="261,96,0,0" VerticalAlignment="Top" Width="152" ItemsSource="{Binding TelefonsL}"/>
         <Label x:Name="label_disciplines" Content="Disciplines" HorizontalAlignment="Left" Margin="19,130,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_telefon" Content="Telefon" HorizontalAlignment="Left" Margin="313,65,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_mail" Content="Mail" HorizontalAlignment="Left" Margin="539,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.462"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="430,255,0,0" VerticalAlignment="Top" Width="117"/>
         <Label x:Name="lbl_agefir_imatge" Content="Imatge identificativa" HorizontalAlignment="Left" Margin="430,230,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btn_imatge" Content="Modificar" HorizontalAlignment="Left" Margin="552,285,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="tb_CognomAutor" HorizontalAlignment="Left" Height="23" Margin="457,30,0,0" TextWrapping="Wrap" Text="{Binding Author.surname}" VerticalAlignment="Top" Width="170"/>
+        <Label x:Name="lbl_cognomAutor" Content="Cognom" HorizontalAlignment="Left" Margin="457,4,0,0" VerticalAlignment="Top" Width="74"/>
 
     </Grid>
 </Window>

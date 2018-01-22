@@ -140,6 +140,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         protected void CreaDisciplina()
         {
             discipline aux_disc = new discipline();
+            aux_disc.id_discipline = 999;
             this.Dialogs.Add(new DisciplinaDialogViewModel
             {
                 Title = "Crear Disciplina",
