@@ -16,7 +16,7 @@
     </Window.DataContext>
     <Grid>
         <Button x:Name="btAutors" Content="Autors" Command="{Binding OpenAuthors}" HorizontalAlignment="Left" Margin="185,115,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
-        <Button x:Name="btProjectes" Content="Projectes" HorizontalAlignment="Left" Margin="185,185,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
+        <Button x:Name="btProjectes" Content="Projectes" Command="{Binding OpenProjects}" HorizontalAlignment="Left" Margin="185,185,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="24" Margin="100,255,0,0" TextWrapping="Wrap" Text="Cerca..." VerticalAlignment="Top" Width="330"/>
         <Button x:Name="btSortir" Content="Salir" HorizontalAlignment="Left" Margin="185,325,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
     </Grid>
