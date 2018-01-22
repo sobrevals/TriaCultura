@@ -24,14 +24,6 @@ namespace TriaCulturaDesktopApp.View
         public Projectes()
         {
             InitializeComponent();
-            this.DataContext = new ProjecteViewModel();
         }
-        
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            btn_tornar_enrere.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-        }
-
     }
 }
