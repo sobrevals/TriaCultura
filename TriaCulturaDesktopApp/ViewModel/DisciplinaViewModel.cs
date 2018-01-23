@@ -10,6 +10,7 @@ using MvvmDialogs.ViewModels;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Windows;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -24,10 +25,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         private author _selectedauthor;
 
         public List<discipline> Disciplines
-        { get { return _disciplines; } set { _disciplines = value; } }
+        { get { return _disciplines; } set { _disciplines = value; NotifyPropertyChanged(); } }
 
-        public discipline SelectedDiscipline_fromDisciplines { get { return _selectedDiscipline_fromDisciplines; } set { _selectedDiscipline_fromDisciplines = value; } }
-        public discipline SelectedDiscipline_fromAuthor { get { return _selectedDiscipline_fromAuthor; } set { _selectedDiscipline_fromAuthor = value; } }
+        public discipline SelectedDiscipline_fromDisciplines { get { return _selectedDiscipline_fromDisciplines; } set { _selectedDiscipline_fromDisciplines = value;NotifyPropertyChanged(); } }
+        public discipline SelectedDiscipline_fromAuthor { get { return _selectedDiscipline_fromAuthor; } set { _selectedDiscipline_fromAuthor = value;NotifyPropertyChanged(); } }
 
         public author SelectedAuthor { get { return _selectedauthor; } set { _selectedauthor = value; }  }
 
@@ -41,6 +42,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
 
         private ObservableCollection<IDialogViewModel> _dialogs = new ObservableCollection<IDialogViewModel>();
+
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _dialogs; } set { _dialogs = value; } }
 
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -73,6 +76,15 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
+        private void FillDisciplines_all(discipline d)
+        {
+            FillDisciplines_all(0);
+            if (d!=null && d.id_discipline!=0)
+            {
+                SelectedDiscipline_fromDisciplines = Disciplines.Where(x => x.id_discipline == d.id_discipline).SingleOrDefault();
+            }
+        }
+
         private void FillDisciplines_author (int index)
         {
             if (index>=0 && index < SelectedAuthor.disciplines.Count)
@@ -90,9 +102,19 @@ namespace TriaCulturaDesktopApp.ViewModel
                 this.OnOk(this);
             } else
             {
-               
+                context.SaveChanges();
+                this.Close();
             }
         }
+
+        public void Close()
+        {
+            if (this.DialogClosing != null)
+            {
+                this.DialogClosing(this, new EventArgs ());
+            }
+        }
+
         public ICommand AfegirDisciplina_autor { get { return new RelayCommand(AddDisciplina_autor); } }
 
         protected virtual void AddDisciplina_autor()
@@ -111,6 +133,75 @@ namespace TriaCulturaDesktopApp.ViewModel
             SelectedAuthor.disciplines.Remove(d);
             context.SaveChanges();
             FillDisciplines_author(0);
+        }
+
+        public ICommand CrearDisciplina { get { return new RelayCommand(CreaDisciplina); } }
+
+        protected void CreaDisciplina()
+        {
+            discipline aux_disc = new discipline();
+            aux_disc.id_discipline = 999;
+            this.Dialogs.Add(new DisciplinaDialogViewModel
+            {
+                Title = "Crear Disciplina",
+                Discipline = aux_disc,
+                OkText = "Confirmar",
+                TextEnabled = true,
+                OnOk = (sender) =>
+                {
+                    Disciplines.Add(aux_disc);
+                    try
+                    {
+                        // hauria de no-declarar la id de l'entrada que vull inserir -- sqlserver no em deixa que sigui explícita
+                        context.SaveChanges();
+                        FillDisciplines_all(aux_disc);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    sender.Close();
+                },
+                    OnCancel = (sender) => { sender.Close(); },
+                    OnCloseRequest = (sender) => { sender.Close(); }
+            });
+            
+        }
+
+        public ICommand EsborrarDisciplina { get { return new RelayCommand(EsborraDisciplina); } }
+
+        protected void EsborraDisciplina()
+        {
+            if (SelectedDiscipline_fromDisciplines != null)
+            {
+                discipline aux_disc = new discipline();
+                aux_disc.id_discipline = SelectedDiscipline_fromDisciplines.id_discipline;
+                aux_disc.type = SelectedDiscipline_fromDisciplines.type;
+                this.Dialogs.Add(new DisciplinaDialogViewModel
+                {
+                    Title = "Esborrar Disciplina",
+                    Discipline = aux_disc,
+                    OkText = "Confirmar",
+                    TextEnabled = false,
+                    OnOk = (sender) =>
+                    {
+                        try
+                        {
+                            context.disciplines.Remove(SelectedDiscipline_fromDisciplines);
+                            context.SaveChanges();
+                            FillDisciplines_all(0);
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.ToString());
+                        }
+                        sender.Close();
+                    },
+                    OnCancel = (sender) => { sender.Close(); },
+                    OnCloseRequest = (sender) => { sender.Close(); }
+
+                });
+            }
         }
 
         public Action<DisciplinaViewModel> OnOk { get; set; }

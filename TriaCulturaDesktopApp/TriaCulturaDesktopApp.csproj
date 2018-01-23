@@ -134,6 +134,8 @@
       <DependentUpon>TriaCulturaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AutorsViewModel.cs" />
+    <Compile Include="ViewModel\AutorViewModel.cs" />
+    <Compile Include="ViewModel\DisciplinaDialogViewModel.cs" />
     <Compile Include="ViewModel\DisciplinaViewModel.cs" />
     <Compile Include="ViewModel\EspaiViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -145,6 +147,9 @@
     </Compile>
     <Compile Include="View\DialogEspais.xaml.cs">
       <DependentUpon>DialogEspais.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DisciplinaDialog.xaml.cs">
+      <DependentUpon>DisciplinaDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Disciplines.xaml.cs">
       <DependentUpon>Disciplines.xaml</DependentUpon>
@@ -167,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DialogEspais.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DisciplinaDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
