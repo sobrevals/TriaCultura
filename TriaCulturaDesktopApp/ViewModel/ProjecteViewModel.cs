@@ -54,7 +54,8 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public ProjecteViewModel()
         {
-            FillRequests_all(0);
+
+            //FillRequests_all(0);
         }
 
 
