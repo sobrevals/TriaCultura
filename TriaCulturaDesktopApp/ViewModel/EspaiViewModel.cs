@@ -9,11 +9,15 @@ using TriaCulturaDesktopApp.Model;
 using MvvmDialogs.ViewModels;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
     class EspaiViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
+        private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
         triaculturaCTXEntities context = new triaculturaCTXEntities();
 
         public bool IsModal
@@ -31,5 +35,17 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             throw new NotImplementedException();
         }
+
+        public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
+        public void Close()
+        {
+            if (this.DialogClosing != null)
+                this.DialogClosing(this, new EventArgs());
+        }
+
+
+
     }
+
+
 }
