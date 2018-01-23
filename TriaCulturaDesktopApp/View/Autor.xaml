@@ -20,8 +20,8 @@
         <Label x:Name="lbl_dni" Content="DNI" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textbox_nom" HorizontalAlignment="Left" Height="23" Margin="259,30,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="170"/>
         <Label x:Name="lbl_nomAutor" Content="Nom" HorizontalAlignment="Left" Margin="259,4,0,0" VerticalAlignment="Top" Width="45"/>
-        <Button x:Name="btn_return" Content="Tornar enrere" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btn_finish" Content="Projectes" HorizontalAlignment="Left" Margin="683,340,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btn_return" Command="{Binding tornarEnrere}" Content="Tornar enrere" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btn_finish" Command="{Binding OpenProjecte}" Content="Projectes" HorizontalAlignment="Left" Margin="683,340,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_esborrar_telefon" Content="Esborrar" HorizontalAlignment="Left" Margin="177,141,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_esborrar_mail" Content="Esborrar" HorizontalAlignment="Left" Margin="663,141,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_afegir_mail" Content="Afegir" HorizontalAlignment="Left" Margin="663,106,0,0" VerticalAlignment="Top" Width="75"/>

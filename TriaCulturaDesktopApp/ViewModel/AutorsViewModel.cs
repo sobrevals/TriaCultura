@@ -73,6 +73,9 @@ namespace TriaCulturaDesktopApp.ViewModel
             else
                 Close();
         }
+
+
+
         public ICommand afegirAutor { get { return new RelayCommand(addAutor); } }
         protected virtual void addAutor()
         {

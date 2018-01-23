@@ -142,7 +142,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             this.Dialogs.Add(new EspaiViewModel());
         }
-
+        public ICommand finalitzar { get { return new RelayCommand(Close); } }
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public void Close()
         {

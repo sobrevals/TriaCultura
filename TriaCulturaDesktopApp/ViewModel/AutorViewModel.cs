@@ -75,5 +75,32 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (this.DialogClosing != null)
                 this.DialogClosing(this, new EventArgs());
         }
+        #region ICommand
+        public ICommand OkCommand { get { return new RelayCommand(Ok); } }
+        protected virtual void Ok()
+        {
+            if (this.OnOk != null)
+                this.OnOk(this);
+            else
+                Close();
+        }
+
+        public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
+        protected virtual void opProject()
+        {
+            this.Dialogs.Add(new ProjecteViewModel());
+        }
+
+        public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
+        public Action<AutorViewModel> OnOk { get; set; }
+        #endregion ICommand
+        #region DialogClosing
+
+        public void Close()
+        {
+            if (this.DialogClosing != null)
+                this.DialogClosing(this, new EventArgs());
+        }
+        #endregion
     }
 }
