@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Input;
 using TriaCulturaDesktopApp.Model;
 using System.Runtime.CompilerServices;
+using TriaCulturaDesktopApp.ViewModel;
 
 
 namespace TriaCulturaDesktopApp.ViewModel
@@ -141,21 +142,20 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         }
 
-
-        public ICommand OkCommand { get { return new RelayCommand(Ok); } }
-        protected virtual void Ok()
+        /*
+        public ICommand OkCommand { get { return new RelayCommand(opProjecte); } }
+        protected virtual void opProjecte()
         {
-            if (this.OnOk != null)
-            {
-                this.OnOk(this);
-            }
-            else if (this.OnReturn != null)
-            {
-                this.OnReturn(this);
-            } else
-            {
-                this.OnCloseRequest(this);
-            }
+            this.Dialogs.Add(new ProjectesViewModel());
+            Close();
+        }*/
+
+
+        public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
+        public void Close()
+        {
+            if (this.DialogClosing != null)
+                this.DialogClosing(this, new EventArgs());
         }
 
         public Action<ProjecteViewModel> OnOk { get; set; }

@@ -26,7 +26,7 @@
         <Label x:Name="lb_author" Content="Autor: " HorizontalAlignment="Left" Margin="22,304,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tb_author" HorizontalAlignment="Left" Height="23" Margin="22,335,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93"/>
         <Button x:Name="bt_add_Copy" Content="ADD" HorizontalAlignment="Left" Margin="131,225,0,0" VerticalAlignment="Top" Width="45"/>
-        <Button x:Name="btn_tornar_enrere" Command="{Binding OkCommand}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
