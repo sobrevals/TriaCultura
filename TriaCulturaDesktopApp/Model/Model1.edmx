@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="triaculturaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="triaculturaDB_localModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="author">
           <Key>
             <PropertyRef Name="dni" />
@@ -289,7 +289,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="triaculturaDBModelStoreContainer">
+        <EntityContainer Name="triaculturaDB_localModelStoreContainer">
           <EntitySet Name="author" EntityType="Self.author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="author_has_discipline" EntityType="Self.author_has_discipline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="capacity" EntityType="Self.capacity" Schema="dbo" store:Type="Tables" />
@@ -362,7 +362,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="triaculturaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="triaculturaDB_localModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="author">
           <Key>
             <PropertyRef Name="dni" />
@@ -583,7 +583,7 @@
           <End Role="project" Type="Self.project" Multiplicity="*" />
           <End Role="type" Type="Self.type" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="triaculturaCTXEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="triaculturaDB_localEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="authors" EntityType="Self.author" />
           <EntitySet Name="capacities" EntityType="Self.capacity" />
           <EntitySet Name="disciplines" EntityType="Self.discipline" />
@@ -642,9 +642,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="triaculturaDBModelStoreContainer" CdmEntityContainer="triaculturaCTXEntities">
+        <EntityContainerMapping StorageEntityContainer="triaculturaDB_localModelStoreContainer" CdmEntityContainer="triaculturaDB_localEntities">
           <EntitySetMapping Name="authors">
-            <EntityTypeMapping TypeName="triaculturaDBModel.author">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.author">
               <MappingFragment StoreEntitySet="author">
                 <ScalarProperty Name="dni" ColumnName="dni" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -654,7 +654,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="capacities">
-            <EntityTypeMapping TypeName="triaculturaDBModel.capacity">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.capacity">
               <MappingFragment StoreEntitySet="capacity">
                 <ScalarProperty Name="id_capacity" ColumnName="id_capacity" />
                 <ScalarProperty Name="type_spectacle" ColumnName="type_spectacle" />
@@ -663,7 +663,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="disciplines">
-            <EntityTypeMapping TypeName="triaculturaDBModel.discipline">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.discipline">
               <MappingFragment StoreEntitySet="discipline">
                 <ScalarProperty Name="id_discipline" ColumnName="id_discipline" />
                 <ScalarProperty Name="type" ColumnName="type" />
@@ -671,7 +671,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="emails">
-            <EntityTypeMapping TypeName="triaculturaDBModel.email">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.email">
               <MappingFragment StoreEntitySet="email">
                 <ScalarProperty Name="id_email" ColumnName="id_email" />
                 <ScalarProperty Name="address" ColumnName="address" />
@@ -680,7 +680,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="events">
-            <EntityTypeMapping TypeName="triaculturaDBModel.event">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.event">
               <MappingFragment StoreEntitySet="event">
                 <ScalarProperty Name="id_event" ColumnName="id_event" />
                 <ScalarProperty Name="date_in" ColumnName="date_in" />
@@ -690,7 +690,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="files">
-            <EntityTypeMapping TypeName="triaculturaDBModel.file">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.file">
               <MappingFragment StoreEntitySet="file">
                 <ScalarProperty Name="id_file" ColumnName="id_file" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -701,7 +701,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="phones">
-            <EntityTypeMapping TypeName="triaculturaDBModel.phone">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.phone">
               <MappingFragment StoreEntitySet="phone">
                 <ScalarProperty Name="id_phone" ColumnName="id_phone" />
                 <ScalarProperty Name="num" ColumnName="num" />
@@ -711,7 +711,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="places">
-            <EntityTypeMapping TypeName="triaculturaDBModel.place">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.place">
               <MappingFragment StoreEntitySet="place">
                 <ScalarProperty Name="id_place" ColumnName="id_place" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -721,7 +721,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="projects">
-            <EntityTypeMapping TypeName="triaculturaDBModel.project">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.project">
               <MappingFragment StoreEntitySet="project">
                 <ScalarProperty Name="id_project" ColumnName="id_project" />
                 <ScalarProperty Name="title" ColumnName="title" />
@@ -732,7 +732,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="requests">
-            <EntityTypeMapping TypeName="triaculturaDBModel.request">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.request">
               <MappingFragment StoreEntitySet="request">
                 <ScalarProperty Name="id_request" ColumnName="id_request" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
@@ -741,7 +741,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="triaculturaDBModel.sysdiagram">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -752,14 +752,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="types">
-            <EntityTypeMapping TypeName="triaculturaDBModel.type">
+            <EntityTypeMapping TypeName="triaculturaDB_localModel.type">
               <MappingFragment StoreEntitySet="type">
                 <ScalarProperty Name="id_type" ColumnName="id_type" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="author_has_discipline" TypeName="triaculturaDBModel.author_has_discipline" StoreEntitySet="author_has_discipline">
+          <AssociationSetMapping Name="author_has_discipline" TypeName="triaculturaDB_localModel.author_has_discipline" StoreEntitySet="author_has_discipline">
             <EndProperty Name="author">
               <ScalarProperty Name="dni" ColumnName="author_dni" />
             </EndProperty>
@@ -767,7 +767,7 @@
               <ScalarProperty Name="id_discipline" ColumnName="discipline_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="place_has_capacity" TypeName="triaculturaDBModel.place_has_capacity" StoreEntitySet="place_has_capacity">
+          <AssociationSetMapping Name="place_has_capacity" TypeName="triaculturaDB_localModel.place_has_capacity" StoreEntitySet="place_has_capacity">
             <EndProperty Name="capacity">
               <ScalarProperty Name="id_capacity" ColumnName="capacity_id" />
             </EndProperty>
@@ -775,7 +775,7 @@
               <ScalarProperty Name="id_place" ColumnName="place_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="project_has_type" TypeName="triaculturaDBModel.project_has_type" StoreEntitySet="project_has_type">
+          <AssociationSetMapping Name="project_has_type" TypeName="triaculturaDB_localModel.project_has_type" StoreEntitySet="project_has_type">
             <EndProperty Name="project">
               <ScalarProperty Name="id_project" ColumnName="project_id" />
             </EndProperty>

@@ -13,10 +13,10 @@ namespace TriaCulturaDesktopApp.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class triaculturaCTXEntities : DbContext
+    public partial class triaculturaDB_localEntities : DbContext
     {
-        public triaculturaCTXEntities()
-            : base("name=triaculturaCTXEntities")
+        public triaculturaDB_localEntities()
+            : base("name=triaculturaDB_localEntities")
         {
         }
     

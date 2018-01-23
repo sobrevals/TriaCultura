@@ -16,7 +16,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     public class AutorsViewModel : ViewModelBase, IUserDialogViewModel
     {
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+        triaculturaDB_localEntities context = new triaculturaDB_localEntities();
 
         #region BasicProperties
 

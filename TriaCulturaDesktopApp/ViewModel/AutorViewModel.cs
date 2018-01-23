@@ -18,7 +18,7 @@ namespace TriaCulturaDesktopApp.ViewModel
     class AutorViewModel : IUserDialogViewModel, INotifyPropertyChanged
     {
         #region Properties
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+        triaculturaDB_localEntities context = new triaculturaDB_localEntities();
 
         private author _author;
         private List<discipline> _disciplines;

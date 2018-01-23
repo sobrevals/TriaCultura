@@ -46,7 +46,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+        triaculturaDB_localEntities context = new triaculturaDB_localEntities();
 
 
         public bool IsModal

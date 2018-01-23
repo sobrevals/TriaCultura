@@ -16,7 +16,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     class DisciplinaViewModel : INotifyPropertyChanged, IUserDialogViewModel
     {
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+        triaculturaDB_localEntities context = new triaculturaDB_localEntities();
         #region BasicProperties
 
         private List<discipline> _disciplines;
@@ -140,7 +140,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         protected void CreaDisciplina()
         {
             discipline aux_disc = new discipline();
-            aux_disc.id_discipline = 999;
             this.Dialogs.Add(new DisciplinaDialogViewModel
             {
                 Title = "Crear Disciplina",
@@ -152,7 +151,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                     Disciplines.Add(aux_disc);
                     try
                     {
-                        // hauria de no-declarar la id de l'entrada que vull inserir -- sqlserver no em deixa que sigui explícita
                         context.SaveChanges();
                         FillDisciplines_all(aux_disc);
                     }

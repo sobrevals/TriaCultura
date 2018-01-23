@@ -8,11 +8,25 @@ using TriaCulturaDesktopApp.Model;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class DisciplinaDialogViewModel : ViewModelBase, IUserDialogViewModel
+    class DisciplinaDialogViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
         #region Properties
         private string _okText;
         private bool _textEnabled;
@@ -39,7 +53,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         public discipline Discipline
         {
             get { return _discipline; }
-            set { _discipline = value; }
+            set { _discipline = value; NotifyPropertyChanged(); }
+
         }
         public virtual bool IsModal { get { return true; } }
         public virtual void RequestClose() { this.DialogClosing(this, null); }

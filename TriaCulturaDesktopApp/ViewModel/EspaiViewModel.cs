@@ -14,7 +14,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     class EspaiViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+        triaculturaDB_localEntities context = new triaculturaDB_localEntities();
 
         public bool IsModal
         {
