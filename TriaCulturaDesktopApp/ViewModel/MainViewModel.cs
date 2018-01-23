@@ -36,10 +36,13 @@ namespace TriaCulturaDesktopApp.ViewModel
         public MainViewModel()
         {          
         }
-        public ICommand CloseAllCommand { get { return new RelayCommand(OnCloseAll); } }
-        public void OnCloseAll()
+        public ICommand CloseMain { get { return new RelayCommand(Close); } }
+
+        public event EventHandler DialogClosing;
+        public void Close()
         {
-            this.Dialogs.Clear();
+            if (this.DialogClosing != null)
+                this.DialogClosing(this, new EventArgs());
         }
 
         public ICommand OpenAuthors { get { return new RelayCommand(OpAuthor); } }
