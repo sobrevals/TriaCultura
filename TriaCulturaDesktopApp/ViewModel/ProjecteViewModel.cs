@@ -113,6 +113,8 @@ namespace TriaCulturaDesktopApp.ViewModel
 
 
         #region Commands
+
+
         public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
         protected virtual void AddPlace_request()
         {
@@ -141,7 +143,6 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Add(new EspaiViewModel());
         }
 
-        public ICommand finalitzar { get { return new RelayCommand(Close); } }
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public void Close()
         {

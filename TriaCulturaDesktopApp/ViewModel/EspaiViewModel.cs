@@ -33,7 +33,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void RequestClose()
         {
-            throw new NotImplementedException();
+            this.DialogClosing(this, null);
         }
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
@@ -41,6 +41,11 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             if (this.DialogClosing != null)
                 this.DialogClosing(this, new EventArgs());
+        }
+        public ICommand CloseAllCommand { get { return new RelayCommand(OnCloseAll); } }
+        public void OnCloseAll()
+        {
+            this.Dialogs.Clear();
         }
 
 
