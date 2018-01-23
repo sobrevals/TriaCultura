@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Input;
 using TriaCulturaDesktopApp.Model;
 using System.Runtime.CompilerServices;
+using TriaCulturaDesktopApp.ViewModel;
 
 
 namespace TriaCulturaDesktopApp.ViewModel
@@ -40,9 +41,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public project SelectedProject
         { get { return _selectedproject; } set { _selectedproject = value; } }
-
-
-
 
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
@@ -118,7 +116,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
 
         #region Commands
-        public ICommand AfegirRequest_place { get { return new RelayCommand(AddPlace_request); } }
+        public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
         protected virtual void AddPlace_request()
         {
             request r = _selectedRequest_place;
@@ -141,21 +139,20 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         }
 
-
-        public ICommand OkCommand { get { return new RelayCommand(Ok); } }
-        protected virtual void Ok()
+        protected virtual void afegirPlace()
         {
-            if (this.OnOk != null)
-            {
-                this.OnOk(this);
-            }
-            else if (this.OnReturn != null)
-            {
-                this.OnReturn(this);
-            } else
-            {
-                this.OnCloseRequest(this);
-            }
+            this.Dialogs.Add(new EspaiViewModel());
+        }
+        protected virtual void removePlace()
+        {
+            this.Dialogs.Add(new EspaiViewModel());
+        }
+        public ICommand finalitzar { get { return new RelayCommand(Close); } }
+        public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
+        public void Close()
+        {
+            if (this.DialogClosing != null)
+                this.DialogClosing(this, new EventArgs());
         }
 
         public Action<ProjecteViewModel> OnOk { get; set; }
