@@ -16,6 +16,8 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     public class AutorsViewModel : ViewModelBase, IUserDialogViewModel
     {
+        private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
         triaculturaCTXEntities context = new triaculturaCTXEntities();
 
         #region BasicProperties
@@ -71,7 +73,13 @@ namespace TriaCulturaDesktopApp.ViewModel
             else
                 Close();
         }
+        public ICommand afegirAutor { get { return new RelayCommand(addAutor); } }
+        protected virtual void addAutor()
+        {
+            this.Dialogs.Add(new AutorViewModel());
+        }
 
+        public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorsViewModel> OnOk { get; set; }
         #endregion ICommand
 

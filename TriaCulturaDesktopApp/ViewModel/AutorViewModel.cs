@@ -12,10 +12,11 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
+using GalaSoft.MvvmLight;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class AutorViewModel : IUserDialogViewModel, INotifyPropertyChanged
+    class AutorViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
         #region Properties
         triaculturaCTXEntities context = new triaculturaCTXEntities();
@@ -71,7 +72,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public void RequestClose()
         {
-            throw new NotImplementedException();
+            if (this.DialogClosing != null)
+                this.DialogClosing(this, new EventArgs());
         }
     }
 }
