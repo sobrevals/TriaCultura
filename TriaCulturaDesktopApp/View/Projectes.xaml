@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
-        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" x:Class="TriaCulturaDesktopApp.View.Projecte"
+        xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" x:Class="TriaCulturaDesktopApp.View.Projectes"
         mc:Ignorable="d"
         Title="Projectes" Height="373.5" Width="534">
     <Window.DataContext>
