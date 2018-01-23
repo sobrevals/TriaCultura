@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         mc:Ignorable="d"
-        Title="Projectes" Height="432.353" Width="530.514"
+        Title="Projecte" Height="432.353" Width="530.514"
         >
     <Grid>
         <Label x:Name="lb_title" Content="Titol" HorizontalAlignment="Left" Margin="22,22,0,0" VerticalAlignment="Top"/>

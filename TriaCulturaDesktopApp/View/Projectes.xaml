@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" x:Class="TriaCulturaDesktopApp.View.Projecte"
         mc:Ignorable="d"
-        Title="Projecte" Height="373.5" Width="534">
+        Title="Projectes" Height="373.5" Width="534">
     <Window.DataContext>
         <ViewModel:ProjectesViewModel/>
     </Window.DataContext>
