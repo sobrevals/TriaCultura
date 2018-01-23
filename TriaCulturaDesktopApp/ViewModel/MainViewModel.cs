@@ -49,11 +49,11 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Add(new AutorsViewModel() );
         }
 
-        public ICommand OpenProjects { get { return new RelayCommand(OpProject); } }
+        public ICommand OpenProjectes { get { return new RelayCommand(OpProjects); } }
 
-        public void OpProject()
+        public void OpProjects()
         {
-            this.Dialogs.Add(new ProjectesViewModel());
+            this.Dialogs.Add(new ProjectesViewModel() );
         }
     }
 }

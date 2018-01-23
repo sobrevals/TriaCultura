@@ -12,7 +12,7 @@
     </Window.DataContext>
     <Grid>
         <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="33,40,0,0" VerticalAlignment="Top" Height="260" Width="300"/>
-        <Button x:Name="bt_add" Content="Afegir" HorizontalAlignment="Left" Margin="400,80,0,0" VerticalAlignment="Top" Width="74" Command="{Binding NewModalDialogCommand}"/>
+        <Button x:Name="bt_add" Content="Afegir" Command="{Binding OpenProjecte}" HorizontalAlignment="Left" Margin="400,80,0,0" VerticalAlignment="Top" Width="74"/>
         <Button x:Name="bt_set" Content="Modificar" HorizontalAlignment="Left" Margin="400,127,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="bt_del" Content="Borrar" HorizontalAlignment="Left" Margin="400,182,0,0" VerticalAlignment="Top" Width="75"/>
 

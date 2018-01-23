@@ -8,6 +8,7 @@ using System.Windows.Input;
 using TriaCulturaDesktopApp.Model;
 using MvvmDialogs.ViewModels;
 using GalaSoft.MvvmLight;
+using System.Collections.ObjectModel;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -15,6 +16,9 @@ namespace TriaCulturaDesktopApp.ViewModel
 
     {
         triaculturaCTXEntities context = new triaculturaCTXEntities();
+
+        private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
 
         #region BasicProperties
 
@@ -65,7 +69,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region Contructor
         public ProjectesViewModel()
         {
-            fillProjectes(0);
+            //fillProjectes(0);
         }
 
         #endregion
@@ -101,13 +105,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
 
         #region ICommand
-        public ICommand OkCommand { get { return new RelayCommand(Ok); } }
-        protected virtual void Ok()
+        public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
+        protected virtual void opProject()
         {
-            if (this.OnOk != null)
-                this.OnOk(this);
-            else
-                Close();
+                this.Dialogs.Add(new ProjectesViewModel());  
         }
 
         public Action<ProjectesViewModel> OnOk { get; set; }
