@@ -4,6 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"      
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"
+        dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         mc:Ignorable="d"
         Title="Projecte" Height="432.353" Width="530.514"
         >
