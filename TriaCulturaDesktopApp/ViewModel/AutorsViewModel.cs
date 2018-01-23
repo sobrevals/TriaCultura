@@ -78,6 +78,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             this.Dialogs.Add(new AutorViewModel());
         }
+
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorsViewModel> OnOk { get; set; }
         #endregion ICommand

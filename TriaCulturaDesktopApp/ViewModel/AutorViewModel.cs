@@ -71,7 +71,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public void RequestClose()
         {
-            throw new NotImplementedException();
+            if (this.DialogClosing != null)
+                this.DialogClosing(this, new EventArgs());
         }
     }
 }

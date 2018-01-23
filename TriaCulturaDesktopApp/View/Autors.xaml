@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
         xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         mc:Ignorable="d"
         Title="Autors" Height="343.493" Width="405.43">
     <Window.DataContext>
