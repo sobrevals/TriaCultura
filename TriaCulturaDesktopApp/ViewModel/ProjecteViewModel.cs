@@ -42,9 +42,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         public project SelectedProject
         { get { return _selectedproject; } set { _selectedproject = value; } }
 
-
-
-
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
         triaculturaCTXEntities context = new triaculturaCTXEntities();
@@ -119,7 +116,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
 
         #region Commands
-        public ICommand AfegirRequest_place { get { return new RelayCommand(AddPlace_request); } }
+        public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
         protected virtual void AddPlace_request()
         {
             request r = _selectedRequest_place;
@@ -142,15 +139,15 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         }
 
-        /*
-        public ICommand OkCommand { get { return new RelayCommand(opProjecte); } }
-        protected virtual void opProjecte()
+        protected virtual void afegirPlace()
         {
-            this.Dialogs.Add(new ProjectesViewModel());
-            Close();
-        }*/
-
-
+            this.Dialogs.Add(new EspaiViewModel());
+        }
+        protected virtual void removePlace()
+        {
+            this.Dialogs.Add(new EspaiViewModel());
+        }
+        public ICommand finalitzar { get { return new RelayCommand(Close); } }
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public void Close()
         {

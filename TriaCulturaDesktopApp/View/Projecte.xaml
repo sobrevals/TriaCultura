@@ -20,7 +20,7 @@
         <ListBox x:Name="lbx_desc" HorizontalAlignment="Left" Height="108" Margin="187,112,0,0" VerticalAlignment="Top" Width="301"/>
         <ListBox x:Name="lbx_place"  ItemsSource="{Binding Request}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest}" HorizontalAlignment="Left" Height="109" Margin="284,258,0,0" VerticalAlignment="Top" Width="122"/>
         <Label x:Name="lb_place" Content="Espais Solicitats" HorizontalAlignment="Left" Margin="301,227,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="bt_save" Content="Finalitzar" HorizontalAlignment="Left" Margin="422,362,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="bt_save" Command="{Binding finalitzar}" Content="Finalitzar" HorizontalAlignment="Left" Margin="422,362,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="bt_add" Command="{Binding AfegirRequest_place}" Content="+" HorizontalAlignment="Left" Margin="222,271,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="bt_del" Command="{Binding TreureRequest_place}" Content="-" HorizontalAlignment="Left" Margin="222,309,0,0" VerticalAlignment="Top" Width="45"/>
         <Label x:Name="lb_author" Content="Autor: " HorizontalAlignment="Left" Margin="22,304,0,0" VerticalAlignment="Top"/>
