@@ -17,7 +17,7 @@ using TriaCulturaDesktopApp.ViewModel;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class ProjecteViewModel : ViewModelBase,  INotifyPropertyChanged, IUserDialogViewModel
+    class ProjecteViewModel : ViewModelBase, IUserDialogViewModel
     {
 
         private List<place> _place;
@@ -56,9 +56,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
 
 
-        ProjecteViewModel()
+        public ProjecteViewModel()
         {
-            FillRequests_all(0);
+            //FillRequests_all(0);
         }
 
 

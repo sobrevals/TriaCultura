@@ -1,12 +1,16 @@
-﻿<Window x:Class="TriaCulturaDesktopApp.View.Projecte"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" x:Class="TriaCulturaDesktopApp.View.Projecte"
         mc:Ignorable="d"
         Title="Projecte" Height="432.353" Width="530.514"
         >
+    <Window.DataContext>
+        <ViewModel:ProjecteViewModel/>
+    </Window.DataContext>
     <Grid>
         <Label x:Name="lb_title" Content="Titol" HorizontalAlignment="Left" Margin="22,22,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tb_title" HorizontalAlignment="Left" Height="23" Margin="22,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="80"/>

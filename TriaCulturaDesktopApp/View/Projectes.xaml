@@ -1,4 +1,4 @@
-﻿<Window
+﻿<Window x:Class="TriaCulturaDesktopApp.View.Projectes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
-        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" x:Class="TriaCulturaDesktopApp.View.Projectes"
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"        
         mc:Ignorable="d"
         Title="Projectes" Height="373.5" Width="534">
     <Window.DataContext>
