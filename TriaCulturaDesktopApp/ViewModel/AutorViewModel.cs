@@ -12,10 +12,11 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
+using GalaSoft.MvvmLight;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class AutorViewModel : IUserDialogViewModel, INotifyPropertyChanged
+    class AutorViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
         #region Properties
         triaculturaCTXEntities context = new triaculturaCTXEntities();
