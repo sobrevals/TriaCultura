@@ -33,30 +33,34 @@ namespace TriaCulturaDesktopApp.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel()
-        {          
-        }
-        public ICommand CloseMain { get { return new RelayCommand(Close); } }
+        ///  public bool IsModal
 
+        public MainViewModel()
+        {           
+        }    
+        public ICommand CloseMain { get { return new RelayCommand(Close); } }
+        public void RequestClose()
+        {
+            this.DialogClosing(this, null);
+        }
         public event EventHandler DialogClosing;
         public void Close()
         {
-            if (this.DialogClosing != null)
-                this.DialogClosing(this, new EventArgs());
+            Application.Current.MainWindow.Close();
         }
 
         public ICommand OpenAuthors { get { return new RelayCommand(OpAuthor); } }
 
         public void OpAuthor()
         {
-            this.Dialogs.Add(new AutorsViewModel() );
+            this.Dialogs.Add(new AutorsViewModel());
         }
 
         public ICommand OpenProjectes { get { return new RelayCommand(OpProjects); } }
 
         public void OpProjects()
         {
-            this.Dialogs.Add(new ProjectesViewModel() );
+            this.Dialogs.Add(new ProjectesViewModel());
         }
     }
 }
