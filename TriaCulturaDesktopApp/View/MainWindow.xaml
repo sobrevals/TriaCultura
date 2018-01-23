@@ -10,7 +10,7 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="530">
+        Title="MainWindow" Height="500" Width="530">    
     <Window.DataContext>
         <ViewModel:MainViewModel/>
     </Window.DataContext>
