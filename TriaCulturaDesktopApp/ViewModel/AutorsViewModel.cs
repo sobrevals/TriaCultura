@@ -36,6 +36,14 @@ namespace TriaCulturaDesktopApp.ViewModel
             set { _authors = value; NotifyPropertyChanged(); }
         }
 
+        public string nameRequest(author a)
+        {
+            string name = context.authors.Where(x => x.dni == a.dni).Select(x => x.name).ToString() ;
+            string surname = context.authors.Where(x => x.dni == a.dni).Select(x => x.surname).ToString();
+            return name + " " + surname;
+        }
+
+
         public int SelectedIndexAuthor
         {
             get { return _selectedIndexAuthor; }
