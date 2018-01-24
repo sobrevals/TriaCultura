@@ -24,7 +24,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private project _selectedproject;
 
         public List<place> Places
-        { get { return _place; } set { _place = value; } }
+        { get { return _place; } set { _place = value; NotifyPropertyChanged(); } }
 
         public List<request> Request
         { get { return _request; } set { _request = value; } }
