@@ -14,7 +14,15 @@
         <ViewModel:ProjectesViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="33,40,0,0" VerticalAlignment="Top" Height="260" Width="300"/>
+        <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="33,40,0,0" VerticalAlignment="Top" Height="260" Width="300" ItemsSource="{Binding ProjectsL}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Title"/>
+                <DataGridCheckBoxColumn Binding="{Binding description}" ClipboardContentBinding="{x:Null}" Header="Description"/>
+                <DataGridCheckBoxColumn Binding="{Binding topic}" ClipboardContentBinding="{x:Null}" Header="Topic"/>
+                <DataGridCheckBoxColumn Binding="{Binding author_dni}" ClipboardContentBinding="{x:Null}" Header="Dni Author"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
         <Button x:Name="bt_add" Content="Afegir" Command="{Binding OpenProjecte}" HorizontalAlignment="Left" Margin="400,80,0,0" VerticalAlignment="Top" Width="74"/>
         <Button x:Name="bt_set" Content="Modificar" HorizontalAlignment="Left" Margin="400,127,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="bt_del" Content="Borrar" HorizontalAlignment="Left" Margin="400,182,0,0" VerticalAlignment="Top" Width="75"/>
