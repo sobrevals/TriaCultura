@@ -26,44 +26,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private int _selectedIndexProject;
         private project _selectedProject;
 
-        public List<project> ProjectsL
-        {
-            get
-            {
-                return _projectsL;
-            }
-
-            set
-            {
-                _projectsL = value;
-            }
-        }
-
-        public int SelectedIndexProject
-        {
-            get
-            {
-                return _selectedIndexProject;
-            }
-
-            set
-            {
-                _selectedIndexProject = value;
-            }
-        }
-
-        public project SelectedProject
-        {
-            get
-            {
-                return _selectedProject;
-            }
-
-            set
-            {
-                _selectedProject = value;
-            }
-        }
+       
         #endregion
 
         #region Contructor
@@ -120,6 +83,45 @@ namespace TriaCulturaDesktopApp.ViewModel
             get
             {
                 return true;
+            }
+        }
+
+        public List<project> ProjectsL
+        {
+            get
+            {
+                return _projectsL;
+            }
+
+            set
+            {
+                _projectsL = value;
+            }
+        }
+
+        public int SelectedIndexProject
+        {
+            get
+            {
+                return _selectedIndexProject;
+            }
+
+            set
+            {
+                _selectedIndexProject = value;
+            }
+        }
+
+        public project SelectedProject
+        {
+            get
+            {
+                return _selectedProject;
+            }
+
+            set
+            {
+                _selectedProject = value;
             }
         }
 

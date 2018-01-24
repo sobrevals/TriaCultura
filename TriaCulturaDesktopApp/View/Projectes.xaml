@@ -16,8 +16,7 @@
     <Grid>
         <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="33,40,0,0" VerticalAlignment="Top" Height="260" Width="300" ItemsSource="{Binding ProjectsL}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Title"/>
-                <DataGridCheckBoxColumn Binding="{Binding description}" ClipboardContentBinding="{x:Null}" Header="Description"/>
+                <DataGridCheckBoxColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Title"/>                
                 <DataGridCheckBoxColumn Binding="{Binding topic}" ClipboardContentBinding="{x:Null}" Header="Topic"/>
                 <DataGridCheckBoxColumn Binding="{Binding author_dni}" ClipboardContentBinding="{x:Null}" Header="Dni Author"/>
             </DataGrid.Columns>
