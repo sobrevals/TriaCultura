@@ -18,7 +18,7 @@
             <DataGrid.Columns>             
                 <DataGridTextColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Title" Width="Auto" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding topic}" ClipboardContentBinding="{x:Null}" Header="Topic" Width="Auto" IsReadOnly="True"/>
-                <DataGridTextColumn ClipboardContentBinding="{x:Null}" Header="Name" Width="Auto" IsReadOnly="True" />
+                <DataGridTextColumn Header="Name" Width="Auto" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 
