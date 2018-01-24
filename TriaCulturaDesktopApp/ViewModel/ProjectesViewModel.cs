@@ -69,7 +69,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region Contructor
         public ProjectesViewModel()
         {
-            //fillProjectes(0);
+            fillProjectes(0);
         }
 
         #endregion
