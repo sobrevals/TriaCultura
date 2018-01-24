@@ -69,7 +69,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region Contructor
         public ProjectesViewModel()
         {
-            //fillProjectes(0);
+            fillProjectes(0);
         }
 
         #endregion
@@ -80,7 +80,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {            
             ProjectsL= context.projects.OrderBy(x => x.id_project).ToList();
 
-            if (ProjectsL != null)
+            if (ProjectsL != null && ProjectsL.Count!=0)
             {
                 SelectedProject = ProjectsL[n];
             }
