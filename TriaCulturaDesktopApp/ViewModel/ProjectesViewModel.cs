@@ -46,7 +46,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (ProjectsL != null && ProjectsL.Count!=0)
             {
                 SelectedProject = ProjectsL[n];
-                _artistNomComplert= nameRequest(SelectedProject.author_dni) ;
+                //_artistNomComplert= nameRequest(SelectedProject.author_dni) ;
             }
         }
         public string nameRequest(string dni)
@@ -55,7 +55,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             string surname = context.authors.Where(x => x.dni == dni).Select(x => x.surname).ToString();
             return name + " " + surname;
         }
-
+   
 
 
         #endregion
@@ -131,6 +131,19 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _selectedProject = value;
+            }
+        }
+
+        public string ArtistNomComplert
+        {
+            get
+            {
+                return nameRequest(SelectedProject.author_dni).ToString();
+            }
+
+            set
+            {
+                _artistNomComplert = value;
             }
         }
 
