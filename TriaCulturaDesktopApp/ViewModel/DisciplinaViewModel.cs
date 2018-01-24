@@ -102,7 +102,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                 this.OnOk(this);
             } else
             {
-                context.SaveChanges();
                 this.Close();
             }
         }
@@ -140,7 +139,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         protected void CreaDisciplina()
         {
             discipline aux_disc = new discipline();
-            aux_disc.id_discipline = 999;
             this.Dialogs.Add(new DisciplinaDialogViewModel
             {
                 Title = "Crear Disciplina",
@@ -149,10 +147,9 @@ namespace TriaCulturaDesktopApp.ViewModel
                 TextEnabled = true,
                 OnOk = (sender) =>
                 {
-                    Disciplines.Add(aux_disc);
+                    context.disciplines.Add(aux_disc);
                     try
                     {
-                        // hauria de no-declarar la id de l'entrada que vull inserir -- sqlserver no em deixa que sigui explícita
                         context.SaveChanges();
                         FillDisciplines_all(aux_disc);
                     }
@@ -193,7 +190,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                         }
                         catch (Exception e)
                         {
-                            MessageBox.Show(e.ToString());
+                            MessageBox.Show("No es pot esborrar la Disciplina ja que està vinculada a algun(s) autor(s).");
                         }
                         sender.Close();
                     },
