@@ -15,11 +15,11 @@
     </Window.DataContext>
     <Grid>
         <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="260" Width="385" ItemsSource="{Binding ProjectsL}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Title"/>                
-                <DataGridCheckBoxColumn Binding="{Binding topic}" ClipboardContentBinding="{x:Null}" Header="Topic"/>
-                <DataGridCheckBoxColumn Binding="{Binding author.name}" ClipboardContentBinding="{x:Null}" Header="Name"/>
-                <DataGridCheckBoxColumn Binding="{Binding author.surname}" ClipboardContentBinding="{x:Null}" Header="Surname"/>
+            <DataGrid.Columns>             
+                <DataGridTextColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Title"/>
+                <DataGridTextColumn Binding="{Binding topic}" ClipboardContentBinding="{x:Null}" Header="Topic"/>
+                <DataGridTextColumn Binding="{Binding author.name}" ClipboardContentBinding="{x:Null}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding author.surname}" ClipboardContentBinding="{x:Null}" Header="Surname"/>
             </DataGrid.Columns>
         </DataGrid>
 
