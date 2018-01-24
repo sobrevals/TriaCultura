@@ -39,12 +39,12 @@ namespace TriaCulturaDesktopApp.ViewModel
                 return true;
             }
         }
-        #endregion
+
 
         private ObservableCollection<IDialogViewModel> _dialogs = new ObservableCollection<IDialogViewModel>();
 
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _dialogs; } set { _dialogs = value; } }
-
+        #endregion
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler DialogClosing;
@@ -64,7 +64,15 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public DisciplinaViewModel ()
         {
-            FillDisciplines_all(0); // crear model 
+            FillDisciplines_all(0);
+            FillDisciplines_author(0);
+            
+        }
+        public DisciplinaViewModel(author a)
+        {
+            SelectedAuthor = a;
+            FillDisciplines_all(0);
+            FillDisciplines_author(0);
         }
         #region fill
         private void FillDisciplines_all (int index)
