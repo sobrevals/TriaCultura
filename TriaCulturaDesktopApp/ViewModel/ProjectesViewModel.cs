@@ -25,8 +25,12 @@ namespace TriaCulturaDesktopApp.ViewModel
         private List<project> _projectsL;
         private int _selectedIndexProject;
         private project _selectedProject;
+        private string _okText;
+        private bool _textEnabled;
+        private string _title;
+        
 
-       
+
         #endregion
 
         #region Contructor
