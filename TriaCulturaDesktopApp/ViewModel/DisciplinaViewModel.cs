@@ -148,7 +148,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 TextEnabled = true,
                 OnOk = (sender) =>
                 {
-                    Disciplines.Add(aux_disc);
+                    context.disciplines.Add(aux_disc);
                     try
                     {
                         context.SaveChanges();

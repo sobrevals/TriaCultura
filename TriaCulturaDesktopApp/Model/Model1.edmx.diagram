@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4c3799cf6e2d457590c7be8eb7f5e71d" Name="Diagram1">
+      <Diagram DiagramId="4c3087ade94c45a6b888f855d55f864b" Name="Diagram1">
         <EntityTypeShape EntityType="triaculturaDB_localModel.author" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="triaculturaDB_localModel.capacity" Width="1.5" PointX="3.75" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="triaculturaDB_localModel.discipline" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="triaculturaDB_localModel.place" Width="1.5" PointX="6" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="triaculturaDB_localModel.project" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="triaculturaDB_localModel.request" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDB_localModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="triaculturaDB_localModel.type" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
         <AssociationConnector Association="triaculturaDB_localModel.FK_email_author" ManuallyRouted="false" />
         <AssociationConnector Association="triaculturaDB_localModel.FK_phone_author" ManuallyRouted="false" />
