@@ -27,8 +27,8 @@
         <Button x:Name="btn_afegir_mail" Command="{Binding AfegirEmail}" Content="Afegir" HorizontalAlignment="Left" Margin="663,106,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_afegir_telefon" Command="{Binding AfegirTelefon}" Content="Afegir" HorizontalAlignment="Left" Margin="177,106,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0,1.572"/>
         <ListBox x:Name="listbox_disciplines" HorizontalAlignment="Left" Height="100" Margin="19,156,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding DisciplinesL}"/>
-        <ListBox x:Name="listbox_mails" HorizontalAlignment="Left" Height="127" Margin="430,96,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding EmailsL}"/>
-        <ListBox x:Name="listbox_telefons" HorizontalAlignment="Left" Height="127" Margin="261,96,0,0" VerticalAlignment="Top" Width="152" ItemsSource="{Binding TelefonsL}"/>
+        <ListBox x:Name="listbox_mails" HorizontalAlignment="Left" Height="127" Margin="430,96,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding EmailsL}" SelectionMode="Single" SelectedItem="{Binding SelectedEmailAddr}" />
+        <ListBox x:Name="listbox_telefons" HorizontalAlignment="Left" Height="127" Margin="261,96,0,0" VerticalAlignment="Top" Width="152" ItemsSource="{Binding TelefonsL}" SelectionMode="Single" SelectedItem ="{Binding SelectedTelefonNum}" />
         <Label x:Name="label_disciplines" Content="Disciplines" HorizontalAlignment="Left" Margin="19,130,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_telefon" Content="Telefon" HorizontalAlignment="Left" Margin="313,65,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_mail" Content="Mail" HorizontalAlignment="Left" Margin="539,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.462"/>
