@@ -10,31 +10,31 @@
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"          
         x:Class="TriaCulturaDesktopApp.View.Projecte"
         mc:Ignorable="d"
-        Title="Projecte" Height="432.353" Width="530.514"
+        Title="Projecte" Height="432.353" Width="711.514"
         >
     <Window.DataContext>
         <ViewModel:ProjecteViewModel/>
     </Window.DataContext>
     <Grid>
         <Label x:Name="lb_title" Content="Titol" HorizontalAlignment="Left" Margin="22,22,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_title" HorizontalAlignment="Left" Height="23" Margin="22,53,0,0" TextWrapping="Wrap" Text="{Binding Contacte.cognoms}" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="tb_title" HorizontalAlignment="Left" Height="23" Margin="22,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Text="{Binding SelectedProject.title}"/>
         <Label x:Name="lb_theme" Content="Tema" HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_theme" HorizontalAlignment="Left" Height="23" Margin="22,112,0,0" TextWrapping="Wrap" Text="{Binding Contacte.cognoms}" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="tb_theme" HorizontalAlignment="Left" Height="23" Margin="22,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedProject.topic}" VerticalAlignment="Top" Width="188"/>
         <Label x:Name="lb_addFile" Content="Adjuntar Fitxers" HorizontalAlignment="Left" Margin="22,154,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbx_file" HorizontalAlignment="Left" Height="93" Margin="22,185,0,0" VerticalAlignment="Top" Width="104"/>
-        <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="187,22,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_typeExpo" HorizontalAlignment="Left" Height="23" Margin="187,53,0,0" TextWrapping="Wrap" Text="{Binding Contacte.cognoms}" VerticalAlignment="Top" Width="80"/>
-        <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="187,81,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbx_desc" HorizontalAlignment="Left" Height="108" Margin="187,112,0,0" VerticalAlignment="Top" Width="301"/>
-        <ListBox x:Name="lbx_place"  ItemsSource="{Binding Request}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest}" HorizontalAlignment="Left" Height="109" Margin="284,258,0,0" VerticalAlignment="Top" Width="122"/>
-        <Label x:Name="lb_place" Content="Espais Solicitats" HorizontalAlignment="Left" Margin="301,227,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="bt_save" Command="{Binding finalitzar}" Content="Finalitzar" HorizontalAlignment="Left" Margin="422,362,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="bt_add" Command="{Binding AfegirRequest_place}" Content="+" HorizontalAlignment="Left" Margin="222,271,0,0" VerticalAlignment="Top" Width="45"/>
-        <Button x:Name="bt_del" Command="{Binding TreureRequest_place}" Content="-" HorizontalAlignment="Left" Margin="222,309,0,0" VerticalAlignment="Top" Width="45"/>
+        <ListBox x:Name="lbx_file" HorizontalAlignment="Left" Height="93" Margin="22,185,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="358,23,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_typeExpo" Text="{Binding SelectedProject.types}" HorizontalAlignment="Left" Height="23" Margin="358,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="358,82,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="lbx_place"  ItemsSource="{Binding Request}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest.place}" HorizontalAlignment="Left" Height="109" Margin="455,259,0,0" VerticalAlignment="Top" Width="122"/>
+        <Label x:Name="lb_place" Content="Espais Solicitats" HorizontalAlignment="Left" Margin="472,228,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="bt_save" Command="{Binding finalitzar}" Content="Finalitzar" HorizontalAlignment="Left" Margin="593,363,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="bt_add" Command="{Binding AfegirRequest_place}" Content="+" HorizontalAlignment="Left" Margin="393,272,0,0" VerticalAlignment="Top" Width="45"/>
+        <Button x:Name="bt_del" Command="{Binding TreureRequest_place}" Content="-" HorizontalAlignment="Left" Margin="393,310,0,0" VerticalAlignment="Top" Width="45"/>
         <Label x:Name="lb_author" Content="Autor: " HorizontalAlignment="Left" Margin="22,304,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_author" HorizontalAlignment="Left" Height="23" Margin="22,335,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93"/>
-        <Button x:Name="bt_add_Copy" Content="ADD" HorizontalAlignment="Left" Margin="131,225,0,0" VerticalAlignment="Top" Width="45"/>
+        <TextBox x:Name="tb_author" Text="{Binding SelectedProject.author.nomComplert}"  HorizontalAlignment="Left" Height="23" Margin="22,335,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Button x:Name="bt_add_Copy" Content="ADD" HorizontalAlignment="Left" Margin="165,228,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="tb_description" HorizontalAlignment="Left" Height="110" Margin="294,113,0,0" TextWrapping="Wrap" Text="{Binding SelectedProject.description}" VerticalAlignment="Top" Width="374" AcceptsReturn="True" />
 
     </Grid>
 </Window>

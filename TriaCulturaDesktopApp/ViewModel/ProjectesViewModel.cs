@@ -25,14 +25,13 @@ namespace TriaCulturaDesktopApp.ViewModel
         private List<project> _projectsL;
         private int _selectedIndexProject;
         private project _selectedProject;
-        private string _artistNomComplert;
-       
         #endregion
 
         #region Contructor
         public ProjectesViewModel()
         {
             fillProjectes(0);
+
         }
 
         #endregion
@@ -46,18 +45,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (ProjectsL != null && ProjectsL.Count!=0)
             {
                 SelectedProject = ProjectsL[n];
-                //_artistNomComplert= nameRequest(SelectedProject.author_dni) ;
             }
         }
-        public string nameRequest(string dni)
-        {
-            string name = context.authors.Where(x => x.dni == dni).Select(x => x.name).ToString();
-            string surname = context.authors.Where(x => x.dni == dni).Select(x => x.surname).ToString();
-            return name + " " + surname;
-        }
-   
-
-
         #endregion
 
         #region RequestClose
@@ -80,8 +69,30 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-                this.Dialogs.Add(new ProjecteViewModel());  
+                this.Dialogs.Add(new ProjecteViewModel());
         }
+        public ICommand ChangeProjecte { get { return new RelayCommand(modProjecte); } }
+        protected virtual void modProjecte()
+        {
+            this.Dialogs.Add(new ProjecteViewModel
+            {
+                SelectedProject = SelectedProject
+            });
+        }
+        public ICommand TreureProjecte_author { get { return new RelayCommand(RemProjecte_autor); } }
+        protected virtual void RemProjecte_autor()
+        {
+
+            project d = SelectedProject;
+            author aux = SelectedProject.author;
+            aux.projects.Remove(d);
+            context.SaveChanges();
+            fillProjectes(0);
+           
+        }
+
+
+
 
         public Action<ProjectesViewModel> OnOk { get; set; }
         #endregion ICommand
@@ -133,20 +144,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                 _selectedProject = value;
             }
         }
-
-        public string ArtistNomComplert
-        {
-            get
-            {
-                return nameRequest(SelectedProject.author_dni).ToString();
-            }
-
-            set
-            {
-                _artistNomComplert = value;
-            }
-        }
-
         #endregion IsModal
     }
 
