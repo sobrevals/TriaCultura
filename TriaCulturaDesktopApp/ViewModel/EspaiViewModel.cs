@@ -146,7 +146,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public virtual void addPlace()
         {
             request aux = new request();
-            aux.place_id = SelectedPlace_fromPlaces.id;
+            aux.place_id = SelectedPlace_fromPlaces.id_place;
             aux.project_id = Project.id_project;
             context.requests.Add(aux);
             fillProjectPlaces(0);
