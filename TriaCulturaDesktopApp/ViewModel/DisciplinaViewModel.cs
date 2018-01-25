@@ -113,7 +113,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 this.DialogClosing(this, new EventArgs ());
             }
         }
-
+     
         public ICommand AfegirDisciplina_autor { get { return new RelayCommand(AddDisciplina_autor); } }
 
         protected virtual void AddDisciplina_autor()

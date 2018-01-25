@@ -29,10 +29,5 @@ namespace TriaCulturaDesktopApp.Model
         public virtual ICollection<@event> events { get; set; }
         public virtual ICollection<request> requests { get; set; }
         public virtual ICollection<capacity> capacities { get; set; }
-
-        public static implicit operator place(request v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
