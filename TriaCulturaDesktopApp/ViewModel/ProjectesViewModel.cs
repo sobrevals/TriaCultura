@@ -25,7 +25,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         private List<project> _projectsL;
         private int _selectedIndexProject;
         private project _selectedProject;
-        private string _artistNomComplert;
        
         #endregion
 
@@ -46,7 +45,6 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (ProjectsL != null && ProjectsL.Count!=0)
             {
                 SelectedProject = ProjectsL[n];
-                //_artistNomComplert= nameRequest(SelectedProject.author_dni) ;
             }
         }
 
@@ -127,9 +125,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                 _selectedProject = value;
             }
         }
-
- 
-
         #endregion IsModal
     }
 
