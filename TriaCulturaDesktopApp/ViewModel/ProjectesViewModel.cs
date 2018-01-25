@@ -25,13 +25,14 @@ namespace TriaCulturaDesktopApp.ViewModel
         private List<project> _projectsL;
         private int _selectedIndexProject;
         private project _selectedProject;
-       
+        private author _selectedAuthor;
         #endregion
 
         #region Contructor
         public ProjectesViewModel()
         {
             fillProjectes(0);
+
         }
 
         #endregion
@@ -72,7 +73,26 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-                this.Dialogs.Add(new ProjecteViewModel());  
+                this.Dialogs.Add(new ProjecteViewModel
+                {
+                    SelectedProject = SelectedProject
+                });
+        }
+        public ICommand ChangeProjecte { get { return new RelayCommand(modProjecte); } }
+        protected virtual void modProjecte()
+        {
+            this.Dialogs.Add(new ProjecteViewModel
+            {
+                SelectedProject = SelectedProject
+            });
+        }
+        public ICommand TreureProjecte_author { get { return new RelayCommand(RemProjecte_autor); } }
+        protected virtual void RemProjecte_autor()
+        {
+            project d = SelectedProject;
+            SelectedAuthor.projects.Remove(d);
+            context.SaveChanges();
+            fillProjectes(0);
         }
 
         public Action<ProjectesViewModel> OnOk { get; set; }
@@ -125,6 +145,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 _selectedProject = value;
             }
         }
+        public author SelectedAuthor { get { return _selectedAuthor; } set { _selectedAuthor = value; } }
         #endregion IsModal
     }
 
