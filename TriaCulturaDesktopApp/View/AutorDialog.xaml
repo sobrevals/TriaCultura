@@ -19,7 +19,7 @@
         <Label x:Name="lbData" Content="{Binding DataText}" HorizontalAlignment="Left" Margin="14,88,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btCancel" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Height="35" Margin="75,191,0,0" VerticalAlignment="Top" Width="80"/>
         <Button x:Name="btOk" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Height="35" Margin="180,191,0,0" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="tbType" HorizontalAlignment="Left" Height="21" Margin="75,138,0,0" TextWrapping="Wrap" Text="{Binding Type_item}" VerticalAlignment="Top" Width="185" IsEnabled="{Binding TextEnabled}" />
+        <TextBox x:Name="tbType" HorizontalAlignment="Left" Height="21" Margin="75,138,0,0" TextWrapping="Wrap" Text="{Binding Type_item}" VerticalAlignment="Top" Width="185" IsEnabled="{Binding TextEnabled_type}" />
         <Label x:Name="lbType" Content="Tipus" HorizontalAlignment="Left" Margin="14,133,0,0" VerticalAlignment="Top"/>
     </Grid>
 

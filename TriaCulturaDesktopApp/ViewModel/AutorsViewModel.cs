@@ -85,7 +85,18 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             this.Dialogs.Add(new AutorViewModel
             {
-                Author = SelectedAuthor
+                Author = new author(),
+                Titol = "Nou Autor"
+            });
+        }
+
+        public ICommand modificarAutor { get { return new RelayCommand(updAutor); } }
+
+        protected virtual void updAutor()
+        {
+            this.Dialogs.Add(new AutorViewModel(SelectedAuthor)
+            {
+                Titol = "Modificar Autor"
             });
         }
         public ICommand modificarAutor { get { return new RelayCommand(changeAutor); } }

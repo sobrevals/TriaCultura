@@ -16,6 +16,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region Properties
         private string _okText;
         private bool _textEnabled;
+        private bool _textEnabled_type;
         private string _title;
 
         private phone _telefon;
@@ -35,6 +36,11 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             get { return _textEnabled; }
             set { _textEnabled = value; }
+        }
+        public bool TextEnabled_type
+        {
+            get { return _textEnabled_type; }
+            set { _textEnabled_type = value; }
         }
 
         public string Title
@@ -117,7 +123,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _type_item = value;
-                Telefon.type = value;
+                if (Telefon != null) Telefon.type = value;
             }
         }
 
