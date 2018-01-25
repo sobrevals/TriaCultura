@@ -49,13 +49,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 //_artistNomComplert= nameRequest(SelectedProject.author_dni) ;
             }
         }
-        public string nameRequest(string dni)
-        {
-            string name = context.authors.Where(x => x.dni == dni).Select(x => x.name).ToString();
-            string surname = context.authors.Where(x => x.dni == dni).Select(x => x.surname).ToString();
-            return name + " " + surname;
-        }
-   
+
 
 
         #endregion
@@ -134,18 +128,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-        public string ArtistNomComplert
-        {
-            get
-            {
-                return nameRequest(SelectedProject.author_dni).ToString();
-            }
-
-            set
-            {
-                _artistNomComplert = value;
-            }
-        }
+ 
 
         #endregion IsModal
     }
