@@ -17,13 +17,13 @@
     </Window.DataContext>
     <Grid>
         <Label x:Name="lb_title" Content="Titol" HorizontalAlignment="Left" Margin="22,22,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_title" HorizontalAlignment="Left" Height="23" Margin="22,53,0,0" TextWrapping="Wrap" Text="{Binding Contacte.cognoms}" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="tb_title" HorizontalAlignment="Left" Height="23" Margin="22,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Text="{Binding SelectedProject.title}"/>
         <Label x:Name="lb_theme" Content="Tema" HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_theme" HorizontalAlignment="Left" Height="23" Margin="22,112,0,0" TextWrapping="Wrap" Text="{Binding Contacte.cognoms}" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="tb_theme" HorizontalAlignment="Left" Height="23" Margin="22,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedProject.topic}" VerticalAlignment="Top" Width="80"/>
         <Label x:Name="lb_addFile" Content="Adjuntar Fitxers" HorizontalAlignment="Left" Margin="22,154,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbx_file" HorizontalAlignment="Left" Height="93" Margin="22,185,0,0" VerticalAlignment="Top" Width="104"/>
         <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="187,22,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_typeExpo" HorizontalAlignment="Left" Height="23" Margin="187,53,0,0" TextWrapping="Wrap" Text="{Binding Contacte.cognoms}" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="tb_typeExpo" HorizontalAlignment="Left" Height="23" Margin="187,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="187,81,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbx_desc" HorizontalAlignment="Left" Height="108" Margin="187,112,0,0" VerticalAlignment="Top" Width="301"/>
         <ListBox x:Name="lbx_place"  ItemsSource="{Binding Request}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest}" HorizontalAlignment="Left" Height="109" Margin="284,258,0,0" VerticalAlignment="Top" Width="122"/>
