@@ -83,9 +83,19 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand afegirAutor { get { return new RelayCommand(addAutor); } }
         protected virtual void addAutor()
         {
-            this.Dialogs.Add(new AutorViewModel());
+            this.Dialogs.Add(new AutorViewModel
+            {
+                Author = SelectedAuthor
+            });
         }
-
+        public ICommand modificarAutor { get { return new RelayCommand(changeAutor); } }
+        protected virtual void changeAutor()
+        {
+            this.Dialogs.Add(new AutorViewModel
+            {
+                Author = SelectedAuthor
+            });
+        }
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorsViewModel> OnOk { get; set; }
         #endregion ICommand

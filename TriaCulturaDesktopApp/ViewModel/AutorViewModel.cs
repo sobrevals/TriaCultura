@@ -108,9 +108,9 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void OpenDisciplines()
         {
-            this.Dialogs.Add(new DisciplinaViewModel
-            {
-                SelectedAuthor = this.Author,
+            this.Dialogs.Add(new DisciplinaViewModel(Author)
+            {          
+                SelectedAuthor = Author, // es torna null cada vegada...      
                 OnOk = (sender) =>
                 {
                     context.SaveChanges();
