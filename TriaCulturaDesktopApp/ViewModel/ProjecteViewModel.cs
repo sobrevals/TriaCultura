@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows.Input;
 using TriaCulturaDesktopApp.Model;
 using System.Runtime.CompilerServices;
-
+using System.Windows;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -128,11 +128,21 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand TreureRequest_place { get { return new RelayCommand(RemRequest_place); } }
         protected virtual void RemRequest_place()
         {
-            request p = SelectedRequest_fromPlace;
-            SelectedProject.requests.Remove(p);
-            context.SaveChanges();
-            FillRequest_place(0);
+            if (SelectedRequest!=null) {
+                request aux_request = context.requests.Where(x => x.id_request == SelectedRequest.id_request).SingleOrDefault();
+                try {
+                    //request p = SelectedRequest_fromPlace;
+                    SelectedProject.requests.Remove(aux_request);
+                    context.SaveChanges();
+                    FillRequest_place(0);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No es pot esborrar aquestsa place.");
+                }
+            }
         }
+        
 
         public ICommand Afegir_fitxer { get { return new RelayCommand(AddFitxer); } }
         protected virtual void AddFitxer()
@@ -143,6 +153,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
         protected virtual void afegirPlace()
         {
+            request aux_request = new request();
+            aux_request.project_id = SelectedProject.id_project;
+
             this.Dialogs.Add(new EspaiViewModel(SelectedProject)
             {
                 SelectedProject = SelectedProject,
