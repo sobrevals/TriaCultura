@@ -69,7 +69,24 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-                this.Dialogs.Add(new ProjecteViewModel());
+            if (SelectedProject != null)
+            {
+                this.Dialogs.Add(new ProjecteViewModel
+                {
+
+                    SelectedProject = SelectedProject
+                });
+            }
+            else
+            {
+                this.Dialogs.Add(new ProjecteViewModel
+                {
+
+                    SelectedProject = new project()
+                });
+            }
+            
+
         }
         public ICommand ChangeProjecte { get { return new RelayCommand(modProjecte); } }
         protected virtual void modProjecte()
