@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows.Input;
 using TriaCulturaDesktopApp.Model;
 using System.Runtime.CompilerServices;
-
+using System.Windows;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -27,19 +27,23 @@ namespace TriaCulturaDesktopApp.ViewModel
         { get { return _place; } set { _place = value; NotifyPropertyChanged(); } }
 
         public List<request> Request
-        { get { return _request; } set { _request = value; } }
+        { get { return _request; } set { _request = value; NotifyPropertyChanged(); } }
 
         public request SelectedRequest
-        { get { return _selectedRequest; } set { _selectedRequest = value; } }
+        { get { return _selectedRequest; } set { _selectedRequest = value; NotifyPropertyChanged(); } }
 
         public request SelectedRequest_fromPlace
-        { get { return _selectedPlace_fromProjects; } set { _selectedPlace_fromProjects = value; } }
+        { get { return _selectedPlace_fromProjects; } set { _selectedPlace_fromProjects = value; NotifyPropertyChanged(); } }
 
         public project SelectedProject
-        { get { return _selectedproject; } set { _selectedproject = value; } }
+        { get { return _selectedproject; } set { _selectedproject = value; NotifyPropertyChanged(); } }
+
+
+        private ObservableCollection<string> _requestL;
+        private ObservableCollection<string> RequestL { get { return _requestL; } set { _requestL = value; NotifyPropertyChanged(); } };
 
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
-        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; NotifyPropertyChanged(); } }
         triaculturaCTXEntities context = new triaculturaCTXEntities();
         #endregion BasicProperties
 
@@ -124,11 +128,21 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand TreureRequest_place { get { return new RelayCommand(RemRequest_place); } }
         protected virtual void RemRequest_place()
         {
-            request p = SelectedRequest_fromPlace;
-            SelectedProject.requests.Remove(p);
-            context.SaveChanges();
-            FillRequest_place(0);
+            if (SelectedRequest!=null) {
+                request aux_request = context.requests.Where(x => x.id_request == SelectedRequest.id_request).SingleOrDefault();
+                try {
+                    //request p = SelectedRequest_fromPlace;
+                    SelectedProject.requests.Remove(aux_request);
+                    context.SaveChanges();
+                    FillRequest_place(0);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No es pot esborrar aquestsa place.");
+                }
+            }
         }
+        
 
         public ICommand Afegir_fitxer { get { return new RelayCommand(AddFitxer); } }
         protected virtual void AddFitxer()
@@ -139,6 +153,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
         protected virtual void afegirPlace()
         {
+            request aux_request = new request();
+            aux_request.project_id = SelectedProject.id_project;
+
             this.Dialogs.Add(new EspaiViewModel(SelectedProject)
             {
                 SelectedProject = SelectedProject,
