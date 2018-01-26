@@ -161,6 +161,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                         FillTelefons();
                     } catch (Exception ex)
                     {
+                        MessageBox.Show(ex.ToString());
                         MessageBox.Show("Error en escriure a la BBDD.");
                     }
                     sender.Close();
@@ -187,8 +188,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                     try
                     {
                         context.SaveChanges();
-                        Author = context.authors.Where(x => x.dni == Author.dni).SingleOrDefault();
-                        FillTelefons();
+/* amb la intenció de refrescar*/Author = context.authors.Where(x => x.dni == Author.dni).SingleOrDefault();
+                        FillEmails();
                     }
                     catch (Exception ex)
                     {
@@ -233,7 +234,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                             FillTelefons();
                         } catch (Exception ex)
                         {
-                            MessageBox.Show(ex.ToString());
                             MessageBox.Show("No es pot esborrar aquest telèfon.");
                         }
                         sender.Close();
@@ -252,9 +252,9 @@ namespace TriaCulturaDesktopApp.ViewModel
             SelectedEmail = context.emails.Where(x => x.address.Equals(SelectedEmailAddr)).SingleOrDefault();
             if (SelectedEmail!= null)
             {
-                email aux_email = new email();
-                aux_email.id_email= SelectedEmail.id_email;
-                aux_email.address= SelectedEmail.address;
+                email aux_email = context.emails.Where(x => x.id_email == SelectedEmail.id_email).SingleOrDefault();
+                //aux_email.id_email= SelectedEmail.id_email;
+                //aux_email.address= SelectedEmail.address;
                 this.Dialogs.Add(new AutorDialogViewModel
                 {
                     Title = "Esborrar Email",
