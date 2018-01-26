@@ -28,13 +28,24 @@ namespace TriaCulturaDesktopApp.ViewModel
         private Image _foto;
         private phone _selectedPhone;
         private email _selectedEmail;
+        #region PropertyChanged // DialogClosing
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler DialogClosing;
 
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
 
-        public author Author { get { return _author; } set { _author = value; } }
-        public List<discipline> Disciplines { get { return _disciplines; } set { _disciplines= value; } }
-        public List<phone> Telefons { get { return _telefons; } set { _telefons= value; } }
-        public List<email> Emails{ get { return _emails; } set { _emails= value; } }
-        public Image Foto { get { return _foto; } set { _foto = value; } }
+        public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged("Author"); } }
+        public List<discipline> Disciplines { get { return _disciplines; } set { _disciplines= value; NotifyPropertyChanged("Disciplines"); } }
+        public List<phone> Telefons { get { return _telefons; } set { _telefons= value; NotifyPropertyChanged("Telefons"); } }
+        public List<email> Emails{ get { return _emails; } set { _emails= value; NotifyPropertyChanged("Emails"); } }
+        public Image Foto { get { return _foto; } set { _foto = value; NotifyPropertyChanged("Foto"); } }
 
         public phone SelectedPhone { get { return _selectedPhone; } set { _selectedPhone = value; } }
 
@@ -42,9 +53,13 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public String Titol { get; set; }
 
-        public List<string> DisciplinesL { get { return Disciplines.Select(x => x.type).ToList(); } }
-        public List<string> TelefonsL { get { return Telefons.Select(x => x.num).ToList(); } }
-        public List<string> EmailsL { get { return Emails.Select(x => x.address).ToList(); } }
+        //public List<string> DisciplinesL { get { return Disciplines.Select(x => x.type).ToList(); }  }
+        //public List<string> TelefonsL { get { return Telefons.Select(x => x.num).ToList(); }  }
+        //public List<string> EmailsL { get { return Emails.Select(x => x.address).ToList(); }  }
+        private ObservableCollection<string> _telefonsL;
+        public ObservableCollection<string> DisciplinesL { get ; set; } 
+        public ObservableCollection<string> TelefonsL { get { return _telefonsL; } set { _telefonsL = value; NotifyPropertyChanged(); } } 
+        public ObservableCollection<string> EmailsL { get; set; } 
 
         public string SelectedTelefonNum { get; set; } 
         public string SelectedEmailAddr { get; set; }
@@ -61,8 +76,6 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-        public event EventHandler DialogClosing;
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
         public AutorViewModel ()
@@ -89,16 +102,19 @@ namespace TriaCulturaDesktopApp.ViewModel
         public void FillDisciplines ()
         {
             Disciplines = Author.disciplines.ToList();
+            DisciplinesL = new ObservableCollection<string>(Disciplines.Select(x => x.type).ToList());
         }
 
         public void FillTelefons ()
         {
             Telefons = Author.phones.ToList();
+            TelefonsL = new ObservableCollection<string>(Telefons.Select(x => x.num).ToList());
         }
 
         public void FillEmails ()
         {
             Emails = Author.emails.ToList();
+            EmailsL = new ObservableCollection<string>(Emails.Select(x => x.address).ToList());
         }
 
         #endregion
@@ -157,7 +173,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                     try
                     {
                         context.SaveChanges();
-                        Author = context.authors.Where(x => x.dni == Author.dni).SingleOrDefault();
                         FillTelefons();
                     } catch (Exception ex)
                     {
