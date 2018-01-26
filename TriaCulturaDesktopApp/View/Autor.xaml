@@ -11,6 +11,7 @@
         xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"
         Title="{Binding Titol}" Height="396.203" Width="776.266">
+        
     <Window.DataContext>
         <ViewModel:AutorViewModel/>
     </Window.DataContext>
