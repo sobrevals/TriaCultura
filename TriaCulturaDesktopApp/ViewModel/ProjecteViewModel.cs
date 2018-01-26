@@ -15,7 +15,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     class ProjecteViewModel : ViewModelBase, IUserDialogViewModel
     {
-
+        #region BasicProperties
         private List<place> _place;
         private List<request> _request;
         private request _selectedRequest;
@@ -41,8 +41,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
         triaculturaCTXEntities context = new triaculturaCTXEntities();
+        #endregion BasicProperties
 
-
+        #region isModal
         public bool IsModal
         {
             get
@@ -51,14 +52,14 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
+        #endregion isModal
 
+        #region constructor
         public ProjecteViewModel()
         {
             FillRequests_all(0);
         }
-
-
-
+        #endregion constructor
 
         #region fill
         private void FillRequests_all(int index)
@@ -80,13 +81,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
         #endregion
-
-
-
-
-
-
-
+        
         #region PropertyChanged
 
         public virtual event EventHandler DialogClosing;
@@ -104,15 +99,14 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.DialogClosing(this, null);
         }
         #endregion
+
+        #region Commands
+
         public ICommand NewModalDialogCommand { get { return new RelayCommand(NewModalDialogEspai); } }
         public void NewModalDialogEspai()
         {
             this.Dialogs.Add(new EspaiViewModel());
         }
-
-
-        #region Commands
-
 
         public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
         protected virtual void AddPlace_request()
@@ -149,9 +143,11 @@ namespace TriaCulturaDesktopApp.ViewModel
                 this.DialogClosing(this, new EventArgs());
         }
 
+
+        #endregion
+
         public Action<ProjecteViewModel> OnOk { get; set; }
         public Action<ProjecteViewModel> OnReturn { get; set; }
         public Action<ProjecteViewModel> OnCloseRequest { get; set; }
-        #endregion
     }
 }
