@@ -17,7 +17,7 @@ namespace TriaCulturaDesktopApp.ViewModel
     {
         #region BasicProperties
         private List<place> _place;
-        private List<request> _request;
+        private List<request> _request;        
         private request _selectedRequest;
         private request _selectedRequest_place;
         private request _selectedPlace_fromProjects;
@@ -75,9 +75,14 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         private void FillRequest_place(int index)
         {
-            if (index >= 0 && index < SelectedProject.requests.Count)
+           // ProjectWithPlace != null && n > 0
+            if (SelectedProject!=null && index >0)
             {
-                SelectedRequest_fromPlace = _selectedproject.requests.ToList()[index];
+                SelectedRequest_fromPlace = SelectedProject.requests.ToList()[index];
+            }
+            else
+            {
+                SelectedProject = new project();
             }
         }
         #endregion
@@ -108,7 +113,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Add(new EspaiViewModel());
         }
 
-        public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
+        
         protected virtual void AddPlace_request()
         {
             request r = _selectedRequest_place;
@@ -131,9 +136,21 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         }
 
+        public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
         protected virtual void afegirPlace()
         {
-            this.Dialogs.Add(new EspaiViewModel());
+            this.Dialogs.Add(new EspaiViewModel(SelectedProject)
+            {
+                SelectedProject = SelectedProject,
+                OnOk = (sender) =>
+                {
+                    context.SaveChanges();
+                    FillRequest_place(0);
+                    sender.Close();
+                },
+                OnCancel = (sender) => { sender.Close(); },
+                OnCloseRequest = (sender) => { sender.Close(); }
+            });        
         }
         public ICommand finalitzar { get { return new RelayCommand(Close); } }
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }

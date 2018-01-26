@@ -21,18 +21,18 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         triaculturaCTXEntities context = new triaculturaCTXEntities();
 
-        #region
+        #region BasicProperties
         private List<place> _placeList;
         private List<place> _placeWithProject;
         private List<place> _placeWithoutProject;
         private place _selectedPlace_fromPlaces;
         private place _selectedPlace;
         private place _selectedPlace_fromProject;
-        private project _project;
+        private project _selectedProject;
         private int _selectedIndexPlace;
 
         public List<string> PlaceNoms { get { return PlaceWithoutProject.Select(x => x.name).ToList(); } }
-        public List<string> ProjectPlaces { get { return ProjectPlace.Select(x => x.name).ToList(); } }
+        public List<string> ProjectPlaces { get { return ProjectWithPlace.Select(x => x.name).ToList(); } }
 
         public List<place> PlaceL
         {
@@ -42,12 +42,12 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
 
             set
-            {              
+            {
                 _placeList = value;
                 NotifyPropertyChanged();
             }
         }
-        public List<place> ProjectPlace
+        public List<place> ProjectWithPlace
         {
             get
             {
@@ -101,6 +101,33 @@ namespace TriaCulturaDesktopApp.ViewModel
                 NotifyPropertyChanged();
             }
         }
+        public project SelectedProject
+        {
+            get
+            {
+                return _selectedProject;
+            }
+
+            set
+            {
+                _selectedProject = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public List<place> PlaceWithoutProject
+        {
+            get
+            {
+                return _placeWithoutProject;
+            }
+
+            set
+            {
+                _placeWithoutProject = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public int SelectedIndexPlace
         {
@@ -116,12 +143,15 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-       
-
         #endregion
 
         public EspaiViewModel()
         {
+        }
+
+        public EspaiViewModel(project p)
+        {
+            SelectedProject = context.projects.Where(x => x.id_project == p.id_project).SingleOrDefault();
             fillPlaces(0);
             fillProjectPlaces(0);
         }
@@ -148,9 +178,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             request aux = new request();
             aux.place_id = SelectedPlace_fromPlaces.id_place;
-            aux.project_id = Project.id_project;
+            aux.project_id = SelectedProject.id_project;
             context.requests.Add(aux);
-            fillProjectPlaces(0);           
+            fillProjectPlaces(0);
         }
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
@@ -161,32 +191,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         public ICommand CloseAllCommand { get { return new RelayCommand(OnCloseAll); } }
 
-        public project Project
-        {
-            get
-            {
-                return _project;
-            }
-
-            set
-            {
-                _project = value;
-            }
-        }
-
-        public List<place> PlaceWithoutProject
-        {
-            get
-            {
-                return _placeWithoutProject;
-            }
-
-            set
-            {
-                _placeWithoutProject = value;
-            }
-        }
-
         public void OnCloseAll()
         {
             this.Dialogs.Clear();
@@ -194,15 +198,16 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void fillPlaces(int n)
         {
-            List<request> llista_requests = context.requests.Where(x => x.project_id != Project.id_project).ToList();
+            List<request> llista_requests = context.requests.Where(x => x.project_id != SelectedProject.id_project).ToList();
 
-            List<place> llista_espais= llista_requests.Select(x => x.place).ToList();
-            PlaceWithoutProject = llista_espais;       
-          
+            List<place> llista_espais = llista_requests.Select(x => x.place).ToList();
+            PlaceWithoutProject = llista_espais;
+
             if (PlaceWithoutProject != null)
             {
                 SelectedPlace = PlaceWithoutProject[n];
-            } else
+            }
+            else
             {
                 PlaceWithoutProject = new List<place>();
             }
@@ -210,13 +215,17 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void fillProjectPlaces(int n)
         {
-            ProjectPlace = context.requests.Where(x => x.project_id == x.project.id_project).Select(x => x.place).ToList();
-            if (ProjectPlace != null && n > 0)
+            //ProjectPlace = context.requests.Where(x => x.project_id == x.project.id_project).Select(x => x.place).ToList();
+            if (ProjectWithPlace != null && n > 0)
             {
-                Selectedplace_fromProject = ProjectPlace[n];
+                Selectedplace_fromProject = ProjectWithPlace[n];
+            }
+            else
+            {
+                ProjectWithPlace = new List<place>();
             }
         }
-        
+
         protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             if (PropertyChanged != null)
@@ -225,7 +234,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
+        public Action<DisciplinaViewModel> OnOk { get; set; }
+        public Action<DisciplinaViewModel> OnCancel { get; set; }
+        public Action<DisciplinaViewModel> OnCloseRequest { get; set; }
     }
-
-
 }
