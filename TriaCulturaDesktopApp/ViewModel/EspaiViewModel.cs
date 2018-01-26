@@ -22,6 +22,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         triaculturaCTXEntities context = new triaculturaCTXEntities();
 
         #region BasicProperties
+        private List<request> _allRequestInProject;
+        private List<request> _allRequestOfProject;
         private List<place> _placeList;
         private List<place> _placeWithProject;
         private List<place> _placeWithoutProject;
@@ -30,9 +32,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         private place _selectedPlace_fromProject;
         private project _selectedProject;
         private int _selectedIndexPlace;
-
-        public List<string> PlaceNoms { get { return PlaceWithoutProject.Select(x => x.name).ToList(); } }
-        public List<string> ProjectPlaces { get { return ProjectWithPlace.Select(x => x.name).ToList(); } }
+        private ObservableCollection<string> _outProjectL;
+        private ObservableCollection<string> _inProjectL;
 
         public List<place> PlaceL
         {
@@ -198,18 +199,11 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void fillPlaces(int n)
         {
-            List<request> llista_requests = context.requests.Where(x => x.project_id != SelectedProject.id_project).ToList();
-
-            List<place> llista_espais = llista_requests.Select(x => x.place).ToList();
-            PlaceWithoutProject = llista_espais;
-
-            if (PlaceWithoutProject != null && n > 0)
+            if (SelectedProject != null)
             {
-                SelectedPlace = PlaceWithoutProject[n];
-            }
-            else
-            {
-                PlaceWithoutProject = new List<place>();
+                AllRequestOfProject = context.requests.Where(x => x.project_id != SelectedProject.id_project).ToList();
+                PlaceWithoutProject = AllRequestOfProject.Select(x => x.place).ToList();
+                PlacesNames = new ObservableCollection<string>(PlaceWithoutProject.Select(x => x.name).ToList());
             }
         }
 
@@ -237,5 +231,61 @@ namespace TriaCulturaDesktopApp.ViewModel
         public Action<DisciplinaViewModel> OnOk { get; set; }
         public Action<DisciplinaViewModel> OnCancel { get; set; }
         public Action<DisciplinaViewModel> OnCloseRequest { get; set; }
+
+        public ObservableCollection<string> PlacesNames
+        {
+            get
+            {
+                return _outProjectL;
+            }
+
+            set
+            {
+                _outProjectL = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> ProjectPlaces
+        {
+            get
+            {
+                return _inProjectL;
+            }
+
+            set
+            {
+                _inProjectL = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public List<request> AllRequestInProject
+        {
+            get
+            {
+                return _allRequestInProject;
+            }
+
+            set
+            {
+                _allRequestInProject = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public List<request> AllRequestOfProject
+        {
+            get
+            {
+                return _allRequestOfProject;
+            }
+
+            set
+            {
+                _allRequestOfProject = value;
+                NotifyPropertyChanged();
+            }
+        }
     }
 }
