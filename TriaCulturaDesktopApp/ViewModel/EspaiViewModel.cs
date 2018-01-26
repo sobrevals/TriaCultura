@@ -42,8 +42,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
 
             set
-            {
-              
+            {              
                 _placeList = value;
                 NotifyPropertyChanged();
             }
