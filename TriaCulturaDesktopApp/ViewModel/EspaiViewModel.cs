@@ -203,7 +203,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             List<place> llista_espais = llista_requests.Select(x => x.place).ToList();
             PlaceWithoutProject = llista_espais;
 
-            if (PlaceWithoutProject != null)
+            if (PlaceWithoutProject != null && n > 0)
             {
                 SelectedPlace = PlaceWithoutProject[n];
             }
