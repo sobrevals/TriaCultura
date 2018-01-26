@@ -112,9 +112,6 @@
     <Compile Include="Model\request.cs">
       <DependentUpon>TriaCulturaDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\sysdiagram.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\TriaCulturaDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

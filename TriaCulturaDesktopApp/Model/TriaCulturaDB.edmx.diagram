@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="triaculturaDBModel.place" Width="1.5" PointX="6" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="triaculturaDBModel.project" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="triaculturaDBModel.request" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="triaculturaDBModel.type" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
         <AssociationConnector Association="triaculturaDBModel.FK_email_author" ManuallyRouted="false" />
         <AssociationConnector Association="triaculturaDBModel.FK_phone_author" ManuallyRouted="false" />
