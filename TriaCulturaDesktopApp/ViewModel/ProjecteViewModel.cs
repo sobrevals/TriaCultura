@@ -27,19 +27,23 @@ namespace TriaCulturaDesktopApp.ViewModel
         { get { return _place; } set { _place = value; NotifyPropertyChanged(); } }
 
         public List<request> Request
-        { get { return _request; } set { _request = value; } }
+        { get { return _request; } set { _request = value; NotifyPropertyChanged(); } }
 
         public request SelectedRequest
-        { get { return _selectedRequest; } set { _selectedRequest = value; } }
+        { get { return _selectedRequest; } set { _selectedRequest = value; NotifyPropertyChanged(); } }
 
         public request SelectedRequest_fromPlace
-        { get { return _selectedPlace_fromProjects; } set { _selectedPlace_fromProjects = value; } }
+        { get { return _selectedPlace_fromProjects; } set { _selectedPlace_fromProjects = value; NotifyPropertyChanged(); } }
 
         public project SelectedProject
-        { get { return _selectedproject; } set { _selectedproject = value; } }
+        { get { return _selectedproject; } set { _selectedproject = value; NotifyPropertyChanged(); } }
+
+
+        private ObservableCollection<string> _requestL;
+        private ObservableCollection<string> RequestL { get { return _requestL; } set { _requestL = value; NotifyPropertyChanged(); } };
 
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
-        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; NotifyPropertyChanged(); } }
         triaculturaCTXEntities context = new triaculturaCTXEntities();
         #endregion BasicProperties
 

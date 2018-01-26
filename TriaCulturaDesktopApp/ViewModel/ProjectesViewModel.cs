@@ -9,6 +9,8 @@ using TriaCulturaDesktopApp.Model;
 using MvvmDialogs.ViewModels;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -25,6 +27,36 @@ namespace TriaCulturaDesktopApp.ViewModel
         private List<project> _projectsL;
         private int _selectedIndexProject;
         private project _selectedProject;
+
+        public List<project> ProjectsL{get { return _projectsL; }  set   {   _projectsL = value;     NotifyPropertyChanged(); } }
+
+        public int SelectedIndexProject
+        {
+            get
+            {
+                return _selectedIndexProject;
+            }
+
+            set
+            {
+                _selectedIndexProject = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public project SelectedProject
+        {
+            get
+            {
+                return _selectedProject;
+            }
+
+            set
+            {
+                _selectedProject = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         #region Contructor
@@ -69,24 +101,11 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-            /*if (SelectedProject != null)
-            {
-                this.Dialogs.Add(new ProjecteViewModel
-                {
-
-                    SelectedProject = SelectedProject
-                });
-            }
-            else
-            {*/
                 this.Dialogs.Add(new ProjecteViewModel
                 {
 
                     SelectedProject = new project()
                 });
-
-            //}
-
         }
         public ICommand ChangeProjecte { get { return new RelayCommand(modProjecte); } }
         protected virtual void modProjecte()
@@ -108,6 +127,17 @@ namespace TriaCulturaDesktopApp.ViewModel
            
         }
 
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion PropertyChanged
 
 
 
@@ -122,46 +152,9 @@ namespace TriaCulturaDesktopApp.ViewModel
                 return true;
             }
         }
-
-        public List<project> ProjectsL
-        {
-            get
-            {
-                return _projectsL;
-            }
-
-            set
-            {
-                _projectsL = value;
-            }
-        }
-
-        public int SelectedIndexProject
-        {
-            get
-            {
-                return _selectedIndexProject;
-            }
-
-            set
-            {
-                _selectedIndexProject = value;
-            }
-        }
-
-        public project SelectedProject
-        {
-            get
-            {
-                return _selectedProject;
-            }
-
-            set
-            {
-                _selectedProject = value;
-            }
-        }
         #endregion IsModal
+
+
     }
 
 
