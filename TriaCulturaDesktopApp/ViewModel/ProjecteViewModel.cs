@@ -40,7 +40,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
 
         private ObservableCollection<string> _requestL;
-        private ObservableCollection<string> RequestL { get { return _requestL; } set { _requestL = value; NotifyPropertyChanged(); } };
+        private ObservableCollection<string> RequestL { get { return _requestL; } set { _requestL = value; NotifyPropertyChanged(); } }
 
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; NotifyPropertyChanged(); } }
@@ -63,15 +63,23 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             FillRequests_all(0);
         }
+        public ProjecteViewModel(project p)
+        {
+            SelectedProject = p;
+            FillRequests_all(0);
+        }
         #endregion constructor
 
         #region fill
         private void FillRequests_all(int index)
         {
-            Request = context.requests.OrderBy(x => x.place_id).ToList();
-            if (Places != null && index >= 0 && index < Places.Count)
+            if (SelectedProject != null)
             {
-                _selectedRequest_place = Request[index];
+                Request = SelectedProject.requests.ToList();
+                if (Places != null && index >= 0 && index < Places.Count)
+                {
+                    _selectedRequest_place = Request[index];
+                }
             }
         }
 
