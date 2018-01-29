@@ -16,14 +16,14 @@
         <ViewModel:DisciplinaViewModel/>
     </Window.DataContext>
     <Grid>
-        <Label x:Name="lbDisciplina" Content="Disciplina" HorizontalAlignment="Left" Margin="90,25,0,0" VerticalAlignment="Top" Width="70" FontFamily="Verdana" FontSize="11"/>
-        <ListBox x:Name="lbDisciplines" ItemsSource="{Binding Disciplines}" SelectionMode="Single" SelectedItem="{Binding SelectedDiscipline_fromDisciplines}" DisplayMemberPath="type" HorizontalAlignment="Left" Height="177" Margin="90,48,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
+        <Label x:Name="lbDisciplina" Content="Disciplines" HorizontalAlignment="Left" Margin="90,25,0,0" VerticalAlignment="Top" Width="70" FontFamily="Verdana" FontSize="11"/>
+        <ListBox x:Name="lbDisciplines" ItemsSource="{Binding notAuthorL}" SelectionMode="Single" SelectedItem="{Binding Selected_notAuthorL}" HorizontalAlignment="Left" Height="177" Margin="90,48,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
         <Button x:Name="btAfegir" Content="Afegir" HorizontalAlignment="Left" Margin="259,74,0,0" VerticalAlignment="Top" Width="75" Command="{Binding AfegirDisciplina_autor}"/>
         <Button x:Name="btTreure" Content="Treure" HorizontalAlignment="Left" Margin="259,111,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TreureDisciplina_autor}"/>
         <Button x:Name="btCrear" Content="Crear" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CrearDisciplina}"/>
         <Button x:Name="btEsborrar" Content="Esborrar" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Width="75" Command="{Binding EsborrarDisciplina}"/>
         <Button x:Name="btFinalitzar" Command ="{Binding OkCommand}" Content="Finalitzar" HorizontalAlignment="Left" Margin="394,239,0,0" VerticalAlignment="Top" Width="75"/>
-        <ListBox x:Name="lbDisciplines_Author" ItemsSource="{Binding Disciplines_fromAuthor}" SelectionMode="Single" SelectedItem="{Binding SelectedDiscipline_fromAuthor}" DisplayMemberPath="type" HorizontalAlignment="Left" Height="177" Margin="339,48,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
+        <ListBox x:Name="lbDisciplines_Author" ItemsSource="{Binding DiscAuthorL}" SelectionMode="Single" SelectedItem="{Binding Selected_DiscAuthorL}"  HorizontalAlignment="Left" Height="177" Margin="339,48,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
         <Label x:Name="lbDisciplina_Author" Content="Disciplines de l'autor" HorizontalAlignment="Left" Margin="339,25,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
         <Button x:Name="btTornar" Command="{Binding CancelCommand}" Content="Tornar Enrere" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="84"/>
 

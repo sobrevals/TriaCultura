@@ -18,17 +18,17 @@ namespace TriaCulturaDesktopApp.ViewModel
     {
         triaculturaCTXEntities context = new triaculturaCTXEntities();
         #region BasicProperties
-
+        private List<discipline> _disciplines_notAuthor;
         private List<discipline> _disciplines;
         private List<discipline> _disciplines_fromAuthor;
-        private discipline _selectedDiscipline_fromDisciplines;
+        private discipline _selectedDiscipline_fromNotAuthor;
         private discipline _selectedDiscipline_fromAuthor;
         private author _selectedauthor;
 
         public List<discipline> Disciplines
         { get { return _disciplines; } set { _disciplines = value; NotifyPropertyChanged(); } }
 
-        public discipline SelectedDiscipline_fromDisciplines { get { return _selectedDiscipline_fromDisciplines; } set { _selectedDiscipline_fromDisciplines = value;NotifyPropertyChanged(); } }
+        public discipline SelectedDiscipline_fromNotAuthor { get { return _selectedDiscipline_fromNotAuthor; } set { _selectedDiscipline_fromNotAuthor = value;NotifyPropertyChanged(); } }
         public discipline SelectedDiscipline_fromAuthor { get { return _selectedDiscipline_fromAuthor; } set { _selectedDiscipline_fromAuthor = value;NotifyPropertyChanged(); } }
 
         public author SelectedAuthor { get { return _selectedauthor; } set { _selectedauthor = value; }  }
@@ -42,6 +42,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _disciplines_fromAuthor = value;
+                NotifyPropertyChanged();
             }
         }
         public bool IsModal
@@ -49,6 +50,77 @@ namespace TriaCulturaDesktopApp.ViewModel
             get
             {
                 return true;
+            }
+        }
+        public List<discipline> Disciplines_notAuthor
+        {
+            get
+            {
+                return _disciplines_notAuthor;
+            }
+
+            set
+            {
+                _disciplines_notAuthor = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> notAuthorL;
+        private ObservableCollection<string> discAuthorL;
+        private string _selected_notAuthorL;
+        private string _selected_discAuthorL;
+        public ObservableCollection<string> NotAuthorL
+        {
+            get
+            {
+                return notAuthorL;
+            }
+
+            set
+            {
+                notAuthorL = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> DiscAuthorL
+        {
+            get
+            {
+                return discAuthorL;
+            }
+
+            set
+            {
+                discAuthorL = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string Selected_notAuthorL
+        {
+            get
+            {
+                return _selected_notAuthorL;
+            }
+
+            set
+            {
+                _selected_notAuthorL = value;
+            }
+        }
+
+        public string Selected_DiscAuthorL
+        {
+            get
+            {
+                return _selected_discAuthorL;
+            }
+
+            set
+            {
+                _selected_discAuthorL = value;
             }
         }
 
@@ -89,10 +161,14 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region fill
         private void FillDisciplines_all (int index)
         {
-            Disciplines = context.disciplines.OrderBy(x => x.type).ToList();
-            if (Disciplines != null && index >= 0 && index < Disciplines.Count)
+            Disciplines_notAuthor = context.disciplines.OrderBy(x => x.type).ToList();
+            Disciplines_notAuthor.RemoveAll(x => x.authors.Contains(SelectedAuthor));
+            
+            notAuthorL = new ObservableCollection<string>(Disciplines_notAuthor.Select(x => x.type).ToList());
+            if (Disciplines_notAuthor != null && index >= 0 && index < Disciplines_notAuthor.Count)
             {
-                SelectedDiscipline_fromDisciplines = Disciplines[index];
+                SelectedDiscipline_fromNotAuthor = Disciplines_notAuthor[index];
+                Selected_notAuthorL = SelectedDiscipline_fromNotAuthor.type;
             }
         }
 
@@ -101,7 +177,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             FillDisciplines_all(0);
             if (d!=null && d.id_discipline!=0)
             {
-                SelectedDiscipline_fromDisciplines = Disciplines.Where(x => x.id_discipline == d.id_discipline).SingleOrDefault();
+                SelectedDiscipline_fromNotAuthor = Disciplines_notAuthor.Where(x => x.id_discipline == d.id_discipline).SingleOrDefault();
+                Selected_notAuthorL = SelectedDiscipline_fromNotAuthor.type;
             }
         }
 
@@ -110,9 +187,11 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (SelectedAuthor != null)
             {
                 Disciplines_fromAuthor = SelectedAuthor.disciplines.ToList();
+                discAuthorL = new ObservableCollection<string>(Disciplines_fromAuthor.Select(x => x.type).ToList());
                 if (Disciplines_fromAuthor != null && index >= 0 && index < Disciplines_fromAuthor.Count)
                 {
                     SelectedDiscipline_fromAuthor = Disciplines_fromAuthor[index];
+                    Selected_DiscAuthorL = SelectedDiscipline_fromAuthor.type;
                 }
             }
         }
@@ -144,11 +223,12 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         protected virtual void AddDisciplina_autor()
         {
-            discipline d = SelectedDiscipline_fromDisciplines;
+            discipline d = SelectedDiscipline_fromNotAuthor;
             //context.disciplines.Where(x => x.id_discipline == d.id_discipline).SingleOrDefault().authors.Add(SelectedAuthor);
             context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault().disciplines.Add(d);
             //context.SaveChanges();
             FillDisciplines_author(0);
+            FillDisciplines_all(0);
         }
 
         public ICommand TreureDisciplina_autor { get { return new RelayCommand(RemDisciplina_autor); } }
@@ -157,9 +237,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             discipline d = SelectedDiscipline_fromAuthor;
             context.disciplines.Where(x => x.id_discipline == d.id_discipline).SingleOrDefault().authors.Remove(SelectedAuthor);
-            SelectedAuthor.disciplines.Remove(d);
+            //SelectedAuthor.disciplines.Remove(d);
             //context.SaveChanges();
             FillDisciplines_author(0);
+            FillDisciplines_all(0);
         }
 
         public ICommand CrearDisciplina { get { return new RelayCommand(CreaDisciplina); } }
@@ -197,11 +278,11 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         protected void EsborraDisciplina()
         {
-            if (SelectedDiscipline_fromDisciplines != null)
+            if (SelectedDiscipline_fromNotAuthor != null)
             {
                 discipline aux_disc = new discipline();
-                aux_disc.id_discipline = SelectedDiscipline_fromDisciplines.id_discipline;
-                aux_disc.type = SelectedDiscipline_fromDisciplines.type;
+                aux_disc.id_discipline = SelectedDiscipline_fromNotAuthor.id_discipline;
+                aux_disc.type = SelectedDiscipline_fromNotAuthor.type;
                 this.Dialogs.Add(new DisciplinaDialogViewModel
                 {
                     Title = "Esborrar Disciplina",
@@ -212,7 +293,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                     {
                         try
                         {
-                            context.disciplines.Remove(SelectedDiscipline_fromDisciplines);
+                            context.disciplines.Remove(SelectedDiscipline_fromNotAuthor);
                             context.SaveChanges();
                             FillDisciplines_all(0);
                         }
@@ -232,6 +313,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         public Action<DisciplinaViewModel> OnOk { get; set; }
         public Action<DisciplinaViewModel> OnCancel { get; set; }
         public Action<DisciplinaViewModel> OnCloseRequest { get; set; }
+
+
+
 
 
         #endregion
