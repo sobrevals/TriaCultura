@@ -24,9 +24,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         triaculturaCTXEntities context = new triaculturaCTXEntities();
 
         private author _author;
-        private List<discipline> _disciplines;
-        private List<phone> _telefons;
-        private List<email> _emails;
+        private ObservableCollection<discipline> _disciplines;
+        private ObservableCollection<phone> _telefons;
+        private ObservableCollection<email> _emails;
         private Image _foto;
         private phone _selectedPhone;
         private email _selectedEmail;
@@ -44,10 +44,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
 
         public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged("Author"); } }
-        public List<discipline> Disciplines { get { return _disciplines; } set { _disciplines = value; NotifyPropertyChanged("Disciplines"); } }
-        public List<phone> Telefons { get { return _telefons; } set { _telefons = value; NotifyPropertyChanged("Telefons"); } }
-        public List<email> Emails { get { return _emails; } set { _emails = value; NotifyPropertyChanged("Emails"); } }
-        public Image Foto { get { return _foto; } set { _foto = value; NotifyPropertyChanged("Foto"); } }
+        public ObservableCollection<discipline> Disciplines { get { return _disciplines; } set { _disciplines = value; NotifyPropertyChanged(); } }
+        public ObservableCollection<phone> Telefons { get { return _telefons; } set { _telefons = value; NotifyPropertyChanged(); } }
+        public ObservableCollection<email> Emails { get { return _emails; } set { _emails = value; NotifyPropertyChanged(); } }
+        public Image Foto { get { return _foto; } set { _foto = value; NotifyPropertyChanged(); } }
 
         public phone SelectedPhone { get { return _selectedPhone; } set { _selectedPhone = value; } }
 
@@ -55,15 +55,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public String Titol { get; set; }
 
-        //public List<string> DisciplinesL { get { return Disciplines.Select(x => x.type).ToList(); }  }
-        //public List<string> TelefonsL { get { return Telefons.Select(x => x.num).ToList(); }  }
-        //public List<string> EmailsL { get { return Emails.Select(x => x.address).ToList(); }  }
-        private ObservableCollection<string> _telefonsL;
-        private ObservableCollection<string> _disciplinesL;
-        private ObservableCollection<string> _emailsL;
-        public ObservableCollection<string> DisciplinesL { get { return _disciplinesL; } set { _disciplinesL = value; NotifyPropertyChanged(); } }
-        public ObservableCollection<string> TelefonsL { get { return _telefonsL; } set { _telefonsL = value; NotifyPropertyChanged(); } }
-        public ObservableCollection<string> EmailsL { get { return _emailsL; } set { _emailsL = value; NotifyPropertyChanged(); } }
 
         public string SelectedTelefonNum { get; set; }
         public string SelectedEmailAddr { get; set; }
@@ -105,20 +96,17 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region Fills
         public void FillDisciplines()
         {
-            Disciplines = Author.disciplines.ToList();
-            DisciplinesL = new ObservableCollection<string>(Disciplines.Select(x => x.type).ToList());
+            Disciplines = new ObservableCollection<discipline>(Author.disciplines.ToList());
         }
 
         public void FillTelefons()
         {
-            Telefons = Author.phones.ToList();
-            TelefonsL = new ObservableCollection<string>(Telefons.Select(x => x.num).ToList());
+            Telefons = new ObservableCollection<phone>(Author.phones.ToList());
         }
 
         public void FillEmails()
         {
-            Emails = Author.emails.ToList();
-            EmailsL = new ObservableCollection<string>(Emails.Select(x => x.address).ToList());
+            Emails = new ObservableCollection<email>(Author.emails.ToList());
         }
 
         #endregion
@@ -129,6 +117,20 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
 
         #region ICommand
+
+        protected void save_changes()
+        {
+            if (context.authors.Where(x => x.dni == Author.dni).ToList().Count==1)
+            {
+                context.authors.Where(x => x.dni == Author.dni).ToList()[0] = Author;
+            } else
+            {
+                context.authors.Add(Author);
+            }
+            context.SaveChanges();
+            Author = context.authors.Where(x => x.dni == Author.dni).SingleOrDefault();
+        }
+
         public ICommand OkCommand { get { return new RelayCommand(Ok); } }
         protected virtual void Ok()
         {
@@ -142,12 +144,14 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void OpenDisciplines()
         {
+            save_changes();
             List<discipline> disciplines_before = Author.disciplines.ToList();
             this.Dialogs.Add(new DisciplinaViewModel(Author)
             {
                 SelectedAuthor = Author,
                 OnOk = (sender) =>
                 {
+                    Author = sender.SelectedAuthor;
                     FillDisciplines();
                     sender.Close();
                 },
@@ -173,6 +177,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void AddTelefon()
         {
+            save_changes();
             phone aux_phone = new phone();
             aux_phone.author_dni = Author.dni;
             this.Dialogs.Add(new AutorDialogViewModel
@@ -213,8 +218,11 @@ namespace TriaCulturaDesktopApp.ViewModel
                 OnCloseRequest = (sender) => { sender.Close(); }
             });
         }
+
         public void AddEmail()
         {
+
+            save_changes();
             email aux_mail = new email();
             aux_mail.author_dni = Author.dni;
             this.Dialogs.Add(new AutorDialogViewModel
@@ -249,6 +257,8 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void DeleteTelefon()
         {
+
+            save_changes();
             SelectedPhone = context.phones.Where(x => x.num.Equals(SelectedTelefonNum)).SingleOrDefault();
             if (SelectedPhone != null)
             {
@@ -283,7 +293,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                     },
                     OnCancel = (sender) => { sender.Close(); },
                     OnCloseRequest = (sender) => { sender.Close(); }
-
                 });
             }
         }
@@ -292,6 +301,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void DeleteEmail()
         {
+            save_changes();
             SelectedEmail = context.emails.Where(x => x.address.Equals(SelectedEmailAddr)).SingleOrDefault();
             if (SelectedEmail != null)
             {
@@ -333,6 +343,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
+            save_changes();
             this.Dialogs.Add(new ProjectesViewModel
             {
                 ProjectsL = Author.projects.ToList()
