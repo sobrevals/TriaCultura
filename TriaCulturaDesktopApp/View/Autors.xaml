@@ -15,7 +15,7 @@
         <ViewModel:AutorsViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="datagrid_autors" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="249" Width="250" ItemsSource="{Binding AuthorsL}" ColumnWidth="80" CanUserResizeColumns="False" SelectedItem="{Binding SelectedAuthor}" AutoGenerateColumns="False">
+        <DataGrid x:Name="datagrid_autors" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="249" Width="250" ItemsSource="{Binding AuthorsL}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedAuthor}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding dni}" ClipboardContentBinding="{x:Null}" Header="Dni"/>
                 <DataGridTextColumn Binding="{Binding name}" ClipboardContentBinding="{x:Null}" Header="Nom"/>
