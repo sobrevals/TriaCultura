@@ -38,6 +38,7 @@
         <Button x:Name="btn_imatge" Content="Modificar" HorizontalAlignment="Left" Margin="552,285,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBox x:Name="tb_CognomAutor" HorizontalAlignment="Left" Height="23" Margin="457,30,0,0" TextWrapping="Wrap" Text="{Binding Author.surname}" VerticalAlignment="Top" Width="170"/>
         <Label x:Name="lbl_cognomAutor" Content="Cognom" HorizontalAlignment="Left" Margin="457,4,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button x:Name="btn_guardar" Content="Guardar i tancar" HorizontalAlignment="Left" Margin="124,335,0,0" VerticalAlignment="Top" Width="105" Command="{Binding OkCommand}"/>
 
     </Grid>
 </Window>

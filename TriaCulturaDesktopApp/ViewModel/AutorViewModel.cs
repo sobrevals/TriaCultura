@@ -43,7 +43,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         #endregion
 
-        public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged("Author"); } }
+        public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged(""); } }
         public ObservableCollection<discipline> Disciplines { get { return _disciplines; } set { _disciplines = value; NotifyPropertyChanged(); } }
         public ObservableCollection<phone> Telefons { get { return _telefons; } set { _telefons = value; NotifyPropertyChanged(); } }
         public ObservableCollection<email> Emails { get { return _emails; } set { _emails = value; NotifyPropertyChanged(); } }
@@ -120,10 +120,11 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         protected void save_changes()
         {
-            if (context.authors.Where(x => x.dni == Author.dni).ToList().Count==1)
+            if (context.authors.Where(x => x.dni == Author.dni).ToList().Count == 1)
             {
                 context.authors.Where(x => x.dni == Author.dni).ToList()[0] = Author;
-            } else
+            }
+            else
             {
                 context.authors.Add(Author);
             }
@@ -134,6 +135,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OkCommand { get { return new RelayCommand(Ok); } }
         protected virtual void Ok()
         {
+             
             if (this.OnOk != null)
                 this.OnOk(this);
             else
@@ -160,6 +162,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                     sender.Close();
                     Author.disciplines = disciplines_before;
                     context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
+                    FillDisciplines();
                     context.SaveChanges();
                 },
                 OnCloseRequest = (sender) =>
@@ -167,6 +170,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                     sender.Close();
                     Author.disciplines = disciplines_before;
                     context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
+                    FillDisciplines();
                     context.SaveChanges();
                 }
             });
@@ -352,6 +356,8 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorViewModel> OnOk { get; set; }
+        public Action<AutorViewModel> OnCancel { get; set; }
+        public Action<AutorsViewModel> OnCloseRequest { get; set; }
 
 
         #endregion ICommand
