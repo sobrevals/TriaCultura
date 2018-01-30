@@ -102,6 +102,19 @@ namespace TriaCulturaDesktopApp.ViewModel
             FillEmails();
         }
 
+        public void saveChanges()
+        {
+            if (context.authors.Where(x=>x.dni == Author.dni).Count()==1)
+            {
+                context.authors.ToList().Where(x => x.dni == Author.dni).ToList()[0] = Author;
+            }
+            else
+            {
+                context.authors.Add(Author);
+            }
+            context.SaveChanges();
+        }
+
         #region Fills
         public void FillDisciplines()
         {
@@ -142,6 +155,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void OpenDisciplines()
         {
+            saveChanges();
             this.Dialogs.Add(new DisciplinaViewModel(Author)
             {
                 SelectedAuthor = Author,
@@ -161,6 +175,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void AddTelefon()
         {
+            saveChanges();
             phone aux_phone = new phone();
             aux_phone.author_dni = Author.dni;
             this.Dialogs.Add(new AutorDialogViewModel
@@ -203,6 +218,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         public void AddEmail()
         {
+            saveChanges();
             email aux_mail = new email();
             aux_mail.author_dni = Author.dni;
             this.Dialogs.Add(new AutorDialogViewModel
@@ -237,6 +253,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void DeleteTelefon()
         {
+            saveChanges();
             SelectedPhone = context.phones.Where(x => x.num.Equals(SelectedTelefonNum)).SingleOrDefault();
             if (SelectedPhone != null)
             {
@@ -280,6 +297,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void DeleteEmail()
         {
+            saveChanges();
             SelectedEmail = context.emails.Where(x => x.address.Equals(SelectedEmailAddr)).SingleOrDefault();
             if (SelectedEmail != null)
             {
@@ -321,6 +339,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
+            saveChanges();
             this.Dialogs.Add(new ProjectesViewModel
             {
                 ProjectsL = Author.projects.ToList()

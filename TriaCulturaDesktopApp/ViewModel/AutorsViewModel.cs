@@ -96,7 +96,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             this.Dialogs.Add(new AutorViewModel(SelectedAuthor)
             {
-                Titol = "Modificar Autor"
+                Titol = "Modificar Autor",
+                Author = SelectedAuthor
             });
         }
         //public ICommand modificarAutor { get { return new RelayCommand(changeAutor); } }

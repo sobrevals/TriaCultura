@@ -152,8 +152,8 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public EspaiViewModel(project p)
         {
-            //SelectedProject = context.projects.Where(x => x.id_project == p.id_project).SingleOrDefault();
-            SelectedProject = new project();
+            SelectedProject = context.projects.Where(x => x.id_project == p.id_project).SingleOrDefault();
+            //SelectedProject = new project();
             fillPlaces(0);
             fillProjectPlaces(0);
         }
@@ -177,17 +177,18 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand agregarEspai { get { return new RelayCommand(addPlace); } }
 
         public virtual void addPlace()
-        {   
-            //request r = (request)context.requests.Where(x => x.project_id == SelectedProject.id_project);           
+        {
+            request r = context.requests.Where(x => x.project_id == SelectedProject.id_project).SingleOrDefault();
             //context.places.Where(x => x.id_place == r.place_id).SingleOrDefault().            
             //FillDisciplines_author(0);
+            //context.projects.Where(x=> x.id_project == SelectedProject.id_project).SingleOrDefault().requests
 
-            request aux = new request();
-            aux.place_id = SelectedPlace_fromPlaces.id_place;
-            aux.project_id = SelectedProject.id_project;
-            context.requests.Add(aux);
-            fillProjectPlaces(0);
-            fillPlaces(0);
+            //request aux = new request();
+            //aux.place_id = SelectedPlace_fromPlaces.id_place;
+            //aux.project_id = SelectedProject.id_project;
+            //context.requests.Add(aux);
+            //fillProjectPlaces(0);
+            //fillPlaces(0);
         }
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
