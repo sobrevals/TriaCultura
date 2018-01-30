@@ -12,7 +12,7 @@
         <Button x:Name="btAfegir" Command="{Binding agregarEspai}" Content="--&gt;" HorizontalAlignment="Left" Margin="171,86,0,0" VerticalAlignment="Top" Width="32"/>
         <Button x:Name="btTreure" Content="&lt;--" HorizontalAlignment="Left" Margin="171,146,0,0" VerticalAlignment="Top" Width="32" RenderTransformOrigin="0.92,0.5"/>
         <Button x:Name="btFinalitzar" Command="{Binding tornarEnrere}" Content="Finalitzar" HorizontalAlignment="Left" Margin="341,239,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="2.787,0.55"/>
-        <ListBox x:Name="lbEspais_Disponibles" HorizontalAlignment="Left" ItemsSource="{Binding PlaceNames}" Height="177" Margin="24,57,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
+        <ListBox x:Name="lbEspais_Disponibles" HorizontalAlignment="Left" ItemsSource="{Binding PlacesNames}" Height="177" Margin="24,57,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
         <Label x:Name="EspaisSeleccionats" Content="Espais escollits" HorizontalAlignment="Left" Margin="229,15,0,0" VerticalAlignment="Top" Width="130"/>
         <Label x:Name="espaisDisponibles" Content="Espais disponibles" HorizontalAlignment="Left" Margin="24,15,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.169,1"/>
         <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="2.787,0.55"/>
