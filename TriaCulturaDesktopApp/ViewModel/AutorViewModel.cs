@@ -142,17 +142,29 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void OpenDisciplines()
         {
+            List<discipline> disciplines_before = Author.disciplines.ToList();
             this.Dialogs.Add(new DisciplinaViewModel(Author)
             {
                 SelectedAuthor = Author,
                 OnOk = (sender) =>
                 {
-                    context.SaveChanges();
                     FillDisciplines();
                     sender.Close();
                 },
-                OnCancel = (sender) => { sender.Close(); },
-                OnCloseRequest = (sender) => { sender.Close(); }
+                OnCancel = (sender) =>
+                {
+                    sender.Close();
+                    Author.disciplines = disciplines_before;
+                    context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
+                    context.SaveChanges();
+                },
+                OnCloseRequest = (sender) =>
+                {
+                    sender.Close();
+                    Author.disciplines = disciplines_before;
+                    context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
+                    context.SaveChanges();
+                }
             });
         }
 
