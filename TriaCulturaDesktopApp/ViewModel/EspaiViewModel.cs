@@ -152,7 +152,8 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public EspaiViewModel(project p)
         {
-            SelectedProject = context.projects.Where(x => x.id_project == p.id_project).SingleOrDefault();
+            //SelectedProject = context.projects.Where(x => x.id_project == p.id_project).SingleOrDefault();
+            SelectedProject = new project();
             fillPlaces(0);
             fillProjectPlaces(0);
         }
@@ -176,12 +177,17 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand agregarEspai { get { return new RelayCommand(addPlace); } }
 
         public virtual void addPlace()
-        {
+        {   
+            //request r = (request)context.requests.Where(x => x.project_id == SelectedProject.id_project);           
+            //context.places.Where(x => x.id_place == r.place_id).SingleOrDefault().            
+            //FillDisciplines_author(0);
+
             request aux = new request();
             aux.place_id = SelectedPlace_fromPlaces.id_place;
             aux.project_id = SelectedProject.id_project;
             context.requests.Add(aux);
             fillProjectPlaces(0);
+            fillPlaces(0);
         }
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
@@ -202,13 +208,14 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (SelectedProject != null)
             {
                 AllRequestOfProject = context.requests.Where(x => x.project_id != SelectedProject.id_project).ToList();
-                PlaceWithoutProject = AllRequestOfProject.Select(x => x.place).ToList();
-                PlacesNames = new ObservableCollection<string>(PlaceWithoutProject.Select(x => x.name).ToList());
-            }
+                PlaceWithoutProject = AllRequestOfProject.Select(x => x.place).ToList();   
+                PlacesNames = new ObservableCollection<string>(PlaceWithoutProject.Select(x => x.name).Distinct().ToList());
+            }          
         }
 
         public void fillProjectPlaces(int n)
         {
+            //ProjectWithPlace = PlaceL.Where(x => x.id_place ==)
             //ProjectPlace = context.requests.Where(x => x.project_id == x.project.id_project).Select(x => x.place).ToList();
             if (ProjectWithPlace != null && n > 0)
             {

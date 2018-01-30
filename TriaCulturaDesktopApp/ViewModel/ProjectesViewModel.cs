@@ -101,7 +101,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-                this.Dialogs.Add(new ProjecteViewModel
+                this.Dialogs.Add(new ProjecteViewModel (new project())
                 {
 
                     SelectedProject = new project()
@@ -110,7 +110,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand ChangeProjecte { get { return new RelayCommand(modProjecte); } }
         protected virtual void modProjecte()
         {
-            this.Dialogs.Add(new ProjecteViewModel
+            this.Dialogs.Add(new ProjecteViewModel (SelectedProject)
             {
                 SelectedProject = SelectedProject
             });
