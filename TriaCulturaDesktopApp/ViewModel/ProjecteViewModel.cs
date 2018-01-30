@@ -63,19 +63,30 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion isModal
 
         #region constructor
-        public ProjecteViewModel()
-        {
-            project p = new project();
-            titol = "Nou Projecte";
-            Projecte = p;           
-            FillRequests_all(0);
-        }
         public ProjecteViewModel(project p)
         {
-            SelectedProject = p;
+            Projecte = context.projects.Where(x => x.id_project == p.id_project).SingleOrDefault();
+            titol = "Nou Projecte";
+            Projecte = p;
+            
+            FillRequests_all(0);
+        }
+
+        public ProjecteViewModel() { }
+
+        public ProjecteViewModel(author a)
+        {
+            Projecte = new project();
+            Projecte.author = a;
 
             FillRequests_all(0);
         }
+        //public ProjecteViewModel(project p)
+        //{
+        //    SelectedProject = p;
+
+        //    FillRequests_all(0);
+        //}
         #endregion constructor
 
         #region fill
@@ -125,6 +136,19 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         #endregion
 
+        protected void save_changes()
+        {
+            if (context.projects.Where(x => x.id_project == Projecte.id_project).ToList().Count == 1)
+            {
+                context.projects.Where(x => x.id_project == Projecte.id_project).ToList()[0] = Projecte;
+            }
+            else
+            {
+                context.projects.Add(Projecte);
+            }
+            context.SaveChanges();
+            Projecte = context.projects.Where(x => x.id_project == Projecte.id_project).SingleOrDefault();
+        }
         #region Commands
 
         public ICommand NewModalDialogCommand { get { return new RelayCommand(NewModalDialogEspai); } }
@@ -169,6 +193,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
         protected virtual void afegirPlace()
         {
+            save_changes();
             request aux_request = new request();
             aux_request.project_id = SelectedProject.id_project;
 

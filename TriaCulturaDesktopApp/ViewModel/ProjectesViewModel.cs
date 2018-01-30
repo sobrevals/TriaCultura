@@ -27,6 +27,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private List<project> _projectsL;
         private int _selectedIndexProject;
         private project _selectedProject;
+        private bool _boto_afegir_enabled;
 
         public List<project> ProjectsL { get { return _projectsL; } set { _projectsL = value; NotifyPropertyChanged(); } }
 
@@ -98,10 +99,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
 
         #region ICommand
-        public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
-        protected virtual void opProject()
+        public ICommand NewProjecte { get { return new RelayCommand(newProject); } }
+        protected virtual void newProject()
         {
-            this.Dialogs.Add(new ProjecteViewModel
+            this.Dialogs.Add(new ProjecteViewModel(new project())
             {
                 Projecte = new project(),
                 titol = "Nou Projecte"
@@ -150,6 +151,19 @@ namespace TriaCulturaDesktopApp.ViewModel
             get
             {
                 return true;
+            }
+        }
+
+        public bool Boto_afegir_enabled
+        {
+            get
+            {
+                return _boto_afegir_enabled;
+            }
+
+            set
+            {
+                _boto_afegir_enabled = value;
             }
         }
         #endregion IsModal
