@@ -13,16 +13,20 @@ using System.Windows;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class ProjecteViewModel : ViewModelBase, IUserDialogViewModel
+    class ProjecteViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
+        triaculturaCTXEntities context = new triaculturaCTXEntities();
+
         #region BasicProperties
         private List<place> _place;
-        private List<request> _request;        
+        private List<request> _request;
+        private project _projecte;    
         private request _selectedRequest;
         private request _selectedRequest_place;
         private request _selectedPlace_fromProjects;
         private project _selectedproject;
 
+        public String titol { get; set; }
         public List<place> Places
         { get { return _place; } set { _place = value; NotifyPropertyChanged(); } }
 
@@ -38,13 +42,13 @@ namespace TriaCulturaDesktopApp.ViewModel
         public project SelectedProject
         { get { return _selectedproject; } set { _selectedproject = value; NotifyPropertyChanged(); } }
 
-
+        
         private ObservableCollection<string> _requestL;
         private ObservableCollection<string> RequestL { get { return _requestL; } set { _requestL = value; NotifyPropertyChanged(); } }
 
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; NotifyPropertyChanged(); } }
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+       
         #endregion BasicProperties
 
         #region isModal
@@ -61,11 +65,15 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region constructor
         public ProjecteViewModel()
         {
+            project p = new project();
+            titol = "Nou Projecte";
+            Projecte = p;           
             FillRequests_all(0);
         }
         public ProjecteViewModel(project p)
         {
             SelectedProject = p;
+
             FillRequests_all(0);
         }
         #endregion constructor
@@ -191,5 +199,19 @@ namespace TriaCulturaDesktopApp.ViewModel
         public Action<ProjecteViewModel> OnOk { get; set; }
         public Action<ProjecteViewModel> OnReturn { get; set; }
         public Action<ProjecteViewModel> OnCloseRequest { get; set; }
+
+        public project Projecte
+        {
+            get
+            {
+                return _projecte;
+            }
+
+            set
+            {
+                _projecte = value;
+                NotifyPropertyChanged("Project");
+            }
+        }
     }
 }
