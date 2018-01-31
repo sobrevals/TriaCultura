@@ -55,7 +55,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
         #endregion
-
+        private bool _isReadAuthor;
+        public bool IsReadAuthor { get { return _isReadAuthor; } set { _isReadAuthor = value; NotifyPropertyChanged(""); } }
 
         public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged(""); } }
         public ObservableCollection<discipline> Disciplines { get { return _disciplines; } set { _disciplines = value; NotifyPropertyChanged(); } }
@@ -89,6 +90,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public AutorViewModel()
         {
+            IsReadAuthor = false;
             // de proves
             author a = new author();
             Titol = "Nou Autor";
@@ -100,6 +102,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public AutorViewModel(author a)
         {
+            IsReadAuthor = true;
             Titol = "Modificar Autor";
             Author = context.authors.Where(x => x.dni == a.dni).SingleOrDefault();
             FillDisciplines();
