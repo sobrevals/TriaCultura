@@ -22,7 +22,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         #region BasicProperties
 
-        private List<author> _authors;
+        private ObservableCollection<author> _authors;
         private int _selectedIndexAuthor;
         private author _selectedAuthor;
 
@@ -30,7 +30,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {                  
             FillAuthors(0);
         }
-        public List<author> AuthorsL
+        public ObservableCollection<author> AuthorsL
         {
             get { return (_authors); }
             set { _authors = value; NotifyPropertyChanged(); }
@@ -77,7 +77,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-            this.Dialogs.Add(new ProjecteViewModel());
+            this.Dialogs.Add(new ProjectesViewModel());
         }
 
         public ICommand afegirAutor { get { return new RelayCommand(addAutor); } }
@@ -86,7 +86,19 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Add(new AutorViewModel
             {
                 Author = new author(),
-                Titol = "Nou Autor"
+                Titol = "Nou Autor",
+                OnOk = (sender) =>
+                {
+                    FillAuthors(0);
+                },
+                OnCancel = (sender) =>
+                {
+                    FillAuthors(0);
+                },
+                OnCloseRequest = (sender) =>
+                {
+                    FillAuthors(0);
+                }
             });
         }
 
@@ -96,7 +108,21 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             this.Dialogs.Add(new AutorViewModel(SelectedAuthor)
             {
-                Titol = "Modificar Autor"
+                Titol = "Modificar Autor",
+                Author = SelectedAuthor,
+                OnOk = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                },
+                OnCancel = (sender) =>
+                {
+                    FillAuthors(0);
+                },
+                OnCloseRequest = (sender) =>
+                {
+                    FillAuthors(0);
+                }
             });
         }
         //public ICommand modificarAutor { get { return new RelayCommand(changeAutor); } }
@@ -141,7 +167,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region FillAutors
         private void FillAuthors(int n)
         {
-            AuthorsL = context.authors.OrderBy(x => x.name).ToList();
+            AuthorsL = new ObservableCollection<author> (context.authors.OrderBy(x => x.dni).ToList());
             
             if (AuthorsL != null)
             {

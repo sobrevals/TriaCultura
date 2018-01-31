@@ -14,7 +14,7 @@ using System.Runtime.CompilerServices;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
-    class ProjectesViewModel : ViewModelBase, IUserDialogViewModel
+    public class ProjectesViewModel : ViewModelBase, IUserDialogViewModel
 
     {
         triaculturaCTXEntities context = new triaculturaCTXEntities();
@@ -27,8 +27,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         private List<project> _projectsL;
         private int _selectedIndexProject;
         private project _selectedProject;
+        private bool _boto_afegir_enabled;
 
-        public List<project> ProjectsL{get { return _projectsL; }  set   {   _projectsL = value;     NotifyPropertyChanged(); } }
+        public List<project> ProjectsL { get { return _projectsL; } set { _projectsL = value; NotifyPropertyChanged(); } }
 
         public int SelectedIndexProject
         {
@@ -71,10 +72,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region FillProjectes
 
         public void fillProjectes(int n)
-        {            
-            ProjectsL= context.projects.OrderBy(x => x.id_project).ToList();
+        {
+            ProjectsL = context.projects.OrderBy(x => x.id_project).ToList();
 
-            if (ProjectsL != null && ProjectsL.Count!=0)
+            if (ProjectsL != null && ProjectsL.Count != 0)
             {
                 SelectedProject = ProjectsL[n];
             }
@@ -98,19 +99,19 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
 
         #region ICommand
-        public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
-        protected virtual void opProject()
+        public ICommand NewProjecte { get { return new RelayCommand(newProject); } }
+        protected virtual void newProject()
         {
-                this.Dialogs.Add(new ProjecteViewModel (new project())
-                {
-
-                    SelectedProject = new project()
-                });
+            this.Dialogs.Add(new ProjecteViewModel(new project())
+            {
+                Projecte = new project(),
+                titol = "Nou Projecte"
+            });
         }
         public ICommand ChangeProjecte { get { return new RelayCommand(modProjecte); } }
         protected virtual void modProjecte()
         {
-            this.Dialogs.Add(new ProjecteViewModel (SelectedProject)
+            this.Dialogs.Add(new ProjecteViewModel(SelectedProject)
             {
                 SelectedProject = SelectedProject
             });
@@ -124,7 +125,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             aux.projects.Remove(d);
             context.SaveChanges();
             fillProjectes(0);
-           
+
         }
 
         #region PropertyChanged
@@ -150,6 +151,19 @@ namespace TriaCulturaDesktopApp.ViewModel
             get
             {
                 return true;
+            }
+        }
+
+        public bool Boto_afegir_enabled
+        {
+            get
+            {
+                return _boto_afegir_enabled;
+            }
+
+            set
+            {
+                _boto_afegir_enabled = value;
             }
         }
         #endregion IsModal
