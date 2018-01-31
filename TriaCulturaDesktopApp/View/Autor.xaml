@@ -17,7 +17,7 @@
     </Window.DataContext>
     <Grid>
         <Button x:Name="btModificarDisciplines" Command="{Binding ObreDisciplines}" Content="Modificar" HorizontalAlignment="Left" Margin="124,170,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="textbox_dni" HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textbox_dni" HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="120" IsReadOnly="{Binding IsReadAuthor}"/>
         <Label x:Name="lbl_dni" Content="DNI" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textbox_nom" HorizontalAlignment="Left" Height="23" Margin="259,30,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="170"/>
         <Label x:Name="lbl_nomAutor" Content="Nom" HorizontalAlignment="Left" Margin="259,4,0,0" VerticalAlignment="Top" Width="45"/>
