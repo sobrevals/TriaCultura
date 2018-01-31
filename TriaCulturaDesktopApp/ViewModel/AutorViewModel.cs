@@ -23,6 +23,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region Properties
         triaculturaCTXEntities context = new triaculturaCTXEntities();
 
+        private bool __boto_afegir_enabled;
         private author _author;
         private ObservableCollection<discipline> _disciplines;
         private ObservableCollection<phone> _telefons;
@@ -39,6 +40,18 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        public bool Boto_afegir_enabled
+        {
+            get
+            {
+                return __boto_afegir_enabled;
+            }
+
+            set
+            {
+                __boto_afegir_enabled = value;
             }
         }
         #endregion
@@ -351,7 +364,9 @@ namespace TriaCulturaDesktopApp.ViewModel
             save_changes();
             this.Dialogs.Add(new ProjectesViewModel
             {
+                Boto_afegir_enabled = false,
                 ProjectsL = Author.projects.ToList()
+               
             });
         }
 
@@ -359,6 +374,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         public Action<AutorViewModel> OnOk { get; set; }
         public Action<AutorViewModel> OnCancel { get; set; }
         public Action<AutorsViewModel> OnCloseRequest { get; set; }
+
+      
 
 
         #endregion ICommand

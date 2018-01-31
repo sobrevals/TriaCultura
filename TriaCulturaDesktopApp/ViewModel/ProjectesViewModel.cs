@@ -67,6 +67,11 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         }
 
+        public ProjectesViewModel(author a, bool enable)
+        {
+
+        }
+
         #endregion
 
         #region FillProjectes
@@ -119,13 +124,11 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand TreureProjecte_author { get { return new RelayCommand(RemProjecte_autor); } }
         protected virtual void RemProjecte_autor()
         {
-
             project d = SelectedProject;
             author aux = SelectedProject.author;
             aux.projects.Remove(d);
             context.SaveChanges();
             fillProjectes(0);
-
         }
 
         #region PropertyChanged

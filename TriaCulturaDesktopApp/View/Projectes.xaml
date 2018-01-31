@@ -9,7 +9,7 @@
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"        
         mc:Ignorable="d"
-        Title="Projectes" Height="373.5" Width="534">
+        Title="{Binding titol}" Height="373.5" Width="534">
     <Window.DataContext>
         <ViewModel:ProjectesViewModel/>
     </Window.DataContext>
