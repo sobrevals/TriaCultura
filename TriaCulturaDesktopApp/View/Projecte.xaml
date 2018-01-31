@@ -23,7 +23,6 @@
         <Label x:Name="lb_addFile" Content="Adjuntar Fitxers" HorizontalAlignment="Left" Margin="22,154,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbx_file" HorizontalAlignment="Left" Height="93" Margin="22,185,0,0" VerticalAlignment="Top" Width="126"/>
         <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="358,23,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_typeExpo" Text="{Binding SelectedProject.types}" HorizontalAlignment="Left" Height="23" Margin="358,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="358,82,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbx_place"  ItemsSource="{Binding Request}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest}" DisplayMemberPath="place.name" HorizontalAlignment="Left" Height="109" Margin="455,259,0,0" VerticalAlignment="Top" Width="122"/>
         <Label x:Name="lb_place" Content="Espais Solicitats" HorizontalAlignment="Left" Margin="472,228,0,0" VerticalAlignment="Top"/>
@@ -35,6 +34,7 @@
         <Button x:Name="bt_add_Copy" Content="ADD" HorizontalAlignment="Left" Margin="165,228,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBox x:Name="tb_description" HorizontalAlignment="Left" Height="110" Margin="294,113,0,0" TextWrapping="Wrap" Text="{Binding SelectedProject.description}" VerticalAlignment="Top" Width="374" AcceptsReturn="True" />
+        <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="318,53,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding SelectedProject.types}" DisplayMemberPath="name"/>
 
     </Grid>
 </Window>

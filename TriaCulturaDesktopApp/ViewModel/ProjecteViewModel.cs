@@ -22,6 +22,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private request _selectedRequest_place;
         private request _selectedPlace_fromProjects;
         private project _selectedproject;
+        
 
         public List<place> Places
         { get { return _place; } set { _place = value; NotifyPropertyChanged(); } }
@@ -38,7 +39,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         public project SelectedProject
         { get { return _selectedproject; } set { _selectedproject = value; NotifyPropertyChanged(); } }
 
-
+        private ObservableCollection<type> _typeL;
+        private ObservableCollection<type> TypeL { get { return _typeL; } set { _typeL = value; NotifyPropertyChanged(); } }
         private ObservableCollection<string> _requestL;
         private ObservableCollection<string> RequestL { get { return _requestL; } set { _requestL = value; NotifyPropertyChanged(); } }
 
@@ -57,6 +59,12 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
 
         #endregion isModal
+
+        public void typeToAll()
+        {
+
+        }
+
 
         #region constructor
         public ProjecteViewModel()
