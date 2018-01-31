@@ -43,6 +43,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         #endregion
 
+
         public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged(""); } }
         public ObservableCollection<discipline> Disciplines { get { return _disciplines; } set { _disciplines = value; NotifyPropertyChanged(); } }
         public ObservableCollection<phone> Telefons { get { return _telefons; } set { _telefons = value; NotifyPropertyChanged(); } }
