@@ -62,5 +62,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             this.Dialogs.Add(new ProjectesViewModel());
         }
+
     }
 }
