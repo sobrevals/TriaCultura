@@ -72,6 +72,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             SelectedAuthor = context.authors.Where(x => x.dni == a.dni).SingleOrDefault();
             FillDisciplines_all(0);
             FillDisciplines_author(0);
+           
         }
         #region fill
         private void FillDisciplines_all (int index)
