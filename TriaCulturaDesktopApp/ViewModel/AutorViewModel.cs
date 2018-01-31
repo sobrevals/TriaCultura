@@ -148,12 +148,13 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             save_changes();
             List<discipline> disciplines_before = Author.disciplines.ToList();
+            author aux_author = Author;
             this.Dialogs.Add(new DisciplinaViewModel(Author)
             {
-                SelectedAuthor = Author,
+                SelectedAuthor = aux_author,
                 OnOk = (sender) =>
                 {
-                    Author = sender.SelectedAuthor;
+                    Author.disciplines = aux_author.disciplines;
                     FillDisciplines();
                     sender.Close();
                 },
