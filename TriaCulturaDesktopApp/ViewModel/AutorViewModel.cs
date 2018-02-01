@@ -104,7 +104,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             IsReadAuthor = true;
             Titol = "Modificar Autor";
-            Author = context.authors.Where(x => x.dni == a.dni).SingleOrDefault();
+            Author = context.authors.ToList().Contains(a) ? context.authors.Where(x => x.dni == a.dni).SingleOrDefault() : new Model.author();
             FillDisciplines();
             FillTelefons();
             FillEmails();
@@ -135,24 +135,12 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         #region ICommand
 
-        protected void save_changes()
-        {
-            if (context.authors.Where(x => x.dni == Author.dni).ToList().Count == 1)
-            {
-                context.authors.Where(x => x.dni == Author.dni).ToList()[0] = Author;
-            }
-            else
-            {
-                context.authors.Add(Author);
-            }
-            context.SaveChanges();
-            Author = context.authors.Where(x => x.dni == Author.dni).SingleOrDefault();
-        }
 
-        public ICommand OkCommand { get { return new RelayCommand(Ok); } }
-        protected virtual void Ok()
+
+        public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
+        protected virtual void GuardarIEnrere()
         {
-             
+
             if (this.OnOk != null)
                 this.OnOk(this);
             else
@@ -163,7 +151,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void OpenDisciplines()
         {
-            save_changes();
             List<discipline> disciplines_before = Author.disciplines.ToList();
             author aux_author = Author;
             this.Dialogs.Add(new DisciplinaViewModel(Author)
@@ -179,17 +166,15 @@ namespace TriaCulturaDesktopApp.ViewModel
                 {
                     sender.Close();
                     Author.disciplines = disciplines_before;
-                    context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
+                    //context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
                     FillDisciplines();
-                    context.SaveChanges();
                 },
                 OnCloseRequest = (sender) =>
                 {
                     sender.Close();
                     Author.disciplines = disciplines_before;
-                    context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
+                    //context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
                     FillDisciplines();
-                    context.SaveChanges();
                 }
             });
         }
@@ -199,7 +184,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void AddTelefon()
         {
-            save_changes();
             phone aux_phone = new phone();
             aux_phone.author_dni = Author.dni;
             this.Dialogs.Add(new AutorDialogViewModel
@@ -212,28 +196,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                 TextEnabled_type = true,
                 OnOk = (sender) =>
                 {
-                    context.phones.Add(aux_phone);
-                    try
-                    {
-                        context.SaveChanges();
-                        FillTelefons();
-                    }
-                    catch (DbEntityValidationException ex)
-                    {
-                        foreach (var validationException in ex.EntityValidationErrors)
-                        {
-                            foreach (var validationErrors in validationException.ValidationErrors)
-                            {
-                                Trace.TraceInformation("Property: {0} Error: {1}", validationErrors.PropertyName, validationErrors.ErrorMessage);
-                            }
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                        MessageBox.Show("Error en escriure a la BBDD.");
-                    }
+                    Author.phones.Add(aux_phone);
+                    FillTelefons();
                     sender.Close();
                 },
                 OnCancel = (sender) => { sender.Close(); },
@@ -244,7 +208,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         public void AddEmail()
         {
 
-            save_changes();
             email aux_mail = new email();
             aux_mail.author_dni = Author.dni;
             this.Dialogs.Add(new AutorDialogViewModel
@@ -253,64 +216,52 @@ namespace TriaCulturaDesktopApp.ViewModel
                 Mail = aux_mail,
                 DataText = "Adreça",
                 OkText = "Afegeix",
+                Type_item = "Email",
                 TextEnabled = true,
                 TextEnabled_type = false,
                 OnOk = (sender) =>
                 {
-                    context.emails.Add(aux_mail);
-                    try
-                    {
-                        context.SaveChanges();
-                        FillEmails();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error en escriure a la BBDD.");
-                    }
+                    Author.emails.Add(aux_mail);
+                    FillEmails();
                     sender.Close();
                 },
                 OnCancel = (sender) => { sender.Close(); },
                 OnCloseRequest = (sender) => { sender.Close(); }
             });
-
-
         }
+
         public ICommand EsborrarTelefon { get { return new RelayCommand(DeleteTelefon); } }
 
         public void DeleteTelefon()
         {
 
-            save_changes();
-            SelectedPhone = context.phones.Where(x => x.num.Equals(SelectedTelefonNum)).SingleOrDefault();
+            phone aux_tel = new Model.phone();
+
             if (SelectedPhone != null)
             {
-                phone aux_phone = context.phones.Where(x => x.num.Equals(SelectedTelefonNum)).SingleOrDefault();
-                //aux_phone.id_phone = SelectedPhone.id_phone;
-                //aux_phone.num = SelectedPhone.num;
-                //aux_phone.type = SelectedPhone.type;
+                aux_tel.id_phone = SelectedPhone.id_phone;
+                aux_tel.num = SelectedPhone.num;
+                aux_tel.type = SelectedPhone.type;
+                aux_tel.author_dni = SelectedPhone.author_dni;
                 this.Dialogs.Add(new AutorDialogViewModel
                 {
                     Title = "Esborrar Telèfon",
-                    Telefon = aux_phone,
-                    Id_item = aux_phone.id_phone,
-                    Type_item = aux_phone.type,
+                    Telefon = aux_tel,
+                    Id_item = aux_tel.id_phone,
+                    Type_item = aux_tel.type,
                     DataText = "Numero",
-                    Data_item = aux_phone.num,
+                    Data_item = aux_tel.num,
                     TextEnabled = false,
                     TextEnabled_type = false,
                     OkText = "Esborra",
                     OnOk = (sender) =>
                     {
-                        try
-                        {
-                            context.phones.Remove(aux_phone);
-                            context.SaveChanges();
-                            FillTelefons();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("No es pot esborrar aquest telèfon.");
-                        }
+
+                        Author.phones.Remove(aux_tel);
+                        FillTelefons();
+
+                        MessageBox.Show("No es pot esborrar aquest telèfon.");
+
                         sender.Close();
                     },
                     OnCancel = (sender) => { sender.Close(); },
@@ -323,13 +274,13 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void DeleteEmail()
         {
-            save_changes();
-            SelectedEmail = context.emails.Where(x => x.address.Equals(SelectedEmailAddr)).SingleOrDefault();
+            email aux_email = new email();
+
             if (SelectedEmail != null)
             {
-                email aux_email = context.emails.Where(x => x.id_email == SelectedEmail.id_email).SingleOrDefault();
-                //aux_email.id_email= SelectedEmail.id_email;
-                //aux_email.address= SelectedEmail.address;
+                aux_email.author_dni = Author.dni;
+                aux_email.id_email = SelectedEmail.id_email;
+                aux_email.address = SelectedEmail.address;
                 this.Dialogs.Add(new AutorDialogViewModel
                 {
                     Title = "Esborrar Email",
@@ -345,8 +296,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                     {
                         try
                         {
-                            context.emails.Remove(aux_email);
-                            context.SaveChanges();
+                            Author.emails.Remove(aux_email);
                             FillEmails();
                         }
                         catch (Exception ex)
@@ -365,11 +315,19 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-            save_changes();
+            if (context.authors.Select(x => x.dni).Contains(Author.dni))
+            {
+                context.authors.Where(x => x.dni == Author.dni).ToList()[0] = Author;
+            }
+            else
+            {
+                context.authors.Add(Author);
+            }
+            context.SaveChanges();
             this.Dialogs.Add(new ProjectesViewModel
             {
                 Boto_afegir_enabled = true,
-                ProjectsL = Author.projects.ToList()               
+                ProjectsL = Author.projects.ToList()
             });
         }
 
@@ -378,7 +336,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public Action<AutorViewModel> OnCancel { get; set; }
         public Action<AutorsViewModel> OnCloseRequest { get; set; }
 
-      
+
 
 
         #endregion ICommand
