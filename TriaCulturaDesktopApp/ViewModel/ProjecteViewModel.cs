@@ -26,6 +26,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private request _selectedPlace_fromProjects;
         private project _selectedproject;
 
+        
         public String titol { get; set; }
         public List<place> Places
         { get { return _place; } set { _place = value; NotifyPropertyChanged(); } }
@@ -210,7 +211,22 @@ namespace TriaCulturaDesktopApp.ViewModel
                 OnCloseRequest = (sender) => { sender.Close(); }
             });        
         }
-        public ICommand finalitzar { get { return new RelayCommand(Close); } }
+        public ICommand finalitzar { get { return new RelayCommand(SaveProject); } }
+
+        public void SaveProject()
+        {
+            if (context.projects.Where(x => x.id_project == Projecte.id_project).ToList().Count == 1)
+            {
+                context.projects.Where(x => x.id_project == Projecte.id_project).ToList()[0] = Projecte;
+            }
+            else
+            {
+                context.projects.Add(Projecte);
+            }
+            context.SaveChanges();
+            Projecte = context.projects.Where(x => x.id_project == Projecte.id_project).SingleOrDefault();
+        }
+
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public void Close()
         {
