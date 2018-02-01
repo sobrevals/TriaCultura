@@ -28,7 +28,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         private int _selectedIndexProject;
         private project _selectedProject;
         private bool _boto_afegir_enabled;
-
+        private author _author;
+        public String titol { get; set; }
         public List<project> ProjectsL { get { return _projectsL; } set { _projectsL = value; NotifyPropertyChanged(); } }
 
         public int SelectedIndexProject
@@ -69,7 +70,8 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public ProjectesViewModel(author a, bool enable)
         {
-
+            titol = "Afegir Projecte";
+            Author = context.authors.Where(x => x.dni == a.dni).SingleOrDefault();
         }
 
         #endregion
@@ -167,6 +169,19 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _boto_afegir_enabled = value;
+            }
+        }
+
+        public author Author
+        {
+            get
+            {
+                return _author;
+            }
+
+            set
+            {
+                _author = value;
             }
         }
         #endregion IsModal

@@ -25,17 +25,71 @@ namespace TriaCulturaDesktopApp.ViewModel
         private List<request> _allRequestInProject;
         private List<request> _allRequestOfProject;
         private List<place> _placeList;
-        private List<place> _placeWithProject;
-        private List<place> _placeWithoutProject;
+        private ObservableCollection<place> _placeWithProject;
+        private ObservableCollection<place> _placeWithoutProject;
         private place _selectedPlace_fromPlaces;
         private place _selectedPlace;
         private place _selectedPlace_fromProject;
         private project _selectedProject;
         private int _selectedIndexPlace;
-        private ObservableCollection<string> _outProjectL;
-        private ObservableCollection<string> _inProjectL;
 
-        public List<place> PlaceL
+
+
+        public List<request> AllRequestInProject
+        {
+            get
+            {
+                return _allRequestInProject;
+            }
+
+            set
+            {
+                _allRequestInProject = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public List<request> AllRequestOfProject
+        {
+            get
+            {
+                return _allRequestOfProject;
+            }
+
+            set
+            {
+                _allRequestOfProject = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<place> PlaceWithProject
+        {
+            get
+            {
+                return _placeWithProject;
+            }
+
+            set
+            {
+                _placeWithProject = value;
+            }
+        }
+
+        public ObservableCollection<place> PlaceWithoutProject
+        {
+            get
+            {
+                return _placeWithoutProject;
+            }
+
+            set
+            {
+                _placeWithoutProject = value;
+            }
+        }
+
+        public List<place> PlaceList
         {
             get
             {
@@ -48,19 +102,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 NotifyPropertyChanged();
             }
         }
-        public List<place> ProjectWithPlace
-        {
-            get
-            {
-                return _placeWithProject;
-            }
 
-            set
-            {
-                _placeWithProject = value;
-                NotifyPropertyChanged();
-            }
-        }
         public place SelectedPlace_fromPlaces
         {
             get
@@ -116,19 +158,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-        public List<place> PlaceWithoutProject
-        {
-            get
-            {
-                return _placeWithoutProject;
-            }
 
-            set
-            {
-                _placeWithoutProject = value;
-                NotifyPropertyChanged();
-            }
-        }
 
         public int SelectedIndexPlace
         {
@@ -143,8 +173,17 @@ namespace TriaCulturaDesktopApp.ViewModel
                 NotifyPropertyChanged();
             }
         }
-
+        public bool IsModal
+        {
+            get
+            {
+                return false;
+            }
+        }
+        public event EventHandler DialogClosing;
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
+        #region constructor
 
         public EspaiViewModel()
         {
@@ -153,21 +192,11 @@ namespace TriaCulturaDesktopApp.ViewModel
         public EspaiViewModel(project p)
         {
             SelectedProject = context.projects.Where(x => x.id_project == p.id_project).SingleOrDefault();
-            //SelectedProject = new project();
             fillPlaces(0);
             fillProjectPlaces(0);
         }
-
-        public bool IsModal
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public event EventHandler DialogClosing;
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+        #region ICommand
 
         public void RequestClose()
         {
@@ -178,17 +207,14 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public virtual void addPlace()
         {
-            request r = context.requests.Where(x => x.project_id == SelectedProject.id_project).SingleOrDefault();
-            //context.places.Where(x => x.id_place == r.place_id).SingleOrDefault().            
-            //FillDisciplines_author(0);
-            //context.projects.Where(x=> x.id_project == SelectedProject.id_project).SingleOrDefault().requests
+            // MIRAR-SE DISCIPLINAVIEWMODEL I FER AQUEST
+        }
 
-            //request aux = new request();
-            //aux.place_id = SelectedPlace_fromPlaces.id_place;
-            //aux.project_id = SelectedProject.id_project;
-            //context.requests.Add(aux);
-            //fillProjectPlaces(0);
-            //fillPlaces(0);
+        public ICommand treureEspai { get { return new RelayCommand(removePlace); } }
+
+        public virtual void removePlace()
+        {
+            // MIRAR-SE DISCIPLINAVIEWMODEL I FER AQUEST
         }
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
@@ -197,37 +223,46 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (this.DialogClosing != null)
                 this.DialogClosing(this, new EventArgs());
         }
-        public ICommand CloseAllCommand { get { return new RelayCommand(OnCloseAll); } }
 
-        public void OnCloseAll()
-        {
-            this.Dialogs.Clear();
-        }
+        public ICommand OkCommand { get { return new RelayCommand(Ok); } }
 
-        public void fillPlaces(int n)
+        public void Ok()
         {
-            if (SelectedProject != null)
+            if (this.OnOk != null)
             {
-                AllRequestOfProject = context.requests.Where(x => x.project_id != SelectedProject.id_project).ToList();
-                PlaceWithoutProject = AllRequestOfProject.Select(x => x.place).ToList();   
-                PlacesNames = new ObservableCollection<string>(PlaceWithoutProject.Select(x => x.name).Distinct().ToList());
-            }          
-        }
-
-        public void fillProjectPlaces(int n)
-        {
-            //ProjectWithPlace = PlaceL.Where(x => x.id_place ==)
-            //ProjectPlace = context.requests.Where(x => x.project_id == x.project.id_project).Select(x => x.place).ToList();
-            if (ProjectWithPlace != null && n > 0)
-            {
-                Selectedplace_fromProject = ProjectWithPlace[n];
+                this.OnOk(this);
             }
             else
             {
-                ProjectWithPlace = new List<place>();
+                this.Close();
+
             }
         }
+        #endregion
+        #region filling
+        public void fillPlaces(int n)
+        {
+            List<request> aux_request_list = context.requests.Where(x => x.project_id != SelectedProject.id_project).ToList();
+            List<place> aux_place_list = new List<place>();
+            foreach (request r in aux_request_list)
+            {
+                aux_place_list.Add(r.place);
+            }
+            PlaceWithoutProject = new ObservableCollection<place>(aux_place_list);
+        }
 
+
+        public void fillProjectPlaces(int n)
+        {
+            List<request> aux_request_list = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
+            List<place> aux_place_list = new List<place>();
+            foreach (request r in aux_request_list)
+            {
+                aux_place_list.Add(r.place);
+            }
+        }
+        #endregion
+        #region propertychanged
         protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             if (PropertyChanged != null)
@@ -235,65 +270,10 @@ namespace TriaCulturaDesktopApp.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        #endregion
+        public Action<EspaiViewModel> OnOk { get; set; }
+        public Action<EspaiViewModel> OnCancel { get; set; }
+        public Action<EspaiViewModel> OnCloseRequest { get; set; }
 
-        public Action<DisciplinaViewModel> OnOk { get; set; }
-        public Action<DisciplinaViewModel> OnCancel { get; set; }
-        public Action<DisciplinaViewModel> OnCloseRequest { get; set; }
-
-        public ObservableCollection<string> PlacesNames
-        {
-            get
-            {
-                return _outProjectL;
-            }
-
-            set
-            {
-                _outProjectL = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public ObservableCollection<string> ProjectPlaces
-        {
-            get
-            {
-                return _inProjectL;
-            }
-
-            set
-            {
-                _inProjectL = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public List<request> AllRequestInProject
-        {
-            get
-            {
-                return _allRequestInProject;
-            }
-
-            set
-            {
-                _allRequestInProject = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public List<request> AllRequestOfProject
-        {
-            get
-            {
-                return _allRequestOfProject;
-            }
-
-            set
-            {
-                _allRequestOfProject = value;
-                NotifyPropertyChanged();
-            }
-        }
     }
 }
