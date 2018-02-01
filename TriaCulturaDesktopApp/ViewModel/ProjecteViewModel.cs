@@ -25,6 +25,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private request _selectedRequest_place;
         private request _selectedPlace_fromProjects;
         private project _selectedproject;
+        private List<Type> _types;
 
         
         public String titol { get; set; }
@@ -158,7 +159,13 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Add(new EspaiViewModel());
         }
 
-        
+        public ICommand OpenTypes { get { return new RelayCommand(MostrarTipus); } }
+
+        public void MostrarTipus()
+        {
+            Types=context.types.ToList();
+        }
+
         protected virtual void AddPlace_request()
         {
             request r = _selectedRequest_place;
@@ -252,6 +259,19 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 _projecte = value;
                 NotifyPropertyChanged("Project");
+            }
+        }
+
+        public List<Type> Types
+        {
+            get
+            {
+                return _types;
+            }
+
+            set
+            {
+                _types = value;
             }
         }
     }
