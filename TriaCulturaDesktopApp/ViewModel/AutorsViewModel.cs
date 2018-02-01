@@ -91,6 +91,25 @@ namespace TriaCulturaDesktopApp.ViewModel
                 Titol = "Nou Autor",
                 OnOk = (sender) =>
                 {
+                    // MIRAR-SE AIXÒ NO PERMET AFEGIR AUTOR BD PETA
+                    // CAL AFEGIR TOTES LES SUBTAULES ABANS QUE L'AUTOR
+                    foreach (email e in aux_author.emails)
+                    {
+                        context.emails.Add(e);
+                    }
+                    foreach (phone p in aux_author.phones)
+                    {
+                        context.phones.Add(p);
+                    }
+                    foreach (discipline d in context.disciplines)
+                    {
+                        foreach (discipline aux_d in aux_author.disciplines)
+                        {
+                            context.disciplines.Where(x => x.id_discipline == d.id_discipline).ToList()[0] = aux_d;
+                        }
+                    }
+                    context.authors.Add(aux_author);
+                    // FINS AQUI
                     context.SaveChanges();
                     FillAuthors(0);
                     sender.Close();

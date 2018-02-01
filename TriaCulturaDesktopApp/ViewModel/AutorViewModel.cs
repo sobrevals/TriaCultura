@@ -90,7 +90,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public AutorViewModel()
         {
-            IsReadAuthor = false;
+            IsReadAuthor = false ;
             // de proves
             author a = new author();
             Titol = "Nou Autor";
