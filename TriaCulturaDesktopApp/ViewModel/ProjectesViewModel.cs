@@ -70,7 +70,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public ProjectesViewModel(author a, bool enable)
         {
-            titol = "Afegir Projecte";
+            titol = "Projectes";
             Author = context.authors.Where(x => x.dni == a.dni).SingleOrDefault();
         }
 
@@ -109,18 +109,44 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand NewProjecte { get { return new RelayCommand(newProject); } }
         protected virtual void newProject()
         {
-            this.Dialogs.Add(new ProjecteViewModel(new project())
+            project aux_project = new project();
+            aux_project.author_dni = Author.dni;
+            this.Dialogs.Add(new ProjecteViewModel(aux_project)
             {
-                Projecte = new project(),
-                titol = "Nou Projecte"
+                Projecte = aux_project,
+                titol = "Nou Projecte",
+                OnOk = (sender) =>
+                {
+                    context.projects.Add(aux_project);
+                    context.SaveChanges();
+                    sender.Close();
+                },
+                OnCloseRequest = (sender) => { sender.Close(); },
+                OnReturn = (sender) => { sender.Close(); }
             });
         }
         public ICommand ChangeProjecte { get { return new RelayCommand(modProjecte); } }
         protected virtual void modProjecte()
         {
-            this.Dialogs.Add(new ProjecteViewModel(SelectedProject)
+            project aux_project = new project();
+            aux_project.author_dni = SelectedProject.author_dni;
+            aux_project.description = SelectedProject.description;
+            aux_project.title = SelectedProject.title;
+            aux_project.topic = SelectedProject.topic;
+            aux_project.requests = SelectedProject.requests;
+            aux_project.files = SelectedProject.files;
+            this.Dialogs.Add(new ProjecteViewModel(aux_project)
             {
-                SelectedProject = SelectedProject
+                Projecte = aux_project,
+                titol = "Modificar Projecte",
+                OnOk = (sender) =>
+                {
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).ToList()[0] = aux_project;
+                    context.SaveChanges();
+                    sender.Close();
+                },
+                OnCloseRequest = (sender) => { sender.Close(); },
+                OnReturn = (sender) => { sender.Close(); }
             });
         }
         public ICommand TreureProjecte_author { get { return new RelayCommand(RemProjecte_autor); } }

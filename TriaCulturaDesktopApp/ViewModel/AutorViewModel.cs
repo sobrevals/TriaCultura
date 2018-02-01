@@ -135,8 +135,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         #region ICommand
 
-
-
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
         protected virtual void GuardarIEnrere()
         {
@@ -324,7 +322,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 context.authors.Add(Author);
             }
             context.SaveChanges();
-            this.Dialogs.Add(new ProjectesViewModel
+            this.Dialogs.Add(new ProjectesViewModel(Author,true)
             {
                 Boto_afegir_enabled = true,
                 ProjectsL = Author.projects.ToList()
