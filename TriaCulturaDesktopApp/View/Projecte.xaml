@@ -10,7 +10,7 @@
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"          
         x:Class="TriaCulturaDesktopApp.View.Projecte"
         mc:Ignorable="d"
-        Title="{Binding titol}" Height="406.108" Width="786.171"
+        Title="{Binding titol}" Height="455.608" Width="729.171"
         >
     <Window.DataContext>
         <ViewModel:ProjecteViewModel/>
@@ -26,7 +26,7 @@
         <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="358,82,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbx_place"  ItemsSource="{Binding Request}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest}" DisplayMemberPath="place.name" HorizontalAlignment="Left" Height="109" Margin="455,259,0,0" VerticalAlignment="Top" Width="122"/>
         <Label x:Name="lb_place" Content="Espais Solicitats" HorizontalAlignment="Left" Margin="472,228,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="bt_save" Command="{Binding finalitzar}" Content="Finalitzar" HorizontalAlignment="Left" Margin="593,363,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="bt_save" Command="{Binding finalitzar}" Content="Guardar i Finalitzar" HorizontalAlignment="Left" Margin="550,376,0,0" VerticalAlignment="Top" Width="118"/>
         <Button x:Name="bt_add" Command="{Binding AfegirRequest_place}" Content="+" HorizontalAlignment="Left" Margin="393,272,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="bt_del" Command="{Binding TreureRequest_place}" Content="-" HorizontalAlignment="Left" Margin="393,310,0,0" VerticalAlignment="Top" Width="45"/>
         <Label x:Name="lb_author" Content="Autor: " HorizontalAlignment="Left" Margin="22,304,0,0" VerticalAlignment="Top"/>
@@ -34,7 +34,7 @@
         <Button x:Name="bt_add_Copy" Content="ADD" HorizontalAlignment="Left" Margin="165,228,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBox x:Name="tb_description" HorizontalAlignment="Left" Height="110" Margin="294,113,0,0" TextWrapping="Wrap" Text="{Binding SelectedProject.description}" VerticalAlignment="Top" Width="374" AcceptsReturn="True" />
-        <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="318,53,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding SelectedProject.types}" DisplayMemberPath="name"/>
+        <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="318,53,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Types}" DisplayMemberPath="name"/>
 
     </Grid>
 </Window>
