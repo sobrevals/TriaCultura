@@ -10,7 +10,7 @@
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"          
         x:Class="TriaCulturaDesktopApp.View.Projecte"
         mc:Ignorable="d"
-        Title="{Binding titol}" Height="406.108" Width="786.171"
+        Title="{Binding titol}" Height="430.108" Width="786.171"
         >
     <Window.DataContext>
         <ViewModel:ProjecteViewModel/>
