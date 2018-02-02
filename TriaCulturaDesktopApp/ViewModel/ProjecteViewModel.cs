@@ -267,6 +267,46 @@ namespace TriaCulturaDesktopApp.ViewModel
             //Close();
         }
 
+
+        public void deleteProject()
+        {
+
+            project aux_project = new Model.project();
+
+            if (SelectedPhone != null)
+            {
+                aux_project.id_project = Projecte.id_project;
+                aux_project.author_dni = Projecte.author_dni;
+                aux_project.title = Projecte.title;
+                aux_project.types = Projecte.types;
+                aux_project.topic = Projecte.topic;
+                aux_project.requests = Projecte.requests;
+                aux_project.files = Projecte.files;
+                aux_project.author = Projecte.author;
+                this.Dialogs.Add(new AutorDialogViewModel
+                {
+                    Title = "Esborrar Projecte",
+                    Telefon = aux_project,
+                    Id_item = aux_project.id_phone,
+                    Type_item = aux_tel.type,
+                    DataText = "Numero",
+                    Data_item = aux_tel.num,
+                    TextEnabled = false,
+                    TextEnabled_type = false,
+                    OkText = "Esborra",
+                    OnOk = (sender) =>
+                    {
+                        Author.phones.Remove(SelectedPhone);
+                        FillTelefons();
+                        sender.Close();
+                    },
+                    OnCancel = (sender) => { sender.Close(); },
+                    OnCloseRequest = (sender) => { sender.Close(); }
+                });
+            }
+        }
+
+
         public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
         protected virtual void afegirPlace()
         {
