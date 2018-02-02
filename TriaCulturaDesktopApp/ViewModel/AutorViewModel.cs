@@ -58,7 +58,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private bool _isReadAuthor;
         public bool IsReadAuthor { get { return _isReadAuthor; } set { _isReadAuthor = value; NotifyPropertyChanged(""); } }
 
-        public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged(""); } }
+        public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged(); } }
         public ObservableCollection<discipline> Disciplines { get { return _disciplines; } set { _disciplines = value; NotifyPropertyChanged(); } }
         public ObservableCollection<phone> Telefons { get { return _telefons; } set { _telefons = value; NotifyPropertyChanged(); } }
         public ObservableCollection<email> Emails { get { return _emails; } set { _emails = value; NotifyPropertyChanged(); } }
@@ -90,7 +90,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public AutorViewModel()
         {
-            IsReadAuthor = false ;
+            IsReadAuthor = false;
             // de proves
             author a = new author();
             Titol = "Nou Autor";
@@ -104,7 +104,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             IsReadAuthor = true;
             Titol = "Modificar Autor";
-            Author = context.authors.ToList().Contains(a) ? context.authors.Where(x => x.dni == a.dni).SingleOrDefault() : new Model.author();
+            Author = context.authors.Select(x => x.dni).ToList().Contains(a.dni) ? context.authors.Where(x => x.dni == a.dni).SingleOrDefault() : new Model.author();
             FillDisciplines();
             FillTelefons();
             FillEmails();
@@ -254,12 +254,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                     OkText = "Esborra",
                     OnOk = (sender) =>
                     {
-
-                        Author.phones.Remove(aux_tel);
+                        Author.phones.Remove(SelectedPhone);
                         FillTelefons();
-
-                        MessageBox.Show("No es pot esborrar aquest telèfon.");
-
                         sender.Close();
                     },
                     OnCancel = (sender) => { sender.Close(); },
@@ -292,15 +288,9 @@ namespace TriaCulturaDesktopApp.ViewModel
                     OkText = "Esborra",
                     OnOk = (sender) =>
                     {
-                        try
-                        {
-                            Author.emails.Remove(aux_email);
-                            FillEmails();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("No es pot esborrar aquesta adreça.");
-                        }
+
+                        Author.emails.Remove(SelectedEmail);
+                        FillEmails();
                         sender.Close();
                     },
                     OnCancel = (sender) => { sender.Close(); },
@@ -322,7 +312,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 context.authors.Add(Author);
             }
             context.SaveChanges();
-            this.Dialogs.Add(new ProjectesViewModel(Author,true)
+            this.Dialogs.Add(new ProjectesViewModel(Author, true)
             {
                 Boto_afegir_enabled = true,
                 ProjectsL = Author.projects.ToList()
