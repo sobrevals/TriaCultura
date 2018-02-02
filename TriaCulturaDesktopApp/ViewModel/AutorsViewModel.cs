@@ -34,7 +34,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ObservableCollection<author> AuthorsL
         {
             get { return (_authors); }
-            set { _authors = value; NotifyPropertyChanged(); }
+            set { _authors = value;
+                NotifyPropertyChanged(); }
         }
 
         public int SelectedIndexAuthor
@@ -53,19 +54,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
         #endregion
-        protected void save_changes()
-        {
-            if (context.authors.Where(x => x.dni == SelectedAuthor.dni).ToList().Count == 1)
-            {
-                context.authors.Where(x => x.dni == SelectedAuthor.dni).ToList()[0] = SelectedAuthor;
-            }
-            else
-            {
-                context.authors.Add(SelectedAuthor);
-            }
-            context.SaveChanges();
-            SelectedAuthor = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
-        }
+
         #region IsModal
         public virtual bool IsModal
         {
@@ -108,7 +97,10 @@ namespace TriaCulturaDesktopApp.ViewModel
                         context.authors.Add(aux_author);
                         context.SaveChanges();
                     }
-                    catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
                     FillAuthors(0);
                     //AuthorsL.Add(aux_author);
                     sender.Close();
@@ -147,13 +139,21 @@ namespace TriaCulturaDesktopApp.ViewModel
                 {
                     try
                     {
-                        context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().dni = aux_author.dni;
-                        context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().address = aux_author.address;
-                        context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().name = aux_author.name;
-                        context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().surname = aux_author.surname;
-                        context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().phones = aux_author.phones;
-                        context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().emails = aux_author.emails;
-                        context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().disciplines = aux_author.disciplines;
+                        author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
+                        a.dni = aux_author.dni;
+                        a.address = aux_author.address;
+                        a.name = aux_author.name;
+                        a.surname = aux_author.surname;
+                        a.emails = aux_author.emails;
+                        a.phones = aux_author.phones;
+                        a.disciplines = aux_author.disciplines;
+                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().dni = aux_author.dni;
+                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().address = aux_author.address;
+                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().name = aux_author.name;
+                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().surname = aux_author.surname;
+                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().phones = aux_author.phones;
+                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().emails = aux_author.emails;
+                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().disciplines = aux_author.disciplines;
                         context.SaveChanges();
                     }
                     catch (Exception e)
@@ -209,11 +209,17 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region FillAutors
         private void FillAuthors(int n)
         {
+
+            if (AuthorsL != null && AuthorsL.Count==0)
+            {
+                AuthorsL.Clear();
+            }
             AuthorsL = new ObservableCollection<author>(context.authors.OrderBy(x => x.dni).ToList());
             if (AuthorsL != null)
             {
                 SelectedAuthor = AuthorsL[n];
             }
+            
         }
         #endregion
     }
