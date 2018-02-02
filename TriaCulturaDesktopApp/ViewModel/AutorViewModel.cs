@@ -319,6 +319,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             });
         }
 
+        
+
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorViewModel> OnOk { get; set; }
         public Action<AutorViewModel> OnCancel { get; set; }

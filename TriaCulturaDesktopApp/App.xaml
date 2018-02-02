@@ -18,6 +18,7 @@
         <View:AutorDialog x:Key="{x:Type ViewModel:AutorDialogViewModel}" x:Shared="False"/>
         <View:DisciplinaDialog x:Key="{x:Type ViewModel:DisciplinaDialogViewModel}" x:Shared="False"/>
         <View:Projectes x:Key="{x:Type ViewModel:ProjectesViewModel}" x:Shared="False"/>
+        <View:Esborrar_AutorBuitDialog x:Key="{x:Type ViewModel:Esborrar_AutorBuitDialog}" x:Shared="False"/>
         <!--<View:MainWindow x:Key="{x:Type ViewModel:MainWindowViewModel}" x:Shared="False"/>-->
     </Application.Resources>
 </Application>
