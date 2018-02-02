@@ -102,7 +102,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                         MessageBox.Show(ex.ToString());
                     }
                     FillAuthors(0);
-                    //AuthorsL.Add(aux_author);
                     sender.Close();
                 },
                 OnCancel = (sender) =>
@@ -147,13 +146,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                         a.emails = aux_author.emails;
                         a.phones = aux_author.phones;
                         a.disciplines = aux_author.disciplines;
-                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().dni = aux_author.dni;
-                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().address = aux_author.address;
-                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().name = aux_author.name;
-                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().surname = aux_author.surname;
-                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().phones = aux_author.phones;
-                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().emails = aux_author.emails;
-                        //context.authors.Where(x => x.dni == SelectedAuthor.dni).FirstOrDefault().disciplines = aux_author.disciplines;
                         context.SaveChanges();
                     }
                     catch (Exception e)
@@ -167,10 +159,12 @@ namespace TriaCulturaDesktopApp.ViewModel
                 OnCancel = (sender) =>
                 {
                     FillAuthors(0);
+                    sender.Close();
                 },
                 OnCloseRequest = (sender) =>
                 {
                     FillAuthors(0);
+                    sender.Close();
                 }
             });
         }

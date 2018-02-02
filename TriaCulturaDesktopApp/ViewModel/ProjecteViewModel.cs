@@ -77,7 +77,10 @@ namespace TriaCulturaDesktopApp.ViewModel
 
             set
             {
+                if (_selectedType == value) return;
                 _selectedType = value;
+                NotifyPropertyChanged();
+                RaisePropertyChanged("SelectedType");
             }
         }
 
@@ -103,7 +106,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region constructor
         public ProjecteViewModel(project p)
         {
-            Projecte = context.projects.Where(x => x.id_project == p.id_project).SingleOrDefault();
+            Projecte = p;
             titol = "Nou Projecte";
 
             FillRequests_all(0);
@@ -243,7 +246,10 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void addType_toProject()
         {
-            Projecte.types.Add(SelectedType);
+            if (!(Projecte.types.Select(x=>x.name).ToList()[0].Equals(SelectedType.name)))
+            {
+                Projecte.types.Add(SelectedType);
+            }
         }
 
         public void SaveProject()
