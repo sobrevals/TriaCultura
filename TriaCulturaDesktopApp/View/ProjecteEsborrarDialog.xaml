@@ -4,16 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" 
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
         mc:Ignorable="d"
         Title="DialogProject" Height="300" Width="300">
     <Grid>
-        <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="21" Margin="75,41,0,0" TextWrapping="Wrap" Text="{Binding Discipline.id_discipline}" VerticalAlignment="Top" Width="47" IsEnabled="False"/>
-        <TextBox x:Name="tbTitle" HorizontalAlignment="Left" Height="21" Margin="75,80,0,0" TextWrapping="Wrap" Text="{Binding Discipline.type}" VerticalAlignment="Top" Width="185" IsEnabled="false" />
+        <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="21" Margin="75,41,0,0" TextWrapping="Wrap" Text="{Binding Id_item}" VerticalAlignment="Top" Width="47" IsEnabled="False"/>
+        <TextBox x:Name="tbTitle" HorizontalAlignment="Left" Height="21" Margin="75,80,0,0" TextWrapping="Wrap" Text="{Binding Title_item.type}" VerticalAlignment="Top" Width="185" IsEnabled="false" />
         <Label x:Name="lbId" Content="Id" HorizontalAlignment="Left" Margin="14,40,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbTitle" Content="Titol" HorizontalAlignment="Left" Margin="14,75,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btCancel" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Height="35" Margin="75,148,0,0" VerticalAlignment="Top" Width="80"/>
         <Button x:Name="btOk" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Height="35" Margin="180,148,0,0" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="tbNameAuthor" HorizontalAlignment="Left" Height="21" Margin="75,111,0,0" TextWrapping="Wrap" Text="{Binding Discipline.type}" VerticalAlignment="Top" Width="185" IsEnabled="false" />
+        <TextBox x:Name="tbNameAuthor" HorizontalAlignment="Left" Height="21" Margin="75,111,0,0" TextWrapping="Wrap" Text="{Binding Dni_item}" VerticalAlignment="Top" Width="185" IsEnabled="false" />
         <Label x:Name="lbNameAuthor" Content="Autor" HorizontalAlignment="Left" Margin="14,106,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

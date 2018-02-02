@@ -273,7 +273,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
             project aux_project = new Model.project();
 
-            if (SelectedPhone != null)
+            if (Projecte != null)
             {
                 aux_project.id_project = Projecte.id_project;
                 aux_project.author_dni = Projecte.author_dni;
@@ -283,7 +283,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 aux_project.requests = Projecte.requests;
                 aux_project.files = Projecte.files;
                 aux_project.author = Projecte.author;
-                this.Dialogs.Add(new AutorDialogViewModel
+              /*  this.Dialogs.Add(new ProjectesViewModel
                 {
                     Title = "Esborrar Projecte",
                     Telefon = aux_project,
@@ -302,7 +302,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                     },
                     OnCancel = (sender) => { sender.Close(); },
                     OnCloseRequest = (sender) => { sender.Close(); }
-                });
+                });*/
             }
         }
 
