@@ -30,7 +30,7 @@
         <Button x:Name="bt_add" Command="{Binding AfegirRequest_place}" Content="+" HorizontalAlignment="Left" Margin="393,272,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="bt_del" Command="{Binding TreureRequest_place}" Content="-" HorizontalAlignment="Left" Margin="393,310,0,0" VerticalAlignment="Top" Width="45"/>
         <Label x:Name="lb_author" Content="Autor: " HorizontalAlignment="Left" Margin="22,304,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_author" Text="{Binding Projecte.author.completeName}"  HorizontalAlignment="Left" Height="23" Margin="22,335,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" IsReadOnly="True"/>
+        <TextBox x:Name="tb_author" Text="{Binding Projecte.author_dni}"  HorizontalAlignment="Left" Height="23" Margin="22,335,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" IsReadOnly="True"/>
         <Button x:Name="bt_add_Copy" Content="ADD" HorizontalAlignment="Left" Margin="165,228,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBox x:Name="tb_description" HorizontalAlignment="Left" Height="110" Margin="294,113,0,0" TextWrapping="Wrap" Text="{Binding Projecte.description}" VerticalAlignment="Top" Width="374" AcceptsReturn="True" />
