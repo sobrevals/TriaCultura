@@ -135,13 +135,21 @@ namespace TriaCulturaDesktopApp.ViewModel
             aux_project.topic = SelectedProject.topic;
             aux_project.requests = SelectedProject.requests;
             aux_project.files = SelectedProject.files;
+            aux_project.types = SelectedProject.types;
             this.Dialogs.Add(new ProjecteViewModel(aux_project)
             {
                 Projecte = aux_project,
                 titol = "Modificar Projecte",
+                SelectedType = aux_project.types.ToList()[0],
                 OnOk = (sender) =>
                 {
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).ToList()[0] = aux_project;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().author_dni = aux_project.author_dni;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().title = aux_project.title;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().topic= aux_project.topic;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description= aux_project.description;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests= aux_project.requests;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().types = aux_project.types;
                     context.SaveChanges();
                     sender.Close();
                 },
