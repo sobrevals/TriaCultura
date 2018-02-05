@@ -14,14 +14,10 @@ namespace TriaCulturaDesktopApp.Model
     
     public partial class discipline
     {
-        public discipline()
-        {
-            this.authors = new HashSet<author>();
-        }
-    
         public int id_discipline { get; set; }
         public string type { get; set; }
+        public string author_dni { get; set; }
     
-        public virtual ICollection<author> authors { get; set; }
+        public virtual author author { get; set; }
     }
 }

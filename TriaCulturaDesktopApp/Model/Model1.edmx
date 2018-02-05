@@ -14,14 +14,6 @@
           <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="80" />
         </EntityType>
-        <EntityType Name="author_has_discipline">
-          <Key>
-            <PropertyRef Name="author_dni" />
-            <PropertyRef Name="discipline_id" />
-          </Key>
-          <Property Name="author_dni" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="discipline_id" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="capacity">
           <Key>
             <PropertyRef Name="id_capacity" />
@@ -36,6 +28,7 @@
           </Key>
           <Property Name="id_discipline" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="author_dni" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="email">
           <Key>
@@ -99,51 +92,25 @@
           <Property Name="description" Type="text" Nullable="false" />
           <Property Name="topic" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="author_dni" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="project_has_type">
-          <Key>
-            <PropertyRef Name="project_id" />
-            <PropertyRef Name="type_id" />
-          </Key>
-          <Property Name="project_id" Type="int" Nullable="false" />
-          <Property Name="type_id" Type="int" Nullable="false" />
+          <Property Name="type" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="request">
           <Key>
             <PropertyRef Name="id_request" />
           </Key>
           <Property Name="id_request" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="project_id" Type="int" Nullable="false" />
-          <Property Name="place_id" Type="int" Nullable="false" />
+          <Property Name="project_id" Type="int" />
+          <Property Name="place_id" Type="int" />
         </EntityType>
-        <EntityType Name="type">
-          <Key>
-            <PropertyRef Name="id_type" />
-          </Key>
-          <Property Name="id_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_author_has_discipline_author">
+        <Association Name="FK_discipline_author">
           <End Role="author" Type="Self.author" Multiplicity="1" />
-          <End Role="author_has_discipline" Type="Self.author_has_discipline" Multiplicity="*" />
+          <End Role="discipline" Type="Self.discipline" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="author">
               <PropertyRef Name="dni" />
             </Principal>
-            <Dependent Role="author_has_discipline">
+            <Dependent Role="discipline">
               <PropertyRef Name="author_dni" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_author_has_discipline_discipline">
-          <End Role="discipline" Type="Self.discipline" Multiplicity="1" />
-          <End Role="author_has_discipline" Type="Self.author_has_discipline" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="discipline">
-              <PropertyRef Name="id_discipline" />
-            </Principal>
-            <Dependent Role="author_has_discipline">
-              <PropertyRef Name="discipline_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -231,32 +198,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_project_has_type_project">
-          <End Role="project" Type="Self.project" Multiplicity="1" />
-          <End Role="project_has_type" Type="Self.project_has_type" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="project">
-              <PropertyRef Name="id_project" />
-            </Principal>
-            <Dependent Role="project_has_type">
-              <PropertyRef Name="project_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_project_has_type_type">
-          <End Role="type" Type="Self.type" Multiplicity="1" />
-          <End Role="project_has_type" Type="Self.project_has_type" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="type">
-              <PropertyRef Name="id_type" />
-            </Principal>
-            <Dependent Role="project_has_type">
-              <PropertyRef Name="type_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_request_place">
-          <End Role="place" Type="Self.place" Multiplicity="1" />
+          <End Role="place" Type="Self.place" Multiplicity="0..1" />
           <End Role="request" Type="Self.request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="place">
@@ -268,7 +211,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_request_project">
-          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="project" Type="Self.project" Multiplicity="0..1" />
           <End Role="request" Type="Self.request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="project">
@@ -281,7 +224,6 @@
         </Association>
         <EntityContainer Name="triaculturaDBModelStoreContainer">
           <EntitySet Name="author" EntityType="Self.author" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="author_has_discipline" EntityType="Self.author_has_discipline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="capacity" EntityType="Self.capacity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="discipline" EntityType="Self.discipline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="email" EntityType="Self.email" Schema="dbo" store:Type="Tables" />
@@ -291,16 +233,10 @@
           <EntitySet Name="place" EntityType="Self.place" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="place_has_capacity" EntityType="Self.place_has_capacity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="project" EntityType="Self.project" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="project_has_type" EntityType="Self.project_has_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="request" EntityType="Self.request" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="type" EntityType="Self.type" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_author_has_discipline_author" Association="Self.FK_author_has_discipline_author">
+          <AssociationSet Name="FK_discipline_author" Association="Self.FK_discipline_author">
             <End Role="author" EntitySet="author" />
-            <End Role="author_has_discipline" EntitySet="author_has_discipline" />
-          </AssociationSet>
-          <AssociationSet Name="FK_author_has_discipline_discipline" Association="Self.FK_author_has_discipline_discipline">
             <End Role="discipline" EntitySet="discipline" />
-            <End Role="author_has_discipline" EntitySet="author_has_discipline" />
           </AssociationSet>
           <AssociationSet Name="FK_email_author" Association="Self.FK_email_author">
             <End Role="author" EntitySet="author" />
@@ -330,14 +266,6 @@
             <End Role="author" EntitySet="author" />
             <End Role="project" EntitySet="project" />
           </AssociationSet>
-          <AssociationSet Name="FK_project_has_type_project" Association="Self.FK_project_has_type_project">
-            <End Role="project" EntitySet="project" />
-            <End Role="project_has_type" EntitySet="project_has_type" />
-          </AssociationSet>
-          <AssociationSet Name="FK_project_has_type_type" Association="Self.FK_project_has_type_type">
-            <End Role="type" EntitySet="type" />
-            <End Role="project_has_type" EntitySet="project_has_type" />
-          </AssociationSet>
           <AssociationSet Name="FK_request_place" Association="Self.FK_request_place">
             <End Role="place" EntitySet="place" />
             <End Role="request" EntitySet="request" />
@@ -360,10 +288,10 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="disciplines" Relationship="Self.FK_discipline_author" FromRole="author" ToRole="discipline" />
           <NavigationProperty Name="emails" Relationship="Self.FK_email_author" FromRole="author" ToRole="email" />
           <NavigationProperty Name="phones" Relationship="Self.FK_phone_author" FromRole="author" ToRole="phone" />
           <NavigationProperty Name="projects" Relationship="Self.FK_project_author" FromRole="author" ToRole="project" />
-          <NavigationProperty Name="disciplines" Relationship="Self.author_has_discipline" FromRole="author" ToRole="discipline" />
         </EntityType>
         <EntityType Name="capacity">
           <Key>
@@ -380,7 +308,8 @@
           </Key>
           <Property Name="id_discipline" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="authors" Relationship="Self.author_has_discipline" FromRole="discipline" ToRole="author" />
+          <Property Name="author_dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="author" Relationship="Self.FK_discipline_author" FromRole="discipline" ToRole="author" />
         </EntityType>
         <EntityType Name="email">
           <Key>
@@ -443,29 +372,33 @@
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="topic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="author_dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="author" Relationship="Self.FK_project_author" FromRole="project" ToRole="author" />
           <NavigationProperty Name="files" Relationship="Self.FK_file_project" FromRole="project" ToRole="file" />
           <NavigationProperty Name="requests" Relationship="Self.FK_request_project" FromRole="project" ToRole="request" />
-          <NavigationProperty Name="types" Relationship="Self.project_has_type" FromRole="project" ToRole="type" />
         </EntityType>
         <EntityType Name="request">
           <Key>
             <PropertyRef Name="id_request" />
           </Key>
           <Property Name="id_request" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="project_id" Type="Int32" Nullable="false" />
-          <Property Name="place_id" Type="Int32" Nullable="false" />
+          <Property Name="project_id" Type="Int32" />
+          <Property Name="place_id" Type="Int32" />
           <NavigationProperty Name="place" Relationship="Self.FK_request_place" FromRole="request" ToRole="place" />
           <NavigationProperty Name="project" Relationship="Self.FK_request_project" FromRole="request" ToRole="project" />
         </EntityType>
-        <EntityType Name="type">
-          <Key>
-            <PropertyRef Name="id_type" />
-          </Key>
-          <Property Name="id_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="projects" Relationship="Self.project_has_type" FromRole="type" ToRole="project" />
-        </EntityType>
+        <Association Name="FK_discipline_author">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="discipline" Type="Self.discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="discipline">
+              <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_email_author">
           <End Role="author" Type="Self.author" Multiplicity="1" />
           <End Role="email" Type="Self.email" Multiplicity="*" />
@@ -527,7 +460,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_request_place">
-          <End Role="place" Type="Self.place" Multiplicity="1" />
+          <End Role="place" Type="Self.place" Multiplicity="0..1" />
           <End Role="request" Type="Self.request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="place">
@@ -539,7 +472,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_request_project">
-          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="project" Type="Self.project" Multiplicity="0..1" />
           <End Role="request" Type="Self.request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="project">
@@ -550,17 +483,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="author_has_discipline">
-          <End Role="author" Type="Self.author" Multiplicity="*" />
-          <End Role="discipline" Type="Self.discipline" Multiplicity="*" />
-        </Association>
         <Association Name="place_has_capacity">
           <End Role="capacity" Type="Self.capacity" Multiplicity="*" />
           <End Role="place" Type="Self.place" Multiplicity="*" />
-        </Association>
-        <Association Name="project_has_type">
-          <End Role="project" Type="Self.project" Multiplicity="*" />
-          <End Role="type" Type="Self.type" Multiplicity="*" />
         </Association>
         <EntityContainer Name="triaculturaCTXEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="authors" EntityType="Self.author" />
@@ -573,7 +498,10 @@
           <EntitySet Name="places" EntityType="Self.place" />
           <EntitySet Name="projects" EntityType="Self.project" />
           <EntitySet Name="requests" EntityType="Self.request" />
-          <EntitySet Name="types" EntityType="Self.type" />
+          <AssociationSet Name="FK_discipline_author" Association="Self.FK_discipline_author">
+            <End Role="author" EntitySet="authors" />
+            <End Role="discipline" EntitySet="disciplines" />
+          </AssociationSet>
           <AssociationSet Name="FK_email_author" Association="Self.FK_email_author">
             <End Role="author" EntitySet="authors" />
             <End Role="email" EntitySet="emails" />
@@ -602,17 +530,9 @@
             <End Role="project" EntitySet="projects" />
             <End Role="request" EntitySet="requests" />
           </AssociationSet>
-          <AssociationSet Name="author_has_discipline" Association="Self.author_has_discipline">
-            <End Role="author" EntitySet="authors" />
-            <End Role="discipline" EntitySet="disciplines" />
-          </AssociationSet>
           <AssociationSet Name="place_has_capacity" Association="Self.place_has_capacity">
             <End Role="capacity" EntitySet="capacities" />
             <End Role="place" EntitySet="places" />
-          </AssociationSet>
-          <AssociationSet Name="project_has_type" Association="Self.project_has_type">
-            <End Role="project" EntitySet="projects" />
-            <End Role="type" EntitySet="types" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -645,6 +565,7 @@
               <MappingFragment StoreEntitySet="discipline">
                 <ScalarProperty Name="id_discipline" ColumnName="id_discipline" />
                 <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="author_dni" ColumnName="author_dni" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -706,6 +627,7 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="topic" ColumnName="topic" />
                 <ScalarProperty Name="author_dni" ColumnName="author_dni" />
+                <ScalarProperty Name="type" ColumnName="type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -718,36 +640,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="types">
-            <EntityTypeMapping TypeName="triaculturaDBModel.type">
-              <MappingFragment StoreEntitySet="type">
-                <ScalarProperty Name="id_type" ColumnName="id_type" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="author_has_discipline" TypeName="triaculturaDBModel.author_has_discipline" StoreEntitySet="author_has_discipline">
-            <EndProperty Name="author">
-              <ScalarProperty Name="dni" ColumnName="author_dni" />
-            </EndProperty>
-            <EndProperty Name="discipline">
-              <ScalarProperty Name="id_discipline" ColumnName="discipline_id" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="place_has_capacity" TypeName="triaculturaDBModel.place_has_capacity" StoreEntitySet="place_has_capacity">
             <EndProperty Name="capacity">
               <ScalarProperty Name="id_capacity" ColumnName="capacity_id" />
             </EndProperty>
             <EndProperty Name="place">
               <ScalarProperty Name="id_place" ColumnName="place_id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="project_has_type" TypeName="triaculturaDBModel.project_has_type" StoreEntitySet="project_has_type">
-            <EndProperty Name="project">
-              <ScalarProperty Name="id_project" ColumnName="project_id" />
-            </EndProperty>
-            <EndProperty Name="type">
-              <ScalarProperty Name="id_type" ColumnName="type_id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

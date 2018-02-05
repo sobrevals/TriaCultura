@@ -135,12 +135,12 @@ namespace TriaCulturaDesktopApp.ViewModel
             aux_project.topic = SelectedProject.topic;
             aux_project.requests = SelectedProject.requests;
             aux_project.files = SelectedProject.files;
-            aux_project.types = SelectedProject.types;
+            aux_project.type = SelectedProject.type;
             this.Dialogs.Add(new ProjecteViewModel(aux_project)
             {
                 Projecte = aux_project,
                 titol = "Modificar Projecte",
-                SelectedType = aux_project.types.ToList()[0],
+                SelectedType = aux_project.type,
                 OnOk = (sender) =>
                 {
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().author_dni = aux_project.author_dni;
@@ -149,7 +149,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description= aux_project.description;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests= aux_project.requests;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().types = aux_project.types;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().type= aux_project.type;
                     context.SaveChanges();
                     sender.Close();
                 },
@@ -178,7 +178,6 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
         #endregion PropertyChanged
-
 
 
         public Action<ProjectesViewModel> OnOk { get; set; }

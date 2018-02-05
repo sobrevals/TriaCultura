@@ -83,52 +83,51 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\author.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Available_Disciplines.cs" />
     <Compile Include="Model\capacity.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Available_Types.cs" />
     <Compile Include="Model\discipline.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\email.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\event.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\file.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\phone.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\place.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\project.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\request.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\TriaCulturaDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TriaCulturaDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\TriaCulturaDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\TriaCulturaDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TriaCulturaDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\type.cs">
-      <DependentUpon>TriaCulturaDB.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AutorDialogViewModel.cs" />
     <Compile Include="ViewModel\AutorsViewModel.cs" />
@@ -265,12 +264,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\TriaCulturaDB.edmx">
+    <EntityDeploy Include="Model\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TriaCulturaDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\TriaCulturaDB.edmx.diagram">
-      <DependentUpon>TriaCulturaDB.edmx</DependentUpon>
+    <None Include="Model\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -295,15 +294,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Model\TriaCulturaDB.Context.tt">
+    <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TriaCulturaDB.edmx</DependentUpon>
-      <LastGenOutput>TriaCulturaDB.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\TriaCulturaDB.tt">
+    <Content Include="Model\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TriaCulturaDB.edmx</DependentUpon>
-      <LastGenOutput>TriaCulturaDB.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

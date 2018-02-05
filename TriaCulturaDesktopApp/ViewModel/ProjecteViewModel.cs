@@ -16,6 +16,7 @@ namespace TriaCulturaDesktopApp.ViewModel
     class ProjecteViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
         triaculturaCTXEntities context = new triaculturaCTXEntities();
+        Available_Types tipus = new Available_Types();
 
         #region BasicProperties
         private List<place> _place;
@@ -24,8 +25,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         private request _selectedRequest;
         private request _selectedRequest_place;
         private request _selectedPlace_fromProjects;
-        private List<type> _types;
-        private type _selectedType;
+        private List<string> _types;
+        private string _selectedType;
+        
 
 
         public String titol { get; set; }
@@ -55,7 +57,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-        public List<type> Types
+        public List<string> Types
         {
             get
             {
@@ -68,7 +70,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-        public type SelectedType
+        public string SelectedType
         {
             get
             {
@@ -110,19 +112,11 @@ namespace TriaCulturaDesktopApp.ViewModel
             titol = "Nou Projecte";
 
             FillRequests_all(0);
-            FillTipus(0);
+            FillTipus();
         }
 
         public ProjecteViewModel() { }
 
-        public ProjecteViewModel(author a)
-        {
-            Projecte = new project();
-            Projecte.author = a;
-
-            FillRequests_all(0);
-
-        }
         //public ProjecteViewModel(project p)
         //{
         //    Projecte = p;
@@ -144,9 +138,9 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-        public void FillTipus(int index)
+        public void FillTipus()
         {
-            Types = context.types.ToList();          
+            Types = tipus.types;          
         }
 
 
@@ -204,10 +198,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Add(new EspaiViewModel());
         }
 
-        public void FillTipus()
-        {
-            Types = context.types.ToList();
-        }
+        
 
         protected virtual void AddPlace_request()
         {
@@ -244,17 +235,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         public ICommand Finalitzar { get { return new RelayCommand(SaveProject); } }
 
-        public void addType_toProject()
-        {
-            if (!(Projecte.types.Select(x=>x.name).ToList()[0].Equals(SelectedType.name)))
-            {
-                Projecte.types.Add(SelectedType);
-            }
-        }
+
 
         public void SaveProject()
         {
-            Projecte.types.Add(SelectedType);
             //if (context.projects.Select(x => x.id_project).ToList().Contains(Projecte.id_project))
             //{
             //    context.projects.Where(x => x.id_project == Projecte.id_project).ToList()[0] = Projecte;
@@ -278,7 +262,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 aux_project.id_project = Projecte.id_project;
                 aux_project.author_dni = Projecte.author_dni;
                 aux_project.title = Projecte.title;
-                aux_project.types = Projecte.types;
+                aux_project.type = Projecte.type;
                 aux_project.topic = Projecte.topic;
                 aux_project.requests = Projecte.requests;
                 aux_project.files = Projecte.files;
@@ -330,7 +314,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
         protected virtual void GuardarIEnrere()
         {
-            addType_toProject();
             if (this.OnOk != null)
                 this.OnOk(this);
             else

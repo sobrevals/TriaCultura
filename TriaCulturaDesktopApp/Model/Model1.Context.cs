@@ -35,6 +35,5 @@ namespace TriaCulturaDesktopApp.Model
         public DbSet<place> places { get; set; }
         public DbSet<project> projects { get; set; }
         public DbSet<request> requests { get; set; }
-        public DbSet<type> types { get; set; }
     }
 }
