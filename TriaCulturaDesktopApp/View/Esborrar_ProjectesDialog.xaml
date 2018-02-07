@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="Esborrar_ProjectesDialog" Height="300" Width="300">
     <Grid>
-        
+        <Button x:Name="button" HorizontalAlignment="Left" Margin="29,191,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
+        <Button x:Name="button_Copy" Content="Button" HorizontalAlignment="Left" Margin="168,191,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
+        <Label x:Name="label" Content="Aquest Autor te projectes&#xD;&#xA;" HorizontalAlignment="Left" Margin="68,84,0,0" VerticalAlignment="Top" Width="151" Height="32"/>
+
     </Grid>
 </Window>

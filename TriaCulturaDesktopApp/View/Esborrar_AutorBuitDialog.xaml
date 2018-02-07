@@ -5,16 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
-        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" 
-        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"        
         xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
         mc:Ignorable="d"
-        Title="Esborrar_AutorBuitDialog" Height="300" Width="300">
+        Title="Esborrar_AutorBuitDialog" Height="244" Width="300">
+
+    <Window.DataContext>
+        <ViewModel:Esborrar_AutorBuitDialogViewModel/>
+    </Window.DataContext>
     <Grid>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="86,83,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="86,151,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>      
-        <Button x:Name="button_Copy" Content="Button" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Width="86" Height="42"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="196,217,0,0" VerticalAlignment="Top" Width="86" Height="42"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="86,49,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="120" IsEnabled="{Binding TextEnabled}"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="86,96,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="120" IsEnabled="{Binding TextEnabled}"/>
+        <Button x:Name="button_Copy" Content="Button" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="86" Height="42"/>
+        <Button x:Name="button" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Margin="196,162,0,0" VerticalAlignment="Top" Width="86" Height="42"/>
 
     </Grid>
 </Window>

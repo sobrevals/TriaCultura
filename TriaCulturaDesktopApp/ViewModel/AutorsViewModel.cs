@@ -34,8 +34,11 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ObservableCollection<author> AuthorsL
         {
             get { return (_authors); }
-            set { _authors = value;
-                NotifyPropertyChanged(); }
+            set
+            {
+                _authors = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public int SelectedIndexAuthor
@@ -169,6 +172,73 @@ namespace TriaCulturaDesktopApp.ViewModel
             });
         }
 
+        public ICommand eliminarAutor { get { return new RelayCommand(delAutor); } }
+
+        protected virtual void delAutor()
+        {
+            author aux_author = SelectedAuthor;
+            aux_author.dni = SelectedAuthor.dni;
+            aux_author.name = SelectedAuthor.name;
+            if ((!(aux_author.projects.Count > 0)))
+            {
+                this.Dialogs.Add(new Esborrar_AutorBuitDialogViewModel()
+            {
+                Title = "Esborrar Contacte",
+                Author = aux_author,
+                OkText = "Delete",
+                TextEnabled = false,
+                OnOk = (sender) =>
+                {
+                    try
+                    {
+                        if (aux_author.phones.Count > 0)
+                        {
+                            foreach (phone item in aux_author.phones)
+                            {
+                                phone p = context.phones.Where(x => x.id_phone == item.id_phone).SingleOrDefault();
+                                context.phones.Remove(p);
+                            }
+                        }
+
+                        if (aux_author.emails.Count > 0)
+                        {
+                            foreach (email item in aux_author.emails)
+                            {
+                                email e = context.emails.Where(x => x.id_email == item.id_email).SingleOrDefault();
+                                context.emails.Remove(e);
+                            }
+                        }
+                        author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
+                        context.authors.Remove(a);
+                        context.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.ToString());
+                    }
+                    FillAuthors(0);
+                    SelectedAuthor = AuthorsL.Where(x => x.dni == aux_author.dni).ToList()[0];
+                    sender.Close();
+                },
+                OnCancel = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                },
+                OnCloseRequest = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                }
+            });
+            }else if((aux_author.projects.Count > 0))
+            {
+                this.Dialogs.Add(new ProjecteEsborrarDialogViewModel()
+                {
+                }
+        }
+
+
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorsViewModel> OnOk { get; set; }
         #endregion ICommand
@@ -204,7 +274,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private void FillAuthors(int n)
         {
 
-            if (AuthorsL != null && AuthorsL.Count==0)
+            if (AuthorsL != null && AuthorsL.Count == 0)
             {
                 AuthorsL.Clear();
             }
@@ -213,7 +283,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 SelectedAuthor = AuthorsL[n];
             }
-            
+
         }
         #endregion
     }
