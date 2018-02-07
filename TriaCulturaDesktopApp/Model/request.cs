@@ -15,8 +15,8 @@ namespace TriaCulturaDesktopApp.Model
     public partial class request
     {
         public int id_request { get; set; }
-        public int project_id { get; set; }
-        public int place_id { get; set; }
+        public Nullable<int> project_id { get; set; }
+        public Nullable<int> place_id { get; set; }
     
         public virtual place place { get; set; }
         public virtual project project { get; set; }

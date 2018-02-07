@@ -18,7 +18,6 @@ namespace TriaCulturaDesktopApp.Model
         {
             this.files = new HashSet<file>();
             this.requests = new HashSet<request>();
-            this.types = new HashSet<type>();
         }
     
         public int id_project { get; set; }
@@ -26,11 +25,10 @@ namespace TriaCulturaDesktopApp.Model
         public string description { get; set; }
         public string topic { get; set; }
         public string author_dni { get; set; }
-
-
+        public string type { get; set; }
+    
         public virtual author author { get; set; }
         public virtual ICollection<file> files { get; set; }
         public virtual ICollection<request> requests { get; set; }
-        public virtual ICollection<type> types { get; set; }
     }
 }
