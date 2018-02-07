@@ -13,7 +13,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     class ProjecteEsborrarDialogModel : ViewModelBase, IUserDialogViewModel
     {
-        #region Properties
+         #region Properties
         private string _okText;
         private bool _textEnabled;
         private bool _textEnabled_type;

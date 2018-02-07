@@ -150,9 +150,6 @@
     <Compile Include="View\DialogEspais.xaml.cs">
       <DependentUpon>DialogEspais.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ProjecteEsborrarDialog.xaml.cs">
-      <DependentUpon>ProjecteEsborrarDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\DisciplinaDialog.xaml.cs">
       <DependentUpon>DisciplinaDialog.xaml</DependentUpon>
     </Compile>
@@ -190,10 +187,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DialogEspais.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ProjecteEsborrarDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
