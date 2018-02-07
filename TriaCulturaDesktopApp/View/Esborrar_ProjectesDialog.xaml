@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         mc:Ignorable="d"
-        Title="Esborrar_ProjectesDialog" Height="300" Width="300">
+        Title="Esborrar_ProjectesDialog" Height="186.398" Width="300">
     <Grid>
-        <Button x:Name="button" HorizontalAlignment="Left" Margin="29,191,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
-        <Button x:Name="button_Copy" Content="Button" HorizontalAlignment="Left" Margin="168,191,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
-        <Label x:Name="label" Content="Aquest Autor te projectes&#xD;&#xA;" HorizontalAlignment="Left" Margin="68,84,0,0" VerticalAlignment="Top" Width="151" Height="32"/>
+        <Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Left" Margin="28,94,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
+        <Button x:Name="btn_aceptar" Content="Button" HorizontalAlignment="Left" Margin="167,94,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
+        <Label x:Name="text_Missatge" Content="Aquest Autor te projectes&#xD;&#xA;" HorizontalAlignment="Left" Margin="72,23,0,0" VerticalAlignment="Top" Width="151" Height="32"/>
 
     </Grid>
 </Window>
