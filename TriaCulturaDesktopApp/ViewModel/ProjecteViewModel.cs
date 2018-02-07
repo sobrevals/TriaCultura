@@ -10,6 +10,7 @@ using System.Windows.Input;
 using TriaCulturaDesktopApp.Model;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using Microsoft.Win32;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -113,9 +114,10 @@ namespace TriaCulturaDesktopApp.ViewModel
 
             FillRequests_all(0);
             FillTipus();
+            RegisterCommands();
         }
 
-        public ProjecteViewModel() { }
+        public ProjecteViewModel() { RegisterCommands(); }
 
         //public ProjecteViewModel(project p)
         //{
@@ -334,6 +336,35 @@ namespace TriaCulturaDesktopApp.ViewModel
         public Action<ProjecteViewModel> OnReturn { get; set; }
         public Action<ProjecteViewModel> OnCloseRequest { get; set; }
 
-      
+
+ 
+        public static RelayCommand OpenCommand { get; set; }
+        private string _selectedPath;
+        public string SelectedPath
+        {
+            get { return _selectedPath; }
+            set
+            {
+                _selectedPath = value;
+                RaisePropertyChanged("SelectedPath");
+            }
+        }
+
+        private string _defaultPath;
+
+
+        private void RegisterCommands()
+        {
+            OpenCommand = new RelayCommand(ExecuteOpenFileDialog);
+        }
+
+        private void ExecuteOpenFileDialog()
+        {
+            var dialog = new OpenFileDialog { InitialDirectory = _defaultPath };
+            dialog.ShowDialog();
+
+            SelectedPath = dialog.FileName;
+        }
+
     }
 }
