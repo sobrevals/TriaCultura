@@ -309,7 +309,13 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
             else
             {
-                context.authors.Add(Author);
+                if (Author.dni!=null)
+                {
+                    context.authors.Add(Author);
+                }else
+                {
+                    return;
+                }
             }
             context.SaveChanges();
             this.Dialogs.Add(new ProjectesViewModel(Author, true)
