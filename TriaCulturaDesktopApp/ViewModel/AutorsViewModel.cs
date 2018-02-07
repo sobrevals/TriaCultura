@@ -97,8 +97,12 @@ namespace TriaCulturaDesktopApp.ViewModel
                 {
                     try
                     {
-                        context.authors.Add(aux_author);
-                        context.SaveChanges();
+                        List<author> subList = context.authors.ToList();
+                        if (!subList.Exists(x => x.dni == aux_author.dni))
+                        {
+                            context.authors.Add(aux_author);
+                            context.SaveChanges();
+                        }
                     }
                     catch (Exception ex)
                     {
