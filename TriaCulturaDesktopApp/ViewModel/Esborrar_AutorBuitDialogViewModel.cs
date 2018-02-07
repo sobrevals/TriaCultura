@@ -114,7 +114,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
             set
             {
-                _author = value;
+                _author = value;                
             }
         }
     }

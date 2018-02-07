@@ -39,6 +39,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _author = value;
+               
             }
         }
         public List<project> ProjectList
@@ -51,6 +52,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _projectList = value;
+               
             }
         }
         public virtual bool IsModal { get { return true; } }

@@ -26,6 +26,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private ObservableCollection<author> _authors;
         private int _selectedIndexAuthor;
         private author _selectedAuthor;
+        private project _project;
 
         public AutorsViewModel()
         {
@@ -251,7 +252,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                     {
                         try
                         {
-
                             if (aux_projectList.Exists(x => x.requests.Count > 0))
                             {
                                 foreach (project subitem in aux_projectList)
@@ -292,6 +292,20 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorsViewModel> OnOk { get; set; }
+
+        public project Project
+        {
+            get
+            {
+                return _project;
+            }
+
+            set
+            {
+                _project = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion ICommand
 
         #region DialogClosing
