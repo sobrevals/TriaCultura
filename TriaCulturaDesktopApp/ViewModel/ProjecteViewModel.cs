@@ -111,7 +111,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             Projecte = p;
             titol = "Nou Projecte";
-
+            Types = tipus.types;
             FillRequests_all(0);
             FillTipus();
             RegisterCommands();
@@ -316,10 +316,16 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
         protected virtual void GuardarIEnrere()
         {
-            if (this.OnOk != null)
-                this.OnOk(this);
-            else
-                Close();
+            if (Projecte.title != null && Projecte.description != null && Projecte.topic != null && Projecte.type != null)
+            {
+                if (this.OnOk != null)
+                    this.OnOk(this);
+                else
+                    Close();
+            }else
+            {
+                MessageBox.Show("Falta omplir algun camp.", "Alert");
+            }
         }
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }

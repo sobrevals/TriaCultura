@@ -85,7 +85,6 @@
     <Compile Include="Model\author.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Available_Disciplines.cs" />
     <Compile Include="Model\capacity.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -133,7 +132,6 @@
     <Compile Include="ViewModel\AutorsViewModel.cs" />
     <Compile Include="ViewModel\AutorViewModel.cs" />
     <Compile Include="ViewModel\DisciplinaDialogViewModel.cs" />
-    <Compile Include="ViewModel\DisciplinaViewModel.cs" />
     <Compile Include="ViewModel\Esborrar_AutorBuitDialogViewModel.cs" />
     <Compile Include="ViewModel\EspaiViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -152,9 +150,6 @@
     </Compile>
     <Compile Include="View\DisciplinaDialog.xaml.cs">
       <DependentUpon>DisciplinaDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Disciplines.xaml.cs">
-      <DependentUpon>Disciplines.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Esborrar_AutorBuitDialog.xaml.cs">
       <DependentUpon>Esborrar_AutorBuitDialog.xaml</DependentUpon>
@@ -191,10 +186,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DisciplinaDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Disciplines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
