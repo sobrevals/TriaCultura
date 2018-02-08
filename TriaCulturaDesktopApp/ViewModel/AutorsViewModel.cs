@@ -83,7 +83,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-            if (SelectedAuthor!=null)
+            if (SelectedAuthor != null)
             {
                 this.Dialogs.Add(new ProjectesViewModel(SelectedAuthor, true)
                 {
@@ -193,147 +193,15 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             if (SelectedAuthor != null)
             {
-                author aux_author = SelectedAuthor;
-                aux_author.dni = SelectedAuthor.dni;
-                aux_author.name = SelectedAuthor.name;
-
-                List<project> aux_projectList = context.projects.Where(x => x.author_dni == aux_author.dni).ToList();
+                author aux_author = SelectedAuthor;               
 
                 if ((!(aux_author.projects.Count > 0)))
                 {
-                    this.Dialogs.Add(new Esborrar_AutorBuitDialogViewModel()
-                    {
-                        Title = "Esborrar Contacte",
-                        Author = aux_author,
-                        OkText = "Delete",
-                        TextEnabled = false,
-                        OnOk = (sender) =>
-                        {
-                            try
-                            {
-                                if (aux_author.phones.Count > 0)
-                                {
-                                    List<phone> phonesDelList = aux_author.phones.ToList();
-                                    foreach (phone item in phonesDelList)
-                                    {
-                                        phone p = context.phones.Where(x => x.id_phone == item.id_phone).SingleOrDefault();
-                                        context.phones.Remove(p);
-                                    }
-                                }
-
-                                if (aux_author.emails.Count > 0)
-                                {
-                                    List<email> emailsDelList = aux_author.emails.ToList();
-                                    foreach (email item in emailsDelList)
-                                    {
-                                        email e = context.emails.Where(x => x.id_email == item.id_email).SingleOrDefault();
-                                        context.emails.Remove(e);
-                                    }
-                                }
-                                author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
-                                context.authors.Remove(a);
-                                context.SaveChanges();
-                            }
-                            catch (Exception e)
-                            {
-                                MessageBox.Show(e.ToString());
-                            }
-                            FillAuthors(0);
-                            sender.Close();
-                        },
-                        OnCancel = (sender) =>
-                        {
-                            FillAuthors(0);
-                            sender.Close();
-                        },
-                        OnCloseRequest = (sender) =>
-                        {
-                            FillAuthors(0);
-                            sender.Close();
-                        }
-                    });
+                    delAuthorWithOutProject();
                 }
                 else if ((aux_author.projects.Count > 0))
                 {
-                    this.Dialogs.Add(new ProjecteEsborrarDialogModel()
-                    {
-                        Title = "Esborrar Contacte",
-                        Author = aux_author,
-                        ProjectList = aux_projectList,
-                        OkText = "Delete",
-                        OnOk = (sender) =>
-                        {
-                            try
-                            {
-                                if (aux_author.projects.Count > 0)
-                                {
-                                    List<project> projectsDelList = aux_author.projects.ToList();
-
-                                    foreach (project subitem in projectsDelList)
-                                    {
-                                        project projectDel = aux_author.projects.SingleOrDefault();
-                                        List<request> requestDelList = projectDel.requests.ToList();
-
-                                        foreach (request item in requestDelList)
-                                        {
-                                            request r = context.requests.Where(x => x.id_request == item.id_request).SingleOrDefault();
-
-                                            context.requests.Remove(r);
-                                        }
-
-                                        project p = context.projects.Where(x => x.id_project == subitem.id_project).SingleOrDefault();
-
-                                        context.projects.Remove(p);
-
-                                    }
-                                    if (aux_author.phones.Count > 0)
-                                    {
-                                        List<phone> phonesDelList = aux_author.phones.ToList();
-
-                                        foreach (phone item in phonesDelList)
-                                        {
-                                            phone p = context.phones.Where(x => x.id_phone == item.id_phone).SingleOrDefault();
-
-                                            context.phones.Remove(p);
-                                        }
-                                    }
-
-                                    if (aux_author.emails.Count > 0)
-                                    {
-                                        List<email> emailsDelList = aux_author.emails.ToList();
-
-                                        foreach (email item in emailsDelList)
-                                        {
-                                            email e = context.emails.Where(x => x.id_email == item.id_email).SingleOrDefault();
-
-                                            context.emails.Remove(e);
-                                        }
-                                    }
-
-                                    author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
-
-                                    context.authors.Remove(a);
-                                    context.SaveChanges();
-                                }
-                            }
-                            catch (Exception e)
-                            {
-                                MessageBox.Show(e.ToString());
-                            }
-                            FillAuthors(0);
-                            sender.Close();
-                        },
-                        OnCancel = (sender) =>
-                        {
-                            FillAuthors(0);
-                            sender.Close();
-                        },
-                        OnCloseRequest = (sender) =>
-                        {
-                            FillAuthors(0);
-                            sender.Close();
-                        }
-                    });
+                    delAuthorWithProject();
                 }
             }
             else
@@ -402,6 +270,182 @@ namespace TriaCulturaDesktopApp.ViewModel
                 SelectedAuthor = AuthorsL[n];
             }
 
+        }
+        #endregion
+
+        #region Methods
+        private void delAuthorWithOutProject()
+        {
+            author aux_author = SelectedAuthor;
+            aux_author.dni = SelectedAuthor.dni;
+            aux_author.name = SelectedAuthor.name;
+
+            List<project> aux_projectList = context.projects.Where(x => x.author_dni == aux_author.dni).ToList();
+
+            this.Dialogs.Add(new Esborrar_AutorBuitDialogViewModel()
+            {
+                Title = "Esborrar Contacte",
+                Author = aux_author,
+                OkText = "Delete",
+                TextEnabled = false,
+                OnOk = (sender) =>
+                {
+                    try
+                    {
+                        if (aux_author.phones.Count > 0)
+                        {
+                            List<phone> phonesDelList = aux_author.phones.ToList();
+                            foreach (phone item in phonesDelList)
+                            {
+                                phone p = context.phones.Where(x => x.id_phone == item.id_phone).SingleOrDefault();
+                                context.phones.Remove(p);
+                            }
+                        }
+
+                        if (aux_author.emails.Count > 0)
+                        {
+                            List<email> emailsDelList = aux_author.emails.ToList();
+                            foreach (email item in emailsDelList)
+                            {
+                                email e = context.emails.Where(x => x.id_email == item.id_email).SingleOrDefault();
+                                context.emails.Remove(e);
+                            }
+                        }
+                        if (aux_author.disciplines.Count > 0)
+                        {
+                            List<discipline> disciplinaDelList = aux_author.disciplines.ToList();
+
+                            foreach (discipline item in disciplinaDelList)
+                            {
+                                discipline d = context.disciplines.Where(x => x.id_discipline == item.id_discipline).SingleOrDefault();
+
+                                context.disciplines.Remove(d);
+                            }
+                        }
+                        author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
+                        context.authors.Remove(a);
+                        context.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.ToString());
+                    }
+                    FillAuthors(0);
+                    sender.Close();
+                },
+                OnCancel = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                },
+                OnCloseRequest = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                }
+            });
+        }
+
+        private void delAuthorWithProject()
+        {
+            author aux_author = SelectedAuthor;
+            aux_author.dni = SelectedAuthor.dni;
+            aux_author.name = SelectedAuthor.name;
+
+            List<project> aux_projectList = context.projects.Where(x => x.author_dni == aux_author.dni).ToList();
+
+            this.Dialogs.Add(new ProjecteEsborrarDialogModel()
+            {
+
+
+                Title = "Esborrar Contacte",
+                Author = aux_author,
+                ProjectList = aux_projectList,
+                OkText = "Delete",
+                OnOk = (sender) =>
+                {
+                    try
+                    {
+                        if (aux_author.projects.Count > 0)
+                        {
+                            List<project> projectsDelList = aux_author.projects.ToList();
+
+                            foreach (project subitem in projectsDelList)
+                            {
+                                project projectDel = aux_author.projects.SingleOrDefault();
+                                List<request> requestDelList = projectDel.requests.ToList();
+
+                                foreach (request item in requestDelList)
+                                {
+                                    request r = context.requests.Where(x => x.id_request == item.id_request).SingleOrDefault();
+
+                                    context.requests.Remove(r);
+                                }
+
+                                project p = context.projects.Where(x => x.id_project == subitem.id_project).SingleOrDefault();
+
+                                context.projects.Remove(p);
+
+                            }
+                            if (aux_author.phones.Count > 0)
+                            {
+                                List<phone> phonesDelList = aux_author.phones.ToList();
+
+                                foreach (phone item in phonesDelList)
+                                {
+                                    phone p = context.phones.Where(x => x.id_phone == item.id_phone).SingleOrDefault();
+
+                                    context.phones.Remove(p);
+                                }
+                            }
+
+                            if (aux_author.emails.Count > 0)
+                            {
+                                List<email> emailsDelList = aux_author.emails.ToList();
+
+                                foreach (email item in emailsDelList)
+                                {
+                                    email e = context.emails.Where(x => x.id_email == item.id_email).SingleOrDefault();
+
+                                    context.emails.Remove(e);
+                                }
+                            }
+                            if (aux_author.disciplines.Count > 0)
+                            {
+                                List<discipline> disciplinaDelList = aux_author.disciplines.ToList();
+
+                                foreach (discipline item in disciplinaDelList)
+                                {
+                                    discipline d = context.disciplines.Where(x => x.id_discipline == item.id_discipline).SingleOrDefault();
+
+                                    context.disciplines.Remove(d);
+                                }
+                            }
+
+                            author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
+
+                            context.authors.Remove(a);
+                            context.SaveChanges();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.ToString());
+                    }
+                    FillAuthors(0);
+                    sender.Close();
+                },
+                OnCancel = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                },
+                OnCloseRequest = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                }
+            });
         }
         #endregion
     }
