@@ -344,7 +344,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 AuthorsL.Clear();
             }
             AuthorsL = new ObservableCollection<author>(context.authors.OrderBy(x => x.dni).ToList());
-            if (AuthorsL != null)
+            if (AuthorsL != null && AuthorsL.Count < 0)
             {
                 SelectedAuthor = AuthorsL[n];
             }
