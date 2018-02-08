@@ -65,7 +65,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ProjectesViewModel()
         {
             fillProjectes(0);
-
         }
 
         public ProjectesViewModel(author a, bool enable)
@@ -73,6 +72,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             titol = "Projectes";
             Author = context.authors.Where(x => x.dni == a.dni).SingleOrDefault();
         }
+
 
         #endregion
 
@@ -160,11 +160,14 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand TreureProjecte_author { get { return new RelayCommand(RemProjecte_autor); } }
         protected virtual void RemProjecte_autor()
         {
-            project d = SelectedProject;
-            author aux = SelectedProject.author;
-            aux.projects.Remove(d);
-            context.SaveChanges();
-            fillProjectes(0);
+            if (SelectedProject!=null)
+            {
+                project d = SelectedProject;
+                author aux = SelectedProject.author;
+                aux.projects.Remove(d);
+                context.SaveChanges();
+                fillProjectes(0);
+            }
         }
 
         #region PropertyChanged
