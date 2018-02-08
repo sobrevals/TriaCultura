@@ -140,7 +140,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 Projecte = aux_project,
                 titol = "Modificar Projecte",
-                SelectedType = aux_project.type,
+                //SelectedType = aux_project.type,
                 OnOk = (sender) =>
                 {
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().author_dni = aux_project.author_dni;

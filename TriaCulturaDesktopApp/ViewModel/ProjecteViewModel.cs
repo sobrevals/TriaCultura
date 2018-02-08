@@ -111,7 +111,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             Projecte = p;
             titol = "Nou Projecte";
-            Types = tipus.types;
             FillRequests_all(0);
             FillTipus();
             RegisterCommands();
@@ -142,7 +141,14 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void FillTipus()
         {
-            Types = tipus.types;          
+            Types = tipus.types;
+            if (Projecte.type != null)
+            {
+                SelectedType = Types.Where(x => x == Projecte.type).SingleOrDefault();
+            } else
+            {
+                SelectedType = Types[0];
+            }
         }
 
 
@@ -192,15 +198,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         //    context.SaveChanges();
         //    Projecte = context.projects.Where(x => x.id_project == Projecte.id_project).SingleOrDefault();
         //}
-        #region Commands
-
-        public ICommand NewModalDialogCommand { get { return new RelayCommand(NewModalDialogEspai); } }
-        public void NewModalDialogEspai()
-        {
-            this.Dialogs.Add(new EspaiViewModel());
-        }
-
-        
+        #region Commands  
 
         protected virtual void AddPlace_request()
         {
@@ -316,6 +314,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
         protected virtual void GuardarIEnrere()
         {
+            Projecte.type = SelectedType;
             if (Projecte.title != null && Projecte.description != null && Projecte.topic != null && Projecte.type != null)
             {
                 if (this.OnOk != null)
