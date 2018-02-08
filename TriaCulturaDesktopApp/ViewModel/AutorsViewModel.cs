@@ -57,6 +57,20 @@ namespace TriaCulturaDesktopApp.ViewModel
                 NotifyPropertyChanged();
             }
         }
+
+        public project Project
+        {
+            get
+            {
+                return _project;
+            }
+
+            set
+            {
+                _project = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         #region IsModal
@@ -96,40 +110,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand afegirAutor { get { return new RelayCommand(addAutor); } }
         protected virtual void addAutor()
         {
-            author aux_author = new author();
-            this.Dialogs.Add(new AutorViewModel
-            {
-                Author = aux_author,
-                Titol = "Nou Autor",
-                OnOk = (sender) =>
-                {
-                    try
-                    {
-                        List<author> subList = context.authors.ToList();
-                        if (!subList.Exists(x => x.dni == aux_author.dni))
-                        {
-                            context.authors.Add(aux_author);
-                            context.SaveChanges();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-                    FillAuthors(0);
-                    sender.Close();
-                },
-                OnCancel = (sender) =>
-                {
-                    FillAuthors(0);
-                    sender.Close();
-                },
-                OnCloseRequest = (sender) =>
-                {
-                    FillAuthors(0);
-                    sender.Close();
-                }
-            });
+            addAuthor();
         }
 
         public ICommand modificarAutor { get { return new RelayCommand(updAutor); } }
@@ -138,52 +119,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             if (SelectedAuthor != null)
             {
-                author aux_author = SelectedAuthor;
-                aux_author.dni = SelectedAuthor.dni;
-                aux_author.address = SelectedAuthor.address;
-                aux_author.disciplines = SelectedAuthor.disciplines;
-                aux_author.name = SelectedAuthor.name;
-                aux_author.surname = SelectedAuthor.surname;
-                aux_author.emails = SelectedAuthor.emails;
-                aux_author.phones = SelectedAuthor.phones;
-                aux_author.projects = SelectedAuthor.projects;
-                this.Dialogs.Add(new AutorViewModel(aux_author)
-                {
-                    Titol = "Modificar Autor",
-                    Author = aux_author,
-                    OnOk = (sender) =>
-                    {
-                        try
-                        {
-                            author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
-                            a.dni = aux_author.dni;
-                            a.address = aux_author.address;
-                            a.name = aux_author.name;
-                            a.surname = aux_author.surname;
-                            a.emails = aux_author.emails;
-                            a.phones = aux_author.phones;
-                            a.disciplines = aux_author.disciplines;
-                            context.SaveChanges();
-                        }
-                        catch (Exception e)
-                        {
-                            MessageBox.Show(e.ToString());
-                        }
-                        FillAuthors(0);
-                        SelectedAuthor = AuthorsL.Where(x => x.dni == aux_author.dni).ToList()[0];
-                        sender.Close();
-                    },
-                    OnCancel = (sender) =>
-                    {
-                        FillAuthors(0);
-                        sender.Close();
-                    },
-                    OnCloseRequest = (sender) =>
-                    {
-                        FillAuthors(0);
-                        sender.Close();
-                    }
-                });
+                updAuthor();
             }
         }
 
@@ -206,7 +142,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
             else
             {
-
+                MessageBox.Show("Cap autor seleccionat");
             }
         }
 
@@ -214,19 +150,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorsViewModel> OnOk { get; set; }
 
-        public project Project
-        {
-            get
-            {
-                return _project;
-            }
-
-            set
-            {
-                _project = value;
-                NotifyPropertyChanged();
-            }
-        }
+     
         #endregion ICommand
 
         #region DialogClosing
@@ -431,6 +355,94 @@ namespace TriaCulturaDesktopApp.ViewModel
                     catch (Exception e)
                     {
                         MessageBox.Show(e.ToString());
+                    }
+                    FillAuthors(0);
+                    sender.Close();
+                },
+                OnCancel = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                },
+                OnCloseRequest = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                }
+            });
+        }
+
+        private void updAuthor()
+        {
+            author aux_author = SelectedAuthor;
+            aux_author.dni = SelectedAuthor.dni;
+            aux_author.address = SelectedAuthor.address;
+            aux_author.disciplines = SelectedAuthor.disciplines;
+            aux_author.name = SelectedAuthor.name;
+            aux_author.surname = SelectedAuthor.surname;
+            aux_author.emails = SelectedAuthor.emails;
+            aux_author.phones = SelectedAuthor.phones;
+            aux_author.projects = SelectedAuthor.projects;
+            this.Dialogs.Add(new AutorViewModel(aux_author)
+            {
+                Titol = "Modificar Autor",
+                Author = aux_author,
+                OnOk = (sender) =>
+                {
+                    try
+                    {
+                        author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
+                        a.dni = aux_author.dni;
+                        a.address = aux_author.address;
+                        a.name = aux_author.name;
+                        a.surname = aux_author.surname;
+                        a.emails = aux_author.emails;
+                        a.phones = aux_author.phones;
+                        a.disciplines = aux_author.disciplines;
+                        context.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.ToString());
+                    }
+                    FillAuthors(0);
+                    SelectedAuthor = AuthorsL.Where(x => x.dni == aux_author.dni).ToList()[0];
+                    sender.Close();
+                },
+                OnCancel = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                },
+                OnCloseRequest = (sender) =>
+                {
+                    FillAuthors(0);
+                    sender.Close();
+                }
+            });
+        }
+
+        private void addAuthor()
+        {
+            author aux_author = new author();
+            this.Dialogs.Add(new AutorViewModel
+            {
+                Author = aux_author,
+                Titol = "Nou Autor",
+                OnOk = (sender) =>
+                {
+                    try
+                    {
+                        List<author> subList = context.authors.ToList();
+                        if (!subList.Exists(x => x.dni == aux_author.dni))
+                        {
+                            context.authors.Add(aux_author);
+                            context.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
                     }
                     FillAuthors(0);
                     sender.Close();
