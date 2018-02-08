@@ -111,7 +111,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             Projecte = p;
             titol = "Nou Projecte";
-
+            Types = tipus.types;
             FillRequests_all(0);
             FillTipus();
             RegisterCommands();

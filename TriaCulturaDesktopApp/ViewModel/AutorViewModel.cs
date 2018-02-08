@@ -31,6 +31,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private Image _foto;
         private phone _selectedPhone;
         private email _selectedEmail;
+        private discipline _selectedDiscipline;
         #region PropertyChanged // DialogClosing
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler DialogClosing;
@@ -59,6 +60,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public bool IsReadAuthor { get { return _isReadAuthor; } set { _isReadAuthor = value; NotifyPropertyChanged(""); } }
 
         public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged(); } }
+        public discipline SelectedDiscipline { get { return _selectedDiscipline; } set { _selectedDiscipline = value; NotifyPropertyChanged(); } }
         public ObservableCollection<discipline> Disciplines { get { return _disciplines; } set { _disciplines = value; NotifyPropertyChanged(); } }
         public ObservableCollection<phone> Telefons { get { return _telefons; } set { _telefons = value; NotifyPropertyChanged(); } }
         public ObservableCollection<email> Emails { get { return _emails; } set { _emails = value; NotifyPropertyChanged(); } }
@@ -145,35 +147,50 @@ namespace TriaCulturaDesktopApp.ViewModel
                 Close();
         }
 
-        public ICommand ObreDisciplines { get { return new RelayCommand(OpenDisciplines); } }
+        public ICommand EsborrarDisciplina { get { return new RelayCommand(DelDisciplina); } }
 
-        public void OpenDisciplines()
+        public void DelDisciplina()
         {
-            List<discipline> disciplines_before = Author.disciplines.ToList();
-            author aux_author = Author;
-            this.Dialogs.Add(new DisciplinaViewModel(aux_author)
+            discipline aux_discipline = new discipline();
+            aux_discipline.author_dni = SelectedDiscipline.author_dni;
+            aux_discipline.type = SelectedDiscipline.type;
+            aux_discipline.id_discipline = SelectedDiscipline.id_discipline;
+            this.Dialogs.Add(new DisciplinaDialogViewModel
             {
-                SelectedAuthor = aux_author,
+                Title = "Esborrar Disciplina",
+                Discipline = aux_discipline,
+                OkText = "Esborra",
+                TextEnabled = false,
                 OnOk = (sender) =>
                 {
-                    Author.disciplines = aux_author.disciplines;
+                    Author.disciplines.Remove(SelectedDiscipline);
                     FillDisciplines();
                     sender.Close();
                 },
-                OnCancel = (sender) =>
+                OnCancel = (sender) => { sender.Close(); },
+                OnCloseRequest = (sender) => { sender.Close(); }
+            });
+        }
+        public ICommand AfegirDisciplina { get { return new RelayCommand(AddDisciplina); } }
+
+        public void AddDisciplina()
+        {
+            discipline aux_discipline = new discipline();
+            aux_discipline.author_dni = Author.dni;
+            this.Dialogs.Add(new DisciplinaDialogViewModel
+            {
+                Title = "Afegir Disciplina",
+                Discipline = aux_discipline,
+                OkText = "Afegeix",
+                TextEnabled = true,
+                OnOk = (sender) =>
                 {
-                    sender.Close();
-                    Author.disciplines = disciplines_before;
-                    //context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
+                    Author.disciplines.Add(aux_discipline);
                     FillDisciplines();
+                    sender.Close();
                 },
-                OnCloseRequest = (sender) =>
-                {
-                    sender.Close();
-                    Author.disciplines = disciplines_before;
-                    //context.authors.Where(x => x.dni == Author.dni).SingleOrDefault().disciplines = disciplines_before;
-                    FillDisciplines();
-                }
+                OnCancel = (sender) => { sender.Close(); },
+                OnCloseRequest = (sender) => { sender.Close(); }
             });
         }
 
@@ -309,10 +326,11 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
             else
             {
-                if (Author.dni!=null)
+                if (Author.dni != null)
                 {
                     context.authors.Add(Author);
-                }else
+                }
+                else
                 {
                     return;
                 }
@@ -325,7 +343,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             });
         }
 
-        
+
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorViewModel> OnOk { get; set; }

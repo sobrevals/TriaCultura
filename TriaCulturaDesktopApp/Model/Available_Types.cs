@@ -8,7 +8,13 @@ namespace TriaCulturaDesktopApp.Model
 {
     public class Available_Types
     {
-        public List<string> types { get {
-                return  new List<string>(new string[] { "Exposició", "Concert", "Teatre", "Performance", "Circ", "Cercavila" }); } }
+        public List<string> types
+        {
+            get
+            {
+                return new List<string>(new string[] { "Exposició", "Concert", "Teatre", "Performance", "Circ", "Cercavila" });
+            }
+        }
     }
 }
+
