@@ -20,6 +20,7 @@
         <TextBox x:Name="textbox_dni" HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="120" IsReadOnly="{Binding IsReadAuthor}"/>
         <Label x:Name="lbl_dni" Content="DNI" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textbox_nom" HorizontalAlignment="Left" Height="23" Margin="259,30,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="170"/>
+        <TextBox x:Name="tb_CognomAutor" HorizontalAlignment="Left" Height="23" Margin="457,30,0,0" TextWrapping="Wrap" Text="{Binding Author.surname}" VerticalAlignment="Top" Width="170"/>
         <Label x:Name="lbl_nomAutor" Content="Nom" HorizontalAlignment="Left" Margin="259,4,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="btn_return" Command="{Binding tornarEnrere}" Content="Tornar enrere" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btn_finish" Command="{Binding OpenProjecte}" Content="Desa i continua..." HorizontalAlignment="Left" Margin="683,340,0,0" VerticalAlignment="Top" Width="75"/>
@@ -36,7 +37,7 @@
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="430,255,0,0" VerticalAlignment="Top" Width="117"/>
         <Label x:Name="lbl_agefir_imatge" Content="Imatge identificativa" HorizontalAlignment="Left" Margin="430,230,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btn_imatge" Content="Modificar" HorizontalAlignment="Left" Margin="552,285,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="tb_CognomAutor" HorizontalAlignment="Left" Height="23" Margin="457,30,0,0" TextWrapping="Wrap" Text="{Binding Author.surname}" VerticalAlignment="Top" Width="170"/>
+        
         <Label x:Name="lbl_cognomAutor" Content="Cognom" HorizontalAlignment="Left" Margin="457,4,0,0" VerticalAlignment="Top" Width="74"/>
         <Button x:Name="btn_guardar" Content="Guardar i tancar" HorizontalAlignment="Left" Margin="124,335,0,0" VerticalAlignment="Top" Width="105" Command="{Binding OkCommand}"/>
 
