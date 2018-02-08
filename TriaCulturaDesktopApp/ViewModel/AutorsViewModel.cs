@@ -201,7 +201,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                         {
                             if (aux_author.phones.Count > 0)
                             {
-                                foreach (phone item in aux_author.phones)
+                                List<phone> phonesDelList = aux_author.phones.ToList();
+                                foreach (phone item in phonesDelList)
                                 {
                                     phone p = context.phones.Where(x => x.id_phone == item.id_phone).SingleOrDefault();
                                     context.phones.Remove(p);
@@ -210,7 +211,8 @@ namespace TriaCulturaDesktopApp.ViewModel
 
                             if (aux_author.emails.Count > 0)
                             {
-                                foreach (email item in aux_author.emails)
+                                List<email> emailsDelList = aux_author.emails.ToList();
+                                foreach (email item in emailsDelList)
                                 {
                                     email e = context.emails.Where(x => x.id_email == item.id_email).SingleOrDefault();
                                     context.emails.Remove(e);
@@ -224,8 +226,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                         {
                             MessageBox.Show(e.ToString());
                         }
-                        FillAuthors(0);
-                        SelectedAuthor = AuthorsL.Where(x => x.dni == aux_author.dni).ToList()[0];
+                        FillAuthors(0);                        
                         sender.Close();
                     },
                     OnCancel = (sender) =>
