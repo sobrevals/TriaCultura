@@ -65,7 +65,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ProjectesViewModel()
         {
             fillProjectes(0);
-
         }
 
         public ProjectesViewModel(author a, bool enable)
@@ -73,6 +72,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             titol = "Projectes";
             Author = context.authors.Where(x => x.dni == a.dni).SingleOrDefault();
         }
+
 
         #endregion
 

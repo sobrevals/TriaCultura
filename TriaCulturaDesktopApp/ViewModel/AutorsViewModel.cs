@@ -83,7 +83,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-            this.Dialogs.Add(new ProjectesViewModel());
+            this.Dialogs.Add(new ProjectesViewModel()
+            {
+                Boto_afegir_enabled = true
+            });
         }
 
         public ICommand afegirAutor { get { return new RelayCommand(addAutor); } }
