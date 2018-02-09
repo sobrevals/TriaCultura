@@ -132,6 +132,7 @@
     <Compile Include="ViewModel\AutorsViewModel.cs" />
     <Compile Include="ViewModel\AutorViewModel.cs" />
     <Compile Include="ViewModel\DisciplinaDialogViewModel.cs" />
+    <Compile Include="ViewModel\EsborrarProjecteFromProjectes.cs" />
     <Compile Include="ViewModel\Esborrar_AutorBuitDialogViewModel.cs" />
     <Compile Include="ViewModel\EspaiViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -150,6 +151,9 @@
     </Compile>
     <Compile Include="View\DisciplinaDialog.xaml.cs">
       <DependentUpon>DisciplinaDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EsborrarProjecteFromProjectesDialog.xaml.cs">
+      <DependentUpon>EsborrarProjecteFromProjectesDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Esborrar_AutorBuitDialog.xaml.cs">
       <DependentUpon>Esborrar_AutorBuitDialog.xaml</DependentUpon>
@@ -186,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DisciplinaDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EsborrarProjecteFromProjectesDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
