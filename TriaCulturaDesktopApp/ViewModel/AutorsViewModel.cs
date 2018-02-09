@@ -38,7 +38,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _authors = value;
-                NotifyPropertyChanged();
+                RaisePropertyChanged("AuthorsL");
             }
         }
 
@@ -184,12 +184,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         private void FillAuthors(int n)
         {
 
-            if (AuthorsL != null && AuthorsL.Count == 0)
-            {
-                AuthorsL.Clear();
-            }
+            AuthorsL = null;
             AuthorsL = new ObservableCollection<author>(context.authors.OrderBy(x => x.dni).ToList());
-            if (AuthorsL != null && AuthorsL.Count < 0)
+            if (AuthorsL != null && AuthorsL.Count > 0)
             {
                 SelectedAuthor = AuthorsL[n];
             }
