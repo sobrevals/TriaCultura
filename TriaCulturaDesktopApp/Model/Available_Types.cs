@@ -12,7 +12,7 @@ namespace TriaCulturaDesktopApp.Model
         {
             get
             {
-                return new List<string>(new string[] { "Exposició", "Concert", "Teatre", "Performance", "Circ", "Cercavila" });
+                return new List<string>(new string[] { "Exposició", "Film", "Concert", "Teatre", "Performance", "Circ", "Cercavila" });
             }
         }
     }
