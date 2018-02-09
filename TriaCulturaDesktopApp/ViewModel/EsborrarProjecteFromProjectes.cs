@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TriaCulturaDesktopApp.Model;
 
+
 namespace TriaCulturaDesktopApp.ViewModel
 {
     class EsborrarProjecteFromProjectes : ViewModelBase, IUserDialogViewModel

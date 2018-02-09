@@ -91,7 +91,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public void fillProjectes(project p)
         {
             fillProjectes(0);
-            if (p != null && p.id_project!=0)
+            if (p != null && p.id_project != 0)
             {
                 SelectedProject = ProjectsL.Where(x => x.id_project == p.id_project).SingleOrDefault();
             }
@@ -155,11 +155,11 @@ namespace TriaCulturaDesktopApp.ViewModel
                 {
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().author_dni = aux_project.author_dni;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().title = aux_project.title;
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().topic= aux_project.topic;
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description= aux_project.description;
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests= aux_project.requests;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().topic = aux_project.topic;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description = aux_project.description;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests = aux_project.requests;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().type= aux_project.type;
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().type = aux_project.type;
                     context.SaveChanges();
                     fillProjectes(SelectedProject);
                     sender.Close();
@@ -171,13 +171,44 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand TreureProjecte_author { get { return new RelayCommand(RemProjecte_autor); } }
         protected virtual void RemProjecte_autor()
         {
-            if (SelectedProject!=null)
+            if (SelectedProject != null)
             {
-                project d = SelectedProject;
-                author aux = SelectedProject.author;
-                aux.projects.Remove(d);
-                context.SaveChanges();
-                fillProjectes(0);
+                project aux_project = new project();
+
+                aux_project = SelectedProject;
+                aux_project.author_dni = SelectedProject.author_dni;
+
+                this.Dialogs.Add(new EsborrarProjecteFromProjectes()
+                {
+                    Project = aux_project,
+                    Title = "Eliminar Projecte",
+                    OkText = "Delete",
+                    OnOk = (sender) =>
+                    {
+                        List<request> requestDelList = aux_project.requests.ToList();
+
+                        foreach (request item in requestDelList)
+                        {
+                            request r = context.requests.Where(x => x.id_request == item.id_request).SingleOrDefault();
+
+                            context.requests.Remove(r);
+                        }
+                        context.projects.Remove(aux_project);
+                        context.SaveChanges();
+                        fillProjectes(0);
+                        sender.Close();
+                    },
+                    OnCancel = (sender) =>
+                    {
+                        fillProjectes(0);
+                        sender.Close();
+                    },
+                    OnCloseRequest = (sender) =>
+                    {
+                        fillProjectes(0);
+                        sender.Close();
+                    }
+                });
             }
         }
 
