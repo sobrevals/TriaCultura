@@ -87,6 +87,15 @@ namespace TriaCulturaDesktopApp.ViewModel
                 SelectedProject = ProjectsL[n];
             }
         }
+
+        public void fillProjectes(project p)
+        {
+            fillProjectes(0);
+            if (p != null && p.id_project!=0)
+            {
+                SelectedProject = ProjectsL.Where(x => x.id_project == p.id_project).SingleOrDefault();
+            }
+        }
         #endregion
 
         #region RequestClose
@@ -119,6 +128,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 {
                     context.projects.Add(aux_project);
                     context.SaveChanges();
+                    fillProjectes(aux_project);
                     sender.Close();
                 },
                 OnCloseRequest = (sender) => { sender.Close(); },
@@ -151,6 +161,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().type= aux_project.type;
                     context.SaveChanges();
+                    fillProjectes(SelectedProject);
                     sender.Close();
                 },
                 OnCloseRequest = (sender) => { sender.Close(); },
