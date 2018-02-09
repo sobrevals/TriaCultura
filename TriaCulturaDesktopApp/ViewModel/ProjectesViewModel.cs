@@ -71,6 +71,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             titol = "Projectes";
             Author = context.authors.Where(x => x.dni == a.dni).SingleOrDefault();
+            fillProjectes(0);
         }
 
 
@@ -80,8 +81,14 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void fillProjectes(int n)
         {
-            ProjectsL = new ObservableCollection<project>(context.projects.OrderBy(x => x.id_project).ToList());
-
+            if (Author != null)
+            {
+                ProjectsL = new ObservableCollection<project>(context.projects.OrderBy(x => x.id_project).ToList());
+            }
+            else
+            {
+                ProjectsL = new ObservableCollection<project>(Author.projects.OrderBy(x => x.id_project).ToList());
+            }
             if (ProjectsL != null && ProjectsL.Count != 0)
             {
                 SelectedProject = ProjectsL[n];

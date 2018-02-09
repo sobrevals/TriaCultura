@@ -97,12 +97,14 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
+            author aux_author = SelectedAuthor;
+
             if (SelectedAuthor != null)
             {
-                this.Dialogs.Add(new ProjectesViewModel(SelectedAuthor, true)
+                this.Dialogs.Add(new ProjectesViewModel(aux_author, true)
                 {
                     Boto_afegir_enabled = true,
-                    ProjectsL = new ObservableCollection<project>(SelectedAuthor.projects.ToList())
+                    ProjectsL = new ObservableCollection<project>(SelectedAuthor.projects.ToList()),
                 });
             }
         }
