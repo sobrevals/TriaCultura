@@ -92,10 +92,10 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         #endregion
 
+        
         public Action<EsborrarProjecteFromProjectes> OnOk { get; set; }
         public Action<EsborrarProjecteFromProjectes> OnCancel { get; set; }
         public Action<EsborrarProjecteFromProjectes> OnCloseRequest { get; set; }
-
-       
+               
     }
 }
