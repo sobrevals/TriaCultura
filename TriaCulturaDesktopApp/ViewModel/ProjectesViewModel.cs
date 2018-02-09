@@ -185,8 +185,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                     OkText = "Delete",
                     OnOk = (sender) =>
                     {
-
-
                         List<request> requestDelList = aux_project.requests.ToList();
 
                         foreach (request item in requestDelList)
@@ -197,8 +195,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                         }
                         context.projects.Remove(aux_project);
                         context.SaveChanges();
+                        fillProjectes(0);
                         sender.Close();
-
                     },
                     OnCancel = (sender) =>
                     {
