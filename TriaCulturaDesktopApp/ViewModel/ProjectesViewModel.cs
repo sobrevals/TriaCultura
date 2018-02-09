@@ -24,13 +24,13 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         #region BasicProperties
 
-        private List<project> _projectsL;
+        private ObservableCollection<project> _projectsL;
         private int _selectedIndexProject;
         private project _selectedProject;
         private bool _boto_afegir_enabled;
         private author _author;
         public String titol { get; set; }
-        public List<project> ProjectsL { get { return _projectsL; } set { _projectsL = value; NotifyPropertyChanged(); } }
+        public ObservableCollection<project> ProjectsL { get { return _projectsL; } set { _projectsL = value; RaisePropertyChanged("ProjectsL"); } }
 
         public int SelectedIndexProject
         {
@@ -80,7 +80,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void fillProjectes(int n)
         {
-            ProjectsL = context.projects.OrderBy(x => x.id_project).ToList();
+            ProjectsL = new ObservableCollection<project>(context.projects.OrderBy(x => x.id_project).ToList());
 
             if (ProjectsL != null && ProjectsL.Count != 0)
             {
