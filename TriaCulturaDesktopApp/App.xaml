@@ -19,6 +19,7 @@
         <View:Projectes x:Key="{x:Type ViewModel:ProjectesViewModel}" x:Shared="False"/>
         <View:Esborrar_AutorBuitDialog x:Key="{x:Type ViewModel:Esborrar_AutorBuitDialogViewModel}" x:Shared="False"/>
         <View:Esborrar_ProjectesDialog x:Key="{x:Type ViewModel:ProjecteEsborrarDialogModel}" x:Shared="False"/>
+        <View:EsborrarProjecteFromProjectesDialog x:Key="{x:Type ViewModel:EsborrarProjecteFromProjectes}" x:Shared="False"/>
         <!--<View:MainWindow x:Key="{x:Type ViewModel:MainWindowViewModel}" x:Shared="False"/>-->
     </Application.Resources>
 </Application>

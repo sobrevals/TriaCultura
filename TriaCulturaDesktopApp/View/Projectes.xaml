@@ -19,7 +19,7 @@
                 <DataGridTextColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Títol" Width="Auto" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding topic}" ClipboardContentBinding="{x:Null}" Header="Tema" Width="Auto" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding type}" ClipboardContentBinding="{x:Null}" Header="Tipus" Width="Auto" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Autor" Width="Auto" IsReadOnly="True" Binding="{Binding author.completeName}"/>
+                <DataGridTextColumn Header="Autor" Width="Auto" IsReadOnly="True" Binding="{Binding author.nameComplet}"/>
             </DataGrid.Columns>
         </DataGrid>
 
