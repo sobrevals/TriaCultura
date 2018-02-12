@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="EsborrarProjecteFromProjectesDialog" Height="186.397" Width="300">
     <Grid>
-        <Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Left" Margin="28,94,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
+        <Button x:Name="btn_cancel" Command="{Binding CancelCommand}" Content="Cancel" HorizontalAlignment="Left" Margin="28,94,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
         <Button x:Name="btn_aceptar" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Margin="167,94,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
         <Label x:Name="text_Missatge" Content="Esta seguro que vol borrar aquest projecte?;" HorizontalAlignment="Left" Margin="72,23,0,0" VerticalAlignment="Top" Width="151" Height="32"/>
 
