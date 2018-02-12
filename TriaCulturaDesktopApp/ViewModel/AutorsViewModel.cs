@@ -295,7 +295,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
                             foreach (project subitem in projectsDelList)
                             {
-                                project projectDel = aux_author.projects.SingleOrDefault();
+                                project projectDel = aux_author.projects.Where(x=> x.id_project== subitem.id_project).SingleOrDefault();
                                 List<request> requestDelList = projectDel.requests.ToList();
 
                                 foreach (request item in requestDelList)
