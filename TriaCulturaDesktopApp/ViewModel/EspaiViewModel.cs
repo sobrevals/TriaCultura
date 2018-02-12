@@ -73,6 +73,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _placeWithProject = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -86,6 +87,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _placeWithoutProject = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -191,7 +193,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public EspaiViewModel(project p)
         {
-            SelectedProject = context.projects.Where(x => x.id_project == p.id_project).SingleOrDefault();
+            SelectedProject = p;
             fillPlaces(0);
             fillProjectPlaces(0);
         }
@@ -242,26 +244,31 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region filling
         public void fillPlaces(int n)
         {
-            List<request> aux_request_list = context.requests.Where(x => x.project_id != SelectedProject.id_project).ToList();
-            List<place> aux_place_list = new List<place>();
-            foreach (request r in aux_request_list)
+            if (SelectedProject != null)
             {
-                aux_place_list.Add(r.place);
+                List<request> aux_project_request_list = SelectedProject.requests.ToList();
+                List<place> places_requested = aux_project_request_list.Select(x => x.place).Distinct().ToList();
+                List<place> all_places = context.places.ToList();
+                all_places.RemoveAll(x => places_requested.Contains(x));
+
+                PlaceWithoutProject = new ObservableCollection<place>(all_places);
             }
-            PlaceWithoutProject = new ObservableCollection<place>(aux_place_list);
         }
 
 
         public void fillProjectPlaces(int n)
         {
-            List<request> aux_request_list = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
-            List<place> aux_place_list = new List<place>();
-            foreach (request r in aux_request_list)
+            if (SelectedProject != null)
             {
-                aux_place_list.Add(r.place);
+                List<request> aux_request_list = SelectedProject.requests.ToList();
+                List<place> aux_place_list = aux_request_list.Select(x => x.place).Distinct().ToList();
+                
+                PlaceWithProject = new ObservableCollection<place>(aux_place_list);
             }
         }
+
         #endregion
+
         #region propertychanged
         protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {

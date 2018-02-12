@@ -219,26 +219,29 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         #endregion
 
-        //protected void save_changes()
-        //{
-        //    if (context.projects.Where(x => x.id_project == Projecte.id_project).ToList().Count == 1)
-        //    {
-        //        context.projects.Where(x => x.id_project == Projecte.id_project).ToList()[0] = Projecte;
-        //    }
-        //    else
-        //    {
-        //        context.projects.Add(Projecte);
-        //    }
-        //    context.SaveChanges();
-        //    Projecte = context.projects.Where(x => x.id_project == Projecte.id_project).SingleOrDefault();
-        //}
-        #region Commands  
+        #region Commands
+
+        public ICommand AfegirRequest_place { get { return new RelayCommand(AddPlace_request); } }
 
         protected virtual void AddPlace_request()
         {
-            request r = _selectedRequest_place;
-            Projecte.requests.Add(r);
-            context.SaveChanges();
+            project aux_project = new project();
+            aux_project.requests = Projecte.requests;
+            aux_project.id_project = Projecte.id_project;
+            aux_project.author_dni = Projecte.author_dni;
+            aux_project.description = Projecte.description;
+            aux_project.files = Projecte.files;
+            aux_project.title= Projecte.title;
+            aux_project.topic= Projecte.topic;
+            aux_project.type= Projecte.type;
+            
+            this.Dialogs.Add(new EspaiViewModel(aux_project)
+            {
+                SelectedProject = aux_project,
+                
+
+            });
+
             FillRequests_all(0);
         }
         public ICommand TreureRequest_place { get { return new RelayCommand(RemRequest_place); } }
@@ -266,7 +269,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         protected virtual void AddFitxer()
         {
 
-        }*/
+        }
         public ICommand Finalitzar { get { return new RelayCommand(SaveProject); } }
 
 
@@ -286,65 +289,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
 
 
-        public void deleteProject()
-        {
-
-            project aux_project = new Model.project();
-
-            if (Projecte != null)
-            {
-                aux_project.id_project = Projecte.id_project;
-                aux_project.author_dni = Projecte.author_dni;
-                aux_project.title = Projecte.title;
-                aux_project.type = Projecte.type;
-                aux_project.topic = Projecte.topic;
-                aux_project.requests = Projecte.requests;
-                aux_project.files = Projecte.files;
-                aux_project.author = Projecte.author;
-              /*  this.Dialogs.Add(new ProjectesViewModel
-                {
-                    Title = "Esborrar Projecte",
-                    Telefon = aux_project,
-                    Id_item = aux_project.id_phone,
-                    Type_item = aux_tel.type,
-                    DataText = "Numero",
-                    Data_item = aux_tel.num,
-                    TextEnabled = false,
-                    TextEnabled_type = false,
-                    OkText = "Esborra",
-                    OnOk = (sender) =>
-                    {
-                        Author.phones.Remove(SelectedPhone);
-                        FillTelefons();
-                        sender.Close();
-                    },
-                    OnCancel = (sender) => { sender.Close(); },
-                    OnCloseRequest = (sender) => { sender.Close(); }
-                });*/
-            }
-        }
-
-
-        public ICommand AfegirRequest_place { get { return new RelayCommand(afegirPlace); } }
-        protected virtual void afegirPlace()
-        {
-            //save_changes();
-            request aux_request = new request();
-            aux_request.project_id = Projecte.id_project;
-
-            this.Dialogs.Add(new EspaiViewModel(Projecte)
-            {
-                SelectedProject = Projecte,
-                OnOk = (sender) =>
-                {
-                    context.SaveChanges();
-                    FillRequest_place(0);
-                    sender.Close();
-                },
-                OnCancel = (sender) => { sender.Close(); },
-                OnCloseRequest = (sender) => { sender.Close(); }
-            });
-        }
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
         protected virtual void GuardarIEnrere()
         {

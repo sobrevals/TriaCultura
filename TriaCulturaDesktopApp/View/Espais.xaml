@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel" 
+        xmlns:View="clr-namespace:TriaCulturaDesktopApp.View"
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
+        dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"          
         mc:Ignorable="d"
         Title="Espais" Height="300" Width="435">
+    <Window.DataContext>
+        <ViewModel:EspaiViewModel/>
+    </Window.DataContext>
     <Grid>
         <Label x:Name="lbDisciplina" Content="Espais" HorizontalAlignment="Left" Margin="164,10,0,0" VerticalAlignment="Top" Width="70" FontFamily="Verdana" FontSize="11"/>
         <ListBox x:Name="lbEspais_agafats" HorizontalAlignment="Left" ItemsSource="{Binding PlaceWithProject}" DisplayMemberPath="{Binding name}" SelectedItem="{Binding SelectedPlace_fromProject}"  Height="177" Margin="229,57,0,0" VerticalAlignment="Top" Width="130" FontFamily="Verdana" FontSize="11"/>
