@@ -50,13 +50,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         public project Projecte
         {
             get
-            {
-                return _projecte;
-            }
+            { return _projecte; }
 
             set
-            {
-                _projecte = value;
+            { _projecte = value;
                 NotifyPropertyChanged("Project");
             }
         }
@@ -297,8 +294,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         public Action<ProjecteViewModel> OnCloseRequest { get; set; }
 
 
- 
-        public static RelayCommand OpenCommand { get; set; }
+        #region OpenFile
+        public static RelayCommand OpenFile{ get; set; }
         private string _selectedPath;
         public string SelectedPath
         {
@@ -315,7 +312,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         private void RegisterCommands()
         {
-            OpenCommand = new RelayCommand(ExecuteOpenFileDialog);
+            OpenFile = new RelayCommand(ExecuteOpenFileDialog);
         }
 
         private void ExecuteOpenFileDialog()
@@ -325,6 +322,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 
             SelectedPath = dialog.FileName;
         }
-
+        #endregion
     }
 }
