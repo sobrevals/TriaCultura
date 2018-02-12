@@ -10,22 +10,50 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         mc:Ignorable="d"
-        Title="Autors" Height="343.493" Width="405.43">
+        Title="Autors" Height="343.493" Width="399.43">
     <Window.DataContext>
         <ViewModel:AutorsViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="datagrid_autors" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="249" Width="250" ItemsSource="{Binding AuthorsL}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedAuthor}">
+        <DataGrid x:Name="datagrid_autors" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="249" Width="267" ItemsSource="{Binding AuthorsL}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedAuthor}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding dni}" ClipboardContentBinding="{x:Null}" Header="Dni" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding name}" ClipboardContentBinding="{x:Null}" Header="Nom" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding surname}" ClipboardContentBinding="{x:Null}" Header="Cognom" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btn_afegir" Command="{Binding afegirAutor}" Content="Afegir" HorizontalAlignment="Left" Margin="291,54,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.051,-0.635"/>
-        <Button x:Name="btn_modificar" Command="{Binding modificarAutor}" Content="Modificar" HorizontalAlignment="Left" Margin="291,99,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.051,-0.635"/>
-        <Button x:Name="btn_projectes" Command="{Binding OpenProjecte}" Content="Projectes" HorizontalAlignment="Left" Margin="291,149,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.051,-0.635"/>
-        <Button x:Name="btn_eliminar" Command="{Binding eliminarAutor}" Content="Eliminar" HorizontalAlignment="Left" Margin="291,192,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.051,-0.635"/>
+        <Button x:Name="btn_afegir" Command="{Binding afegirAutor}" Content=""  HorizontalAlignment="Left" Margin="308,13,0,0" VerticalAlignment="Top" Width="44" RenderTransformOrigin="-0.051,-0.635" Height="42" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_user_add_36957.png" Stretch="None"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_user_add_36957.png" Stretch="None"/>
+            </Button.Background>
+        </Button>                  
+        <Button x:Name="btn_eliminar" Command="{Binding eliminarAutor}" Content="" HorizontalAlignment="Left" Margin="308,78,0,0" VerticalAlignment="Top" Width="44" RenderTransformOrigin="-0.051,-0.635" Height="42" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush Stretch="None" ImageSource="/TriaCulturaDesktopApp;component/Resources/if_user_close_36968.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_user_close_36968.png" Stretch="None"/>
+            </Button.Background>
+        </Button>       
+        <Button x:Name="btn_modificar" Command="{Binding modificarAutor}" Content="" HorizontalAlignment="Left" Margin="308,146,0,0" VerticalAlignment="Top" Width="44" RenderTransformOrigin="-0.051,-0.635" Height="42" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush Stretch="None" ImageSource="/TriaCulturaDesktopApp;component/Resources/if_pencil_36945.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_pencil_36945.png" Stretch="None"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btn_projectes" Command="{Binding OpenProjecte}" Content="" HorizontalAlignment="Left" Margin="308,214,0,0" VerticalAlignment="Top" Width="44" RenderTransformOrigin="-0.051,-0.635" Height="42" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_page_table_36935.png" Stretch="None"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_page_table_36935.png" Stretch="None"/>
+            </Button.Background>
+        </Button>
         <Button x:Name="btn_enrera" Command="{Binding tornarEnrere}" Content="Enrera" HorizontalAlignment="Left" Margin="10,275,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
