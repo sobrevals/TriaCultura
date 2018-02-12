@@ -11,6 +11,7 @@ using TriaCulturaDesktopApp.Model;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -28,7 +29,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         private request _selectedPlace_fromProjects;
         private List<string> _types;
         private string _selectedType;
-        
+        private int _selectedIndexType;
+
+
 
 
         public String titol { get; set; }
@@ -87,6 +90,20 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
+        public int SelectedIndexType
+        {
+            get
+            {
+                return _selectedIndexType;
+            }
+
+            set
+            {
+                _selectedIndexType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private ObservableCollection<string> _requestL;
         private ObservableCollection<string> RequestL { get { return _requestL; } set { _requestL = value; NotifyPropertyChanged(); } }
 
@@ -141,13 +158,24 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void FillTipus()
         {
+           
             Types = tipus.types;
             if (Projecte.type != null)
             {
-                SelectedType = Types.Where(x => x == Projecte.type).SingleOrDefault();
+                string aux_type = Projecte.type;
+                aux_type = Regex.Replace(aux_type, @"\s", "");
+                for (int i = 0; i < Types.Count; i++)
+                {
+                    if (Types[i].Contains(aux_type))
+                    {
+                        SelectedType = Types[i];
+                        SelectedIndexType = i;
+                    }
+                }
             } else
             {
                 SelectedType = Types[0];
+                SelectedIndexType=0;
             }
         }
 
@@ -314,7 +342,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
         protected virtual void GuardarIEnrere()
         {
-            Projecte.type = SelectedType;
+            Projecte.type = Types[SelectedIndexType];
             if (Projecte.title != null && Projecte.description != null && Projecte.topic != null && Projecte.type != null)
             {
                 if (this.OnOk != null)

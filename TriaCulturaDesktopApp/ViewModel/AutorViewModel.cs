@@ -339,7 +339,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Add(new ProjectesViewModel(Author, true)
             {
                 Boto_afegir_enabled = true,
-                ProjectsL = Author.projects.ToList()
+                ProjectsL = new ObservableCollection<project>(Author.projects.ToList())
             });
         }
 

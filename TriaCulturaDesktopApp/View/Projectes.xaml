@@ -14,7 +14,7 @@
         <ViewModel:ProjectesViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="260" Width="385" ItemsSource="{Binding ProjectsL}" SelectedItem="{Binding SelectedProject}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="260" Width="385" ItemsSource="{Binding ProjectsL}" SelectedIndex="{Binding SelectedIndexProject}" SelectedItem="{Binding SelectedProject}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False">
             <DataGrid.Columns>             
                 <DataGridTextColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Títol" Width="Auto" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding topic}" ClipboardContentBinding="{x:Null}" Header="Tema" Width="Auto" IsReadOnly="True"/>

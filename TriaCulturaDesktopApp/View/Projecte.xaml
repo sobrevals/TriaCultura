@@ -34,7 +34,7 @@
         <Button x:Name="bt_add_Copy" Content="ADD" HorizontalAlignment="Left" Margin="165,228,0,0" VerticalAlignment="Top" Width="45"/>
         <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBox x:Name="tb_description" HorizontalAlignment="Left" Height="110" Margin="294,113,0,0" TextWrapping="Wrap" Text="{Binding Projecte.description}" VerticalAlignment="Top" Width="374" AcceptsReturn="True" />
-        <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="318,53,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" IsSynchronizedWithCurrentItem="True"/><!--SelectedItem="{Binding Path=Projecte.type, Mode=TwoWay}"-->
+        <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="318,53,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" SelectedIndex="{Binding SelectedIndexType}" IsSynchronizedWithCurrentItem="True"/><!--SelectedItem="{Binding Path=Projecte.type, Mode=TwoWay}"-->
 
     </Grid>
 </Window>

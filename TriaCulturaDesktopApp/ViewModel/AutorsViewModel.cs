@@ -38,7 +38,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _authors = value;
-                NotifyPropertyChanged();
+                RaisePropertyChanged("AuthorsL");
             }
         }
 
@@ -97,12 +97,14 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
+            author aux_author = SelectedAuthor;
+
             if (SelectedAuthor != null)
             {
-                this.Dialogs.Add(new ProjectesViewModel(SelectedAuthor, true)
+                this.Dialogs.Add(new ProjectesViewModel(aux_author, true)
                 {
                     Boto_afegir_enabled = true,
-                    ProjectsL = SelectedAuthor.projects.ToList()
+                    ProjectsL = new ObservableCollection<project>(SelectedAuthor.projects.ToList()),
                 });
             }
         }
@@ -184,12 +186,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         private void FillAuthors(int n)
         {
 
-            if (AuthorsL != null && AuthorsL.Count == 0)
-            {
-                AuthorsL.Clear();
-            }
+            AuthorsL = null;
             AuthorsL = new ObservableCollection<author>(context.authors.OrderBy(x => x.dni).ToList());
-            if (AuthorsL != null && AuthorsL.Count < 0)
+            if (AuthorsL != null && AuthorsL.Count > 0)
             {
                 SelectedAuthor = AuthorsL[n];
             }
@@ -296,7 +295,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
                             foreach (project subitem in projectsDelList)
                             {
-                                project projectDel = aux_author.projects.SingleOrDefault();
+                                project projectDel = aux_author.projects.Where(x=> x.id_project== subitem.id_project).SingleOrDefault();
                                 List<request> requestDelList = projectDel.requests.ToList();
 
                                 foreach (request item in requestDelList)
