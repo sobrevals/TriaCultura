@@ -81,7 +81,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void fillProjectes(int n)
         {
-            if (Author != null)
+            if (Author == null)
             {
                 ProjectsL = new ObservableCollection<project>(context.projects.OrderBy(x => x.id_project).ToList());
             }
