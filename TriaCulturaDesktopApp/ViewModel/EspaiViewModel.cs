@@ -229,7 +229,15 @@ namespace TriaCulturaDesktopApp.ViewModel
             r.project_id = SelectedProject.id_project;
             r.place_id = SelectedPlace_fromProject.id_place;
             r.place = SelectedPlace_fromProject;
-            SelectedProject.requests.Remove(r);
+            List<request> aux_list = SelectedProject.requests.ToList();
+            foreach (request req in aux_list)
+            {
+                if (req.place_id.Equals(r.place_id))
+                {
+                    SelectedProject.requests.Remove(req);
+                }
+            }
+            //SelectedProject.requests.Remove(r);
             fillPlaces(0);
             fillProjectPlaces(0);
         }
@@ -294,7 +302,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 List<request> aux_request_list = SelectedProject.requests.ToList();
                 List<place> aux_place_list = aux_request_list.Select(x => x.place).Distinct().ToList();
-                
+
 
 
                 PlaceWithProject = new ObservableCollection<place>(aux_place_list);
