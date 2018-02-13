@@ -270,23 +270,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
 
         }
-        public ICommand Finalitzar { get { return new RelayCommand(SaveProject); } }
-
-
-
-        public void SaveProject()
-        {
-            //if (context.projects.Select(x => x.id_project).ToList().Contains(Projecte.id_project))
-            //{
-            //    context.projects.Where(x => x.id_project == Projecte.id_project).ToList()[0] = Projecte;
-            //}
-            //else
-            //{
-            //    context.projects.Add(Projecte);
-            //}
-            //context.SaveChanges();
-            //Close();
-        }
 
 
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
