@@ -22,33 +22,21 @@ namespace TriaCulturaDesktopApp.ViewModel
         Available_Types tipus = new Available_Types();
 
         #region BasicProperties
-        private List<place> _place;
-        private List<request> _request;
+        
         private project _projecte;
         private ObservableCollection<file> _files;
         private request _selectedRequest;
-        private request _selectedRequest_place;
-        private request _selectedPlace_fromProjects;
+        
         private List<string> _types;
         private string _selectedType;
         private int _selectedIndexType;
 
 
-
+        public request SelectedRequest { get { return _selectedRequest; } set { _selectedRequest = value; NotifyPropertyChanged();RaisePropertyChanged("SelectedRequest"); } }
 
         public String titol { get; set; }
-        public List<place> Places
-        { get { return _place; } set { _place = value; NotifyPropertyChanged(); } }
+
         public ObservableCollection<file> Files { get { return _files; } set { _files = value; NotifyPropertyChanged(); } }
-
-        public List<request> Request
-        { get { return _request; } set { _request = value; NotifyPropertyChanged(); } }
-
-        public request SelectedRequest
-        { get { return _selectedRequest; } set { _selectedRequest = value; NotifyPropertyChanged(); } }
-
-        public request SelectedRequest_fromPlace
-        { get { return _selectedPlace_fromProjects; } set { _selectedPlace_fromProjects = value; NotifyPropertyChanged(); } }
 
         public project Projecte
         {
@@ -104,8 +92,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-        private ObservableCollection<string> _requestL;
-        private ObservableCollection<string> RequestL { get { return _requestL; } set { _requestL = value; NotifyPropertyChanged(); } }
+        private ObservableCollection<request> _requestL;
+        public ObservableCollection<request> RequestL { get { return _requestL; } set { _requestL = value; NotifyPropertyChanged(); } }
 
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; NotifyPropertyChanged(); } }
@@ -149,10 +137,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             if (Projecte != null)
             {
-                Request = Projecte.requests.ToList();
-                if (Places != null && index >= 0 && index < Places.Count)
+                RequestL = new ObservableCollection<request>(Projecte.requests.ToList());
+                if (RequestL!= null && index >= 0 && index < RequestL.Count)
                 {
-                    _selectedRequest_place = Request[index];
+                    SelectedRequest= RequestL[index];
                 }
             }
         }
@@ -180,20 +168,6 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-
-
-        private void FillRequest_place(int index)
-        {
-            // ProjectWithPlace != null && n > 0
-            if (Projecte != null && index > 0)
-            {
-                SelectedRequest_fromPlace = Projecte.requests.ToList()[index];
-            }
-            else
-            {
-                Projecte = new project();
-            }
-        }
 
         private void FillFiles()
         {
@@ -228,21 +202,34 @@ namespace TriaCulturaDesktopApp.ViewModel
             project aux_project = new project();
             aux_project.requests = Projecte.requests;
             aux_project.id_project = Projecte.id_project;
-            aux_project.author_dni = Projecte.author_dni;
-            aux_project.description = Projecte.description;
-            aux_project.files = Projecte.files;
-            aux_project.title= Projecte.title;
-            aux_project.topic= Projecte.topic;
-            aux_project.type= Projecte.type;
+            //aux_project.author_dni = Projecte.author_dni;
+            //aux_project.description = Projecte.description;
+            //aux_project.files = Projecte.files;
+            //aux_project.title= Projecte.title;
+            //aux_project.topic= Projecte.topic;
+            //aux_project.type= Projecte.type;
             
             this.Dialogs.Add(new EspaiViewModel(aux_project)
             {
-                SelectedProject = aux_project,
-                
+               SelectedProject = aux_project,
+               OnOk = (sender) =>
+               {
+                   Projecte.requests = aux_project.requests;
+                   FillRequests_all(0);
+                   sender.Close();
+               },
+               OnCancel = (sender) =>
+               {
+                   FillRequests_all(0);
+                   sender.Close();
+               },
+               OnCloseRequest = (sender) =>
+               {
+                   FillRequests_all(0);
+                   sender.Close();
+               }
 
             });
-
-            FillRequests_all(0);
         }
         public ICommand TreureRequest_place { get { return new RelayCommand(RemRequest_place); } }
         protected virtual void RemRequest_place()
@@ -362,7 +349,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                 fitxer.extension = Path.GetExtension(SelectedPath);
                 fitxer.path = SelectedPath;
                 context.files.Add(fitxer);
-                context.SaveChanges();
                 FillFiles();
             }
 

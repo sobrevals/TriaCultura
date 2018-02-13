@@ -24,7 +24,7 @@
         <ListBox x:Name="lbx_file" ItemsSource="{Binding Files}" SelectionMode="Single"  HorizontalAlignment="Left" Height="93" Margin="22,185,0,0" VerticalAlignment="Top" Width="126" DisplayMemberPath="name"/>
         <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="358,23,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="358,82,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbx_place"  ItemsSource="{Binding Request}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest}" DisplayMemberPath="place.name" HorizontalAlignment="Left" Height="109" Margin="455,259,0,0" VerticalAlignment="Top" Width="122"/>
+        <ListBox x:Name="lbx_place" ItemsSource="{Binding RequestL}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest}" DisplayMemberPath="place.name" HorizontalAlignment="Left" Height="109" Margin="455,259,0,0" VerticalAlignment="Top" Width="122"/>
         <Label x:Name="lb_place" Content="Espais Solicitats" HorizontalAlignment="Left" Margin="472,228,0,0" VerticalAlignment="Top"/>
         <Button x:Name="bt_save" Command="{Binding OkCommand}" Content="Guardar i Finalitzar" HorizontalAlignment="Left" Margin="550,376,0,0" VerticalAlignment="Top" Width="118"/>
         <Button x:Name="bt_add" Command="{Binding AfegirRequest_place}" Content="+" HorizontalAlignment="Left" Margin="393,272,0,0" VerticalAlignment="Top" Width="45"/>
