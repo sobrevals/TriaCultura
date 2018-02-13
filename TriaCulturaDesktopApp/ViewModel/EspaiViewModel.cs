@@ -135,7 +135,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-        public place Selectedplace_fromProject
+        public place SelectedPlace_fromProject
         {
             get
             {
@@ -226,7 +226,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             request r = new request();
             r.project_id = SelectedProject.id_project;
-            r.place_id = Selectedplace_fromProject.id_place;
+            r.place_id = SelectedPlace_fromProject.id_place;
+            r.place = SelectedPlace_fromProject;
             SelectedProject.requests.Remove(r);
             fillPlaces(0);
             fillProjectPlaces(0);
@@ -263,8 +264,17 @@ namespace TriaCulturaDesktopApp.ViewModel
                 List<place> places_requested = aux_project_request_list.Select(x => x.place).Distinct().ToList();
                 //List<place> places_requested = context.places.Where(x => aux_project_request_list.Select(y => y.place_id).Equals(x.id_place)).ToList();
                 List<place> all_places = context.places.ToList();
-                List<place> aux_all_places = all_places;
-                foreach(place p in aux_all_places)
+                List<place> aux_all_places = new List<place>();
+
+                foreach (place item in all_places)
+                {
+                    if (places_requested.Select(x => x.id_place).ToList().Contains(item.id_place))
+                    {
+                        aux_all_places.Add(item);
+                    }
+                }
+
+                foreach (place p in aux_all_places)
                 {
                     if (places_requested.Select(x => x.id_place).ToList().Contains(p.id_place))
                     {
@@ -284,6 +294,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                 List<request> aux_request_list = SelectedProject.requests.ToList();
                 List<place> aux_place_list = aux_request_list.Select(x => x.place).Distinct().ToList();
                 
+
+
                 PlaceWithProject = new ObservableCollection<place>(aux_place_list);
             }
         }
