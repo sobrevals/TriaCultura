@@ -73,7 +73,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _placeWithProject = value;
-                RaisePropertyChanged();
+                NotifyPropertyChanged();
+                RaisePropertyChanged("PlaceWithProject");
             }
         }
 
@@ -87,7 +88,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             set
             {
                 _placeWithoutProject = value;
-                RaisePropertyChanged();
+                NotifyPropertyChanged();
+                RaisePropertyChanged("PlaceWithoutProject");
             }
         }
 
@@ -209,14 +211,25 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public virtual void addPlace()
         {
-            // MIRAR-SE DISCIPLINAVIEWMODEL I FER AQUEST
+            request r = new request();
+            r.project_id = SelectedProject.id_project;
+            r.place_id = SelectedPlace_fromPlaces.id_place;
+            r.place = SelectedPlace_fromPlaces;
+            SelectedProject.requests.Add(r);
+            fillPlaces(0);
+            fillProjectPlaces(0);
         }
 
         public ICommand treureEspai { get { return new RelayCommand(removePlace); } }
 
         public virtual void removePlace()
         {
-            // MIRAR-SE DISCIPLINAVIEWMODEL I FER AQUEST
+            request r = new request();
+            r.project_id = SelectedProject.id_project;
+            r.place_id = Selectedplace_fromProject.id_place;
+            SelectedProject.requests.Remove(r);
+            fillPlaces(0);
+            fillProjectPlaces(0);
         }
 
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
@@ -248,8 +261,16 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 List<request> aux_project_request_list = SelectedProject.requests.ToList();
                 List<place> places_requested = aux_project_request_list.Select(x => x.place).Distinct().ToList();
+                //List<place> places_requested = context.places.Where(x => aux_project_request_list.Select(y => y.place_id).Equals(x.id_place)).ToList();
                 List<place> all_places = context.places.ToList();
-                all_places.RemoveAll(x => places_requested.Contains(x));
+                List<place> aux_all_places = all_places;
+                foreach(place p in aux_all_places)
+                {
+                    if (places_requested.Select(x => x.id_place).ToList().Contains(p.id_place))
+                    {
+                        all_places.Remove(p);
+                    }
+                }
 
                 PlaceWithoutProject = new ObservableCollection<place>(all_places);
             }
