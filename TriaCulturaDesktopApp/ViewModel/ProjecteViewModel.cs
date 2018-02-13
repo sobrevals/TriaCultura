@@ -30,6 +30,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private request _selectedRequest_place;
         private request _selectedPlace_fromProjects;
         private List<string> _types;
+        private file _selectedFile;
         private string _selectedType;
         private int _selectedIndexType;
 
@@ -40,6 +41,8 @@ namespace TriaCulturaDesktopApp.ViewModel
         public List<place> Places
         { get { return _place; } set { _place = value; NotifyPropertyChanged(); } }
         public ObservableCollection<file> Files { get { return _files; } set { _files = value; NotifyPropertyChanged(); } }
+
+        public file SelectedFile { get { return _selectedFile; } set { _selectedFile = value; NotifyPropertyChanged(); } }
 
         public List<request> Request
         { get { return _request; } set { _request = value; NotifyPropertyChanged(); } }
@@ -321,6 +324,25 @@ namespace TriaCulturaDesktopApp.ViewModel
 
 
         #region OpenFile
+        public ICommand RemoveFile { get { return new RelayCommand(eliminarFile); } }
+        protected virtual void eliminarFile()
+        {
+            if (SelectedFile != null)
+            {
+                file aux_fitxer = SelectedFile;
+                aux_fitxer.id_file = SelectedFile.id_file;
+                aux_fitxer.project_id = SelectedFile.project_id;
+                aux_fitxer.name = SelectedFile.name;
+                aux_fitxer.path = SelectedFile.path;
+                aux_fitxer.extension = SelectedFile.extension;
+                context.files.Remove(aux_fitxer);
+                //context.SaveChanges();
+                FillFiles();
+            }
+        }
+
+
+
         public RelayCommand OpenFile{ get; set; }
         private string _selectedPath;
         public string SelectedPath
