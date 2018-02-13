@@ -10,26 +10,23 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         mc:Ignorable="d"
-        Title="TriaCultura Menú" Height="500" Width="530" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png" RenderTransformOrigin="0.5,0.5" AllowsTransparency="False" ShowInTaskbar="True">
+        Title="TriaCultura Menú" Height="500" Width="530" RenderTransformOrigin="0.5,0.5" ShowInTaskbar="True" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF256EB8" Offset="0"/>
-            <GradientStop Color="#FF87CF31" Offset="1"/>
-        </LinearGradientBrush>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>
     <Window.DataContext>
         <ViewModel:MainViewModel/>
     </Window.DataContext>
     <Grid>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="216" VerticalAlignment="Top" Width="282" Margin="128,10,0,0" Stretch="Fill">
+        <Image x:Name="image" HorizontalAlignment="Left" Height="216" VerticalAlignment="Top" Width="290" Margin="118,10,0,0" Stretch="UniformToFill" Source="/TriaCulturaDesktopApp;component/Resources/mc3a1scaras-de-teatro.png">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"/>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/mc3a1scaras-de-teatro.png" Stretch="UniformToFill"/>
             </Image.OpacityMask>
         </Image>
 
-        <Button x:Name="btAutors" Content="Autors" Command="{Binding OpenAuthors}" HorizontalAlignment="Left" Margin="185,231,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
-        <Button x:Name="btProjectes" Content="Projectes" Command="{Binding OpenProjectes}" HorizontalAlignment="Left" Margin="185,291,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
-        <Button x:Name="btSortir" Content="Salir" HorizontalAlignment="Left"  Command="{Binding CloseMain}" Margin="185,385,0,0" VerticalAlignment="Top" Width="160" Height="24"/>
+        <Button x:Name="btAutors" Content="Autors" Command="{Binding OpenAuthors}" HorizontalAlignment="Left" Margin="185,237,0,0" VerticalAlignment="Top" Width="160" Height="24" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <Button x:Name="btProjectes" Content="Projectes" Command="{Binding OpenProjectes}" HorizontalAlignment="Left" Margin="185,297,0,0" VerticalAlignment="Top" Width="160" Height="24" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <Button x:Name="btSortir" Content="Salir" HorizontalAlignment="Left"  Command="{Binding CloseMain}" Margin="185,385,0,0" VerticalAlignment="Top" Width="160" Height="24" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
 
     </Grid>
 </Window>
