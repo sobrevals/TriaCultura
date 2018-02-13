@@ -26,6 +26,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private project _projecte;
         private ObservableCollection<file> _files;
         private request _selectedRequest;
+        private file _selectedFile;
         
         private List<string> _types;
         private string _selectedType;
@@ -36,7 +37,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public String titol { get; set; }
 
-        public ObservableCollection<file> Files { get { return _files; } set { _files = value; NotifyPropertyChanged(); } }
+        public ObservableCollection<file> Files { get { return _files; } set { _files = value; NotifyPropertyChanged(); RaisePropertyChanged("Files"); } }
 
         public project Projecte
         {
@@ -48,6 +49,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                 NotifyPropertyChanged();
             }
         }
+
+        public file SelectedFile { get { return _selectedFile; } set { _selectedFile = value; NotifyPropertyChanged();RaisePropertyChanged("SelectedFile"); } }
 
         public List<string> Types
         {
@@ -308,6 +311,18 @@ namespace TriaCulturaDesktopApp.ViewModel
 
 
         #region OpenFile
+        public ICommand RemoveFile { get { return new RelayCommand(eliminarFile); } }
+        protected virtual void eliminarFile()
+        {
+            if (SelectedFile != null)
+            {
+                file aux_fitxer = context.files.Where(x => x.id_file == SelectedFile.id_file).SingleOrDefault();
+                context.files.Remove(aux_fitxer);
+                context.SaveChanges();
+                FillFiles();
+            }
+        }
+
         public RelayCommand OpenFile{ get; set; }
         private string _selectedPath;
         public string SelectedPath

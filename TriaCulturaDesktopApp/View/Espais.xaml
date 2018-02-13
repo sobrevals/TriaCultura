@@ -9,7 +9,10 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"          
         mc:Ignorable="d"
-        Title="Espais" Height="300" Width="435">
+        Title="Espais" Height="300" Width="435"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        >
     <Window.DataContext>
         <ViewModel:EspaiViewModel/>
     </Window.DataContext>
