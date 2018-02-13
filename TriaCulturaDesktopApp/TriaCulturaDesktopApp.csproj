@@ -291,6 +291,11 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\if_button_minus_red_14768.png" />
+    <Resource Include="Resources\if_button_plus_blue_14780.png" />
+    <Resource Include="Resources\if_redo_101174.png" />
+    <Resource Include="Resources\if_Save_70652.png" />
+    <Resource Include="Resources\if_undo_100964.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\if_undo_100961.png" />
