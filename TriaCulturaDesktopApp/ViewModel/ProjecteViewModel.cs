@@ -329,15 +329,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             if (SelectedFile != null)
             {
-                file aux_fitxer = SelectedFile;
-                aux_fitxer.id_file = SelectedFile.id_file;
-                aux_fitxer.project_id = SelectedFile.project_id;
-                aux_fitxer.name = SelectedFile.name;
-                aux_fitxer.path = SelectedFile.path;
-                aux_fitxer.extension = SelectedFile.extension;
+                file aux_fitxer = context.files.Where(x => x.id_file == SelectedFile.id_file).SingleOrDefault();
                 context.files.Remove(aux_fitxer);
-                //context.SaveChanges();
-                FillFiles();
+                context.SaveChanges();
             }
         }
 
