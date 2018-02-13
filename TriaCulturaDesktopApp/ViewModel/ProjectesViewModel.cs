@@ -169,7 +169,9 @@ namespace TriaCulturaDesktopApp.ViewModel
 
                     //List<request> aux_request_list = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
                     //foreach (request r in aux_request_list) { context.requests.Add(r); }
-                    //context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests = aux_project.requests;
+
+                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests = aux_project.requests;
+
 
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().type = aux_project.type;

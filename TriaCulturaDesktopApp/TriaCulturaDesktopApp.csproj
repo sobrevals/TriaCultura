@@ -86,10 +86,10 @@
     <Compile Include="Model\author.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Available_Types.cs" />
     <Compile Include="Model\capacity.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Available_Types.cs" />
     <Compile Include="Model\discipline.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -280,7 +280,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -292,6 +291,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\if_undo_100961.png" />
     <Resource Include="Resources\images2.jpg" />
     <Resource Include="Resources\mc3a1scaras-de-teatro.png" />
