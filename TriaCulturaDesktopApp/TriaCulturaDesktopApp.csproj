@@ -86,10 +86,10 @@
     <Compile Include="Model\author.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Available_Types.cs" />
     <Compile Include="Model\capacity.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Available_Types.cs" />
     <Compile Include="Model\discipline.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -280,7 +280,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -292,12 +291,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resources\if_floppy_285657.png" />
-    <Resource Include="Resources\if_Save_70652.png" />
-    <Resource Include="Resources\if_redo_101174.png" />
-    <Resource Include="Resources\if_button_minus_red_14768.png" />
-    <Resource Include="Resources\if_button_plus_blue_14780.png" />
-    <Resource Include="Resources\if_undo_100964.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\if_undo_100961.png" />
     <Resource Include="Resources\images2.jpg" />
     <Resource Include="Resources\mc3a1scaras-de-teatro.png" />

@@ -18,7 +18,7 @@ namespace TriaCulturaDesktopApp.Model
         public string name { get; set; }
         public string extension { get; set; }
         public string path { get; set; }
-        public int project_id { get; set; }
+        public Nullable<int> project_id { get; set; }
     
         public virtual project project { get; set; }
     }

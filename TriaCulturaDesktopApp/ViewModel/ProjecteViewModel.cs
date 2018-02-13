@@ -316,9 +316,23 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             if (SelectedFile != null)
             {
-                file aux_fitxer = context.files.Where(x => x.id_file == SelectedFile.id_file).SingleOrDefault();
-                context.files.Remove(aux_fitxer);
-                context.SaveChanges();
+                file aux_fitxer = new file();
+                aux_fitxer.extension = SelectedFile.extension;
+                aux_fitxer.path = SelectedFile.path;
+                aux_fitxer.name= SelectedFile.name;
+                aux_fitxer.id_file= SelectedFile.id_file;
+                aux_fitxer.project_id= SelectedFile.project_id;
+
+                List<file> aux_list = Projecte.files.ToList();
+                foreach (file f in aux_list)
+                {
+                    if (f.id_file.Equals(aux_fitxer.id_file))
+                    {
+                        Projecte.files.Remove(f);
+                    }
+                }
+                //Projecte.files.Remove(aux_fitxer);
+                //context.SaveChanges();
                 FillFiles();
             }
         }
@@ -363,7 +377,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 fitxer.name = Path.GetFileNameWithoutExtension(SelectedPath);
                 fitxer.extension = Path.GetExtension(SelectedPath);
                 fitxer.path = SelectedPath;
-                context.files.Add(fitxer);
+                Projecte.files.Add(fitxer);
                 FillFiles();
             }
 

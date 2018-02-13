@@ -11,9 +11,8 @@ namespace TriaCulturaDesktopApp.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
-    public partial class project 
+    
+    public partial class project
     {
         public project()
         {
@@ -31,6 +30,5 @@ namespace TriaCulturaDesktopApp.Model
         public virtual author author { get; set; }
         public virtual ICollection<file> files { get; set; }
         public virtual ICollection<request> requests { get; set; }
-
     }
 }
