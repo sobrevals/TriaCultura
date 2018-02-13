@@ -371,7 +371,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public void afegirPaths(project p)
         {
             if (Projecte != null)
-            { 
+            {
                 file fitxer = new file();
                 fitxer.project_id = p.id_project;
                 fitxer.name = Path.GetFileNameWithoutExtension(SelectedPath);

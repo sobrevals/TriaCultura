@@ -20,7 +20,10 @@
         <ViewModel:AutorsViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="datagrid_autors" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="249" Width="267" ItemsSource="{Binding AuthorsL}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedAuthor}">
+        <DataGrid x:Name="datagrid_autors" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="249" Width="279" ItemsSource="{Binding AuthorsL}" ColumnWidth="90" CanUserResizeColumns="False" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedAuthor}" FontFamily="Franklin Gothic Medium" FontSize="14">
+            <DataGrid.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+            </DataGrid.Background>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding dni}" ClipboardContentBinding="{x:Null}" Header="Dni" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding name}" ClipboardContentBinding="{x:Null}" Header="Nom" IsReadOnly="True"/>
@@ -61,10 +64,10 @@
         </Button>
         <Button x:Name="btn_enrera" Command="{Binding tornarEnrere}" Content="" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="44" Height="42">
             <Button.OpacityMask>
-                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100961.png"/>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
             </Button.OpacityMask>
             <Button.Background>
-                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100961.png"/>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
             </Button.Background>
         </Button>
 
