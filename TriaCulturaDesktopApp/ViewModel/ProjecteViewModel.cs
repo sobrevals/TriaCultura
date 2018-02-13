@@ -200,7 +200,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         private void FillFiles()
         {
-            Files = new ObservableCollection<file>(Projecte.files.ToList());
+            Files = new ObservableCollection<file>(context.files.Where(x=>x.project_id == Projecte.id_project).ToList());
         }
         #endregion
 
@@ -332,6 +332,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 file aux_fitxer = context.files.Where(x => x.id_file == SelectedFile.id_file).SingleOrDefault();
                 context.files.Remove(aux_fitxer);
                 context.SaveChanges();
+                FillFiles();
             }
         }
 
@@ -370,7 +371,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         public void afegirPaths(project p)
         {
-            if (Projecte != null)
+            if (Projecte != null && SelectedPath.Length>0)
             {
                 file fitxer = new file();
                 fitxer.project_id = p.id_project;
