@@ -269,7 +269,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         protected virtual void AddFitxer()
         {
 
-        }
+        }*/
 
 
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }

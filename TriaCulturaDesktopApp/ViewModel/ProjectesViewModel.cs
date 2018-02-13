@@ -122,6 +122,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
 
         #region ICommand
+        public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public ICommand NewProjecte { get { return new RelayCommand(newProject); } }
         protected virtual void newProject()
         {

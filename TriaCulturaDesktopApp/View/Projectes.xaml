@@ -15,7 +15,7 @@
     </Window.DataContext>
     <Grid>
         <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="260" Width="385" ItemsSource="{Binding ProjectsL}" SelectedIndex="{Binding SelectedIndexProject}" SelectedItem="{Binding SelectedProject}" ColumnWidth="80" CanUserResizeColumns="False" AutoGenerateColumns="False">
-            <DataGrid.Columns>             
+            <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Títol" Width="Auto" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding topic}" ClipboardContentBinding="{x:Null}" Header="Tema" Width="Auto" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding type}" ClipboardContentBinding="{x:Null}" Header="Tipus" Width="Auto" IsReadOnly="True"/>
@@ -26,6 +26,6 @@
         <Button x:Name="bt_add" Content="Afegir" Command="{Binding NewProjecte}" IsEnabled="{Binding Boto_afegir_enabled}"  HorizontalAlignment="Left" Margin="400,80,0,0" VerticalAlignment="Top" Width="74"/>
         <Button x:Name="bt_set" Command="{Binding ChangeProjecte}" Content="Modificar" HorizontalAlignment="Left" Margin="400,127,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="bt_del" Command="{Binding TreureProjecte_author}" Content="Borrar" HorizontalAlignment="Left" Margin="400,182,0,0" VerticalAlignment="Top" Width="75"/>
-
+        <Button x:Name="btn_return" Command="{Binding tornarEnrere}" Content="Tornar enrere" HorizontalAlignment="Left" Margin="400,234,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>
