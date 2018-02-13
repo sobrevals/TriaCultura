@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using Microsoft.Win32;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -24,6 +25,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private List<place> _place;
         private List<request> _request;
         private project _projecte;
+        private ObservableCollection<file> _files;
         private request _selectedRequest;
         private request _selectedRequest_place;
         private request _selectedPlace_fromProjects;
@@ -37,6 +39,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public String titol { get; set; }
         public List<place> Places
         { get { return _place; } set { _place = value; NotifyPropertyChanged(); } }
+        public ObservableCollection<file> Files { get { return _files; } set { _files = value; NotifyPropertyChanged(); } }
 
         public List<request> Request
         { get { return _request; } set { _request = value; NotifyPropertyChanged(); } }
@@ -54,7 +57,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
             set
             { _projecte = value;
-                NotifyPropertyChanged("Project");
+                NotifyPropertyChanged();
             }
         }
 
@@ -127,6 +130,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             titol = "Nou Projecte";
             FillRequests_all(0);
             FillTipus();
+            FillFiles();
             RegisterCommands();
         }
 
@@ -189,6 +193,11 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 Projecte = new project();
             }
+        }
+
+        private void FillFiles()
+        {
+            Files = new ObservableCollection<file>(Projecte.files.ToList());
         }
         #endregion
 
@@ -256,10 +265,27 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
 
 
-        public ICommand Afegir_fitxer { get { return new RelayCommand(AddFitxer); } }
+       /* public ICommand Afegir_fitxer { get { return new RelayCommand(AddFitxer); } }
         protected virtual void AddFitxer()
         {
 
+        }
+        public ICommand Finalitzar { get { return new RelayCommand(SaveProject); } }
+
+
+
+        public void SaveProject()
+        {
+            //if (context.projects.Select(x => x.id_project).ToList().Contains(Projecte.id_project))
+            //{
+            //    context.projects.Where(x => x.id_project == Projecte.id_project).ToList()[0] = Projecte;
+            //}
+            //else
+            //{
+            //    context.projects.Add(Projecte);
+            //}
+            //context.SaveChanges();
+            //Close();
         }
 
 
@@ -295,7 +321,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
 
         #region OpenFile
-        public static RelayCommand OpenFile{ get; set; }
+        public RelayCommand OpenFile{ get; set; }
         private string _selectedPath;
         public string SelectedPath
         {
@@ -321,7 +347,29 @@ namespace TriaCulturaDesktopApp.ViewModel
             dialog.ShowDialog();
 
             SelectedPath = dialog.FileName;
+            afegirPaths(Projecte);
+
+
+
         }
+        public void afegirPaths(project p)
+        {
+            if (Projecte != null)
+            {
+                file fitxer = new file();
+                fitxer.project_id = p.id_project;
+                fitxer.name = Path.GetFileNameWithoutExtension(SelectedPath);
+                fitxer.extension = Path.GetExtension(SelectedPath);
+                fitxer.path = SelectedPath;
+                context.files.Add(fitxer);
+                context.SaveChanges();
+                FillFiles();
+            }
+
+        }
+
+
+
         #endregion
     }
 }

@@ -10,7 +10,7 @@
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"          
         x:Class="TriaCulturaDesktopApp.View.Projecte"
         mc:Ignorable="d"
-        Title="{Binding titol}" Height="455.608" Width="729.171"
+        Title="{Binding titol}" Height="455.608" Width="729.171" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
         >
     <Window.DataContext>
         <ViewModel:ProjecteViewModel/>
@@ -21,7 +21,7 @@
         <Label x:Name="lb_theme" Content="Tema" HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tb_theme" HorizontalAlignment="Left" Height="23" Margin="22,112,0,0" TextWrapping="Wrap" Text="{Binding Projecte.topic}" VerticalAlignment="Top" Width="188"/>
         <Label x:Name="lb_addFile" Content="Adjuntar Fitxers" HorizontalAlignment="Left" Margin="22,154,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbx_file" HorizontalAlignment="Left" Height="93" Margin="22,185,0,0" VerticalAlignment="Top" Width="126"/>
+        <ListBox x:Name="lbx_file" ItemsSource="{Binding Files}" SelectionMode="Single"  HorizontalAlignment="Left" Height="93" Margin="22,185,0,0" VerticalAlignment="Top" Width="126" DisplayMemberPath="name"/>
         <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="358,23,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="358,82,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbx_place"  ItemsSource="{Binding Request}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest}" DisplayMemberPath="place.name" HorizontalAlignment="Left" Height="109" Margin="455,259,0,0" VerticalAlignment="Top" Width="122"/>

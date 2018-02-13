@@ -8,7 +8,7 @@
         xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"        
         xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
         mc:Ignorable="d"
-        Title="Esborrar_AutorBuitDialog" Height="244" Width="300">
+        Title="Esborrar_AutorBuitDialog" Height="244" Width="300" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
 
     <Window.DataContext>
         <ViewModel:Esborrar_AutorBuitDialogViewModel/>

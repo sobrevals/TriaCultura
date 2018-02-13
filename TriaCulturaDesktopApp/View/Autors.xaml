@@ -10,7 +10,7 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         mc:Ignorable="d"
-        Title="Autors" Height="343.493" Width="399.43">
+        Title="Autors" Height="343.493" Width="399.43" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Window.DataContext>
         <ViewModel:AutorsViewModel/>
     </Window.DataContext>

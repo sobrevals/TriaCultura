@@ -146,6 +146,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         protected virtual void modProjecte()
         {
             project aux_project = new project();
+            aux_project.id_project = SelectedProject.id_project;
             aux_project.author_dni = SelectedProject.author_dni;
             aux_project.description = SelectedProject.description;
             aux_project.title = SelectedProject.title;
