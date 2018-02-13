@@ -10,7 +10,9 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"
-        Title="{Binding Titol}" Height="406.108" Width="786.171" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+        Title="{Binding Titol}" Height="406.108" Width="786.171"
+        Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
+        WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <ViewModel:AutorViewModel/>

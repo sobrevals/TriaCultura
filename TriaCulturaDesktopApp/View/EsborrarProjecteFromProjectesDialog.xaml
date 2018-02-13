@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriaCulturaDesktopApp.View"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="EsborrarProjecteFromProjectesDialog" Height="186.397" Width="300" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Grid>
         <Button x:Name="btn_cancel" Command="{Binding CancelCommand}" Content="Cancel" HorizontalAlignment="Left" Margin="28,94,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
