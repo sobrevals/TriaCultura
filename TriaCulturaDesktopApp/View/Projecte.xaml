@@ -14,6 +14,9 @@
         WindowStartupLocation="CenterScreen"
         Title="{Binding titol}" Height="455.608" Width="729.171" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
         >
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
+    </Window.Background>
     <Window.DataContext>
         <ViewModel:ProjecteViewModel/>
     </Window.DataContext>
