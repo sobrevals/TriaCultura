@@ -292,6 +292,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\if_undo_100961.png" />
     <Resource Include="Resources\images2.jpg" />
     <Resource Include="Resources\mc3a1scaras-de-teatro.png" />
     <Resource Include="Resources\art-culture-128.png" />

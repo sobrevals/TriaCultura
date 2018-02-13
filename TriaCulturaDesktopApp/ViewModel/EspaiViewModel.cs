@@ -216,6 +216,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             r.place_id = SelectedPlace_fromPlaces.id_place;
             r.place = SelectedPlace_fromPlaces;
             SelectedProject.requests.Add(r);
+            
             fillPlaces(0);
             fillProjectPlaces(0);
         }

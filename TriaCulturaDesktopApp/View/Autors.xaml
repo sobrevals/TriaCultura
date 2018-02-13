@@ -10,7 +10,12 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Title="Autors" Height="343.493" Width="399.43" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
+    </Window.Background>
     <Window.DataContext>
         <ViewModel:AutorsViewModel/>
     </Window.DataContext>
@@ -29,7 +34,7 @@
             <Button.Background>
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_user_add_36957.png" Stretch="None"/>
             </Button.Background>
-        </Button>                  
+        </Button>
         <Button x:Name="btn_eliminar" Command="{Binding eliminarAutor}" Content="" HorizontalAlignment="Left" Margin="308,78,0,0" VerticalAlignment="Top" Width="44" RenderTransformOrigin="-0.051,-0.635" Height="42" BorderBrush="{x:Null}">
             <Button.OpacityMask>
                 <ImageBrush Stretch="None" ImageSource="/TriaCulturaDesktopApp;component/Resources/if_user_close_36968.png"/>
@@ -37,7 +42,7 @@
             <Button.Background>
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_user_close_36968.png" Stretch="None"/>
             </Button.Background>
-        </Button>       
+        </Button>
         <Button x:Name="btn_modificar" Command="{Binding modificarAutor}" Content="" HorizontalAlignment="Left" Margin="308,146,0,0" VerticalAlignment="Top" Width="44" RenderTransformOrigin="-0.051,-0.635" Height="42" BorderBrush="{x:Null}">
             <Button.OpacityMask>
                 <ImageBrush Stretch="None" ImageSource="/TriaCulturaDesktopApp;component/Resources/if_pencil_36945.png"/>
@@ -54,7 +59,14 @@
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_page_table_36935.png" Stretch="None"/>
             </Button.Background>
         </Button>
-        <Button x:Name="btn_enrera" Command="{Binding tornarEnrere}" Content="Enrera" HorizontalAlignment="Left" Margin="10,275,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btn_enrera" Command="{Binding tornarEnrere}" Content="" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="44" Height="42">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100961.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100961.png"/>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>
