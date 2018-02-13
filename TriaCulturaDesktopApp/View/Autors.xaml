@@ -10,6 +10,8 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Title="Autors" Height="343.493" Width="399.43" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
