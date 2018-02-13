@@ -9,6 +9,7 @@
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"    
         xmlns:ViewModel="clr-namespace:TriaCulturaDesktopApp.ViewModel"        
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="{Binding titol}" Height="373.5" Width="534" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Window.DataContext>
