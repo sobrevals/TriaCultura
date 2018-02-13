@@ -10,40 +10,103 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"
-        Title="{Binding Titol}" Height="406.108" Width="786.171"
+        Title="{Binding Titol}" Height="456.108" Width="542.171"
         Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
+    </Window.Background>
 
     <Window.DataContext>
         <ViewModel:AutorViewModel/>
     </Window.DataContext>
     <Grid>
-        <Button x:Name="btAddDisciplines" Command="{Binding AfegirDisciplina}" Content="Afegir" HorizontalAlignment="Left" Margin="124,170,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btDelDisciplines" Command="{Binding EsborrarDisciplina}" Content="Esborrar" HorizontalAlignment="Left" Margin="124,203,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="textbox_dni" HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="120" IsReadOnly="{Binding IsReadAuthor}"/>
-        <Label x:Name="lbl_dni" Content="DNI" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textbox_nom" HorizontalAlignment="Left" Height="23" Margin="259,30,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="170"/>
-        <TextBox x:Name="tb_CognomAutor" HorizontalAlignment="Left" Height="23" Margin="457,30,0,0" TextWrapping="Wrap" Text="{Binding Author.surname}" VerticalAlignment="Top" Width="170"/>
-        <Label x:Name="lbl_nomAutor" Content="Nom" HorizontalAlignment="Left" Margin="259,4,0,0" VerticalAlignment="Top" Width="45"/>
-        <Button x:Name="btn_return" Command="{Binding tornarEnrere}" Content="Tornar enrere" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btn_finish" Command="{Binding OpenProjecte}" Content="Desa i continua..." HorizontalAlignment="Left" Margin="683,340,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btn_esborrar_telefon" Command="{Binding EsborrarTelefon}" Content="Esborrar" HorizontalAlignment="Left" Margin="177,141,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btn_esborrar_mail" Command="{Binding EsborrarEmail}" Content="Esborrar" HorizontalAlignment="Left" Margin="663,141,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btn_afegir_mail" Command="{Binding AfegirEmail}" Content="Afegir" HorizontalAlignment="Left" Margin="663,106,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btn_afegir_telefon" Command="{Binding AfegirTelefon}" Content="Afegir" HorizontalAlignment="Left" Margin="177,106,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0,1.572" />
-        <ListBox x:Name="listbox_disciplines" HorizontalAlignment="Left" Height="100" Margin="19,156,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding Disciplines}" DisplayMemberPath="type" SelectionMode="Single" SelectedItem="{Binding SelectedDiscipline}" />
-        <ListBox x:Name="listbox_mails" HorizontalAlignment="Left" Height="127" Margin="430,96,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding Emails}" SelectionMode="Single" SelectedItem="{Binding SelectedEmail}" DisplayMemberPath="address"/>
-        <ListBox x:Name="listbox_telefons" HorizontalAlignment="Left" Height="127" Margin="261,96,0,0" VerticalAlignment="Top" Width="152" ItemsSource="{Binding Telefons}" SelectionMode="Single" SelectedItem ="{Binding SelectedPhone}" DisplayMemberPath="num"/>
-        <Label x:Name="label_disciplines" Content="Disciplines" HorizontalAlignment="Left" Margin="19,130,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_telefon" Content="Telefon" HorizontalAlignment="Left" Margin="313,65,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_mail" Content="Mail" HorizontalAlignment="Left" Margin="539,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.462"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="430,255,0,0" VerticalAlignment="Top" Width="117"/>
-        <Label x:Name="lbl_agefir_imatge" Content="Imatge identificativa" HorizontalAlignment="Left" Margin="430,230,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btn_imatge" Content="Modificar" HorizontalAlignment="Left" Margin="552,285,0,0" VerticalAlignment="Top" Width="75"/>
-        
-        <Label x:Name="lbl_cognomAutor" Content="Cognom" HorizontalAlignment="Left" Margin="457,4,0,0" VerticalAlignment="Top" Width="74"/>
-        <Button x:Name="btn_guardar" Content="Guardar i tancar" HorizontalAlignment="Left" Margin="124,335,0,0" VerticalAlignment="Top" Width="105" Command="{Binding OkCommand}"/>
+        <Button x:Name="btAddDisciplines" Command="{Binding AfegirDisciplina}" Content="" HorizontalAlignment="Left" Margin="159,233,0,0" VerticalAlignment="Top" Width="40" FontFamily="Franklin Gothic Medium" FontSize="14" Height="39" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_plus_blue_14780.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_plus_blue_14780.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btDelDisciplines" Command="{Binding EsborrarDisciplina}" Content="" HorizontalAlignment="Left" Margin="159,287,0,0" VerticalAlignment="Top" Width="40" FontFamily="Franklin Gothic Medium" FontSize="14" Height="39" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_minus_red_14768.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_minus_red_14768.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <TextBox x:Name="textbox_dni" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="142" IsReadOnly="{Binding IsReadAuthor}" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
+        <Label x:Name="lbl_dni" Content="DNI" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <TextBox x:Name="textbox_nom" HorizontalAlignment="Left" Height="23" Margin="10,86,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="142" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
+        <TextBox x:Name="tb_CognomAutor" HorizontalAlignment="Left" Height="23" Margin="10,143,0,0" TextWrapping="Wrap" Text="{Binding Author.surname}" VerticalAlignment="Top" Width="142" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
+        <Label x:Name="lbl_nomAutor" Content="Nom" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="45" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="btn_return" Command="{Binding tornarEnrere}" Content="" HorizontalAlignment="Left" Margin="13,356,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="44">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btn_finish" Command="{Binding OpenProjecte}" Content="" HorizontalAlignment="Left" Margin="461,356,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="44">
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_redo_101174.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_redo_101174.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Button x:Name="btn_esborrar_telefon" Command="{Binding EsborrarTelefon}" Content="" HorizontalAlignment="Left" Margin="463,110,0,0" VerticalAlignment="Top" Width="40" FontFamily="Franklin Gothic Medium" FontSize="14" Height="39" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_minus_red_14768.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_minus_red_14768.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btn_esborrar_mail" Command="{Binding EsborrarEmail}" Content="" HorizontalAlignment="Left" Margin="463,287,0,0" VerticalAlignment="Top" Width="40" FontFamily="Franklin Gothic Medium" FontSize="14" Height="39" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_minus_red_14768.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_minus_red_14768.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btn_afegir_mail" Command="{Binding AfegirEmail}" Content="" HorizontalAlignment="Left" Margin="463,233,0,0" VerticalAlignment="Top" Width="40" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="39">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_plus_blue_14780.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_plus_blue_14780.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btn_afegir_telefon" Command="{Binding AfegirTelefon}" Content="" HorizontalAlignment="Left" Margin="463,53,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0,1.572" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="39" >
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_plus_blue_14780.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_plus_blue_14780.png"/>
+            </Button.Background>
+        </Button>
+        <ListBox x:Name="listbox_disciplines" HorizontalAlignment="Left" Height="120" Margin="13,218,0,0" VerticalAlignment="Top" Width="139" ItemsSource="{Binding Disciplines}" DisplayMemberPath="type" SelectionMode="Single" SelectedItem="{Binding SelectedDiscipline}" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" />
+        <ListBox x:Name="listbox_mails" HorizontalAlignment="Left" Height="120" Margin="220,218,0,0" VerticalAlignment="Top" Width="223" ItemsSource="{Binding Emails}" SelectionMode="Single" SelectedItem="{Binding SelectedEmail}" DisplayMemberPath="address" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
+        <ListBox x:Name="listbox_telefons" HorizontalAlignment="Left" Height="120" Margin="220,44,0,0" VerticalAlignment="Top" Width="223" ItemsSource="{Binding Telefons}" SelectionMode="Single" SelectedItem ="{Binding SelectedPhone}" DisplayMemberPath="num" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
+        <Label x:Name="label_disciplines" Content="Disciplines" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Label x:Name="label_telefon" Content="Telefon" HorizontalAlignment="Left" Margin="220,13,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Label x:Name="label_mail" Content="Mail" HorizontalAlignment="Left" Margin="220,187,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.462" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+
+        <Label x:Name="lbl_cognomAutor" Content="Cognom" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="74" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="btn_guardar" Content="" HorizontalAlignment="Left" Margin="238,356,0,0" VerticalAlignment="Top" Width="53" Command="{Binding OkCommand}" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="44">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Save_70652.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Save_70652.png"/>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>
