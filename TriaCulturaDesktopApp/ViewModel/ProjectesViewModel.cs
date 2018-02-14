@@ -167,10 +167,18 @@ namespace TriaCulturaDesktopApp.ViewModel
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().topic = aux_project.topic;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description = aux_project.description;
 
-                    //List<request> aux_request_list = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
-                    //foreach (request r in aux_request_list) { context.requests.Add(r); }
+                    List<request> aux_request_in_project = aux_project.requests.ToList();
+                    List<request> aux_request_in_context = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
+                    foreach (request r in aux_request_in_project)
+                    {
+                        if (!aux_request_in_context.Select(x => x.place_id).Contains(r.place_id))
+                        {
+                            context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests.Add(r);
+                            //context.requests.Add(r);
+                        }
+                    }
 
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests = aux_project.requests;
+                    //context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests = aux_project.requests;
 
 
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
