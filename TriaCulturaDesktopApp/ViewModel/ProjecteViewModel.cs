@@ -22,18 +22,18 @@ namespace TriaCulturaDesktopApp.ViewModel
         Available_Types tipus = new Available_Types();
 
         #region BasicProperties
-        
+
         private project _projecte;
         private ObservableCollection<file> _files;
         private request _selectedRequest;
         private file _selectedFile;
-        
+
         private List<string> _types;
         private string _selectedType;
         private int _selectedIndexType;
 
 
-        public request SelectedRequest { get { return _selectedRequest; } set { _selectedRequest = value; NotifyPropertyChanged();RaisePropertyChanged("SelectedRequest"); } }
+        public request SelectedRequest { get { return _selectedRequest; } set { _selectedRequest = value; NotifyPropertyChanged(); RaisePropertyChanged("SelectedRequest"); } }
 
         public String titol { get; set; }
 
@@ -45,12 +45,13 @@ namespace TriaCulturaDesktopApp.ViewModel
             { return _projecte; }
 
             set
-            { _projecte = value;
+            {
+                _projecte = value;
                 NotifyPropertyChanged();
             }
         }
 
-        public file SelectedFile { get { return _selectedFile; } set { _selectedFile = value; NotifyPropertyChanged();RaisePropertyChanged("SelectedFile"); } }
+        public file SelectedFile { get { return _selectedFile; } set { _selectedFile = value; NotifyPropertyChanged(); RaisePropertyChanged("SelectedFile"); } }
 
         public List<string> Types
         {
@@ -127,12 +128,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public ProjecteViewModel() { RegisterCommands(); }
 
-        //public ProjecteViewModel(project p)
-        //{
-        //    Projecte = p;
-
-        //    FillRequests_all(0);
-        //}
         #endregion constructor
 
         #region fill
@@ -141,16 +136,16 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (Projecte != null)
             {
                 RequestL = new ObservableCollection<request>(Projecte.requests.ToList());
-                if (RequestL!= null && index >= 0 && index < RequestL.Count)
+                if (RequestL != null && index >= 0 && index < RequestL.Count)
                 {
-                    SelectedRequest= RequestL[index];
+                    SelectedRequest = RequestL[index];
                 }
             }
         }
 
         public void FillTipus()
         {
-           
+
             Types = tipus.types;
             if (Projecte.type != null)
             {
@@ -164,10 +159,11 @@ namespace TriaCulturaDesktopApp.ViewModel
                         SelectedIndexType = i;
                     }
                 }
-            } else
+            }
+            else
             {
                 SelectedType = Types[0];
-                SelectedIndexType=0;
+                SelectedIndexType = 0;
             }
         }
 
@@ -198,87 +194,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         #region Commands
 
-        public ICommand AfegirRequest_place { get { return new RelayCommand(AddPlace_request); } }
-
-        protected virtual void AddPlace_request()
-        {
-            project aux_project = new project();
-            aux_project.requests = Projecte.requests;
-            aux_project.id_project = Projecte.id_project;
-            //aux_project.author_dni = Projecte.author_dni;
-            //aux_project.description = Projecte.description;
-            //aux_project.files = Projecte.files;
-            //aux_project.title= Projecte.title;
-            //aux_project.topic= Projecte.topic;
-            //aux_project.type= Projecte.type;
-            
-            this.Dialogs.Add(new EspaiViewModel(aux_project)
-            {
-               SelectedProject = aux_project,
-               OnOk = (sender) =>
-               {
-                   Projecte.requests = aux_project.requests;
-                   FillRequests_all(0);
-                   sender.Close();
-               },
-               OnCancel = (sender) =>
-               {
-                   FillRequests_all(0);
-                   sender.Close();
-               },
-               OnCloseRequest = (sender) =>
-               {
-                   FillRequests_all(0);
-                   sender.Close();
-               }
-
-            });
-        }
-        public ICommand TreureRequest_place { get { return new RelayCommand(RemRequest_place); } }
-        protected virtual void RemRequest_place()
-        {
-
-            //if (SelectedRequest != null)
-            //{
-            //    request aux_request = context.requests.Where(x => x.id_request == SelectedRequest.id_request).SingleOrDefault();
-            //    try
-            //    {
-            //        //request p = SelectedRequest_fromPlace;
-            //        Projecte.requests.Remove(aux_request);
-            //        context.SaveChanges();
-            //        FillRequest_place(0);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("No es pot esborrar aquestsa place.");
-            //    }
-            //}
-        }
-
-
-
-       public ICommand Afegir_fitxer { get { return new RelayCommand(AddFitxer); } }
-        protected virtual void AddFitxer()
-        {
-
-        }
-        public ICommand Finalitzar { get { return new RelayCommand(SaveProject); } }
-
-        public void SaveProject()
-        {
-            //if (context.projects.Select(x => x.id_project).ToList().Contains(Projecte.id_project))
-            //{
-            //    context.projects.Where(x => x.id_project == Projecte.id_project).ToList()[0] = Projecte;
-            //}
-            //else
-            //{
-            //    context.projects.Add(Projecte);
-            //}
-            //context.SaveChanges();
-            //Close();
-        }
-
-
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
         protected virtual void GuardarIEnrere()
         {
@@ -289,7 +204,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                     this.OnOk(this);
                 else
                     Close();
-            }else
+            }
+            else
             {
                 MessageBox.Show("Falta omplir algun camp.", "Alert");
             }
@@ -301,16 +217,8 @@ namespace TriaCulturaDesktopApp.ViewModel
             if (this.DialogClosing != null)
                 this.DialogClosing(this, new EventArgs());
         }
-
-
-        #endregion
-
-        public Action<ProjecteViewModel> OnOk { get; set; }
-        public Action<ProjecteViewModel> OnReturn { get; set; }
-        public Action<ProjecteViewModel> OnCloseRequest { get; set; }
-
-
         #region OpenFile
+
         public ICommand RemoveFile { get { return new RelayCommand(eliminarFile); } }
         protected virtual void eliminarFile()
         {
@@ -319,9 +227,9 @@ namespace TriaCulturaDesktopApp.ViewModel
                 file aux_fitxer = new file();
                 aux_fitxer.extension = SelectedFile.extension;
                 aux_fitxer.path = SelectedFile.path;
-                aux_fitxer.name= SelectedFile.name;
-                aux_fitxer.id_file= SelectedFile.id_file;
-                aux_fitxer.project_id= SelectedFile.project_id;
+                aux_fitxer.name = SelectedFile.name;
+                aux_fitxer.id_file = SelectedFile.id_file;
+                aux_fitxer.project_id = SelectedFile.project_id;
 
                 List<file> aux_list = Projecte.files.ToList();
                 foreach (file f in aux_list)
@@ -337,7 +245,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             }
         }
 
-        public RelayCommand OpenFile{ get; set; }
+        public RelayCommand OpenFile { get; set; }
         private string _selectedPath;
         public string SelectedPath
         {
@@ -383,5 +291,14 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         }
         #endregion
+
+        #endregion
+
+        public Action<ProjecteViewModel> OnOk { get; set; }
+        public Action<ProjecteViewModel> OnReturn { get; set; }
+        public Action<ProjecteViewModel> OnCloseRequest { get; set; }
+
+
+        
     }
 }
