@@ -18,7 +18,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     class ProjecteViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+        //triaculturaCTXEntities context = new triaculturaCTXEntities();
         Available_Types tipus = new Available_Types();
 
         #region BasicProperties

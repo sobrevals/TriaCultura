@@ -28,6 +28,7 @@
         <Button x:Name="bt_add" Content="Afegir" Command="{Binding NewProjecte}" IsEnabled="{Binding Boto_afegir_enabled}"  HorizontalAlignment="Left" Margin="400,80,0,0" VerticalAlignment="Top" Width="74"/>
         <Button x:Name="bt_set" Command="{Binding ChangeProjecte}" Content="Modificar" HorizontalAlignment="Left" Margin="400,127,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="bt_del" Command="{Binding TreureProjecte_author}" Content="Borrar" HorizontalAlignment="Left" Margin="400,182,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btn_return" Command="{Binding tornarEnrere}" Content="Tornar enrere" HorizontalAlignment="Left" Margin="400,234,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="bt_espais" Command="{Binding Veure_Espais}" Content="Espais" HorizontalAlignment="Left" Margin="400,223,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btn_return" Command="{Binding tornarEnrere}" Content="Tornar enrere" HorizontalAlignment="Left" Margin="399,278,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>
