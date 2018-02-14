@@ -10,17 +10,20 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="{Binding Title}"  Height="240" Width="297" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
+    </Window.Background>
     <Window.DataContext>
         <ViewModel:DisciplinaDialogViewModel/>
     </Window.DataContext>
 
     <Grid>
-        <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="21" Margin="75,41,0,0" TextWrapping="Wrap" Text="{Binding Discipline.id_discipline}" VerticalAlignment="Top" Width="47" IsEnabled="False"/>
-        <TextBox x:Name="tbType" HorizontalAlignment="Left" Height="21" Margin="75,93,0,0" TextWrapping="Wrap" Text="{Binding Discipline.type}" VerticalAlignment="Top" Width="185" IsEnabled="{Binding TextEnabled}" />
-        <Label x:Name="lbId" Content="Id" HorizontalAlignment="Left" Margin="14,40,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbType" Content="Tipus" HorizontalAlignment="Left" Margin="14,88,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btCancel" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Height="35" Margin="75,148,0,0" VerticalAlignment="Top" Width="80"/>
-        <Button x:Name="btOk" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Height="35" Margin="180,148,0,0" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="21" Margin="72,41,0,0" TextWrapping="Wrap" Text="{Binding Discipline.id_discipline}" VerticalAlignment="Top" Width="47" IsEnabled="False" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <TextBox x:Name="tbType" HorizontalAlignment="Left" Height="21" Margin="72,93,0,0" TextWrapping="Wrap" Text="{Binding Discipline.type}" VerticalAlignment="Top" Width="185" IsEnabled="{Binding TextEnabled}" FontFamily="Franklin Gothic Medium" FontSize="14" />
+        <Label x:Name="lbId" Content="Id" HorizontalAlignment="Left" Margin="11,40,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Label x:Name="lbType" Content="Tipus" HorizontalAlignment="Left" Margin="11,88,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="btCancel" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Height="35" Margin="72,148,0,0" VerticalAlignment="Top" Width="80" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="btOk" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Height="35" Margin="177,148,0,0" VerticalAlignment="Top" Width="80" FontFamily="Franklin Gothic Medium" FontSize="14"/>
     </Grid>
 
 </Window>
