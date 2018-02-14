@@ -292,7 +292,6 @@
     <Resource Include="Resources\if_page_white_add_36265.png" />
     <Resource Include="Resources\if_page_white_delete_36277.png" />
     <Resource Include="Resources\if_phone_36326.png" />
-    <Resource Include="Resources\if_document_copies_64085.png" />
     <Resource Include="Resources\if_button_minus_red_14768.png" />
     <Resource Include="Resources\if_button_plus_blue_14780.png" />
     <Resource Include="Resources\if_redo_101174.png" />
@@ -300,16 +299,8 @@
     <Resource Include="Resources\if_undo_100964.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\if_undo_100961.png" />
-    <Resource Include="Resources\images2.jpg" />
     <Resource Include="Resources\mc3a1scaras-de-teatro.png" />
     <Resource Include="Resources\art-culture-128.png" />
-    <Resource Include="Resources\images.jpg" />
-    <Resource Include="Resources\teatro1.png" />
-    <Resource Include="Resources\if_add_user_3802.png" />
-    <Resource Include="Resources\if_page_table_36935.png" />
-    <Resource Include="Resources\if_book_add_36875.png" />
-    <Resource Include="Resources\if_book_close_36877.png" />
     <Resource Include="Resources\if_page_blank_add_36931.png" />
     <Resource Include="Resources\if_page_blank_close_36933.png" />
     <Resource Include="Resources\if_pencil_36945.png" />
