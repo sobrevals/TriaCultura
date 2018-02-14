@@ -11,13 +11,14 @@ using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
     public class ProjectesViewModel : ViewModelBase, IUserDialogViewModel
 
     {
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+        public triaculturaCTXEntities context { get; set; }
 
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
@@ -64,11 +65,13 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region Contructor
         public ProjectesViewModel()
         {
+            context = new triaculturaCTXEntities();
             fillProjectes(0);
         }
 
-        public ProjectesViewModel(author a, bool enable)
+        public ProjectesViewModel(author a, bool enable, triaculturaCTXEntities ctx)
         {
+            context = ctx;
             titol = "Projectes";
             Author = context.authors.Where(x => x.dni == a.dni).SingleOrDefault();
             fillProjectes(0);
@@ -135,7 +138,22 @@ namespace TriaCulturaDesktopApp.ViewModel
                 OnOk = (sender) =>
                 {
                     context.projects.Add(aux_project);
-                    context.SaveChanges();
+                    if (aux_project.files.Count > 0)
+                    {
+                        List<file> files_to_add = aux_project.files.ToList();
+                        foreach (file f in files_to_add)
+                        {
+                            context.files.Add(f);
+                        }
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+                    } catch (Exception ex)
+                    {
+                        MessageBox.Show("Error en esciure a la BBDD");
+                    }
                     fillProjectes(aux_project);
                     sender.Close();
                 },
@@ -170,7 +188,13 @@ namespace TriaCulturaDesktopApp.ViewModel
 
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().type = aux_project.type;
-                    context.SaveChanges();
+                    try
+                    {
+                        context.SaveChanges();
+                    } catch (Exception ex)
+                    {
+                        MessageBox.Show("Error de validació");
+                    }
                     fillProjectes(SelectedProject);
                     sender.Close();
                 },
@@ -186,6 +210,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 project aux_project = new project();
 
                 aux_project = SelectedProject;
+                aux_project.id_project = SelectedProject.id_project;
                 aux_project.author_dni = SelectedProject.author_dni;
 
                 this.Dialogs.Add(new EsborrarProjecteFromProjectes()
@@ -195,16 +220,36 @@ namespace TriaCulturaDesktopApp.ViewModel
                     OkText = "Delete",
                     OnOk = (sender) =>
                     {
-                        List<request> requestDelList = aux_project.requests.ToList();
-
-                        foreach (request item in requestDelList)
+                        if (aux_project.requests.Count > 0)
                         {
-                            request r = context.requests.Where(x => x.id_request == item.id_request).SingleOrDefault();
+                            List<request> requestDelList = aux_project.requests.ToList();
 
-                            context.requests.Remove(r);
+                            foreach (request item in requestDelList)
+                            {
+                                request r = context.requests.Where(x => x.id_request == item.id_request).SingleOrDefault();
+
+                                context.requests.Remove(r);
+                            }
                         }
-                        context.projects.Remove(aux_project);
-                        context.SaveChanges();
+                        if (aux_project.files.Count > 0)
+                        {
+                            List<file> fileDelList = aux_project.files.ToList();
+
+                            foreach (file f in fileDelList)
+                            {
+                                file file = context.files.Where(x => x.id_file == f.id_file).SingleOrDefault();
+                                context.files.Remove(file);
+                            }
+                        }
+                        project p = context.projects.Where(x => x.id_project == aux_project.id_project).SingleOrDefault();
+                        context.projects.Remove(p);
+                        try
+                        {
+                            context.SaveChanges();
+                        } catch (Exception ex)
+                        {
+                            MessageBox.Show("Error escrivint a la BBDD");
+                        }
                         fillProjectes(0);
                         sender.Close();
                     },
@@ -249,7 +294,13 @@ namespace TriaCulturaDesktopApp.ViewModel
                                 context.requests.Add(r);
                             }
                         }
-                        context.SaveChanges();
+                        try
+                        {
+                            context.SaveChanges();
+                        } catch (Exception ex)
+                        {
+                            MessageBox.Show("Error en escriure a la BBDD");
+                        }
                         sender.Close();
                     },
                     OnCancel = (sender) =>

@@ -13,7 +13,9 @@
         Title="{Binding Titol}" Height="456.108" Width="542.171"
         Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Visibility="{Binding IsVisible}">
+        
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>
