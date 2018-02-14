@@ -277,6 +277,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\if_Backward-64_32056.png" />
+    <Resource Include="Resources\if_Forward-64_32079.png" />
     <Resource Include="Resources\if_page_white_edit_36279.png" />
     <Resource Include="Resources\if_bullet_valid_92546.png" />
     <Resource Include="Resources\if_cross_35931.png" />

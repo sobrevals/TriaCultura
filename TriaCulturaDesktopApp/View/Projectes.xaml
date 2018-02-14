@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="{Binding titol}" Height="393.5" Width="534" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+        Title="{Binding titol}" Height="402.5" Width="534" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>
@@ -53,7 +53,7 @@
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_page_white_delete_36277.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="bt_espais" Command="{Binding Veure_Espais}" Content="" HorizontalAlignment="Left" Margin="433,231,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
+        <Button x:Name="bt_espais" Command="{Binding Veure_Espais}" Content="" HorizontalAlignment="Left" Margin="430,231,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
             <Button.Background>
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_home_page_64352.png"/>
             </Button.Background>

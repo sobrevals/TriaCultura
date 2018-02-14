@@ -29,12 +29,40 @@
         <ListBox x:Name="lbx_file" ItemsSource="{Binding Files}" SelectedItem="{Binding SelectedFile}" SelectionMode="Single"  HorizontalAlignment="Left" Height="73" Margin="251,90,0,0" VerticalAlignment="Top" Width="126" DisplayMemberPath="name" BorderBrush="#FF262934" FontFamily="Franklin Gothic Medium" FontSize="14"/>
         <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="251,4,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
         <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Button x:Name="bt_save" Command="{Binding OkCommand}" Content="Guardar i Finalitzar" HorizontalAlignment="Left" Margin="318,324,0,0" VerticalAlignment="Top" Width="59" FontFamily="Franklin Gothic Medium" FontSize="14" Height="51"/>
+        <Button x:Name="bt_save" Command="{Binding OkCommand}" Content="" HorizontalAlignment="Left" Margin="332,324,0,0" VerticalAlignment="Top" Width="45" FontFamily="Franklin Gothic Medium" FontSize="14" Height="42" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Save_70652.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Save_70652.png"/>
+            </Button.Background>
+        </Button>
         <Label x:Name="lb_author" Content="Autor " HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
         <TextBox x:Name="tb_author" Text="{Binding Projecte.author_dni}"  HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" IsReadOnly="True" BorderBrush="#FF262934" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Button x:Name="bt_add_File" Command="{Binding OpenFile}" Content="ADD" HorizontalAlignment="Left" Margin="251,191,0,0" VerticalAlignment="Top" Width="56" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Button x:Name="bt_rem_File" Command="{Binding RemoveFile}" Content="Remove" HorizontalAlignment="Left" Margin="321,191,0,0" VerticalAlignment="Top" Width="56" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,324,0,0" VerticalAlignment="Top" Width="59" FontFamily="Franklin Gothic Medium" FontSize="14" Height="51"/>
+        <Button x:Name="bt_add_File" Command="{Binding OpenFile}" Content="" HorizontalAlignment="Left" Margin="251,171,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_folder_add_36060.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_folder_add_36060.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="bt_rem_File" Command="{Binding RemoveFile}" Content="" HorizontalAlignment="Left" Margin="335,171,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_folder_delete_36066.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_folder_delete_36066.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content=""  HorizontalAlignment="Left" Margin="10,324,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" Height="42" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
+            </Button.Background>
+        </Button>
         <TextBox x:Name="tb_description" HorizontalAlignment="Left" Height="110" Margin="10,197,0,0" TextWrapping="Wrap" Text="{Binding Projecte.description}" VerticalAlignment="Top" Width="188" AcceptsReturn="True" BorderBrush="#FF262934" FontFamily="Franklin Gothic Medium" FontSize="14" />
         <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="251,31,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" SelectedIndex="{Binding SelectedIndexType}" IsSynchronizedWithCurrentItem="True" FontFamily="Franklin Gothic Medium" FontSize="14"/>
         <!--SelectedItem="{Binding Path=Projecte.type, Mode=TwoWay}"-->
