@@ -158,7 +158,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region DialogClosing
 
         public event EventHandler DialogClosing;
-
+        public void RequestClose()
+        {
+            this.DialogClosing(this, null);
+        }
         public void Close()
         {
             if (this.DialogClosing != null)
@@ -172,13 +175,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-
-        #region RequestClose
-        public void RequestClose()
-        {
-            this.DialogClosing(this, null);
         }
         #endregion
 
@@ -196,7 +192,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         #endregion
 
-        #region Methods
+        #region ChangeDatabaseMethods
         private void delAuthorWithOutProject()
         {
             author aux_author = SelectedAuthor;
