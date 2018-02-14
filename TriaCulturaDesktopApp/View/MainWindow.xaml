@@ -26,9 +26,21 @@
             </Image.OpacityMask>
         </Image>
 
-        <Button x:Name="btAutors" Content="Autors" Command="{Binding OpenAuthors}" HorizontalAlignment="Left" Margin="185,239,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
-        <Button x:Name="btProjectes" Content="Projectes" Command="{Binding OpenProjectes}" HorizontalAlignment="Left" Margin="185,312,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
-        <Button x:Name="btSortir" Content="Sortir" HorizontalAlignment="Left"  Command="{Binding CloseMain}" Margin="185,410,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <Button x:Name="btAutors" Content="Autors" Command="{Binding OpenAuthors}" HorizontalAlignment="Left" Margin="185,239,0,0" VerticalAlignment="Top" Width="160" Height="55" FontFamily="Franklin Gothic Medium" FontSize="16">
+            <Button.Background>
+                <SolidColorBrush Color="#FFBCC3D1"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btProjectes" Content="Projectes" Command="{Binding OpenProjectes}" HorizontalAlignment="Left" Margin="185,312,0,0" VerticalAlignment="Top" Width="160" Height="55" FontFamily="Franklin Gothic Medium" FontSize="16">
+            <Button.Background>
+                <SolidColorBrush Color="#FFBCC3D1"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btSortir" Content="Sortir" HorizontalAlignment="Left"  Command="{Binding CloseMain}" Margin="185,410,0,0" VerticalAlignment="Top" Width="160" Height="55" FontFamily="Franklin Gothic Medium" FontSize="16">
+            <Button.Background>
+                <SolidColorBrush Color="#FFBCC3D1"/>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>

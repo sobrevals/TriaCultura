@@ -277,6 +277,19 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\if_bullet_valid_92546.png" />
+    <Resource Include="Resources\if_cross_35931.png" />
+    <Resource Include="Resources\if_door_in_35977.png" />
+    <Resource Include="Resources\if_draw_eraser_64141.png" />
+    <Resource Include="Resources\if_email_36007.png" />
+    <Resource Include="Resources\if_file_manager_64277.png" />
+    <Resource Include="Resources\if_folder_add_36060.png" />
+    <Resource Include="Resources\if_folder_delete_36066.png" />
+    <Resource Include="Resources\if_home_page_64352.png" />
+    <Resource Include="Resources\if_page_white_add_36265.png" />
+    <Resource Include="Resources\if_page_white_delete_36277.png" />
+    <Resource Include="Resources\if_phone_36326.png" />
+    <Resource Include="Resources\if_document_copies_64085.png" />
     <Resource Include="Resources\if_button_minus_red_14768.png" />
     <Resource Include="Resources\if_button_plus_blue_14780.png" />
     <Resource Include="Resources\if_redo_101174.png" />
