@@ -18,7 +18,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     class ProjecteViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
-        //triaculturaCTXEntities context = new triaculturaCTXEntities();
         Available_Types tipus = new Available_Types();
 
         #region BasicProperties
@@ -239,8 +238,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                         Projecte.files.Remove(f);
                     }
                 }
-                //Projecte.files.Remove(aux_fitxer);
-                //context.SaveChanges();
                 FillFiles();
             }
         }

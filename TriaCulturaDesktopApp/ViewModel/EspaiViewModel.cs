@@ -22,7 +22,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         public triaculturaCTXEntities context { get; set; }
 
 
-
         #region BasicProperties
         private List<request> _allRequestInProject;
         private List<request> _allRequestOfProject;
@@ -243,7 +242,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                     SelectedProject.requests.Remove(req);
                 }
             }
-            //SelectedProject.requests.Remove(r);
             fillPlaces(0);
             fillProjectPlaces(0);
         }
@@ -277,7 +275,6 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 List<request> aux_project_request_list = SelectedProject.requests.ToList();
                 List<place> places_requested = aux_project_request_list.Select(x => x.place).Distinct().ToList();
-                //List<place> places_requested = context.places.Where(x => aux_project_request_list.Select(y => y.place_id).Equals(x.id_place)).ToList();
                 List<place> all_places = context.places.ToList();
                 List<place> aux_all_places = new List<place>();
 

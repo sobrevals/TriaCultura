@@ -151,25 +151,28 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void DelDisciplina()
         {
-            discipline aux_discipline = new discipline();
-            aux_discipline.author_dni = SelectedDiscipline.author_dni;
-            aux_discipline.type = SelectedDiscipline.type;
-            aux_discipline.id_discipline = SelectedDiscipline.id_discipline;
-            this.Dialogs.Add(new DisciplinaDialogViewModel
+            if (SelectedDiscipline != null)
             {
-                Title = "Esborrar Disciplina",
-                Discipline = aux_discipline,
-                OkText = "Esborra",
-                TextEnabled = false,
-                OnOk = (sender) =>
+                discipline aux_discipline = new discipline();
+                aux_discipline.author_dni = SelectedDiscipline.author_dni;
+                aux_discipline.type = SelectedDiscipline.type;
+                aux_discipline.id_discipline = SelectedDiscipline.id_discipline;
+                this.Dialogs.Add(new DisciplinaDialogViewModel
                 {
-                    Author.disciplines.Remove(SelectedDiscipline);
-                    FillDisciplines();
-                    sender.Close();
-                },
-                OnCancel = (sender) => { sender.Close(); },
-                OnCloseRequest = (sender) => { sender.Close(); }
-            });
+                    Title = "Esborrar Disciplina",
+                    Discipline = aux_discipline,
+                    OkText = "Esborra",
+                    TextEnabled = false,
+                    OnOk = (sender) =>
+                    {
+                        Author.disciplines.Remove(SelectedDiscipline);
+                        FillDisciplines();
+                        sender.Close();
+                    },
+                    OnCancel = (sender) => { sender.Close(); },
+                    OnCloseRequest = (sender) => { sender.Close(); }
+                });
+            }
         }
         public ICommand AfegirDisciplina { get { return new RelayCommand(AddDisciplina); } }
 
@@ -222,7 +225,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public void AddEmail()
         {
-
             email aux_mail = new email();
             aux_mail.author_dni = Author.dni;
             this.Dialogs.Add(new AutorDialogViewModel

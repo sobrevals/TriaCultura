@@ -159,7 +159,6 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 Projecte = aux_project,
                 titol = "Modificar Projecte",
-                //SelectedType = aux_project.type,
                 OnOk = (sender) =>
                 {
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().author_dni = aux_project.author_dni;
@@ -167,18 +166,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().topic = aux_project.topic;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description = aux_project.description;
 
-                    //List<request> aux_request_in_project = aux_project.requests.ToList();
-                    //List<request> aux_request_in_context = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
-                    //foreach (request r in aux_request_in_project)
-                    //{
-                    //    if (!aux_request_in_context.Select(x => x.place_id).Contains(r.place_id))
-                    //    {
-                    //        context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests.Add(r);
-                    //        //context.requests.Add(r);
-                    //    }
-                    //}
-
-                    //context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests = aux_project.requests;
 
 
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
@@ -253,7 +240,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                     context = context,
                     OnOk = (sender) =>
                     {
-                        //context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests = aux_project.requests;
                         List<request> existing_requests = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
                         List<request> project_requests = aux_project.requests.ToList();
                         foreach (request r in project_requests)
