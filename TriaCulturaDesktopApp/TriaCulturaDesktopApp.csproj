@@ -277,6 +277,14 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\if_add_user_3802.png" />
+    <Resource Include="Resources\if_book_add_36875.png" />
+    <Resource Include="Resources\if_book_close_36877.png" />
+    <Resource Include="Resources\if_document_copies_64085.png" />
+    <Resource Include="Resources\if_undo_100961.png" />
+    <Resource Include="Resources\images.jpg" />
+    <Resource Include="Resources\images2.jpg" />
+    <Resource Include="Resources\teatro1.png" />
     <Resource Include="Resources\if_Backward-64_32056.png" />
     <Resource Include="Resources\if_Forward-64_32079.png" />
     <Resource Include="Resources\if_page_white_edit_36279.png" />
