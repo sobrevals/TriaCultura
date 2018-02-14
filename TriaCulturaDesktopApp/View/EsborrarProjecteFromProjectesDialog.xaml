@@ -1,4 +1,4 @@
-﻿<Window x:Class="TriaCulturaDesktopApp.View.EsborrarProjecteFromProjectesDialog"
+﻿<Window x:Name="Esborrar_Projecte" x:Class="TriaCulturaDesktopApp.View.EsborrarProjecteFromProjectesDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,10 +8,13 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="EsborrarProjecteFromProjectesDialog" Height="186.397" Width="300" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
+    </Window.Background>
     <Grid>
-        <Button x:Name="btn_cancel" Command="{Binding CancelCommand}" Content="Cancel" HorizontalAlignment="Left" Margin="28,94,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
-        <Button x:Name="btn_aceptar" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Margin="167,94,0,0" VerticalAlignment="Top" Width="98" Height="41"/>
-        <Label x:Name="text_Missatge" Content="Esta seguro que vol borrar aquest projecte?;" HorizontalAlignment="Left" Margin="72,23,0,0" VerticalAlignment="Top" Width="151" Height="32"/>
+        <Button x:Name="btn_cancel" Command="{Binding CancelCommand}" Content="Cancel·lar" HorizontalAlignment="Left" Margin="28,94,0,0" VerticalAlignment="Top" Width="98" Height="41" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="btn_aceptar" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Margin="167,94,0,0" VerticalAlignment="Top" Width="98" Height="41" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Label x:Name="text_Missatge" Content="Esta seguro que vol borrar aquest projecte?;" HorizontalAlignment="Left" Margin="72,23,0,0" VerticalAlignment="Top" Width="151" Height="32" FontFamily="Franklin Gothic Medium" FontSize="14"/>
 
     </Grid>
 </Window>

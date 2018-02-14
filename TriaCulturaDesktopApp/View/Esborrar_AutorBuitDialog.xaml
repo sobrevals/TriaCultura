@@ -11,15 +11,18 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="Esborrar_AutorBuitDialog" Height="244" Width="300" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
+    </Window.Background>
 
     <Window.DataContext>
         <ViewModel:Esborrar_AutorBuitDialogViewModel/>
     </Window.DataContext>
     <Grid>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="86,49,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="120" IsEnabled="{Binding TextEnabled}"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="86,96,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="120" IsEnabled="{Binding TextEnabled}"/>
-        <Button x:Name="button_Copy" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="86" Height="42"/>
-        <Button x:Name="button" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Margin="196,162,0,0" VerticalAlignment="Top" Width="86" Height="42"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="86,49,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="120" IsEnabled="{Binding TextEnabled}" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="86,96,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="120" IsEnabled="{Binding TextEnabled}" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="button_Copy" Content="Cancel·lar" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="86" Height="42" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="button" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Margin="196,162,0,0" VerticalAlignment="Top" Width="86" Height="42" FontFamily="Franklin Gothic Medium" FontSize="14"/>
 
     </Grid>
 </Window>
