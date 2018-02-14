@@ -167,16 +167,16 @@ namespace TriaCulturaDesktopApp.ViewModel
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().topic = aux_project.topic;
                     context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description = aux_project.description;
 
-                    List<request> aux_request_in_project = aux_project.requests.ToList();
-                    List<request> aux_request_in_context = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
-                    foreach (request r in aux_request_in_project)
-                    {
-                        if (!aux_request_in_context.Select(x => x.place_id).Contains(r.place_id))
-                        {
-                            context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests.Add(r);
-                            //context.requests.Add(r);
-                        }
-                    }
+                    //List<request> aux_request_in_project = aux_project.requests.ToList();
+                    //List<request> aux_request_in_context = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
+                    //foreach (request r in aux_request_in_project)
+                    //{
+                    //    if (!aux_request_in_context.Select(x => x.place_id).Contains(r.place_id))
+                    //    {
+                    //        context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests.Add(r);
+                    //        //context.requests.Add(r);
+                    //    }
+                    //}
 
                     //context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests = aux_project.requests;
 
@@ -233,6 +233,50 @@ namespace TriaCulturaDesktopApp.ViewModel
                     }
                 });
             }
+        }
+
+        public ICommand Veure_Espais { get { return new RelayCommand(veureEspais); } }
+
+        public virtual void veureEspais()
+        {
+
+            if (SelectedProject != null)
+            {
+                project aux_project = new project();
+                aux_project.id_project = SelectedProject.id_project;
+                aux_project.requests = SelectedProject.requests;
+                aux_project.author_dni = SelectedProject.author_dni;
+
+                this.Dialogs.Add(new EspaiViewModel(aux_project, context)
+                {
+                    SelectedProject = aux_project,
+                    context = context,
+                    OnOk = (sender) =>
+                    {
+                        //context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().requests = aux_project.requests;
+                        List<request> existing_requests = context.requests.Where(x => x.project_id == SelectedProject.id_project).ToList();
+                        List<request> project_requests = aux_project.requests.ToList();
+                        foreach (request r in project_requests)
+                        {
+                            if (!existing_requests.Select(x=>x.place_id).Contains(r.place_id))
+                            {
+                                context.requests.Add(r);
+                            }
+                        }
+                        context.SaveChanges();
+                        sender.Close();
+                    },
+                    OnCancel = (sender) =>
+                    {
+                        sender.Close();
+                    },
+                    OnCloseRequest = (sender) =>
+                    {
+                        sender.Close();
+                    }
+                });
+            }
+
         }
 
         #region PropertyChanged
