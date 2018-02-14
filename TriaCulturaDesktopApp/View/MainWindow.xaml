@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="TriaCultura Menú" Height="500" Width="530" RenderTransformOrigin="0.5,0.5" ShowInTaskbar="True" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+        Title="TriaCultura Menú" Height="529" Width="530" RenderTransformOrigin="0.5,0.5" ShowInTaskbar="True" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>
@@ -28,7 +28,7 @@
 
         <Button x:Name="btAutors" Content="Autors" Command="{Binding OpenAuthors}" HorizontalAlignment="Left" Margin="185,239,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
         <Button x:Name="btProjectes" Content="Projectes" Command="{Binding OpenProjectes}" HorizontalAlignment="Left" Margin="185,312,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
-        <Button x:Name="btSortir" Content="Salir" HorizontalAlignment="Left"  Command="{Binding CloseMain}" Margin="185,398,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <Button x:Name="btSortir" Content="Sortir" HorizontalAlignment="Left"  Command="{Binding CloseMain}" Margin="185,410,0,0" VerticalAlignment="Top" Width="160" Height="55" Background="#FFD8B69E" FontFamily="Franklin Gothic Medium" FontSize="16"/>
 
     </Grid>
 </Window>

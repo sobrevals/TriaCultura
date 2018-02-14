@@ -38,11 +38,11 @@
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_minus_red_14768.png"/>
             </Button.OpacityMask>
         </Button>
-        <TextBox x:Name="textbox_dni" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="142" IsReadOnly="{Binding IsReadAuthor}" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
-        <Label x:Name="lbl_dni" Content="DNI" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <TextBox x:Name="textbox_nom" HorizontalAlignment="Left" Height="23" Margin="10,86,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="142" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
-        <TextBox x:Name="tb_CognomAutor" HorizontalAlignment="Left" Height="23" Margin="10,143,0,0" TextWrapping="Wrap" Text="{Binding Author.surname}" VerticalAlignment="Top" Width="142" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
-        <Label x:Name="lbl_nomAutor" Content="Nom" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="45" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <TextBox x:Name="textbox_dni" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="{Binding Author.dni}" VerticalAlignment="Top" Width="142" IsReadOnly="{Binding IsReadAuthor}" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" BorderBrush="#FF262934" BorderThickness="1"/>
+        <Label x:Name="lbl_dni" Content="DNI" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <TextBox x:Name="textbox_nom" HorizontalAlignment="Left" Height="23" Margin="10,86,0,0" TextWrapping="Wrap" Text="{Binding Author.name}" VerticalAlignment="Top" Width="142" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" BorderBrush="#FF262934" BorderThickness="1"/>
+        <TextBox x:Name="tb_CognomAutor" HorizontalAlignment="Left" Height="23" Margin="10,143,0,0" TextWrapping="Wrap" Text="{Binding Author.surname}" VerticalAlignment="Top" Width="142" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" BorderBrush="#FF262934" BorderThickness="1"/>
+        <Label x:Name="lbl_nomAutor" Content="Nom" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="45" FontFamily="Franklin Gothic Medium" FontSize="16"/>
         <Button x:Name="btn_return" Command="{Binding tornarEnrere}" Content="" HorizontalAlignment="Left" Margin="13,356,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="44">
             <Button.OpacityMask>
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
@@ -91,15 +91,15 @@
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_plus_blue_14780.png"/>
             </Button.Background>
         </Button>
-        <ListBox x:Name="listbox_disciplines" HorizontalAlignment="Left" Height="120" Margin="13,218,0,0" VerticalAlignment="Top" Width="139" ItemsSource="{Binding Disciplines}" DisplayMemberPath="type" SelectionMode="Single" SelectedItem="{Binding SelectedDiscipline}" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" />
-        <ListBox x:Name="listbox_mails" HorizontalAlignment="Left" Height="120" Margin="220,218,0,0" VerticalAlignment="Top" Width="223" ItemsSource="{Binding Emails}" SelectionMode="Single" SelectedItem="{Binding SelectedEmail}" DisplayMemberPath="address" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
-        <ListBox x:Name="listbox_telefons" HorizontalAlignment="Left" Height="120" Margin="220,44,0,0" VerticalAlignment="Top" Width="223" ItemsSource="{Binding Telefons}" SelectionMode="Single" SelectedItem ="{Binding SelectedPhone}" DisplayMemberPath="num" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3"/>
-        <Label x:Name="label_disciplines" Content="Disciplines" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Label x:Name="label_telefon" Content="Telefon" HorizontalAlignment="Left" Margin="220,13,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Label x:Name="label_mail" Content="Mail" HorizontalAlignment="Left" Margin="220,187,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.462" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <ListBox x:Name="listbox_disciplines" HorizontalAlignment="Left" Height="120" Margin="13,218,0,0" VerticalAlignment="Top" Width="139" ItemsSource="{Binding Disciplines}" DisplayMemberPath="type" SelectionMode="Single" SelectedItem="{Binding SelectedDiscipline}" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" BorderBrush="#FF262934" BorderThickness="1" />
+        <ListBox x:Name="listbox_mails" HorizontalAlignment="Left" Height="120" Margin="220,218,0,0" VerticalAlignment="Top" Width="223" ItemsSource="{Binding Emails}" SelectionMode="Single" SelectedItem="{Binding SelectedEmail}" DisplayMemberPath="address" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" BorderBrush="#FF262934" BorderThickness="1"/>
+        <ListBox x:Name="listbox_telefons" HorizontalAlignment="Left" Height="120" Margin="220,44,0,0" VerticalAlignment="Top" Width="223" ItemsSource="{Binding Telefons}" SelectionMode="Single" SelectedItem ="{Binding SelectedPhone}" DisplayMemberPath="num" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" BorderBrush="#FF262934" BorderThickness="1"/>
+        <Label x:Name="label_disciplines" Content="Disciplines" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <Label x:Name="label_telefon" Content="Telefon" HorizontalAlignment="Left" Margin="220,13,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <Label x:Name="label_mail" Content="Mail" HorizontalAlignment="Left" Margin="220,187,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.462" FontFamily="Franklin Gothic Medium" FontSize="16"/>
 
-        <Label x:Name="lbl_cognomAutor" Content="Cognom" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="74" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Button x:Name="btn_guardar" Content="" HorizontalAlignment="Left" Margin="238,356,0,0" VerticalAlignment="Top" Width="53" Command="{Binding OkCommand}" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="44">
+        <Label x:Name="lbl_cognomAutor" Content="Cognom" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="74" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <Button x:Name="btn_guardar" Content="" HorizontalAlignment="Left" Margin="238,353,0,0" VerticalAlignment="Top" Width="53" Command="{Binding OkCommand}" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="47">
             <Button.OpacityMask>
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Save_70652.png"/>
             </Button.OpacityMask>
