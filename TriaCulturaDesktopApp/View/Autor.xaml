@@ -95,7 +95,7 @@
         <ListBox x:Name="listbox_mails" HorizontalAlignment="Left" Height="120" Margin="220,218,0,0" VerticalAlignment="Top" Width="223" ItemsSource="{Binding Emails}" SelectionMode="Single" SelectedItem="{Binding SelectedEmail}" DisplayMemberPath="address" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" BorderBrush="#FF262934" BorderThickness="1"/>
         <ListBox x:Name="listbox_telefons" HorizontalAlignment="Left" Height="120" Margin="220,44,0,0" VerticalAlignment="Top" Width="223" ItemsSource="{Binding Telefons}" SelectionMode="Single" SelectedItem ="{Binding SelectedPhone}" DisplayMemberPath="num" FontFamily="Franklin Gothic Medium" FontSize="14" Background="#FFF3F3F3" BorderBrush="#FF262934" BorderThickness="1"/>
         <Label x:Name="label_disciplines" Content="Disciplines" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="16"/>
-        <Label x:Name="label_telefon" Content="Telefon" HorizontalAlignment="Left" Margin="220,13,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <Label x:Name="label_telefon" Content="Telèfon" HorizontalAlignment="Left" Margin="220,13,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="16"/>
         <Label x:Name="label_mail" Content="Mail" HorizontalAlignment="Left" Margin="220,187,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.462" FontFamily="Franklin Gothic Medium" FontSize="16"/>
 
         <Label x:Name="lbl_cognomAutor" Content="Cognom" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="74" FontFamily="Franklin Gothic Medium" FontSize="16"/>
