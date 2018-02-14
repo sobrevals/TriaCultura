@@ -9,7 +9,7 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"          
         mc:Ignorable="d"
-        Title="Espais" Height="300" Width="435"
+        Title="Espais" Height="330" Width="400"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         >
@@ -22,12 +22,40 @@
     <Grid>
         <Label x:Name="lbDisciplina" Content="Espais" HorizontalAlignment="Left" Margin="164,10,0,0" VerticalAlignment="Top" Width="70" FontFamily="Franklin Gothic Medium" FontSize="14"/>
         <ListBox x:Name="lbEspais_agafats" HorizontalAlignment="Left" ItemsSource="{Binding PlaceWithProject}" DisplayMemberPath="name" SelectedItem="{Binding SelectedPlace_fromProject}"  Height="177" Margin="229,57,0,0" VerticalAlignment="Top" Width="130" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Button x:Name="btAfegir" Command="{Binding agregarEspai}" Content="--&gt;" HorizontalAlignment="Left" Margin="171,86,0,0" VerticalAlignment="Top" Width="32" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Button x:Name="btTreure" Command="{Binding treureEspai}" Content="&lt;--" HorizontalAlignment="Left" Margin="171,146,0,0" VerticalAlignment="Top" Width="32" RenderTransformOrigin="0.92,0.5" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Button x:Name="btFinalitzar" Command="{Binding OkCommand}" Content="Finalitzar" HorizontalAlignment="Left" Margin="341,239,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="2.787,0.55" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="btAfegir" Command="{Binding agregarEspai}" Content="" HorizontalAlignment="Left" Margin="168,90,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Forward-64_32079.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Forward-64_32079.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btTreure" Command="{Binding treureEspai}" Content="" HorizontalAlignment="Left" Margin="168,147,0,0" VerticalAlignment="Top" Width="42" RenderTransformOrigin="0.92,0.5" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Backward-64_32056.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Backward-64_32056.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btFinalitzar" Command="{Binding OkCommand}" Content="" HorizontalAlignment="Left" Margin="307,249,0,0" VerticalAlignment="Top" Width="52" RenderTransformOrigin="2.787,0.55" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Save_70652.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_Save_70652.png"/>
+            </Button.Background>
+        </Button>
         <ListBox x:Name="lbEspais_Disponibles" HorizontalAlignment="Left" ItemsSource="{Binding PlaceWithoutProject}" DisplayMemberPath="name" SelectedItem="{Binding SelectedPlace_fromPlaces}" Height="177" Margin="24,57,0,0" VerticalAlignment="Top" Width="130" FontFamily="Franklin Gothic Medium" FontSize="14"/>
         <Label x:Name="EspaisSeleccionats" Content="Espais escollits" HorizontalAlignment="Left" Margin="229,15,0,0" VerticalAlignment="Top" Width="130" FontFamily="Franklin Gothic Medium" FontSize="14"/>
         <Label x:Name="espaisDisponibles" Content="Espais disponibles" HorizontalAlignment="Left" Margin="24,15,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.169,1" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="2.787,0.55" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="" HorizontalAlignment="Left" Margin="24,249,0,0" VerticalAlignment="Top" Width="42" RenderTransformOrigin="2.787,0.55" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>
