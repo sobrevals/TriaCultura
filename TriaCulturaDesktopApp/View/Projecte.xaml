@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="{Binding titol}" Height="455.608" Width="729.171" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
+        Title="{Binding titol}" Height="427.608" Width="431.171" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
         >
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
@@ -21,26 +21,22 @@
         <ViewModel:ProjecteViewModel/>
     </Window.DataContext>
     <Grid>
-        <Label x:Name="lb_title" Content="Titol" HorizontalAlignment="Left" Margin="22,22,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_title" HorizontalAlignment="Left" Height="23" Margin="22,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Text="{Binding Projecte.title}"/>
-        <Label x:Name="lb_theme" Content="Tema" HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_theme" HorizontalAlignment="Left" Height="23" Margin="22,112,0,0" TextWrapping="Wrap" Text="{Binding Projecte.topic}" VerticalAlignment="Top" Width="188"/>
-        <Label x:Name="lb_addFile" Content="Adjuntar Fitxers" HorizontalAlignment="Left" Margin="22,154,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbx_file" ItemsSource="{Binding Files}" SelectedItem="{Binding SelectedFile}" SelectionMode="Single"  HorizontalAlignment="Left" Height="93" Margin="22,185,0,0" VerticalAlignment="Top" Width="126" DisplayMemberPath="name"/>
-        <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="358,23,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="358,82,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbx_place" ItemsSource="{Binding RequestL}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest}" DisplayMemberPath="place.name" HorizontalAlignment="Left" Height="109" Margin="455,259,0,0" VerticalAlignment="Top" Width="122"/>
-        <Label x:Name="lb_place" Content="Espais Solicitats" HorizontalAlignment="Left" Margin="472,228,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="bt_save" Command="{Binding OkCommand}" Content="Guardar i Finalitzar" HorizontalAlignment="Left" Margin="550,376,0,0" VerticalAlignment="Top" Width="118"/>
-        <Button x:Name="bt_add" Command="{Binding AfegirRequest_place}" Content="+" HorizontalAlignment="Left" Margin="393,272,0,0" VerticalAlignment="Top" Width="45"/>
-        <Button x:Name="bt_del" Command="{Binding TreureRequest_place}" Content="-" HorizontalAlignment="Left" Margin="393,310,0,0" VerticalAlignment="Top" Width="45"/>
-        <Label x:Name="lb_author" Content="Autor: " HorizontalAlignment="Left" Margin="22,304,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tb_author" Text="{Binding Projecte.author_dni}"  HorizontalAlignment="Left" Height="23" Margin="22,335,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" IsReadOnly="True"/>
-        <Button x:Name="bt_add_File" Command="{Binding OpenFile}" Content="ADD" HorizontalAlignment="Left" Margin="165,203,0,0" VerticalAlignment="Top" Width="56"/>
-        <Button x:Name="bt_rem_File" Command="{Binding RemoveFile}" Content="Remove" HorizontalAlignment="Left" Margin="165,244,0,0" VerticalAlignment="Top" Width="56"/>
-        <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="tb_description" HorizontalAlignment="Left" Height="110" Margin="294,113,0,0" TextWrapping="Wrap" Text="{Binding Projecte.description}" VerticalAlignment="Top" Width="374" AcceptsReturn="True" />
-        <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="318,53,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" SelectedIndex="{Binding SelectedIndexType}" IsSynchronizedWithCurrentItem="True"/>
+        <Label x:Name="lb_title" Content="Titol" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <TextBox x:Name="tb_title" HorizontalAlignment="Left" Height="23" Margin="10,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Text="{Binding Projecte.title}" BorderBrush="#FF262934" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Label x:Name="lb_theme" Content="Tema" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <TextBox x:Name="tb_theme" HorizontalAlignment="Left" Height="23" Margin="10,140,0,0" TextWrapping="Wrap" Text="{Binding Projecte.topic}" VerticalAlignment="Top" Width="188" BorderBrush="#FF262934" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Label x:Name="lb_addFile" Content="Adjuntar Fitxers" HorizontalAlignment="Left" Margin="251,64,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <ListBox x:Name="lbx_file" ItemsSource="{Binding Files}" SelectedItem="{Binding SelectedFile}" SelectionMode="Single"  HorizontalAlignment="Left" Height="73" Margin="251,90,0,0" VerticalAlignment="Top" Width="126" DisplayMemberPath="name" BorderBrush="#FF262934" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Label x:Name="lb_type" Content="Tipus" HorizontalAlignment="Left" Margin="251,4,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Label x:Name="lb_descrip" Content="Descripció" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="bt_save" Command="{Binding OkCommand}" Content="Guardar i Finalitzar" HorizontalAlignment="Left" Margin="318,324,0,0" VerticalAlignment="Top" Width="59" FontFamily="Franklin Gothic Medium" FontSize="14" Height="51"/>
+        <Label x:Name="lb_author" Content="Autor " HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <TextBox x:Name="tb_author" Text="{Binding Projecte.author_dni}"  HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" IsReadOnly="True" BorderBrush="#FF262934" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="bt_add_File" Command="{Binding OpenFile}" Content="ADD" HorizontalAlignment="Left" Margin="251,191,0,0" VerticalAlignment="Top" Width="56" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="bt_rem_File" Command="{Binding RemoveFile}" Content="Remove" HorizontalAlignment="Left" Margin="321,191,0,0" VerticalAlignment="Top" Width="56" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Button x:Name="btn_tornar_enrere" Command="{Binding tornarEnrere}" Content="Tornar enrere"  HorizontalAlignment="Left" Margin="10,324,0,0" VerticalAlignment="Top" Width="59" FontFamily="Franklin Gothic Medium" FontSize="14" Height="51"/>
+        <TextBox x:Name="tb_description" HorizontalAlignment="Left" Height="110" Margin="10,197,0,0" TextWrapping="Wrap" Text="{Binding Projecte.description}" VerticalAlignment="Top" Width="188" AcceptsReturn="True" BorderBrush="#FF262934" FontFamily="Franklin Gothic Medium" FontSize="14" />
+        <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="251,31,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" SelectedIndex="{Binding SelectedIndexType}" IsSynchronizedWithCurrentItem="True" FontFamily="Franklin Gothic Medium" FontSize="14"/>
         <!--SelectedItem="{Binding Path=Projecte.type, Mode=TwoWay}"-->
 
     </Grid>
