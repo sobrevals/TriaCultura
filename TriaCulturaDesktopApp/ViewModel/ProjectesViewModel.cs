@@ -150,7 +150,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                     try
                     {
                         context.SaveChanges();
-                    } catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         MessageBox.Show("Error en esciure a la BBDD");
                     }
@@ -164,43 +165,47 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand ChangeProjecte { get { return new RelayCommand(modProjecte); } }
         protected virtual void modProjecte()
         {
-            project aux_project = new project();
-            aux_project.id_project = SelectedProject.id_project;
-            aux_project.author_dni = SelectedProject.author_dni;
-            aux_project.description = SelectedProject.description;
-            aux_project.title = SelectedProject.title;
-            aux_project.topic = SelectedProject.topic;
-            aux_project.requests = SelectedProject.requests;
-            aux_project.files = SelectedProject.files;
-            aux_project.type = SelectedProject.type;
-            this.Dialogs.Add(new ProjecteViewModel(aux_project)
+            if (SelectedIndexProject != null)
             {
-                Projecte = aux_project,
-                titol = "Modificar Projecte",
-                OnOk = (sender) =>
+                project aux_project = new project();
+                aux_project.id_project = SelectedProject.id_project;
+                aux_project.author_dni = SelectedProject.author_dni;
+                aux_project.description = SelectedProject.description;
+                aux_project.title = SelectedProject.title;
+                aux_project.topic = SelectedProject.topic;
+                aux_project.requests = SelectedProject.requests;
+                aux_project.files = SelectedProject.files;
+                aux_project.type = SelectedProject.type;
+                this.Dialogs.Add(new ProjecteViewModel(aux_project)
                 {
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().author_dni = aux_project.author_dni;
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().title = aux_project.title;
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().topic = aux_project.topic;
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description = aux_project.description;
-
-
-
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
-                    context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().type = aux_project.type;
-                    try
+                    Projecte = aux_project,
+                    titol = "Modificar Projecte",
+                    OnOk = (sender) =>
                     {
-                        context.SaveChanges();
-                    } catch (Exception ex)
-                    {
-                        MessageBox.Show("Error de validació");
-                    }
-                    fillProjectes(SelectedProject);
-                    sender.Close();
-                },
-                OnCloseRequest = (sender) => { sender.Close(); },
-                OnReturn = (sender) => { sender.Close(); }
-            });
+                        context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().author_dni = aux_project.author_dni;
+                        context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().title = aux_project.title;
+                        context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().topic = aux_project.topic;
+                        context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description = aux_project.description;
+
+
+
+                        context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
+                        context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().type = aux_project.type;
+                        try
+                        {
+                            context.SaveChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error de validació");
+                        }
+                        fillProjectes(SelectedProject);
+                        sender.Close();
+                    },
+                    OnCloseRequest = (sender) => { sender.Close(); },
+                    OnReturn = (sender) => { sender.Close(); }
+                });
+            }
         }
         public ICommand TreureProjecte_author { get { return new RelayCommand(RemProjecte_autor); } }
         protected virtual void RemProjecte_autor()
@@ -217,7 +222,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 {
                     Project = aux_project,
                     Title = "Eliminar Projecte",
-                    OkText = "Delete",
+                    OkText = "Esborrar",
                     OnOk = (sender) =>
                     {
                         if (aux_project.requests.Count > 0)
@@ -246,7 +251,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                         try
                         {
                             context.SaveChanges();
-                        } catch (Exception ex)
+                        }
+                        catch (Exception ex)
                         {
                             MessageBox.Show("Error escrivint a la BBDD");
                         }
@@ -289,7 +295,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                         List<request> project_requests = aux_project.requests.ToList();
                         foreach (request r in project_requests)
                         {
-                            if (!existing_requests.Select(x=>x.place_id).Contains(r.place_id))
+                            if (!existing_requests.Select(x => x.place_id).Contains(r.place_id))
                             {
                                 context.requests.Add(r);
                             }
@@ -297,7 +303,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                         try
                         {
                             context.SaveChanges();
-                        } catch (Exception ex)
+                        }
+                        catch (Exception ex)
                         {
                             MessageBox.Show("Error en escriure a la BBDD");
                         }

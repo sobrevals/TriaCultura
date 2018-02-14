@@ -212,9 +212,9 @@ namespace TriaCulturaDesktopApp.ViewModel
             aux_phone.author_dni = Author.dni;
             this.Dialogs.Add(new AutorDialogViewModel
             {
-                Title = "Afegir Telefon",
+                Title = "Afegir Telèfon",
                 Telefon = aux_phone,
-                DataText = "Numero",
+                DataText = "Número",
                 OkText = "Afegeix",
                 TextEnabled = true,
                 TextEnabled_type = true,
@@ -272,11 +272,11 @@ namespace TriaCulturaDesktopApp.ViewModel
                     Telefon = aux_tel,
                     Id_item = aux_tel.id_phone,
                     Type_item = aux_tel.type,
-                    DataText = "Numero",
+                    DataText = "Número",
                     Data_item = aux_tel.num,
                     TextEnabled = false,
                     TextEnabled_type = false,
-                    OkText = "Esborra",
+                    OkText = "Esborrar",
                     OnOk = (sender) =>
                     {
                         Author.phones.Remove(SelectedPhone);
@@ -310,7 +310,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                     Data_item = aux_email.address,
                     TextEnabled = false,
                     TextEnabled_type = false,
-                    OkText = "Esborra",
+                    OkText = "Esborrar",
                     OnOk = (sender) =>
                     {
 

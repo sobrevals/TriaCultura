@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="EsborrarProjecteFromProjectesDialog" Height="186.397" Width="300" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+        Title="Borrar Projecte" Height="186.397" Width="300" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>
     <Grid>
         <Button x:Name="btn_cancel" Command="{Binding CancelCommand}" Content="Cancel·lar" HorizontalAlignment="Left" Margin="28,94,0,0" VerticalAlignment="Top" Width="98" Height="41" FontFamily="Franklin Gothic Medium" FontSize="14"/>
         <Button x:Name="btn_aceptar" Content="{Binding OkText}" Command="{Binding OkCommand}" HorizontalAlignment="Left" Margin="167,94,0,0" VerticalAlignment="Top" Width="98" Height="41" FontFamily="Franklin Gothic Medium" FontSize="14"/>
-        <Label x:Name="text_Missatge" Content="Esta seguro que vol borrar aquest projecte?;" HorizontalAlignment="Left" Margin="72,23,0,0" VerticalAlignment="Top" Width="151" Height="32" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <Label x:Name="text_Missatge" Content="Esta seguro que vol borrar aquest projecte?" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="274" Height="32" FontFamily="Franklin Gothic Medium" FontSize="14"/>
 
     </Grid>
 </Window>
