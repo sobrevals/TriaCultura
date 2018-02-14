@@ -12,6 +12,7 @@ using TriaCulturaDesktopApp.Model;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Windows;
+using System.Threading;
 
 namespace TriaCulturaDesktopApp.ViewModel
 {
@@ -101,8 +102,9 @@ namespace TriaCulturaDesktopApp.ViewModel
 
             if (SelectedAuthor != null)
             {
-                this.Dialogs.Add(new ProjectesViewModel(aux_author, true)
+                this.Dialogs.Add(new ProjectesViewModel(aux_author, true, context)
                 {
+                    context = context,
                     Boto_afegir_enabled = true,
                     ProjectsL = new ObservableCollection<project>(SelectedAuthor.projects.ToList()),
                 });
@@ -131,7 +133,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
             if (SelectedAuthor != null)
             {
-                author aux_author = SelectedAuthor;               
+                author aux_author = SelectedAuthor;
 
                 if ((!(aux_author.projects.Count > 0)))
                 {
@@ -152,7 +154,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public Action<AutorsViewModel> OnOk { get; set; }
 
-     
+
         #endregion ICommand
 
         #region DialogClosing
@@ -243,7 +245,14 @@ namespace TriaCulturaDesktopApp.ViewModel
                         }
                         author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
                         context.authors.Remove(a);
-                        context.SaveChanges();
+                        try
+                        {
+                            context.SaveChanges();
+                        } catch (Exception ex)
+                        {
+
+                            MessageBox.Show("Error en escriure a la BBDD");
+                        }
                     }
                     catch (Exception e)
                     {
@@ -291,62 +300,79 @@ namespace TriaCulturaDesktopApp.ViewModel
 
                             foreach (project subitem in projectsDelList)
                             {
-                                project projectDel = aux_author.projects.Where(x=> x.id_project== subitem.id_project).SingleOrDefault();
-                                List<request> requestDelList = projectDel.requests.ToList();
-
-                                foreach (request item in requestDelList)
+                                if (subitem.requests.Count > 0)
                                 {
-                                    request r = context.requests.Where(x => x.id_request == item.id_request).SingleOrDefault();
+                                    List<request> requestDelList = subitem.requests.ToList();
+                                    foreach (request item in requestDelList)
+                                    {
+                                        request r = context.requests.Where(x => x.id_request == item.id_request).SingleOrDefault();
 
-                                    context.requests.Remove(r);
+                                        context.requests.Remove(r);
+                                    }
                                 }
-
+                                if (subitem.files.Count > 0)
+                                {
+                                    List<file> fileDelList = subitem.files.ToList();
+                                    foreach(file item in fileDelList)
+                                    {
+                                        file f = context.files.Where(x => x.id_file == item.id_file).SingleOrDefault();
+                                        context.files.Remove(f);
+                                    }
+                                }
                                 project p = context.projects.Where(x => x.id_project == subitem.id_project).SingleOrDefault();
 
                                 context.projects.Remove(p);
 
                             }
-                            if (aux_author.phones.Count > 0)
+                        }
+                        if (aux_author.phones.Count > 0)
+                        {
+                            List<phone> phonesDelList = aux_author.phones.ToList();
+
+                            foreach (phone item in phonesDelList)
                             {
-                                List<phone> phonesDelList = aux_author.phones.ToList();
+                                phone p = context.phones.Where(x => x.id_phone == item.id_phone).SingleOrDefault();
 
-                                foreach (phone item in phonesDelList)
-                                {
-                                    phone p = context.phones.Where(x => x.id_phone == item.id_phone).SingleOrDefault();
-
-                                    context.phones.Remove(p);
-                                }
+                                context.phones.Remove(p);
                             }
+                        }
 
-                            if (aux_author.emails.Count > 0)
+                        if (aux_author.emails.Count > 0)
+                        {
+                            List<email> emailsDelList = aux_author.emails.ToList();
+
+                            foreach (email item in emailsDelList)
                             {
-                                List<email> emailsDelList = aux_author.emails.ToList();
+                                email e = context.emails.Where(x => x.id_email == item.id_email).SingleOrDefault();
 
-                                foreach (email item in emailsDelList)
-                                {
-                                    email e = context.emails.Where(x => x.id_email == item.id_email).SingleOrDefault();
-
-                                    context.emails.Remove(e);
-                                }
+                                context.emails.Remove(e);
                             }
-                            if (aux_author.disciplines.Count > 0)
+                        }
+                        if (aux_author.disciplines.Count > 0)
+                        {
+                            List<discipline> disciplinaDelList = aux_author.disciplines.ToList();
+
+                            foreach (discipline item in disciplinaDelList)
                             {
-                                List<discipline> disciplinaDelList = aux_author.disciplines.ToList();
+                                discipline d = context.disciplines.Where(x => x.id_discipline == item.id_discipline).SingleOrDefault();
 
-                                foreach (discipline item in disciplinaDelList)
-                                {
-                                    discipline d = context.disciplines.Where(x => x.id_discipline == item.id_discipline).SingleOrDefault();
-
-                                    context.disciplines.Remove(d);
-                                }
+                                context.disciplines.Remove(d);
                             }
+                        }
 
-                            author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
-
-                            context.authors.Remove(a);
+                        author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
+                        Thread.Sleep(3000);
+                        context.authors.Remove(a);
+                        try
+                        {
                             context.SaveChanges();
+                        } catch (Exception ex)
+                        {
+
+                            MessageBox.Show("Error en escriure a la BBDD");
                         }
                     }
+
                     catch (Exception e)
                     {
                         MessageBox.Show(e.ToString());
@@ -394,7 +420,14 @@ namespace TriaCulturaDesktopApp.ViewModel
                         a.emails = aux_author.emails;
                         a.phones = aux_author.phones;
                         a.disciplines = aux_author.disciplines;
-                        context.SaveChanges();
+                        try
+                        {
+                            context.SaveChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error en escriure a la BBDD");
+                        }
                     }
                     catch (Exception e)
                     {
@@ -432,7 +465,15 @@ namespace TriaCulturaDesktopApp.ViewModel
                         if (!subList.Exists(x => x.dni == aux_author.dni))
                         {
                             context.authors.Add(aux_author);
-                            context.SaveChanges();
+                            try
+                            {
+                                context.SaveChanges();
+                            } catch (Exception ex)
+                            {
+
+                            MessageBox.Show("Error en escriure a la BBDD");
+
+                            }
                         }
                     }
                     catch (Exception ex)

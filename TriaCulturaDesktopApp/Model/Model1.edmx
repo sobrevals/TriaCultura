@@ -337,7 +337,7 @@
           <Property Name="id_file" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="extension" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="path" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="project_id" Type="Int32" />
           <NavigationProperty Name="project" Relationship="Self.FK_file_project" FromRole="file" ToRole="project" />
         </EntityType>

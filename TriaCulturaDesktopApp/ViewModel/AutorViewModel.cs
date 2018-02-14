@@ -57,6 +57,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         }
         #endregion
         private bool _isReadAuthor;
+        private bool _isVisible;
+
+        public bool IsVisible { get { return _isVisible; } set { _isVisible = value; NotifyPropertyChanged("IsVisible"); RaisePropertyChanged("IsVisible"); } }
+
         public bool IsReadAuthor { get { return _isReadAuthor; } set { _isReadAuthor = value; NotifyPropertyChanged(""); } }
 
         public author Author { get { return _author; } set { _author = value; NotifyPropertyChanged(); } }
@@ -92,6 +96,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public AutorViewModel()
         {
+            IsVisible = true;
             IsReadAuthor = false;
             // de proves
             author a = new author();
@@ -104,6 +109,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public AutorViewModel(author a)
         {
+            IsVisible = true;
             IsReadAuthor = true;
             Titol = "Modificar Autor";
             Author = context.authors.Select(x => x.dni).ToList().Contains(a.dni) ? context.authors.Where(x => x.dni == a.dni).SingleOrDefault() : new Model.author();
@@ -338,11 +344,14 @@ namespace TriaCulturaDesktopApp.ViewModel
                 }
             }
             context.SaveChanges();
-            this.Dialogs.Add(new ProjectesViewModel(Author, true)
+            IsVisible = false;
+            this.Dialogs.Add(new ProjectesViewModel(Author, true, context)
             {
+                context = context,
                 Boto_afegir_enabled = true,
                 ProjectsL = new ObservableCollection<project>(Author.projects.ToList())
             });
+            this.Close();
         }
 
 
