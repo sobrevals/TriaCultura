@@ -17,8 +17,8 @@ namespace TriaCulturaDesktopApp.Model
         public place()
         {
             this.events = new HashSet<@event>();
+            this.place_has_capacity = new HashSet<place_has_capacity>();
             this.requests = new HashSet<request>();
-            this.capacities = new HashSet<capacity>();
         }
     
         public int id_place { get; set; }
@@ -27,7 +27,7 @@ namespace TriaCulturaDesktopApp.Model
         public string address { get; set; }
     
         public virtual ICollection<@event> events { get; set; }
+        public virtual ICollection<place_has_capacity> place_has_capacity { get; set; }
         public virtual ICollection<request> requests { get; set; }
-        public virtual ICollection<capacity> capacities { get; set; }
     }
 }

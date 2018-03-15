@@ -12,15 +12,12 @@ namespace TriaCulturaDesktopApp.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class file
+    public partial class sysdiagram
     {
-        public int id_file { get; set; }
         public string name { get; set; }
-        public string extension { get; set; }
-        public string path { get; set; }
-        public Nullable<int> project_id { get; set; }
-        public byte[] file_content { get; set; }
-    
-        public virtual project project { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

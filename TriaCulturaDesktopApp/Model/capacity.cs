@@ -16,13 +16,12 @@ namespace TriaCulturaDesktopApp.Model
     {
         public capacity()
         {
-            this.places = new HashSet<place>();
+            this.place_has_capacity = new HashSet<place_has_capacity>();
         }
     
         public int id_capacity { get; set; }
         public string type_spectacle { get; set; }
-        public int vol_expo { get; set; }
     
-        public virtual ICollection<place> places { get; set; }
+        public virtual ICollection<place_has_capacity> place_has_capacity { get; set; }
     }
 }

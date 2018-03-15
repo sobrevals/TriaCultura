@@ -412,14 +412,14 @@ namespace TriaCulturaDesktopApp.ViewModel
                 {
                     try
                     {
-                        author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
-                        a.dni = aux_author.dni;
-                        a.address = aux_author.address;
-                        a.name = aux_author.name;
-                        a.surname = aux_author.surname;
-                        a.emails = aux_author.emails;
-                        a.phones = aux_author.phones;
-                        a.disciplines = aux_author.disciplines;
+                        //author a = context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault();
+                        context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault().dni = aux_author.dni;
+                        context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault().address = aux_author.address;
+                        context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault().name = aux_author.name;
+                        context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault().surname = aux_author.surname;
+                        context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault().emails = aux_author.emails;
+                        context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault().phones = aux_author.phones;
+                        context.authors.Where(x => x.dni == SelectedAuthor.dni).SingleOrDefault().disciplines = aux_author.disciplines;
                         try
                         {
                             context.SaveChanges();

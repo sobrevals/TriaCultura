@@ -26,6 +26,7 @@ namespace TriaCulturaDesktopApp.Model
         }
     
         public DbSet<author> authors { get; set; }
+        public DbSet<author_has_discipline> author_has_discipline { get; set; }
         public DbSet<capacity> capacities { get; set; }
         public DbSet<discipline> disciplines { get; set; }
         public DbSet<email> emails { get; set; }
@@ -33,7 +34,12 @@ namespace TriaCulturaDesktopApp.Model
         public DbSet<file> files { get; set; }
         public DbSet<phone> phones { get; set; }
         public DbSet<place> places { get; set; }
+        public DbSet<place_has_capacity> place_has_capacity { get; set; }
         public DbSet<project> projects { get; set; }
+        public DbSet<rating> ratings { get; set; }
         public DbSet<request> requests { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<user> users { get; set; }
+        public DbSet<vote> votes { get; set; }
     }
 }

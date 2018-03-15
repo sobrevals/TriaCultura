@@ -17,6 +17,8 @@ namespace TriaCulturaDesktopApp.Model
         public int id_request { get; set; }
         public Nullable<int> project_id { get; set; }
         public Nullable<int> place_id { get; set; }
+        public Nullable<int> is_winner { get; set; }
+        public Nullable<System.DateTime> proposed_date { get; set; }
     
         public virtual place place { get; set; }
         public virtual project project { get; set; }

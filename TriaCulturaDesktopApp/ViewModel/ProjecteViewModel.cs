@@ -282,6 +282,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 fitxer.name = Path.GetFileNameWithoutExtension(SelectedPath);
                 fitxer.extension = Path.GetExtension(SelectedPath);
                 fitxer.path = SelectedPath;
+                fitxer.file_content = File.ReadAllBytes(SelectedPath);
                 Projecte.files.Add(fitxer);
                 FillFiles();
             }

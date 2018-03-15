@@ -14,13 +14,20 @@
           <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="80" />
         </EntityType>
+        <EntityType Name="author_has_discipline">
+          <Key>
+            <PropertyRef Name="author_dni" />
+            <PropertyRef Name="discipline_id" />
+          </Key>
+          <Property Name="author_dni" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="discipline_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="capacity">
           <Key>
             <PropertyRef Name="id_capacity" />
           </Key>
           <Property Name="id_capacity" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="type_spectacle" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="vol_expo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="discipline">
           <Key>
@@ -36,7 +43,7 @@
           </Key>
           <Property Name="id_email" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="author_dni" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="author_dni" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="event">
           <Key>
@@ -52,10 +59,11 @@
             <PropertyRef Name="id_file" />
           </Key>
           <Property Name="id_file" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="extension" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="path" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="extension" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="path" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="project_id" Type="int" />
+          <Property Name="file_content" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="phone">
           <Key>
@@ -64,7 +72,7 @@
           <Property Name="id_phone" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="num" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="type" Type="varchar" MaxLength="20" />
-          <Property Name="author_dni" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="author_dni" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="place">
           <Key>
@@ -82,6 +90,8 @@
           </Key>
           <Property Name="capacity_id" Type="int" Nullable="false" />
           <Property Name="place_id" Type="int" Nullable="false" />
+          <Property Name="vol_capacity" Type="int" />
+          <Property Name="fee" Type="decimal" Precision="6" Scale="0" />
         </EntityType>
         <EntityType Name="project">
           <Key>
@@ -94,6 +104,16 @@
           <Property Name="author_dni" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="type" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="rating">
+          <Key>
+            <PropertyRef Name="id_rating" />
+          </Key>
+          <Property Name="id_rating" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rate" Type="int" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="comment" Type="text" />
+        </EntityType>
         <EntityType Name="request">
           <Key>
             <PropertyRef Name="id_request" />
@@ -101,6 +121,35 @@
           <Property Name="id_request" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="project_id" Type="int" />
           <Property Name="place_id" Type="int" />
+          <Property Name="is_winner" Type="int" />
+          <Property Name="proposed_date" Type="date" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dni" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vote">
+          <Key>
+            <PropertyRef Name="id_vote" />
+          </Key>
+          <Property Name="id_vote" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_discipline_author">
           <End Role="author" Type="Self.author" Multiplicity="0..1" />
@@ -115,7 +164,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_email_author">
-          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="author" Type="Self.author" Multiplicity="0..1" />
           <End Role="email" Type="Self.email" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="author">
@@ -151,7 +200,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_phone_author">
-          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="author" Type="Self.author" Multiplicity="0..1" />
           <End Role="phone" Type="Self.phone" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="author">
@@ -198,6 +247,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rating_project">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="rating" Type="Self.rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="rating">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rating_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="rating" Type="Self.rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rating">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_request_place">
           <End Role="place" Type="Self.place" Multiplicity="0..1" />
           <End Role="request" Type="Self.request" Multiplicity="*" />
@@ -222,8 +295,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_vote_project">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="vote" Type="Self.vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="vote">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vote_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="vote" Type="Self.vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vote">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="triaculturaDBModelStoreContainer">
           <EntitySet Name="author" EntityType="Self.author" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="author_has_discipline" EntityType="Self.author_has_discipline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="capacity" EntityType="Self.capacity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="discipline" EntityType="Self.discipline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="email" EntityType="Self.email" Schema="dbo" store:Type="Tables" />
@@ -233,7 +331,11 @@
           <EntitySet Name="place" EntityType="Self.place" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="place_has_capacity" EntityType="Self.place_has_capacity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="project" EntityType="Self.project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rating" EntityType="Self.rating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="request" EntityType="Self.request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vote" EntityType="Self.vote" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_discipline_author" Association="Self.FK_discipline_author">
             <End Role="author" EntitySet="author" />
             <End Role="discipline" EntitySet="discipline" />
@@ -266,6 +368,14 @@
             <End Role="author" EntitySet="author" />
             <End Role="project" EntitySet="project" />
           </AssociationSet>
+          <AssociationSet Name="FK_rating_project" Association="Self.FK_rating_project">
+            <End Role="project" EntitySet="project" />
+            <End Role="rating" EntitySet="rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rating_user" Association="Self.FK_rating_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="rating" EntitySet="rating" />
+          </AssociationSet>
           <AssociationSet Name="FK_request_place" Association="Self.FK_request_place">
             <End Role="place" EntitySet="place" />
             <End Role="request" EntitySet="request" />
@@ -273,6 +383,14 @@
           <AssociationSet Name="FK_request_project" Association="Self.FK_request_project">
             <End Role="project" EntitySet="project" />
             <End Role="request" EntitySet="request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vote_project" Association="Self.FK_vote_project">
+            <End Role="project" EntitySet="project" />
+            <End Role="vote" EntitySet="vote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vote_user" Association="Self.FK_vote_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="vote" EntitySet="vote" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -293,14 +411,21 @@
           <NavigationProperty Name="phones" Relationship="Self.FK_phone_author" FromRole="author" ToRole="phone" />
           <NavigationProperty Name="projects" Relationship="Self.FK_project_author" FromRole="author" ToRole="project" />
         </EntityType>
+        <EntityType Name="author_has_discipline">
+          <Key>
+            <PropertyRef Name="author_dni" />
+            <PropertyRef Name="discipline_id" />
+          </Key>
+          <Property Name="author_dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="discipline_id" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="capacity">
           <Key>
             <PropertyRef Name="id_capacity" />
           </Key>
           <Property Name="id_capacity" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="type_spectacle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="vol_expo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="places" Relationship="Self.place_has_capacity" FromRole="capacity" ToRole="place" />
+          <NavigationProperty Name="place_has_capacity" Relationship="Self.FK_place_has_capacity_capacity" FromRole="capacity" ToRole="place_has_capacity" />
         </EntityType>
         <EntityType Name="discipline">
           <Key>
@@ -317,7 +442,7 @@
           </Key>
           <Property Name="id_email" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="author_dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="author_dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="author" Relationship="Self.FK_email_author" FromRole="email" ToRole="author" />
         </EntityType>
         <EntityType Name="event">
@@ -336,9 +461,10 @@
           </Key>
           <Property Name="id_file" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="extension" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="extension" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="project_id" Type="Int32" />
+          <Property Name="file_content" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="project" Relationship="Self.FK_file_project" FromRole="file" ToRole="project" />
         </EntityType>
         <EntityType Name="phone">
@@ -348,7 +474,7 @@
           <Property Name="id_phone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="author_dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="author_dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="author" Relationship="Self.FK_phone_author" FromRole="phone" ToRole="author" />
         </EntityType>
         <EntityType Name="place">
@@ -360,8 +486,20 @@
           <Property Name="capacity" Type="Int32" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="events" Relationship="Self.FK_event_place" FromRole="place" ToRole="event" />
+          <NavigationProperty Name="place_has_capacity" Relationship="Self.FK_place_has_capacity_place" FromRole="place" ToRole="place_has_capacity" />
           <NavigationProperty Name="requests" Relationship="Self.FK_request_place" FromRole="place" ToRole="request" />
-          <NavigationProperty Name="capacities" Relationship="Self.place_has_capacity" FromRole="place" ToRole="capacity" />
+        </EntityType>
+        <EntityType Name="place_has_capacity">
+          <Key>
+            <PropertyRef Name="capacity_id" />
+            <PropertyRef Name="place_id" />
+          </Key>
+          <Property Name="capacity_id" Type="Int32" Nullable="false" />
+          <Property Name="place_id" Type="Int32" Nullable="false" />
+          <Property Name="vol_capacity" Type="Int32" />
+          <Property Name="fee" Type="Decimal" Precision="6" Scale="0" />
+          <NavigationProperty Name="capacity" Relationship="Self.FK_place_has_capacity_capacity" FromRole="place_has_capacity" ToRole="capacity" />
+          <NavigationProperty Name="place" Relationship="Self.FK_place_has_capacity_place" FromRole="place_has_capacity" ToRole="place" />
         </EntityType>
         <EntityType Name="project">
           <Key>
@@ -375,7 +513,21 @@
           <Property Name="type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="author" Relationship="Self.FK_project_author" FromRole="project" ToRole="author" />
           <NavigationProperty Name="files" Relationship="Self.FK_file_project" FromRole="project" ToRole="file" />
+          <NavigationProperty Name="ratings" Relationship="Self.FK_rating_project" FromRole="project" ToRole="rating" />
           <NavigationProperty Name="requests" Relationship="Self.FK_request_project" FromRole="project" ToRole="request" />
+          <NavigationProperty Name="votes" Relationship="Self.FK_vote_project" FromRole="project" ToRole="vote" />
+        </EntityType>
+        <EntityType Name="rating">
+          <Key>
+            <PropertyRef Name="id_rating" />
+          </Key>
+          <Property Name="id_rating" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rate" Type="Int32" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="project" Relationship="Self.FK_rating_project" FromRole="rating" ToRole="project" />
+          <NavigationProperty Name="user" Relationship="Self.FK_rating_user" FromRole="rating" ToRole="user" />
         </EntityType>
         <EntityType Name="request">
           <Key>
@@ -384,8 +536,41 @@
           <Property Name="id_request" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="project_id" Type="Int32" />
           <Property Name="place_id" Type="Int32" />
+          <Property Name="is_winner" Type="Int32" />
+          <Property Name="proposed_date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="place" Relationship="Self.FK_request_place" FromRole="request" ToRole="place" />
           <NavigationProperty Name="project" Relationship="Self.FK_request_project" FromRole="request" ToRole="project" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dni" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ratings" Relationship="Self.FK_rating_user" FromRole="user" ToRole="rating" />
+          <NavigationProperty Name="votes" Relationship="Self.FK_vote_user" FromRole="user" ToRole="vote" />
+        </EntityType>
+        <EntityType Name="vote">
+          <Key>
+            <PropertyRef Name="id_vote" />
+          </Key>
+          <Property Name="id_vote" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="project" Relationship="Self.FK_vote_project" FromRole="vote" ToRole="project" />
+          <NavigationProperty Name="user" Relationship="Self.FK_vote_user" FromRole="vote" ToRole="user" />
         </EntityType>
         <Association Name="FK_discipline_author">
           <End Role="author" Type="Self.author" Multiplicity="0..1" />
@@ -400,7 +585,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_email_author">
-          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="author" Type="Self.author" Multiplicity="0..1" />
           <End Role="email" Type="Self.email" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="author">
@@ -412,7 +597,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_phone_author">
-          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="author" Type="Self.author" Multiplicity="0..1" />
           <End Role="phone" Type="Self.phone" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="author">
@@ -432,6 +617,18 @@
             </Principal>
             <Dependent Role="project">
               <PropertyRef Name="author_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_place_has_capacity_capacity">
+          <End Role="capacity" Type="Self.capacity" Multiplicity="1" />
+          <End Role="place_has_capacity" Type="Self.place_has_capacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="capacity">
+              <PropertyRef Name="id_capacity" />
+            </Principal>
+            <Dependent Role="place_has_capacity">
+              <PropertyRef Name="capacity_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -459,6 +656,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_place_has_capacity_place">
+          <End Role="place" Type="Self.place" Multiplicity="1" />
+          <End Role="place_has_capacity" Type="Self.place_has_capacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="place">
+              <PropertyRef Name="id_place" />
+            </Principal>
+            <Dependent Role="place_has_capacity">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_request_place">
           <End Role="place" Type="Self.place" Multiplicity="0..1" />
           <End Role="request" Type="Self.request" Multiplicity="*" />
@@ -468,6 +677,18 @@
             </Principal>
             <Dependent Role="request">
               <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rating_project">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="rating" Type="Self.rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="rating">
+              <PropertyRef Name="project_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -483,12 +704,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="place_has_capacity">
-          <End Role="capacity" Type="Self.capacity" Multiplicity="*" />
-          <End Role="place" Type="Self.place" Multiplicity="*" />
+        <Association Name="FK_vote_project">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="vote" Type="Self.vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="vote">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rating_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="rating" Type="Self.rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rating">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vote_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="vote" Type="Self.vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vote">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityContainer Name="triaculturaCTXEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="authors" EntityType="Self.author" />
+          <EntitySet Name="author_has_discipline" EntityType="Self.author_has_discipline" />
           <EntitySet Name="capacities" EntityType="Self.capacity" />
           <EntitySet Name="disciplines" EntityType="Self.discipline" />
           <EntitySet Name="emails" EntityType="Self.email" />
@@ -496,8 +750,13 @@
           <EntitySet Name="files" EntityType="Self.file" />
           <EntitySet Name="phones" EntityType="Self.phone" />
           <EntitySet Name="places" EntityType="Self.place" />
+          <EntitySet Name="place_has_capacity" EntityType="Self.place_has_capacity" />
           <EntitySet Name="projects" EntityType="Self.project" />
+          <EntitySet Name="ratings" EntityType="Self.rating" />
           <EntitySet Name="requests" EntityType="Self.request" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="votes" EntityType="Self.vote" />
           <AssociationSet Name="FK_discipline_author" Association="Self.FK_discipline_author">
             <End Role="author" EntitySet="authors" />
             <End Role="discipline" EntitySet="disciplines" />
@@ -514,6 +773,10 @@
             <End Role="author" EntitySet="authors" />
             <End Role="project" EntitySet="projects" />
           </AssociationSet>
+          <AssociationSet Name="FK_place_has_capacity_capacity" Association="Self.FK_place_has_capacity_capacity">
+            <End Role="capacity" EntitySet="capacities" />
+            <End Role="place_has_capacity" EntitySet="place_has_capacity" />
+          </AssociationSet>
           <AssociationSet Name="FK_event_place" Association="Self.FK_event_place">
             <End Role="place" EntitySet="places" />
             <End Role="event" EntitySet="events" />
@@ -522,17 +785,33 @@
             <End Role="project" EntitySet="projects" />
             <End Role="file" EntitySet="files" />
           </AssociationSet>
+          <AssociationSet Name="FK_place_has_capacity_place" Association="Self.FK_place_has_capacity_place">
+            <End Role="place" EntitySet="places" />
+            <End Role="place_has_capacity" EntitySet="place_has_capacity" />
+          </AssociationSet>
           <AssociationSet Name="FK_request_place" Association="Self.FK_request_place">
             <End Role="place" EntitySet="places" />
             <End Role="request" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rating_project" Association="Self.FK_rating_project">
+            <End Role="project" EntitySet="projects" />
+            <End Role="rating" EntitySet="ratings" />
           </AssociationSet>
           <AssociationSet Name="FK_request_project" Association="Self.FK_request_project">
             <End Role="project" EntitySet="projects" />
             <End Role="request" EntitySet="requests" />
           </AssociationSet>
-          <AssociationSet Name="place_has_capacity" Association="Self.place_has_capacity">
-            <End Role="capacity" EntitySet="capacities" />
-            <End Role="place" EntitySet="places" />
+          <AssociationSet Name="FK_vote_project" Association="Self.FK_vote_project">
+            <End Role="project" EntitySet="projects" />
+            <End Role="vote" EntitySet="votes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rating_user" Association="Self.FK_rating_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="rating" EntitySet="ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vote_user" Association="Self.FK_vote_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="vote" EntitySet="votes" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -551,12 +830,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="author_has_discipline">
+            <EntityTypeMapping TypeName="triaculturaDBModel.author_has_discipline">
+              <MappingFragment StoreEntitySet="author_has_discipline">
+                <ScalarProperty Name="author_dni" ColumnName="author_dni" />
+                <ScalarProperty Name="discipline_id" ColumnName="discipline_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="capacities">
             <EntityTypeMapping TypeName="triaculturaDBModel.capacity">
               <MappingFragment StoreEntitySet="capacity">
                 <ScalarProperty Name="id_capacity" ColumnName="id_capacity" />
                 <ScalarProperty Name="type_spectacle" ColumnName="type_spectacle" />
-                <ScalarProperty Name="vol_expo" ColumnName="vol_expo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -596,6 +882,7 @@
                 <ScalarProperty Name="extension" ColumnName="extension" />
                 <ScalarProperty Name="path" ColumnName="path" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="file_content" ColumnName="file_content" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -619,6 +906,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="place_has_capacity">
+            <EntityTypeMapping TypeName="triaculturaDBModel.place_has_capacity">
+              <MappingFragment StoreEntitySet="place_has_capacity">
+                <ScalarProperty Name="capacity_id" ColumnName="capacity_id" />
+                <ScalarProperty Name="place_id" ColumnName="place_id" />
+                <ScalarProperty Name="vol_capacity" ColumnName="vol_capacity" />
+                <ScalarProperty Name="fee" ColumnName="fee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="projects">
             <EntityTypeMapping TypeName="triaculturaDBModel.project">
               <MappingFragment StoreEntitySet="project">
@@ -631,23 +928,58 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ratings">
+            <EntityTypeMapping TypeName="triaculturaDBModel.rating">
+              <MappingFragment StoreEntitySet="rating">
+                <ScalarProperty Name="id_rating" ColumnName="id_rating" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="requests">
             <EntityTypeMapping TypeName="triaculturaDBModel.request">
               <MappingFragment StoreEntitySet="request">
                 <ScalarProperty Name="id_request" ColumnName="id_request" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
                 <ScalarProperty Name="place_id" ColumnName="place_id" />
+                <ScalarProperty Name="is_winner" ColumnName="is_winner" />
+                <ScalarProperty Name="proposed_date" ColumnName="proposed_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="place_has_capacity" TypeName="triaculturaDBModel.place_has_capacity" StoreEntitySet="place_has_capacity">
-            <EndProperty Name="capacity">
-              <ScalarProperty Name="id_capacity" ColumnName="capacity_id" />
-            </EndProperty>
-            <EndProperty Name="place">
-              <ScalarProperty Name="id_place" ColumnName="place_id" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="triaculturaDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="triaculturaDBModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="votes">
+            <EntityTypeMapping TypeName="triaculturaDBModel.vote">
+              <MappingFragment StoreEntitySet="vote">
+                <ScalarProperty Name="id_vote" ColumnName="id_vote" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -12,15 +12,14 @@ namespace TriaCulturaDesktopApp.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class file
+    public partial class place_has_capacity
     {
-        public int id_file { get; set; }
-        public string name { get; set; }
-        public string extension { get; set; }
-        public string path { get; set; }
-        public Nullable<int> project_id { get; set; }
-        public byte[] file_content { get; set; }
+        public int capacity_id { get; set; }
+        public int place_id { get; set; }
+        public Nullable<int> vol_capacity { get; set; }
+        public Nullable<decimal> fee { get; set; }
     
-        public virtual project project { get; set; }
+        public virtual capacity capacity { get; set; }
+        public virtual place place { get; set; }
     }
 }
