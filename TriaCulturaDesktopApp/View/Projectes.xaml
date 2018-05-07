@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="{Binding titol}" Height="402.5" Width="505" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+        Title="{Binding titol}" Height="402.5" Width="613" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>
@@ -19,7 +19,7 @@
         <ViewModel:ProjectesViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="260" Width="385" ItemsSource="{Binding ProjectsL}" SelectedIndex="{Binding SelectedIndexProject}" SelectedItem="{Binding SelectedProject}" ColumnWidth="100" CanUserResizeColumns="False" AutoGenerateColumns="False" FontFamily="Franklin Gothic Medium" FontSize="14">
+        <DataGrid x:Name="dgv_Projects" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="260" Width="528" ItemsSource="{Binding ProjectsL}" SelectedIndex="{Binding SelectedIndexProject}" SelectedItem="{Binding SelectedProject}" ColumnWidth="100" CanUserResizeColumns="False" AutoGenerateColumns="False" FontFamily="Franklin Gothic Medium" FontSize="14">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding title}" ClipboardContentBinding="{x:Null}" Header="Títol" Width="Auto" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding topic}" ClipboardContentBinding="{x:Null}" Header="Tema" Width="Auto" IsReadOnly="True"/>
@@ -28,7 +28,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button x:Name="bt_add" Content="" Command="{Binding NewProjecte}" IsEnabled="{Binding Boto_afegir_enabled}"  HorizontalAlignment="Left" Margin="433,61,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" Height="42" BorderBrush="{x:Null}">
+        <Button x:Name="bt_add" Content="" Command="{Binding NewProjecte}" IsEnabled="{Binding Boto_afegir_enabled}"  HorizontalAlignment="Left" Margin="546,61,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" Height="42" BorderBrush="{x:Null}">
             <Button.OpacityMask>
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_page_white_add_36265.png"/>
             </Button.OpacityMask>
@@ -36,7 +36,7 @@
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_page_white_add_36265.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="bt_set" Command="{Binding ChangeProjecte}" Content="" HorizontalAlignment="Left" Margin="433,173,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
+        <Button x:Name="bt_set" Command="{Binding ChangeProjecte}" Content="" HorizontalAlignment="Left" Margin="546,173,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
             <Button.Background>
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_page_white_edit_36279.png"/>
             </Button.Background>
@@ -45,7 +45,7 @@
             </Button.OpacityMask>
         </Button>
         <Button x:Name="bt_del" Command="{Binding TreureProjecte_author}" Content="
-" HorizontalAlignment="Left" Margin="433,118,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" Height="42">
+" HorizontalAlignment="Left" Margin="546,118,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" Height="42">
             <Button.OpacityMask>
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_page_white_delete_36277.png"/>
             </Button.OpacityMask>
@@ -53,7 +53,7 @@
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_page_white_delete_36277.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="bt_espais" Command="{Binding Veure_Espais}" Content="" HorizontalAlignment="Left" Margin="430,231,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
+        <Button x:Name="bt_espais" Command="{Binding Veure_Espais}" Content="" HorizontalAlignment="Left" Margin="543,231,0,0" VerticalAlignment="Top" Width="42" FontFamily="Franklin Gothic Medium" FontSize="14" BorderBrush="{x:Null}" Height="42">
             <Button.Background>
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_home_page_64352.png"/>
             </Button.Background>
@@ -69,5 +69,20 @@
                 <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_undo_100964.png"/>
             </Button.Background>
         </Button>
+        <TextBox x:Name="filter_textBox" Text="{Binding SearchBoxText}"  HorizontalAlignment="Left" Height="23" Margin="117,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Return"
+                            Command="{Binding filtrarProjectes}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+        <Button x:Name="bt_filtre" Content="" Command="{Binding filtrarProjectes}" HorizontalAlignment="Left" Margin="283,10,0,0" VerticalAlignment="Top" Width="21" FontFamily="Franklin Gothic Medium" FontSize="14" Height="23" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_filter.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_filter.png"/>
+            </Button.Background>
+        </Button>
+        <Label x:Name="label" Content="Filtre" HorizontalAlignment="Left" Margin="76,10,0,0" VerticalAlignment="Top" Width="36"/>
     </Grid>
 </Window>

@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="TriaCultura Menú" Height="529" Width="530" RenderTransformOrigin="0.5,0.5" ShowInTaskbar="True" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+        Title="TriaCultura Menú" Height="594.055" Width="530" RenderTransformOrigin="0.5,0.5" ShowInTaskbar="True" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>
@@ -36,11 +36,12 @@
                 <SolidColorBrush Color="#FFBCC3D1"/>
             </Button.Background>
         </Button>
-        <Button x:Name="btSortir" Content="Sortir" HorizontalAlignment="Left"  Command="{Binding CloseMain}" Margin="185,410,0,0" VerticalAlignment="Top" Width="160" Height="55" FontFamily="Franklin Gothic Medium" FontSize="16">
+        <Button x:Name="btSortir" Content="Sortir" HorizontalAlignment="Left"  Command="{Binding CloseMain}" Margin="185,478,0,0" VerticalAlignment="Top" Width="160" Height="55" FontFamily="Franklin Gothic Medium" FontSize="16">
             <Button.Background>
                 <SolidColorBrush Color="#FFBCC3D1"/>
             </Button.Background>
         </Button>
+        <Button x:Name="bt_Places" Content="Localitzacions" Command="{Binding OpenPlaces}" HorizontalAlignment="Left" Margin="185,388,0,0" VerticalAlignment="Top" Width="160" Height="55" FontFamily="Franklin Gothic Medium" FontSize="16" Background="#FFBCC3D1"/>
 
     </Grid>
 </Window>

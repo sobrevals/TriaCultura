@@ -21,7 +21,7 @@ namespace TriaCulturaDesktopApp.ViewModel
     class AutorViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
         #region Properties
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+        triaculturaDBEntities context = new triaculturaDBEntities();
 
         private bool __boto_afegir_enabled;
         private author _author;
@@ -244,9 +244,15 @@ namespace TriaCulturaDesktopApp.ViewModel
                 TextEnabled_type = false,
                 OnOk = (sender) =>
                 {
-                    Author.emails.Add(aux_mail);
-                    FillEmails();
-                    sender.Close();
+                    if (this.validate_mail(aux_mail.address))
+                    {
+                        Author.emails.Add(aux_mail);
+                        FillEmails();
+                        sender.Close();
+                    } else
+                    {
+                        MessageBox.Show("Email incorrecte. Insereixi un correu vàlid.");
+                    }
                 },
                 OnCancel = (sender) => { sender.Close(); },
                 OnCloseRequest = (sender) => { sender.Close(); }
@@ -328,30 +334,37 @@ namespace TriaCulturaDesktopApp.ViewModel
         public ICommand OpenProjecte { get { return new RelayCommand(opProject); } }
         protected virtual void opProject()
         {
-            if (context.authors.Select(x => x.dni).Contains(Author.dni))
+            bool valid = validate_dni(Author.dni);
+            if (valid)
             {
-                context.authors.Where(x => x.dni == Author.dni).ToList()[0] = Author;
-            }
-            else
-            {
-                if (Author.dni != null)
+                if (context.authors.Select(x => x.dni).Contains(Author.dni))
                 {
-                    context.authors.Add(Author);
+                    context.authors.Where(x => x.dni == Author.dni).ToList()[0] = Author;
                 }
                 else
                 {
-                    return;
+                    if (Author.dni != null)
+                    {
+                        context.authors.Add(Author);
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
-            }
-            context.SaveChanges();
-            IsVisible = false;
-            this.Dialogs.Add(new ProjectesViewModel(Author, true, context)
+                context.SaveChanges();
+                IsVisible = false;
+                this.Dialogs.Add(new ProjectesViewModel(Author, true, context)
+                {
+                    context = context,
+                    Boto_afegir_enabled = true,
+                    ProjectsL = new ObservableCollection<project>(Author.projects.ToList())
+                });
+                this.Close();
+            } else
             {
-                context = context,
-                Boto_afegir_enabled = true,
-                ProjectsL = new ObservableCollection<project>(Author.projects.ToList())
-            });
-            this.Close();
+                MessageBox.Show("DNI Invàlid.");
+            }
         }
 
 
@@ -374,5 +387,29 @@ namespace TriaCulturaDesktopApp.ViewModel
                 this.DialogClosing(this, new EventArgs());
         }
         #endregion
+        public bool validate_dni(String dni)
+        {
+            string patron = "[A-HJ-NP-SUVW][0-9]{7}[0-9A-J]|\\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]|[X]\\d{7}[TRWAGMYFPDXBNJZSQVHLCKE]|[X]\\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]|[YZ]\\d{0,7}[TRWAGMYFPDXBNJZSQVHLCKE]";
+            string sRemp = "";
+            bool ret = false;
+            System.Text.RegularExpressions.Regex rgx = new System.Text.RegularExpressions.Regex(patron);
+            sRemp = rgx.Replace(dni, "OK");
+            if (sRemp == "OK") ret = true;
+            return ret;
+        }
+        public bool validate_mail(String email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
+
 }

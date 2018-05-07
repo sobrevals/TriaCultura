@@ -20,7 +20,7 @@ namespace TriaCulturaDesktopApp.ViewModel
     {
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
-        triaculturaCTXEntities context = new triaculturaCTXEntities();
+        triaculturaDBEntities context = new triaculturaDBEntities();
 
         #region BasicProperties
 
@@ -207,7 +207,7 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 Title = "Esborrar Contacte",
                 Author = aux_author,
-                OkText = "Delete",
+                OkText = "Esborrar",
                 TextEnabled = false,
                 OnOk = (sender) =>
                 {
@@ -289,7 +289,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 Title = "Esborrar Contacte",
                 Author = aux_author,
                 ProjectList = aux_projectList,
-                OkText = "Delete",
+                OkText = "Esborrar",
                 OnOk = (sender) =>
                 {
                     try
@@ -459,29 +459,44 @@ namespace TriaCulturaDesktopApp.ViewModel
                 Titol = "Nou Autor",
                 OnOk = (sender) =>
                 {
-                    try
-                    {
-                        List<author> subList = context.authors.ToList();
-                        if (!subList.Exists(x => x.dni == aux_author.dni))
+                    bool can_be_closed = true;
+                    if (sender.validate_dni(aux_author.dni)) {
+                        try
                         {
-                            context.authors.Add(aux_author);
-                            try
+                            List<author> subList = context.authors.ToList();
+                            if (!subList.Exists(x => x.dni == aux_author.dni))
                             {
-                                context.SaveChanges();
-                            } catch (Exception ex)
-                            {
+                                context.authors.Add(aux_author);
+                                try
+                                {
+                                    context.SaveChanges();
+                                } catch (Exception ex)
+                                {
 
-                            MessageBox.Show("Error en escriure a la BBDD");
+                                    MessageBox.Show("Error en escriure a la BBDD");
+
+                                }
+                            } else
+                            {
+                                MessageBox.Show("Ja existeix un autor amb aquest DNI!");
+                                can_be_closed = false;
 
                             }
                         }
-                    }
-                    catch (Exception ex)
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+                    } else
                     {
-                        MessageBox.Show(ex.ToString());
+                        MessageBox.Show("DNI Invàlid.");
+                        can_be_closed = false;
                     }
                     FillAuthors(0);
-                    sender.Close();
+                    if (can_be_closed)
+                    {
+                        sender.Close();
+                    }
                 },
                 OnCancel = (sender) =>
                 {

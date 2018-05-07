@@ -4,23 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="34aba8bdeaee4ce091c688e01f5503a2" Name="Diagram1">
-        <EntityTypeShape EntityType="triaculturaDBModel.author" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.author_has_discipline" Width="1.5" PointX="5.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.capacity" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.discipline" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.email" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.event" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.file" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.phone" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.place" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.place_has_capacity" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.project" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.rating" Width="1.5" PointX="8.25" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.request" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.user" Width="1.5" PointX="6" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="triaculturaDBModel.vote" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+      <Diagram DiagramId="f7316e7069f741bbb3edb5c4658ba0fe" Name="Diagram1">
+        <EntityTypeShape EntityType="triaculturaDBModel.author" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.author_has_discipline" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.capacity" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.discipline" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.email" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.event" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.file" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.phone" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.place" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.place_has_capacity" Width="1.5" PointX="8.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.project" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.request" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="triaculturaDBModel.type" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="triaculturaDBModel.FK_discipline_author" ManuallyRouted="false" />
         <AssociationConnector Association="triaculturaDBModel.FK_email_author" ManuallyRouted="false" />
         <AssociationConnector Association="triaculturaDBModel.FK_phone_author" ManuallyRouted="false" />
@@ -30,11 +27,7 @@
         <AssociationConnector Association="triaculturaDBModel.FK_file_project" ManuallyRouted="false" />
         <AssociationConnector Association="triaculturaDBModel.FK_place_has_capacity_place" ManuallyRouted="false" />
         <AssociationConnector Association="triaculturaDBModel.FK_request_place" ManuallyRouted="false" />
-        <AssociationConnector Association="triaculturaDBModel.FK_rating_project" ManuallyRouted="false" />
         <AssociationConnector Association="triaculturaDBModel.FK_request_project" ManuallyRouted="false" />
-        <AssociationConnector Association="triaculturaDBModel.FK_vote_project" ManuallyRouted="false" />
-        <AssociationConnector Association="triaculturaDBModel.FK_rating_user" ManuallyRouted="false" />
-        <AssociationConnector Association="triaculturaDBModel.FK_vote_user" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

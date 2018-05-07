@@ -18,7 +18,7 @@ namespace TriaCulturaDesktopApp.ViewModel
     public class ProjectesViewModel : ViewModelBase, IUserDialogViewModel
 
     {
-        public triaculturaCTXEntities context { get; set; }
+        public triaculturaDBEntities context { get; set; }
 
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
@@ -30,6 +30,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         private project _selectedProject;
         private bool _boto_afegir_enabled;
         private author _author;
+        private string _searchBoxText;
+
+        public string SearchBoxText { get { return _searchBoxText; } set { _searchBoxText = value;  RaisePropertyChanged("SearchBoxText"); } }
         public String titol { get; set; }
         public ObservableCollection<project> ProjectsL { get { return _projectsL; } set { _projectsL = value; RaisePropertyChanged("ProjectsL"); } }
 
@@ -65,11 +68,11 @@ namespace TriaCulturaDesktopApp.ViewModel
         #region Contructor
         public ProjectesViewModel()
         {
-            context = new triaculturaCTXEntities();
+            context = new triaculturaDBEntities();
             fillProjectes(0);
         }
 
-        public ProjectesViewModel(author a, bool enable, triaculturaCTXEntities ctx)
+        public ProjectesViewModel(author a, bool enable, triaculturaDBEntities ctx)
         {
             context = ctx;
             titol = "Projectes";
@@ -77,10 +80,28 @@ namespace TriaCulturaDesktopApp.ViewModel
             fillProjectes(0);
         }
 
+        public ProjectesViewModel(place p, triaculturaDBEntities ctx)
+        {
+            context = ctx;
+            titol = "Projectes";
+            fillProjectes(p);
+        }
 
         #endregion
 
         #region FillProjectes
+
+        public void fillProjectes (place p)
+        {
+            List<request> lr = context.requests.Where(x => x.place_id == p.id_place).ToList();
+            List<project> lp = new List<project>(400);
+            foreach (request r in lr)
+            {
+                lp.Add(r.project);
+            }
+            ProjectsL = new ObservableCollection<project>(lp);
+
+        }
 
         public void fillProjectes(int n)
         {
@@ -106,6 +127,14 @@ namespace TriaCulturaDesktopApp.ViewModel
                 SelectedProject = ProjectsL.Where(x => x.id_project == p.id_project).SingleOrDefault();
             }
         }
+
+        public void fillProjectes (string filter)
+        {
+            ProjectsL = null;
+            ProjectsL = new ObservableCollection<project>(context.projects
+                .Where(x => x.title.Contains(filter)).OrderBy(x => x.id_project).ToList());
+
+        }
         #endregion
 
         #region RequestClose
@@ -125,8 +154,16 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
 
         #region ICommand
+
+        public ICommand filtrarProjectes { get { return new RelayCommand(filtre); } }
         public ICommand tornarEnrere { get { return new RelayCommand(Close); } }
         public ICommand NewProjecte { get { return new RelayCommand(newProject); } }
+
+        protected virtual void filtre()
+        {
+            fillProjectes(SearchBoxText);
+        }
+
         protected virtual void newProject()
         {
             project aux_project = new project();
@@ -186,8 +223,6 @@ namespace TriaCulturaDesktopApp.ViewModel
                         context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().title = aux_project.title;
                         context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().topic = aux_project.topic;
                         context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().description = aux_project.description;
-
-
 
                         context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().files = aux_project.files;
                         context.projects.Where(x => x.id_project == SelectedProject.id_project).SingleOrDefault().type = aux_project.type;

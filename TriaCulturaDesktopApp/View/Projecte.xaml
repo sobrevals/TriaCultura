@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="{Binding titol}" Height="415.608" Width="404.171" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
+        Title="{Binding titol}" Height="415.608" Width="436.171" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
         >
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
@@ -64,7 +64,29 @@
             </Button.Background>
         </Button>
         <TextBox x:Name="tb_description" HorizontalAlignment="Left" Height="110" Margin="10,197,0,0" TextWrapping="Wrap" Text="{Binding Projecte.description}" VerticalAlignment="Top" Width="188" AcceptsReturn="True" BorderBrush="#FF262934" FontFamily="Franklin Gothic Medium" FontSize="14" />
-        <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="251,31,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" SelectedIndex="{Binding SelectedIndexType}" IsSynchronizedWithCurrentItem="True" FontFamily="Franklin Gothic Medium" FontSize="14"/>
+        <ComboBox x:Name="cbBox_type" HorizontalAlignment="Left" Margin="251,31,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Available_Types}" SelectedItem="{Binding SelectedType}" SelectedIndex="{Binding SelectedIndexType}" IsSynchronizedWithCurrentItem="True" FontFamily="Franklin Gothic Medium" FontSize="14">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding description}"></TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button x:Name="btAddType" Command="{Binding TreureType}" Content="" HorizontalAlignment="Left" Margin="393,34,0,0" VerticalAlignment="Top" Width="17" FontFamily="Franklin Gothic Medium" FontSize="14" Height="17" BorderBrush="{x:Null}" RenderTransformOrigin="1.176,0.294">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_minus_red_14768.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_minus_red_14768.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btAddType_Copy" Command="{Binding AfegirType}" Content="" HorizontalAlignment="Left" Margin="373,34,0,0" VerticalAlignment="Top" Width="17" FontFamily="Franklin Gothic Medium" FontSize="14" Height="17" BorderBrush="{x:Null}" RenderTransformOrigin="1.176,0.294">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_plus_blue_14780.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/if_button_plus_blue_14780.png"/>
+            </Button.Background>
+        </Button>
         <!--SelectedItem="{Binding Path=Projecte.type, Mode=TwoWay}"-->
 
     </Grid>

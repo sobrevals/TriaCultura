@@ -19,7 +19,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
         public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
 
-        public triaculturaCTXEntities context { get; set; }
+        public triaculturaDBEntities context { get; set; }
 
 
         #region BasicProperties
@@ -194,7 +194,7 @@ namespace TriaCulturaDesktopApp.ViewModel
         {
         }
 
-        public EspaiViewModel(project p, triaculturaCTXEntities context)
+        public EspaiViewModel(project p, triaculturaDBEntities context)
         {
             this.context = context;
             SelectedProject = p;

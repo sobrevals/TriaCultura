@@ -12,15 +12,9 @@ namespace TriaCulturaDesktopApp.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class rating
+    public partial class type
     {
-        public int id_rating { get; set; }
-        public Nullable<int> rate { get; set; }
-        public int user_id { get; set; }
-        public int project_id { get; set; }
-        public string comment { get; set; }
-    
-        public virtual project project { get; set; }
-        public virtual user user { get; set; }
+        public int id { get; set; }
+        public string description { get; set; }
     }
 }

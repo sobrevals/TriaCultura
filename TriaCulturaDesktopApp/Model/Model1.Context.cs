@@ -13,10 +13,10 @@ namespace TriaCulturaDesktopApp.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class triaculturaCTXEntities : DbContext
+    public partial class triaculturaDBEntities : DbContext
     {
-        public triaculturaCTXEntities()
-            : base("name=triaculturaCTXEntities")
+        public triaculturaDBEntities()
+            : base("name=triaculturaDBEntities")
         {
         }
     
@@ -36,10 +36,7 @@ namespace TriaCulturaDesktopApp.Model
         public DbSet<place> places { get; set; }
         public DbSet<place_has_capacity> place_has_capacity { get; set; }
         public DbSet<project> projects { get; set; }
-        public DbSet<rating> ratings { get; set; }
         public DbSet<request> requests { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
-        public DbSet<user> users { get; set; }
-        public DbSet<vote> votes { get; set; }
+        public DbSet<type> types { get; set; }
     }
 }

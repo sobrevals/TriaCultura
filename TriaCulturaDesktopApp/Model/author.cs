@@ -26,6 +26,8 @@ namespace TriaCulturaDesktopApp.Model
         public string name { get; set; }
         public string surname { get; set; }
         public string address { get; set; }
+
+        public string nameComplet { get { return name + " " + surname; } }
     
         public virtual ICollection<discipline> disciplines { get; set; }
         public virtual ICollection<email> emails { get; set; }

@@ -18,7 +18,6 @@ namespace TriaCulturaDesktopApp.ViewModel
 {
     class ProjecteViewModel : ViewModelBase, IUserDialogViewModel, INotifyPropertyChanged
     {
-        Available_Types tipus = new Available_Types();
 
         #region BasicProperties
 
@@ -26,9 +25,10 @@ namespace TriaCulturaDesktopApp.ViewModel
         private ObservableCollection<file> _files;
         private request _selectedRequest;
         private file _selectedFile;
+        private ObservableCollection<type> _available_types;
 
         private List<string> _types;
-        private string _selectedType;
+        private type _selectedType;
         private int _selectedIndexType;
 
 
@@ -37,6 +37,9 @@ namespace TriaCulturaDesktopApp.ViewModel
         public String titol { get; set; }
 
         public ObservableCollection<file> Files { get { return _files; } set { _files = value; NotifyPropertyChanged(); RaisePropertyChanged("Files"); } }
+        public ObservableCollection<type> Available_Types { get { return _available_types; } set { _available_types = value; NotifyPropertyChanged(); RaisePropertyChanged("Types"); } }
+
+        private triaculturaDBEntities context = new triaculturaDBEntities();
 
         public project Projecte
         {
@@ -52,20 +55,7 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         public file SelectedFile { get { return _selectedFile; } set { _selectedFile = value; NotifyPropertyChanged(); RaisePropertyChanged("SelectedFile"); } }
 
-        public List<string> Types
-        {
-            get
-            {
-                return _types;
-            }
-
-            set
-            {
-                _types = value;
-            }
-        }
-
-        public string SelectedType
+        public type SelectedType
         {
             get
             {
@@ -145,23 +135,25 @@ namespace TriaCulturaDesktopApp.ViewModel
         public void FillTipus()
         {
 
-            Types = tipus.types;
+            Available_Types = new ObservableCollection<type>(context.types.ToList());
             if (Projecte.type != null)
             {
                 string aux_type = Projecte.type;
                 aux_type = Regex.Replace(aux_type, @"\s", "");
-                for (int i = 0; i < Types.Count; i++)
+                int ind = 0;
+                foreach (type t in Available_Types)
                 {
-                    if (Types[i].Contains(aux_type))
+                    if (t.description.Contains(aux_type))
                     {
-                        SelectedType = Types[i];
-                        SelectedIndexType = i;
+                        SelectedType = t;
+                        SelectedIndexType = ind;
                     }
+                    ind++;
                 }
             }
             else
             {
-                SelectedType = Types[0];
+                SelectedType = Available_Types[0];
                 SelectedIndexType = 0;
             }
         }
@@ -193,10 +185,78 @@ namespace TriaCulturaDesktopApp.ViewModel
 
         #region Commands
 
+        public ICommand AfegirType { get { return new RelayCommand(add_type); } }
+
+        protected virtual void add_type()
+        {
+
+            type aux_type = new Model.type();
+            this.Dialogs.Add(new TypeDialogViewModel
+            {
+                Title = "Afegir tipus",
+                Selected_type = aux_type,
+                TextEnabled = true,
+                OkText = "Afegir",
+                OnOk = (sender) =>
+                {
+                    try
+                    {
+                        context.types.Add(aux_type);
+                        context.SaveChanges();
+                        FillTipus();
+                        sender.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                },
+                OnCancel = (sender) => { sender.Close(); },
+                OnCloseRequest = (sender) => { sender.Close(); }
+            });
+        }
+
+        public ICommand TreureType { get { return new RelayCommand(rem_type); } }
+
+        protected virtual void rem_type()
+        {
+            type aux_type = SelectedType;
+            this.Dialogs.Add(new TypeDialogViewModel
+            {
+                Title = "Esborrar Tipus",
+                Selected_type = aux_type,
+                OkText = "Confirmar",
+                TextEnabled = false,
+                OnOk = (sender) =>
+                {
+                    try
+                    {
+                        if (context.projects.Where(x => x.type.Equals(aux_type.description)).ToList().Count < 1)
+                        {
+                            context.types.Remove(aux_type);
+                            context.SaveChanges();
+                            FillTipus();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Aquest tipus és utilitzat per altres projectes. No es pot eliminar.");
+                        }
+                        sender.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                },
+                OnCancel = (sender) => { sender.Close(); },
+                OnCloseRequest = (sender) => { sender.Close(); }
+            });
+
+        }
         public ICommand OkCommand { get { return new RelayCommand(GuardarIEnrere); } }
         protected virtual void GuardarIEnrere()
         {
-            Projecte.type = Types[SelectedIndexType];
+            Projecte.type = Available_Types[SelectedIndexType].description;
             if (Projecte.title != null && Projecte.description != null && Projecte.topic != null && Projecte.type != null)
             {
                 if (this.OnOk != null)
@@ -297,6 +357,6 @@ namespace TriaCulturaDesktopApp.ViewModel
         public Action<ProjecteViewModel> OnCloseRequest { get; set; }
 
 
-        
+
     }
 }

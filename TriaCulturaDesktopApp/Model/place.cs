@@ -25,6 +25,8 @@ namespace TriaCulturaDesktopApp.Model
         public string name { get; set; }
         public int capacity { get; set; }
         public string address { get; set; }
+
+        public int count { get { return requests.Count; } }
     
         public virtual ICollection<@event> events { get; set; }
         public virtual ICollection<place_has_capacity> place_has_capacity { get; set; }

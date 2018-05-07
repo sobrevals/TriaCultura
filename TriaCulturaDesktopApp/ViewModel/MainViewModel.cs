@@ -63,5 +63,12 @@ namespace TriaCulturaDesktopApp.ViewModel
             this.Dialogs.Add(new ProjectesViewModel());
         }
 
+        public ICommand OpenPlaces { get { return new RelayCommand(OpPlaces); } }
+
+        public void OpPlaces()
+        {
+            this.Dialogs.Add(new EspaisListViewModel());
+        }
+
     }
 }

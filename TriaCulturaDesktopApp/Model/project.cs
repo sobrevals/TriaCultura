@@ -17,9 +17,7 @@ namespace TriaCulturaDesktopApp.Model
         public project()
         {
             this.files = new HashSet<file>();
-            this.ratings = new HashSet<rating>();
             this.requests = new HashSet<request>();
-            this.votes = new HashSet<vote>();
         }
     
         public int id_project { get; set; }
@@ -31,8 +29,6 @@ namespace TriaCulturaDesktopApp.Model
     
         public virtual author author { get; set; }
         public virtual ICollection<file> files { get; set; }
-        public virtual ICollection<rating> ratings { get; set; }
         public virtual ICollection<request> requests { get; set; }
-        public virtual ICollection<vote> votes { get; set; }
     }
 }

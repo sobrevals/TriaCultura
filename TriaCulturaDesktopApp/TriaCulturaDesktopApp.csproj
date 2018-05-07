@@ -132,19 +132,10 @@
     <Compile Include="Model\project.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\rating.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\request.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\user.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\vote.cs">
+    <Compile Include="Model\type.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AutorDialogViewModel.cs" />
@@ -153,11 +144,14 @@
     <Compile Include="ViewModel\DisciplinaDialogViewModel.cs" />
     <Compile Include="ViewModel\EsborrarProjecteFromProjectes.cs" />
     <Compile Include="ViewModel\Esborrar_AutorBuitDialogViewModel.cs" />
+    <Compile Include="ViewModel\EspaisListViewModel.cs" />
     <Compile Include="ViewModel\EspaiViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PlaceDialogViewModel.cs" />
     <Compile Include="ViewModel\ProjecteEsborrarDialogModel.cs" />
     <Compile Include="ViewModel\ProjectesViewModel.cs" />
     <Compile Include="ViewModel\ProjecteViewModel.cs" />
+    <Compile Include="ViewModel\TypeDialogViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Autor.xaml.cs">
       <DependentUpon>Autor.xaml</DependentUpon>
@@ -180,11 +174,20 @@
     <Compile Include="View\Espais.xaml.cs">
       <DependentUpon>Espais.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EspaisList.xaml.cs">
+      <DependentUpon>EspaisList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PlaceDialog.xaml.cs">
+      <DependentUpon>PlaceDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Projectes.xaml.cs">
       <DependentUpon>Projectes.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Projecte.xaml.cs">
       <DependentUpon>Projecte.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TypeDialog.xaml.cs">
+      <DependentUpon>TypeDialog.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Autor.xaml">
       <SubType>Designer</SubType>
@@ -218,6 +221,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EspaisList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -234,11 +241,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PlaceDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Projectes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Projecte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TypeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,6 +340,9 @@
     <Resource Include="Resources\if_user_close_36968.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\if_filter.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -335,6 +353,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\if_close_36841.png" />
+    <Resource Include="Resources\if_home_36917.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
