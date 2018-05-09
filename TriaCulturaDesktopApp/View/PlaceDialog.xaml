@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="{Binding Title}"  Height="277.864" Width="297" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+        Title="{Binding Title}"  Height="277.864" Width="297" Icon="/TriaCulturaDesktopApp;component/Resources/triacultura4.png">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>

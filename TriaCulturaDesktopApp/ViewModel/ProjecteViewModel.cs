@@ -339,11 +339,15 @@ namespace TriaCulturaDesktopApp.ViewModel
             {
                 file fitxer = new file();
                 fitxer.project_id = p.id_project;
+                if(Path.GetExtension(SelectedPath) != "")
+                { 
                 fitxer.name = Path.GetFileNameWithoutExtension(SelectedPath);
                 fitxer.extension = Path.GetExtension(SelectedPath);
-                fitxer.path = SelectedPath;
+                fitxer.path = SelectedPath;                
                 fitxer.file_content = File.ReadAllBytes(SelectedPath);
                 Projecte.files.Add(fitxer);
+                }
+                
                 FillFiles();
             }
 

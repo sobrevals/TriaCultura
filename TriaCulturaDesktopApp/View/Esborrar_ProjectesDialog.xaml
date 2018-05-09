@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="Esborrar Projecte i Autor" Height="186.398" Width="300" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+        Title="Esborrar Projecte i Autor" Height="186.398" Width="300" Icon="/TriaCulturaDesktopApp;component/Resources/triacultura4.png">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>

@@ -249,7 +249,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                         Author.emails.Add(aux_mail);
                         FillEmails();
                         sender.Close();
-                    } else
+                    }
+                    else
                     {
                         MessageBox.Show("Email incorrecte. Insereixi un correu vàlid.");
                     }
@@ -343,7 +344,7 @@ namespace TriaCulturaDesktopApp.ViewModel
                 }
                 else
                 {
-                    if (Author.dni != null)
+                    if (Author != null && Author.dni != null)
                     {
                         context.authors.Add(Author);
                     }
@@ -361,7 +362,8 @@ namespace TriaCulturaDesktopApp.ViewModel
                     ProjectsL = new ObservableCollection<project>(Author.projects.ToList())
                 });
                 this.Close();
-            } else
+            }
+            else
             {
                 MessageBox.Show("DNI Invàlid.");
             }
@@ -389,13 +391,20 @@ namespace TriaCulturaDesktopApp.ViewModel
         #endregion
         public bool validate_dni(String dni)
         {
-            string patron = "[A-HJ-NP-SUVW][0-9]{7}[0-9A-J]|\\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]|[X]\\d{7}[TRWAGMYFPDXBNJZSQVHLCKE]|[X]\\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]|[YZ]\\d{0,7}[TRWAGMYFPDXBNJZSQVHLCKE]";
-            string sRemp = "";
-            bool ret = false;
-            System.Text.RegularExpressions.Regex rgx = new System.Text.RegularExpressions.Regex(patron);
-            sRemp = rgx.Replace(dni, "OK");
-            if (sRemp == "OK") ret = true;
-            return ret;
+            if (dni != null)
+            {
+                string patron = "[A-HJ-NP-SUVW][0-9]{7}[0-9A-J]|\\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]|[X]\\d{7}[TRWAGMYFPDXBNJZSQVHLCKE]|[X]\\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]|[YZ]\\d{0,7}[TRWAGMYFPDXBNJZSQVHLCKE]";
+                string sRemp = "";
+                bool ret = false;
+                System.Text.RegularExpressions.Regex rgx = new System.Text.RegularExpressions.Regex(patron);
+                sRemp = rgx.Replace(dni, "OK");
+                if (sRemp == "OK") ret = true;
+                return ret;
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool validate_mail(String email)
         {

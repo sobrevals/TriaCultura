@@ -9,7 +9,7 @@
         xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"          
         mc:Ignorable="d"
-        Title="Espais" Height="330" Width="400"
+        Title="Espais" Height="330" Width="400" Icon="/TriaCulturaDesktopApp;component/Resources/triacultura4.png"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         >

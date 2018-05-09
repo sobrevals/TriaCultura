@@ -353,6 +353,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\triacultura4.png" />
     <Resource Include="Resources\if_close_36841.png" />
     <Resource Include="Resources\if_home_36917.png" />
   </ItemGroup>

@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="TriaCultura Menú" Height="594.055" Width="530" RenderTransformOrigin="0.5,0.5" ShowInTaskbar="True" Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png">
+        Title="TriaCultura Menú" Height="594.055" Width="530" RenderTransformOrigin="0.5,0.5" ShowInTaskbar="True" Icon="/TriaCulturaDesktopApp;component/Resources/triacultura4.png">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
     </Window.Background>
@@ -20,9 +20,9 @@
         <ViewModel:MainViewModel/>
     </Window.DataContext>
     <Grid>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="216" VerticalAlignment="Top" Width="290" Margin="118,10,0,0" Stretch="UniformToFill" Source="/TriaCulturaDesktopApp;component/Resources/mc3a1scaras-de-teatro.png">
+        <Image x:Name="image" HorizontalAlignment="Left" Height="216" VerticalAlignment="Top" Width="290" Margin="118,10,0,0" Stretch="UniformToFill" Source="/TriaCulturaDesktopApp;component/Resources/triacultura4.png">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/mc3a1scaras-de-teatro.png" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="/TriaCulturaDesktopApp;component/Resources/triacultura4.png" Stretch="UniformToFill"/>
             </Image.OpacityMask>
         </Image>
 

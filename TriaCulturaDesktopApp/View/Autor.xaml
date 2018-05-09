@@ -11,7 +11,7 @@
         xmlns:Model="clr-namespace:TriaCulturaDesktopApp.Model"
         dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"
         Title="{Binding Titol}" Height="456.108" Width="542.171"
-        Icon="/TriaCulturaDesktopApp;component/Resources/art-culture-128.png"
+        Icon="/TriaCulturaDesktopApp;component/Resources/triacultura4.png"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Visibility="{Binding IsVisible}">
